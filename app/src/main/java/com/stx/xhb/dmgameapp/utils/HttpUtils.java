@@ -20,10 +20,10 @@ import java.util.Map;
  * 网络工具类
  */
 public class HttpUtils {
+    public static final int TIMEOUT_MILLIS = 10000;
     private static final int TIME_OUT = 10000;//10秒超时
     //运送的Handler
     private static final Handler M_HANDLER = new Handler();
-    public static final int TIMEOUT_MILLIS = 10000;
 
     /**
      * 下载的方法
@@ -62,11 +62,11 @@ public class HttpUtils {
                         M_HANDLER.post(new Runnable() {
                             @Override
                             public void run() {
-                                Log.i("====>","我没进回调方法了。。。。。");
+                                Log.i("====>", "我没进回调方法了。。。。。");
                                 //这个方法里面的语句，是执行在主线程的
                                 if (data != null) {
                                     onFetchDataListener.OnFetch(url, data);
-                                    Log.i("====>","我进回调方法了。。。。。");
+                                    Log.i("====>", "我进回调方法了。。。。。");
                                 }
 
                             }
@@ -127,11 +127,6 @@ public class HttpUtils {
         }
     }
 
-    //网络下载的回调
-    public static interface OnFetchDataListener {
-        void OnFetch(String url, byte[] data);
-    }
-
     /**
      * 评论提交
      *
@@ -167,7 +162,7 @@ public class HttpUtils {
                         M_HANDLER.post(new Runnable() {
                             @Override
                             public void run() {
-                                   listener.OnFechResponse(response);
+                                listener.OnFechResponse(response);
                             }
                         });
                     }
@@ -188,13 +183,13 @@ public class HttpUtils {
     public static StringBuffer getRequestData(Map<String, String> params, String encode) {
         StringBuffer stringBuffer = new StringBuffer(); //存储封装好的请求体信息
         /*try {*/
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                stringBuffer.append(entry.getKey())
-                        .append("=")
-                        .append(URLEncoder.encode(entry.getValue()))
-                        .append("&");
-            }
-            stringBuffer.deleteCharAt(stringBuffer.length() - 1);    //删除最后的一个"&"/*
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            stringBuffer.append(entry.getKey())
+                    .append("=")
+                    .append(URLEncoder.encode(entry.getValue()))
+                    .append("&");
+        }
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);    //删除最后的一个"&"/*
        /* } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }*/
@@ -227,8 +222,14 @@ public class HttpUtils {
         result = new String(bos.toByteArray());
         return result;
     }
+
+    //网络下载的回调
+    public interface OnFetchDataListener {
+        void OnFetch(String url, byte[] data);
+    }
+
     //服务器响应处理回调接口
-    public static interface OnFetchResponseListener{
-         void OnFechResponse(String reponse);
+    public interface OnFetchResponseListener {
+        void OnFechResponse(String reponse);
     }
 }

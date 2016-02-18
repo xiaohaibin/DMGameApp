@@ -45,8 +45,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.VideoDetailActivity"
-            android:theme="@style/AppTheme" ></activity>
+        <activity
+            android:name=".activities.VideoDetailActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

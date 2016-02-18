@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.stx.xhb.dmgameapp.R;
 
 /**
- *论坛的Fragment
+ * 论坛的Fragment
  */
 public class ForumFragment extends Fragment {
 
@@ -24,6 +24,7 @@ public class ForumFragment extends Fragment {
     private WebView web_view;
     private View view;
     private ProgressDialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,11 +33,12 @@ public class ForumFragment extends Fragment {
         initView();
         return view;
     }
+
     //获取控件
     private void initView() {
         TextView tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("论坛");
-        web_view= (WebView) view.findViewById(R.id.web_view);
+        web_view = (WebView) view.findViewById(R.id.web_view);
         //加载网络资源
         web_view.loadUrl(HTTP_FORM_URL);
         //设置可以在webview中加载网页中的连接
@@ -48,13 +50,13 @@ public class ForumFragment extends Fragment {
                 return true;
             }
         });
-        web_view.setWebChromeClient(new WebChromeClient(){
+        web_view.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress==100){
+                if (newProgress == 100) {
                     //网页加载完成，关闭对话框
                     closeDialog();
-                }else {
+                } else {
                     //网页加载中，打开进度对话框
                     openDialog(newProgress);
                 }

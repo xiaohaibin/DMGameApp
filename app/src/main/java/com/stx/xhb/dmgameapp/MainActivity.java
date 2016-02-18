@@ -28,6 +28,9 @@ public class MainActivity extends FragmentActivity {
     private MainFragmentPageAdapter adapter;
     private RadioGroup rgp;
     private TipsToast tipsToast;
+    //退出时间
+    private long exitTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +44,9 @@ public class MainActivity extends FragmentActivity {
 
     //初始化窗体布局
     private void initWindow() {
-          SystemBarTintManager tintManager;
+        SystemBarTintManager tintManager;
         //由于沉浸式状态栏需要在Android4.4.4以上才能使用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             tintManager = new SystemBarTintManager(this);
@@ -60,7 +63,7 @@ public class MainActivity extends FragmentActivity {
         main_viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         //设置viewpager的预加载页数，viewpager默认只会预加载左右两边的页面数据
         main_viewPager.setOffscreenPageLimit(4);
-        rgp= (RadioGroup) findViewById(R.id.main_rgp);
+        rgp = (RadioGroup) findViewById(R.id.main_rgp);
         //设置默认第一个为选中状态
         RadioButton rb = (RadioButton) rgp.getChildAt(0);
         rb.setChecked(true);
@@ -81,22 +84,23 @@ public class MainActivity extends FragmentActivity {
     //设置适配器
     private void setAdapter() {
         //实例化适配器
-        adapter=new MainFragmentPageAdapter(getSupportFragmentManager(),fragemnts);
+        adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts);
         //设置适配器
         main_viewPager.setAdapter(adapter);
     }
+
     //设置监听
     private void setListener() {
-            //viewPager的滑动监听
-           main_viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-               @Override
-               public void onPageSelected(int position) {
-                   //获取当前位置的RadioButton
-                   RadioButton rb= (RadioButton) rgp.getChildAt(position);
-                   //设置为true
-                   rb.setChecked(true);
-               }
-           });
+        //viewPager的滑动监听
+        main_viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                //获取当前位置的RadioButton
+                RadioButton rb = (RadioButton) rgp.getChildAt(position);
+                //设置为true
+                rb.setChecked(true);
+            }
+        });
         //RadioGroup的事件监听
         rgp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -112,12 +116,9 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-
-
-    //退出时间
-    private long exitTime = 0;
     /**
      * 按两次退出应用
+     *
      * @param keyCode
      * @param event
      * @return
@@ -129,7 +130,7 @@ public class MainActivity extends FragmentActivity {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
                 /*Toast.makeText(getApplicationContext(), "再按一次退出程序",
                         Toast.LENGTH_SHORT).show();*/
-                showTips(R.drawable.tips_smile,"再按一次退出程序");
+                showTips(R.drawable.tips_smile, "再按一次退出程序");
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
@@ -142,13 +143,12 @@ public class MainActivity extends FragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
     /**
      * 自定义toast
      *
-     * @param iconResId
-     *            图片
-     * @param tips
-     *            提示文字
+     * @param iconResId 图片
+     * @param tips      提示文字
      */
     private void showTips(int iconResId, String tips) {
         if (tipsToast != null) {

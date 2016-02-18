@@ -30,6 +30,10 @@ import java.util.List;
  * 通用的Fragment
  */
 public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+    //视频分类id集合
+    private static final int[] VIDEO_TYPE_ID = new int[]{
+            194, 180, 221, 214, 213, 212, 211, 210, 203, 256, 201
+    };
     private SwipeRefreshLayout refreshLayout;
     private ListView lv_data;
     private View inflate;
@@ -44,10 +48,6 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private boolean isBottom;//是否滑动到底部的标记
     private boolean isLoadData = false;//是否正在加载新数据的标记
     private String url;
-    //视频分类id集合
-    private static final int[] VIDEO_TYPE_ID = new int[]{
-            194, 180, 221, 214, 213, 212, 211, 210, 203, 256, 201
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -203,10 +203,6 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         //若第一个可见的item的下标+可见的条目的数量=当前listview中总的条目数量，则说明已经到达底部
-        if (firstVisibleItem + visibleItemCount == totalItemCount) {
-            isBottom = true;
-        } else {
-            isBottom = false;
-        }
+        isBottom = firstVisibleItem + visibleItemCount == totalItemCount;
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by xhb on 2016/1/19.
  * Listview的自定义适配器
  */
-public class ListViewAdapter extends BaseAdapter{
+public class ListViewAdapter extends BaseAdapter {
     private Context context;
     private List<ChapterListItem> chapterListItems;
     private LayoutInflater mLayoutInflater;
@@ -51,22 +51,22 @@ public class ListViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder=null;
-        if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.listview_item_layout,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.title= (TextView) convertView.findViewById(R.id.title);
-            viewHolder.date= (TextView) convertView.findViewById(R.id.date);
-            viewHolder.comment= (TextView) convertView.findViewById(R.id.comment);
-            viewHolder.tv_id= (TextView) convertView.findViewById(R.id.tv_id);
-            viewHolder.tv_typeid= (TextView) convertView.findViewById(R.id.tv_typeid);
-            viewHolder.tv_url= (TextView) convertView.findViewById(R.id.tv_url);
-            viewHolder.iv= (ImageView) convertView.findViewById(R.id.iv);
+        ViewHolder viewHolder = null;
+        if (convertView == null) {
+            convertView = mLayoutInflater.inflate(R.layout.listview_item_layout, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+            viewHolder.date = (TextView) convertView.findViewById(R.id.date);
+            viewHolder.comment = (TextView) convertView.findViewById(R.id.comment);
+            viewHolder.tv_id = (TextView) convertView.findViewById(R.id.tv_id);
+            viewHolder.tv_typeid = (TextView) convertView.findViewById(R.id.tv_typeid);
+            viewHolder.tv_url = (TextView) convertView.findViewById(R.id.tv_url);
+            viewHolder.iv = (ImageView) convertView.findViewById(R.id.iv);
             //设置tag
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             //获取缓存布局
-            viewHolder= (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         ChapterListItem chapterListItem = chapterListItems.get(position);
         viewHolder.title.setText(chapterListItem.getTitle());
@@ -83,19 +83,20 @@ public class ListViewAdapter extends BaseAdapter{
         //获取到图片地址
         String litpic = chapterListItem.getLitpic();
         //如果图片地址为空，则设置默认图片
-        if (litpic==null){
+        if (litpic == null) {
             iv.setImageResource(R.drawable.product_default);
         }
         //地址拼接
-        String imageUrl= HttpAdress.DMGEAME_URL+litpic;
+        String imageUrl = HttpAdress.DMGEAME_URL + litpic;
         //下载图片，优先使用本地缓存图片
         ImageLoader.getInstance().display(iv, imageUrl, R.drawable.product_default);
         return convertView;
     }
+
     //创建一个ViewHolder保存converview的布局
-    class ViewHolder{
-          ImageView iv;//图片
-          //标题、日期、评论数、文章id、分类id、文章地址
-          TextView title,date,comment,tv_id,tv_typeid,tv_url;
+    class ViewHolder {
+        ImageView iv;//图片
+        //标题、日期、评论数、文章id、分类id、文章地址
+        TextView title, date, comment, tv_id, tv_typeid, tv_url;
     }
 }

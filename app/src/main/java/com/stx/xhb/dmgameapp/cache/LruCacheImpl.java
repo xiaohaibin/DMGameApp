@@ -54,8 +54,8 @@ public class LruCacheImpl implements ILruCache {
             return;
         }
         //如果以前没有这个东西，那么才添加
-        if (lruCache.get(url)==null){
-            lruCache.put(url,bitmap);
+        if (lruCache.get(url) == null) {
+            lruCache.put(url, bitmap);
         }
 
     }

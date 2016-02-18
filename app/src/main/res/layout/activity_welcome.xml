@@ -11,6 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,14 +49,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="CopyRight©2016 All Rights Reserved"
-            android:textSize="10sp"
-            android:textColor="#8F8F8F" />
+            android:textColor="#8F8F8F"
+            android:textSize="10sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Powered by MR.XIAO"
-            android:textSize="10sp"
-            android:textColor="#8F8F8F" />
+            android:textColor="#8F8F8F"
+            android:textSize="10sp" />
     </LinearLayout>
 </LinearLayout>

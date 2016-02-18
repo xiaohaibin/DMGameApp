@@ -41,7 +41,6 @@ import java.lang.reflect.Method;
 /**
  * Class to manage status and navigation bar tint effects when using KitKat
  * translucent system UI modes.
- *
  */
 public class SystemBarTintManager {
 
@@ -49,6 +48,17 @@ public class SystemBarTintManager {
      * The default system bar tint color value.
      */
     public static final int DEFAULT_TINT_COLOR = 0x99000000;
+    private static boolean sIsMiuiV6;
+
+    static {
+        try {
+            Class<?> sysClass = Class.forName("android.os.SystemProperties");
+            Method getStringMethod = sysClass.getDeclaredMethod("get", String.class);
+            sIsMiuiV6 = "V6".equals(getStringMethod.invoke(sysClass, "ro.miui.ui.version.name"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private final SystemBarConfig mConfig;
     private boolean mStatusBarAvailable;
@@ -57,17 +67,6 @@ public class SystemBarTintManager {
     private boolean mNavBarTintEnabled;
     private View mStatusBarTintView;
     private View mNavBarTintView;
-    private static boolean sIsMiuiV6;
-
-    static {
-        try {
-            Class<?> sysClass = Class.forName("android.os.SystemProperties");
-            Method getStringMethod = sysClass.getDeclaredMethod("get", String.class);
-            sIsMiuiV6 = "V6".equals((String) getStringMethod.invoke(sysClass, "ro.miui.ui.version.name"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Constructor. Call this in the host activity onCreate method after its
@@ -122,23 +121,8 @@ public class SystemBarTintManager {
     }
 
     /**
-     * Enable tinting of the system status bar.
-     *
-     * If the platform is running Jelly Bean or earlier, or translucent system
-     * UI modes have not been enabled in either the theme or via window flags,
-     * then this method does nothing.
-     *
-     * @param enabled True to enable tinting, false to disable it (default).
-     */
-    public void setStatusBarTintEnabled(boolean enabled) {
-        mStatusBarTintEnabled = enabled;
-        if (mStatusBarAvailable) {
-            mStatusBarTintView.setVisibility(enabled ? View.VISIBLE : View.GONE);
-        }
-    }
-
-    /**
      * set status bar darkmode
+     *
      * @param darkmode
      * @param activity
      */
@@ -160,7 +144,7 @@ public class SystemBarTintManager {
 
     /**
      * Enable tinting of the system navigation bar.
-     *
+     * <p/>
      * If the platform does not have soft navigation keys, is running Jelly Bean
      * or earlier, or translucent system UI modes have not been enabled in either
      * the theme or via window flags, then this method does nothing.
@@ -325,6 +309,22 @@ public class SystemBarTintManager {
     }
 
     /**
+     * Enable tinting of the system status bar.
+     * <p/>
+     * If the platform is running Jelly Bean or earlier, or translucent system
+     * UI modes have not been enabled in either the theme or via window flags,
+     * then this method does nothing.
+     *
+     * @param enabled True to enable tinting, false to disable it (default).
+     */
+    public void setStatusBarTintEnabled(boolean enabled) {
+        mStatusBarTintEnabled = enabled;
+        if (mStatusBarAvailable) {
+            mStatusBarTintView.setVisibility(enabled ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    /**
      * Is tinting enabled for the system navigation bar?
      *
      * @return True if enabled, False otherwise.
@@ -365,7 +365,6 @@ public class SystemBarTintManager {
     /**
      * Class which describes system bar sizing and other characteristics for the current
      * device configuration.
-     *
      */
     public static class SystemBarConfig {
 

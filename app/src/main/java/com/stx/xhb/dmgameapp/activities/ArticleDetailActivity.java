@@ -147,20 +147,20 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                 Log.i("--------->decode", "" + decode);
                 String date = DateUtils.dateFromat(senddate);//发布时间
                 String html = "<html><body>"
-                                       + "<h3>"
-                                       + title
-                                       + "</h3>"
-                                       + "<p>"
-                                       + "作者:" + writer
-                                       + "&nbsp&nbsp"
-                                       + "发布时间:" + date
-                                       + "</p>"
-                                       +"<style>"
+                        + "<h3>"
+                        + title
+                        + "</h3>"
+                        + "<p>"
+                        + "作者:" + writer
+                        + "&nbsp&nbsp"
+                        + "发布时间:" + date
+                        + "</p>"
+                        + "<style>"
 //                                       +"body{text-align:center}"
-                                       +"img{width:100%;height:auto;}"//自定义样式，设置图片显示大小
-                                       +"</style>"
-                                       + decode
-                                       + "</body></html>";
+                        + "img{width:100%;height:auto;}"//自定义样式，设置图片显示大小
+                        + "</style>"
+                        + decode
+                        + "</body></html>";
                 //使用这种方法，前面添加网站的地址 http://www.3dmgame.com，可以解决，有些图片前面乜有完整请求地址的问题
                 comment_web.loadDataWithBaseURL(HttpAdress.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
             } catch (UnsupportedEncodingException e) {
@@ -207,7 +207,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
             dialog = new ProgressDialog(ArticleDetailActivity.this);
             dialog.setProgress(newProgress);
             dialog.setMessage("文章详情加载中。。。");
-             dialog.show();
+            dialog.show();
         } else {
             dialog.setProgress(newProgress);
         }

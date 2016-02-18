@@ -9,14 +9,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.stx.xhb.dmgameapp.activities.GameDetailActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
+
     <LinearLayout
-        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -27,8 +29,8 @@
                 android:id="@+id/iv_game"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
-                android:clickable="true"
                 android:background="@drawable/gamedefault"
+                android:clickable="true"
                 android:scaleType="fitXY" />
         </LinearLayout>
 
@@ -67,6 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -81,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -95,6 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -109,6 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -138,6 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -158,8 +165,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,8 +176,7 @@
         <TextView
             android:id="@+id/tv_game_detail"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-          />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>

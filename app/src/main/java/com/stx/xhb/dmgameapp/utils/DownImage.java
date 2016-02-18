@@ -15,77 +15,81 @@ import java.net.URL;
 public class DownImage {
 
     public static final int TIMEOUT_MILLIS = 10000;
+
     /**
      * 网络下载方法
+     *
      * @param url
      * @return
      */
-    public static byte[] downLoad(String url){
+    public static byte[] downLoad(String url) {
 
-        byte [] ret =null;
-       HttpURLConnection connection=null;
+        byte[] ret = null;
+        HttpURLConnection connection = null;
         try {
-            URL netUrl=new URL(url);
+            URL netUrl = new URL(url);
             connection = (HttpURLConnection) netUrl.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(TIMEOUT_MILLIS);
             connection.setReadTimeout(TIMEOUT_MILLIS);
             connection.connect();
-            if (connection.getResponseCode()==HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream is = connection.getInputStream();
                 //输入流转换为字节流
-                ret=isToByteArray(is);
+                ret = isToByteArray(is);
             }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if (connection!=null){
+        } finally {
+            if (connection != null) {
                 connection.disconnect();
             }
         }
-          return ret;
+        return ret;
     }
 
     /**
      * 输入流转换为字节数组
+     *
      * @param is
      * @return
      */
     private static byte[] isToByteArray(InputStream is) {
-          byte[] ret=null;
-        ByteArrayOutputStream bos=null;
+        byte[] ret = null;
+        ByteArrayOutputStream bos = null;
         try {
-            bos=new ByteArrayOutputStream();
-            byte[] buff=new byte[1024*4];
-            int len=0;
-            while ((len=is.read(buff))!=-1){
-                 bos.write(buff,0,len);
+            bos = new ByteArrayOutputStream();
+            byte[] buff = new byte[1024 * 4];
+            int len = 0;
+            while ((len = is.read(buff)) != -1) {
+                bos.write(buff, 0, len);
                 bos.flush();
             }
-            ret=bos.toByteArray();
+            ret = bos.toByteArray();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-                //关闭流
-               closeStream(is,bos);
+        } finally {
+            //关闭流
+            closeStream(is, bos);
         }
         return ret;
     }
 
     /**
      * 关闭流
+     *
      * @param closeables
      */
-    private  static void closeStream(Closeable...closeables){
+    private static void closeStream(Closeable... closeables) {
 
-        if (closeables==null){
+        if (closeables == null) {
             return;
         }
-        for (Closeable c:closeables){
-            if (c!=null){
+        for (Closeable c : closeables) {
+            if (c != null) {
                 try {
                     c.close();
                 } catch (IOException e) {

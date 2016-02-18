@@ -17,9 +17,10 @@ import java.util.List;
  * Created by xhb on 2016/1/22.
  * 评论listview的适配器
  */
-public class CommentListviewAdapter extends BaseAdapter{
+public class CommentListviewAdapter extends BaseAdapter {
     private Context context;
     private List<ChapterCommentListItem.DescriptionEntity.DataEntity> dataEntities;
+
     public CommentListviewAdapter(Context context, List<ChapterCommentListItem.DescriptionEntity.DataEntity> dataEntities) {
         this.context = context;
         this.dataEntities = dataEntities;
@@ -42,25 +43,25 @@ public class CommentListviewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater=LayoutInflater.from(context);
-        ViewHodler viewHodler=null;
-        if (convertView==null){
-            convertView=inflater.inflate(R.layout.item_lv_comment,parent,false);
-            viewHodler=new ViewHodler();
-            viewHodler.tv_username= (TextView) convertView.findViewById(R.id.tv_username);
-            viewHodler.tv_date= (TextView) convertView.findViewById(R.id.tv_date);
-            viewHodler.tv_floor= (TextView) convertView.findViewById(R.id.tv_floor);
-            viewHodler.tv_comment= (TextView) convertView.findViewById(R.id.tv_comment);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ViewHodler viewHodler = null;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_lv_comment, parent, false);
+            viewHodler = new ViewHodler();
+            viewHodler.tv_username = (TextView) convertView.findViewById(R.id.tv_username);
+            viewHodler.tv_date = (TextView) convertView.findViewById(R.id.tv_date);
+            viewHodler.tv_floor = (TextView) convertView.findViewById(R.id.tv_floor);
+            viewHodler.tv_comment = (TextView) convertView.findViewById(R.id.tv_comment);
             convertView.setTag(viewHodler);
-        }else {
-            viewHodler= (ViewHodler) convertView.getTag();
+        } else {
+            viewHodler = (ViewHodler) convertView.getTag();
         }
-          //给缓存布局设置新数据
+        //给缓存布局设置新数据
         ChapterCommentListItem.DescriptionEntity.DataEntity entity = dataEntities.get(position);
         //判断是否是匿名发表
-        if ("????".equals(entity.getUsername())){
+        if ("????".equals(entity.getUsername())) {
             viewHodler.tv_username.setText("匿名发表");
-        }else {
+        } else {
             viewHodler.tv_username.setText(entity.getUsername());
         }
         String date = DateUtils.dateFromat(entity.getDtime());
@@ -69,8 +70,9 @@ public class CommentListviewAdapter extends BaseAdapter{
         viewHodler.tv_comment.setText(entity.getMsg());
         return convertView;
     }
+
     //创建一个ViewHolder保存缓存布局
-    class ViewHodler{
-          TextView tv_username,tv_date,tv_floor,tv_comment;
+    class ViewHodler {
+        TextView tv_username, tv_date, tv_floor, tv_comment;
     }
 }

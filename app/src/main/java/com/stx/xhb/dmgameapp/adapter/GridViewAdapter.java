@@ -19,7 +19,7 @@ import java.util.List;
  * Created by xhb on 2016/1/21.
  * GridView的适配器
  */
-public class GridViewAdapter extends BaseAdapter{
+public class GridViewAdapter extends BaseAdapter {
     private Context context;
     private List<GameListItem> gameListItems;
 
@@ -45,18 +45,18 @@ public class GridViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater=LayoutInflater.from(context);
-        ViewHodler viewHodler=null;
-        if (convertView==null){
-            convertView=inflater.inflate(R.layout.grid_item_layout,parent,false);
-            viewHodler=new ViewHodler();
-            viewHodler.game_iv= (ImageView) convertView.findViewById(R.id.game_iv);
-            viewHodler.game_tv= (TextView) convertView.findViewById(R.id.tv_game);
-            viewHodler.game_id= (TextView) convertView.findViewById(R.id.game_id);
-            viewHodler.game_typeid= (TextView) convertView.findViewById(R.id.game_typeid);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ViewHodler viewHodler = null;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.grid_item_layout, parent, false);
+            viewHodler = new ViewHodler();
+            viewHodler.game_iv = (ImageView) convertView.findViewById(R.id.game_iv);
+            viewHodler.game_tv = (TextView) convertView.findViewById(R.id.tv_game);
+            viewHodler.game_id = (TextView) convertView.findViewById(R.id.game_id);
+            viewHodler.game_typeid = (TextView) convertView.findViewById(R.id.game_typeid);
             convertView.setTag(viewHodler);
-        }else {
-            viewHodler= (ViewHodler) convertView.getTag();
+        } else {
+            viewHodler = (ViewHodler) convertView.getTag();
         }
         //给缓存布局加载新的数据
         GameListItem gameListItem = gameListItems.get(position);
@@ -68,21 +68,22 @@ public class GridViewAdapter extends BaseAdapter{
         //获取到图片地址
         String litpic = gameListItem.getLitpic();
         //如果图片地址为空，则设置默认图片
-        if (litpic==null){
+        if (litpic == null) {
             game_iv.setImageResource(R.drawable.gamedefault);
         }
         //地址拼接
-        String imageUrl= HttpAdress.DMGEAME_URL+litpic;
+        String imageUrl = HttpAdress.DMGEAME_URL + litpic;
         //将图片与imageview绑定在一起
         game_iv.setTag(imageUrl);
         //下载图片,优先使用本地缓存图片
-        ImageLoader.getInstance().display(game_iv,imageUrl,R.drawable.gamedefault);
+        ImageLoader.getInstance().display(game_iv, imageUrl, R.drawable.gamedefault);
 
         return convertView;
     }
+
     //创建ViewHolder保存缓存布局
-    class ViewHodler{
-          ImageView game_iv;
-          TextView game_tv,game_id,game_typeid;
+    class ViewHodler {
+        ImageView game_iv;
+        TextView game_tv, game_id, game_typeid;
     }
 }

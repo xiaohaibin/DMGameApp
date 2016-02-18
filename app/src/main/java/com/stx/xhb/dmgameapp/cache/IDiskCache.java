@@ -11,16 +11,18 @@ public interface IDiskCache {
 
     /**
      * 放入数据
-     * @param url 地址
-     * @param data  数据
+     *
+     * @param url  地址
+     * @param data 数据
      */
-     void put(String url, byte[] data);
+    void put(String url, byte[] data);
 
     /**
      * 获取数据
+     *
      * @param url 地址
-     * @return  数据
+     * @return 数据
      */
-     byte[] get(String url);
+    byte[] get(String url);
 
 }

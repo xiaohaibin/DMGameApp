@@ -6,11 +6,11 @@
     android:gravity="center">
 
     <ImageView
-        android:layout_marginTop="5dp"
         android:layout_width="26dp"
         android:layout_height="31dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/user" />
 
     <TextView
@@ -21,12 +21,13 @@
         android:text="标题"
         android:textColor="#ffffff"
         android:textSize="23sp" />
+
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/serach" />
 </RelativeLayout>

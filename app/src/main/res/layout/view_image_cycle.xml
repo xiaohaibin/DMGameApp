@@ -34,8 +34,8 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:textSize="11sp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:textSize="11sp" />
 
 
 </RelativeLayout>

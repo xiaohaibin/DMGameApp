@@ -30,13 +30,15 @@ public class DiskCacheImpl implements IDiskCache {
         //获取到sd根路径的绝对路径
         String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + folder;
         //实例化一个文件
-        folder = new File(absolutePath+File.separator+FOLDER);
+        folder = new File(absolutePath + File.separator + FOLDER);
         if (!folder.exists() || folder.isFile()) {
             folder.mkdirs();
         }
     }
 
-    /**将文件保存到里面去
+    /**
+     * 将文件保存到里面去
+     *
      * @param url  地址
      * @param data 数据
      */
@@ -131,7 +133,7 @@ public class DiskCacheImpl implements IDiskCache {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-           closeStream(fis,bos);
+            closeStream(fis, bos);
         }
         return ret;
     }
@@ -171,7 +173,7 @@ public class DiskCacheImpl implements IDiskCache {
         //获取到url 也是一种uri，所以可以通过这个方法，获取到最后一块的文件名
         String lastPathSegment = Uri.parse(url).getLastPathSegment();
         //如果图片没有最后的文件名则把url地址作为文件名
-        if (lastPathSegment==null){
+        if (lastPathSegment == null) {
             return url;
         }
         return lastPathSegment;

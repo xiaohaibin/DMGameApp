@@ -22,6 +22,8 @@ import com.stx.xhb.dmgameapp.utils.DownImage;
  * 下载成功之后，存储到磁盘缓存中去，存储到内存缓存中去
  */
 public class ImageLoader {
+    //一个对象，类加载的时候，就实例化了
+    private static ImageLoader imageLoader = new ImageLoader();
     //这里采取单例的模式，因为这个类，只需要存在一个对象就ok了
     //LruCache,DiskCache
     private ILruCache iLruCache;
@@ -31,9 +33,6 @@ public class ImageLoader {
         iLruCache = new LruCacheImpl();
         iDiskCache = new DiskCacheImpl();
     }
-
-    //一个对象，类加载的时候，就实例化了
-    private static ImageLoader imageLoader = new ImageLoader();
 
     //获取到这个单例对象
     public static ImageLoader getInstance() {

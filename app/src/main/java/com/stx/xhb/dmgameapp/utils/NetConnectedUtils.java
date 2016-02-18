@@ -42,10 +42,10 @@ public class NetConnectedUtils {
     /**
      * 2.判断手机网络是否存在
      *
-     * @param context  上下文
-     * @return   返回 false 无手机网络   true 有手机网络
+     * @param context 上下文
+     * @return 返回 false 无手机网络   true 有手机网络
      */
-    public static boolean isPhoneNetConnected(Context context){
+    public static boolean isPhoneNetConnected(Context context) {
         int typeMobile = ConnectivityManager.TYPE_MOBILE;//手机网络类型
         return isNetworkConnected(context, typeMobile);
     }
@@ -54,38 +54,39 @@ public class NetConnectedUtils {
     /**
      * 2.判断WIFI网络是否存在
      *
-     * @param context  上下文
-     * @return   返回 false 无wifi网络   true 有wifi网络
+     * @param context 上下文
+     * @return 返回 false 无wifi网络   true 有wifi网络
      */
-    public static boolean isWifiNetConnected(Context context){
+    public static boolean isWifiNetConnected(Context context) {
         int typeMobile = ConnectivityManager.TYPE_WIFI;//WIFI网络类型
         return isNetworkConnected(context, typeMobile);
     }
 
     /**
      * 返回网络是否连接
-     * @param context   上下文
-     * @param typeMobile   网络类型
-     * @return   true  有网络连接   false 无网络连接
+     *
+     * @param context    上下文
+     * @param typeMobile 网络类型
+     * @return true  有网络连接   false 无网络连接
      */
     private static boolean isNetworkConnected(Context context, int typeMobile) {
-        boolean ret=false;
+        boolean ret = false;
         //判断是否有网络
-        if (!isNetConnected(context)){
+        if (!isNetConnected(context)) {
             //如果没有网络连接，直接返回
             return ret;
         }
         //获取到网络连接管理器
-        ConnectivityManager connectManger= (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectManger = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         //当获取到网络连接信息的时候，可以获取到某一个类型的网络连接
         //获取到手机网络的信息
         NetworkInfo networkInfo = connectManger.getNetworkInfo(typeMobile);
         //如果不存在，那么就没有连接了
-        if (networkInfo==null){
-            return  ret;
+        if (networkInfo == null) {
+            return ret;
         }
         //判断手机网络是否可用
-        ret=networkInfo.isAvailable()&networkInfo.isConnected();
+        ret = networkInfo.isAvailable() & networkInfo.isConnected();
         return ret;
     }
 }

@@ -8,11 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
-   <!--Tabindicator的自定义style-->
+    <!--Tabindicator的自定义style-->
     <style name="StyledIndicators" parent="@android:style/Theme.Holo.Light.NoActionBar">
         <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
         <item name="android:background">@drawable/tab_indicator</item>
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>

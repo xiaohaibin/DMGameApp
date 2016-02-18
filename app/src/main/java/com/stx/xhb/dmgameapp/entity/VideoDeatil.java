@@ -120,6 +120,12 @@ public class VideoDeatil {
     private String redirecturl;
     private String templet;
     private String userip;
+    /**
+     * 0 : {"0":"《我的电台心》上市预告片","1":"XMTQ1NDk5OTQyOA==","2":"/uploads/video/201601/r_1453622910Fs3C.jpg"}
+     * body : %3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Ftab.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fhtml5.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fjquery-1.9.1.min.js%22+type%3D%22text%2Fjavascript%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fy.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fv.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+language%3D%22javascript%22+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Falone%2Fajax.js%22%3E%3C%2Fscript%3E%3Cscript+language%3D%22javascript%22%3E%0D%0Avar+players+%3D+%22youku%22%3Bvar+videos+%3D+%5B%7Btitle%3A%27%E3%80%8A%E6%88%91%E7%9A%84%E7%94%B5%E5%8F%B0%E5%BF%83%E3%80%8B%E4%B8%8A%E5%B8%82%E9%A2%84%E5%91%8A%E7%89%87%27%2Cvid%3A%27XMTQ1NDk5OTQyOA%3D%3D%27%2Cimg%3A%27%2Fuploads%2Fvideo%2F201601%2Fr_1453622910Fs3C.jpg%27%7D%2C%5D%3B%0D%0Afunction+GetRequest%28%29+%7B%0D%0A%09var+url+%3D+location.search%3B+%0D%0A%09var+theRequest+%3D+new+Object%28%29%3B%0D%0A%09if+%28url.indexOf%28%22%3F%22%29+%21%3D+-1%29+%7B%0D%0A%09%09var+str+%3D+url.substr%281%29%3B%0D%0A%09%09strs+%3D+str.split%28%22%26%22%29%3B%0D%0A%09%09for%28var+i+%3D+0%3B+i+%3C+strs.length%3B+i+%2B%2B%29+%7B%0D%0A%09%09%09theRequest%5Bstrs%5Bi%5D.split%28%22%3D%22%29%5B0%5D%5D%3Dunescape%28strs%5Bi%5D.split%28%22%3D%22%29%5B1%5D%29%3B%0D%0A%09%09%7D%0D%0A%09%7D%0D%0A%09return+theRequest%3B%0D%0A%7D%0D%0A+%09%09%0D%0Avar+request+%3D+new+Object%28%29%3B%09%09%09%0D%0Arequest+%3D+GetRequest%28%29%3B%09%09%0D%0Aif%28request%5B%22pag%22%5D%29%7B%0D%0A%09pag+%3D+request%5B%22pag%22%5D+-+1%3B%0D%0A%7Delse%7B%0D%0A%09pag+%3D+0%3B%0D%0A%7D%0D%0A%0D%0Adata+%3D+videos%5Bpag%5D%3B%0D%0Aif%28data.player%29%7B%0D%0A%09player+%3D+data.player%3B%0D%0A%7Delse%7B%0D%0A%09player+%3D+players%3B%0D%0A%7D%0D%0A%3C%2Fscript%3E%0D%0A%3Cdiv+class%3D%22chajian%22%3E%0D%0A%3Cscript+language%3D%22javascript%22%3E%0D%0A%09v.Play%28%22.chajian%22%2C+524%2C+240%2C+%22XMTQ1NDk5OTQyOA%3D%3D%22%2C+%22%22%2C+%22%22%29%3B%0D%0A%3C%2Fscript%3E%0D%0A%3C%2Fdiv%3E
+     */
+
+    private VideolistEntity videolist;
 
     public String getId() {
         return id;
@@ -177,13 +183,6 @@ public class VideoDeatil {
         this.senddate = senddate;
     }
 
-    /**
-     * 0 : {"0":"《我的电台心》上市预告片","1":"XMTQ1NDk5OTQyOA==","2":"/uploads/video/201601/r_1453622910Fs3C.jpg"}
-     * body : %3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Ftab.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fhtml5.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fjquery-1.9.1.min.js%22+type%3D%22text%2Fjavascript%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fy.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Fvideo%2Fjs%2Fv.js%22%3E%0D%0A%3C%2Fscript%3E%3Cscript+language%3D%22javascript%22+type%3D%22text%2Fjavascript%22+src%3D%22http%3A%2F%2Fwww.3dmgame.com%2Ftemplets%2Falone%2Fajax.js%22%3E%3C%2Fscript%3E%3Cscript+language%3D%22javascript%22%3E%0D%0Avar+players+%3D+%22youku%22%3Bvar+videos+%3D+%5B%7Btitle%3A%27%E3%80%8A%E6%88%91%E7%9A%84%E7%94%B5%E5%8F%B0%E5%BF%83%E3%80%8B%E4%B8%8A%E5%B8%82%E9%A2%84%E5%91%8A%E7%89%87%27%2Cvid%3A%27XMTQ1NDk5OTQyOA%3D%3D%27%2Cimg%3A%27%2Fuploads%2Fvideo%2F201601%2Fr_1453622910Fs3C.jpg%27%7D%2C%5D%3B%0D%0Afunction+GetRequest%28%29+%7B%0D%0A%09var+url+%3D+location.search%3B+%0D%0A%09var+theRequest+%3D+new+Object%28%29%3B%0D%0A%09if+%28url.indexOf%28%22%3F%22%29+%21%3D+-1%29+%7B%0D%0A%09%09var+str+%3D+url.substr%281%29%3B%0D%0A%09%09strs+%3D+str.split%28%22%26%22%29%3B%0D%0A%09%09for%28var+i+%3D+0%3B+i+%3C+strs.length%3B+i+%2B%2B%29+%7B%0D%0A%09%09%09theRequest%5Bstrs%5Bi%5D.split%28%22%3D%22%29%5B0%5D%5D%3Dunescape%28strs%5Bi%5D.split%28%22%3D%22%29%5B1%5D%29%3B%0D%0A%09%09%7D%0D%0A%09%7D%0D%0A%09return+theRequest%3B%0D%0A%7D%0D%0A+%09%09%0D%0Avar+request+%3D+new+Object%28%29%3B%09%09%09%0D%0Arequest+%3D+GetRequest%28%29%3B%09%09%0D%0Aif%28request%5B%22pag%22%5D%29%7B%0D%0A%09pag+%3D+request%5B%22pag%22%5D+-+1%3B%0D%0A%7Delse%7B%0D%0A%09pag+%3D+0%3B%0D%0A%7D%0D%0A%0D%0Adata+%3D+videos%5Bpag%5D%3B%0D%0Aif%28data.player%29%7B%0D%0A%09player+%3D+data.player%3B%0D%0A%7Delse%7B%0D%0A%09player+%3D+players%3B%0D%0A%7D%0D%0A%3C%2Fscript%3E%0D%0A%3Cdiv+class%3D%22chajian%22%3E%0D%0A%3Cscript+language%3D%22javascript%22%3E%0D%0A%09v.Play%28%22.chajian%22%2C+524%2C+240%2C+%22XMTQ1NDk5OTQyOA%3D%3D%22%2C+%22%22%2C+%22%22%29%3B%0D%0A%3C%2Fscript%3E%0D%0A%3C%2Fdiv%3E
-     */
-
-    private VideolistEntity videolist;
-
     public VideolistEntity getVideolist() {
         return videolist;
     }
@@ -192,7 +191,7 @@ public class VideoDeatil {
         this.videolist = videolist;
     }
 
-    public static class  VideolistEntity{
+    public static class VideolistEntity {
         private String body;
 
         public String getBody() {

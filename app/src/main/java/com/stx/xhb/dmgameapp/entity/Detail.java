@@ -82,20 +82,6 @@ public class Detail {
         this.videolist = videolist;
     }
 
-    public static class  VideolistEntity{
-        private String body;
-
-        public String getBody() {
-            return body;
-        }
-
-        public void setBody(String body) {
-            this.body = body;
-        }
-    }
-
-
-
     public String getWebsit() {
         return websit;
     }
@@ -590,6 +576,18 @@ public class Detail {
 
     public void setTopgl(Object topgl) {
         this.topgl = topgl;
+    }
+
+    public static class VideolistEntity {
+        private String body;
+
+        public String getBody() {
+            return body;
+        }
+
+        public void setBody(String body) {
+            this.body = body;
+        }
     }
 
 }

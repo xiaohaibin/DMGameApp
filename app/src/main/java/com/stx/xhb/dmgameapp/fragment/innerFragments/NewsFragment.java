@@ -47,7 +47,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private List<ChapterListItem> chapterListItems;
     private int currenPage = 1;//当前页
     private boolean isBottom;//是否到底部的标记
-    private boolean isLoadData=false;//判断是否已经在加载数据
+    private boolean isLoadData = false;//判断是否已经在加载数据
     private String url;
 
     @Override
@@ -73,35 +73,36 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         refreshLayout.setColorSchemeColors(Color.BLUE, Color.YELLOW);
 
         //添加listview头部控件
-        mHeadView=mInflater.inflate(R.layout.banner_view, null);
-        mImageCycleView=(ImageCycleView) mHeadView.findViewById(R.id.icv_topView);
+        mHeadView = mInflater.inflate(R.layout.banner_view, null);
+        mImageCycleView = (ImageCycleView) mHeadView.findViewById(R.id.icv_topView);
         news_lv.addHeaderView(mHeadView);
         //添加底部控件
         mFootView = mInflater.inflate(R.layout.listview_footer, null);
 //        mFootView.setVisibility(View.GONE);//默认隐藏
-        news_lv.addFooterView(mFootView,null,false);
+        news_lv.addFooterView(mFootView, null, false);
         adapter = new ListViewAdapter(getContext(), data);
         //初始化图片轮播数据
         initBanner();
     }
+
     //初始化图片轮播数据
     private void initBanner() {
-        List<ImageCycleView.ImageInfo> list=new ArrayList<>();
-            //使用网络加载数据，最后一个参数为图片新闻的id
-            list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111111111111111111-130124144424.jpg","新年首款大作 《龙之信条：黑暗觉者》破解版发布","3542051"));
-            list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111111111111-130124145Q3.jpg", "3DM轩辕组制作 《暗黑地牢》正式版汉化补丁发布", "3544323"));
-            list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/1111111111-130124145Q7.jpg", "育碧旗下射击游戏《全境封锁》PC版详细配置公布", "3544277"));
-            list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111-130124145R1.jpg", "PS4《侠盗猎车5》重制版新截图展示华丽视觉效果", "3395945"));
-            list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/1111111111111111111111111111111-130124145R1-50.jpg", "1月31日3DM新游评测与推荐 老司机是时候开车了", "3545703"));
+        List<ImageCycleView.ImageInfo> list = new ArrayList<>();
+        //使用网络加载数据，最后一个参数为图片新闻的id
+        list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111111111111111111-130124144424.jpg", "新年首款大作 《龙之信条：黑暗觉者》破解版发布", "3542051"));
+        list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111111111111-130124145Q3.jpg", "3DM轩辕组制作 《暗黑地牢》正式版汉化补丁发布", "3544323"));
+        list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/1111111111-130124145Q7.jpg", "育碧旗下射击游戏《全境封锁》PC版详细配置公布", "3544277"));
+        list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/11111111111-130124145R1.jpg", "PS4《侠盗猎车5》重制版新截图展示华丽视觉效果", "3395945"));
+        list.add(new ImageCycleView.ImageInfo("http://www.3dmgame.com/uploads/allimg/130124/1111111111111111111111111111111-130124145R1-50.jpg", "1月31日3DM新游评测与推荐 老司机是时候开车了", "3545703"));
         mImageCycleView.setOnPageClickListener(new ImageCycleView.OnPageClickListener() {
             @Override
             public void onClick(View imageView, ImageCycleView.ImageInfo imageInfo) {
                 //点击跳转到文章详情界面
-                Bundle bundle=new Bundle();
-                bundle.putString("typeid","2");
+                Bundle bundle = new Bundle();
+                bundle.putString("typeid", "2");
                 bundle.putString("id", imageInfo.value.toString());
                 //跳转到文章详情界面
-                Intent intent=new Intent(getContext(),ArticleDetailActivity.class);
+                Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -154,9 +155,6 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
 
-
-
-
     //下拉刷新加载数据方法
     @Override
     public void onRefresh() {
@@ -206,11 +204,11 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         //isBottom是自定义的boolean变量，用于标记是否滑动到底部
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && isBottom&&!isLoadData) {
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && isBottom && !isLoadData) {
             //如果加载到底部则加载下一页的数据显示到listview中
             currenPage++;
             //加载新数据
-            isLoadData=true;//将加载数据的状态设置为true
+            isLoadData = true;//将加载数据的状态设置为true
             url = String.format(HttpAdress.NEWS_URL, currenPage);
             mFootView.setVisibility(View.VISIBLE);//设置进度条出现
             HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
@@ -222,7 +220,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         mFootView.setVisibility(View.GONE);//设置隐藏进度条
                         data.addAll(chapterListItems);
                         adapter.notifyDataSetChanged();
-                        isLoadData=false;//下载完数据之后，将状态设为false
+                        isLoadData = false;//下载完数据之后，将状态设为false
                     }
                 }
             });
@@ -233,10 +231,6 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         //若第一个可见的item的下标+可见的条目的数量=当前listview中总的条目数量，则说明已经到达底部
-        if (firstVisibleItem + visibleItemCount == totalItemCount) {
-            isBottom = true;
-        } else {
-            isBottom = false;
-        }
+        isBottom = firstVisibleItem + visibleItemCount == totalItemCount;
     }
 }
