@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="120dp"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/game_iv"
+        android:layout_width="100dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/gamedefault"
+        android:layout_height="120dp"/>
+    <TextView
+        android:id="@+id/tv_game"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="游戏名称"/>
+    <!--隐藏这两个属性，这两个属性是为了跳转时候用到-->
+    <TextView
+        android:id="@+id/game_id"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/game_typeid"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

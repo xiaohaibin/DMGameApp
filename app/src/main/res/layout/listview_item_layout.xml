@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/product_default"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标题"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日期" />
+                <TextView
+                    android:id="@+id/comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60dp"
+                    android:text="评论数"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+            <!--设置隐藏属性，以便点击跳转详情的时候使用-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                  <TextView
+                   android:id="@+id/tv_id"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:visibility="gone"
+                   android:text="文章id" />
+               <TextView
+                   android:id="@+id/tv_typeid"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:visibility="gone"
+                   android:text="分类id" />
+               <TextView
+                   android:id="@+id/tv_url"
+                   android:visibility="gone"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="文章url" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

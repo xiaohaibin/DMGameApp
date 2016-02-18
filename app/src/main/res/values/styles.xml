@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+   <!--Tabindicator的自定义style-->
+    <style name="StyledIndicators" parent="@android:style/Theme.Holo.Light.NoActionBar">
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/tab_indicator</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:dividerPadding">8dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+    </style>
+
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+        <item name="android:textColor">@drawable/selector_tabtext</item>
+    </style>
+</resources>

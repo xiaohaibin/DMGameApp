@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.stx.xhb.dmgameapp.fragment.GameFragment">
+
+    <!-- 标题 -->
+    <include layout="@layout/title_layout"></include>
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="游戏类型："
+            android:textSize="15sp"/>
+        <Spinner
+            android:id="@+id/game_spinner"
+            android:layout_width="wrap_content"
+            android:spinnerMode="dialog"
+            android:background="@drawable/edittext1"
+            android:layout_height="40dp"></Spinner>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"></View>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+            android:padding="5dp"
+            android:id="@+id/game_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="auto_fit"
+            android:columnWidth="100dp"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"/>
+        <TextView
+            android:id="@+id/tv_empty"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无该类游戏"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>
