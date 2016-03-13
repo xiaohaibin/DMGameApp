@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activities.ArticleDetailActivity;
@@ -20,8 +21,11 @@ import com.stx.xhb.dmgameapp.activities.VideoDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterListItem;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,11 +82,17 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
         typeid = getArguments().getInt("typeid");
         //网络请求地址
         url = String.format(HttpAdress.ARTICLE_URL, typeid, currenPage);
-        //接口回调获取数据
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+        //xutils加载网络数据
+        downloadData();
+        //给listview绑定适配器
+        lv_data.setAdapter(adapter);
+    }
+    //加载网络数据
+    private void downloadData() {
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] data) {
-                String json = new String(data);
+            public void onSuccess(String result) {
+                String json = new String(result);
                 //解析json数据
                 datachapter = JsonUtils.parseChapterJson(json);
                 if (datachapter != null) {
@@ -91,9 +101,22 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
                     adapter.notifyDataSetChanged();
                 }
             }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
         });
-        //给listview绑定适配器
-        lv_data.setAdapter(adapter);
     }
 
     //设置事件监听
@@ -112,20 +135,8 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
         //加载新数据
         //网络请求地址
         url = String.format(HttpAdress.ARTICLE_URL, typeid, currenPage);
-        //接口回调获取数据
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
-            @Override
-            public void OnFetch(String url, byte[] data) {
-                String json = new String(data);
-                //解析json数据
-                datachapter = JsonUtils.parseChapterJson(json);
-                if (datachapter != null) {
-                    chapterListItems.clear();
-                    chapterListItems.addAll(datachapter);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
+        //加载新数据
+        downloadData();
         refreshLayout.setRefreshing(false);
     }
 
@@ -173,11 +184,10 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
             isLoadData = true;//将加载新数据的标记设置为true
             //网络请求地址
             url = String.format(HttpAdress.ARTICLE_URL, typeid, currenPage);
-            //接口回调获取数据
-            HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+            x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
                 @Override
-                public void OnFetch(String url, byte[] data) {
-                    String json = new String(data);
+                public void onSuccess(String result) {
+                    String json = new String(result);
                     //解析json数据
                     datachapter = JsonUtils.parseChapterJson(json);
                     if (datachapter != null) {
@@ -187,6 +197,21 @@ public class CommondFragment extends Fragment implements SwipeRefreshLayout.OnRe
                         //加载完数据之后，将标记设置为false
                         isLoadData = false;
                     }
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
                 }
             });
         }

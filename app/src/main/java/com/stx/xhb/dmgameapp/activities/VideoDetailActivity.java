@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,10 +13,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,9 +24,16 @@ import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -56,16 +60,18 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
+        ////网页中的视频，上屏幕的时候，可能出现闪烁的情况，需要如下设置：Activity在onCreate时需要设置:
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
         initWindow();
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
         String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);//文章详情请求地址
         //下载网络数据
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] data) {
-                String json = new String(data);
+            public void onSuccess(String result) {
+                String json = new String(result);
                 //json解析
                 VideoDeatil detail = new Gson().fromJson(json, VideoDeatil.class);
                 body = detail.getVideolist().getBody();//视频内容
@@ -73,6 +79,21 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
                 writer = detail.getWriter();//文章作者
                 senddate = detail.getSenddate();//文章发布时间
                 initData();
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
             }
         });
         initListener();
@@ -107,15 +128,19 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         getSupportActionBar().setTitle("视频详情");
         //设置标题栏字体颜色
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.backup));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 
     }
 
     //初始化数据
     private void initData() {
+        comment_web.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+        comment_web.setDrawingCacheEnabled(true);
         //启用支持javascript
         WebSettings settings = comment_web.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setPluginState(WebSettings.PluginState.ON);
+        settings.setPluginsEnabled(true);//可以使用插件
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setAllowFileAccess(true);
         settings.setLoadWithOverviewMode(true);
@@ -123,7 +148,6 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         settings.setDefaultTextEncodingName("utf-8");//设置默认编码格式
 //        //自适应屏幕
         settings.setUseWideViewPort(true);
-//        settings.setLoadWithOverviewMode(true);
         comment_web.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -157,6 +181,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
                         + "</body></html>";
                 //使用这种方法，前面添加网站的地址 http://www.3dmgame.com，可以解决，有些图片前面乜有完整请求地址的问题
                 comment_web.loadDataWithBaseURL(HttpAdress.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -173,20 +198,22 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         }
 
     }
-
     //改写物理按键——返回的逻辑
     //返回无效是重定向的原因
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            comment_web.goBack();//返回上一页面
-            return true;
+            if (comment_web!=null&&comment_web.canGoBack()){
+                comment_web.canGoBack();
+                return true;
+            }else {
+                return super.onKeyDown(keyCode, event);
+            }
         }
         return super.onKeyDown(keyCode, event);
 
     }
-
     //关闭进度对话框
     private void closeDialog() {
         if (dialog != null && dialog.isShowing()) {

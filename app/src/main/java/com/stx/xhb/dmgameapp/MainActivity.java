@@ -1,6 +1,5 @@
 package com.stx.xhb.dmgameapp;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +17,7 @@ import com.stx.xhb.dmgameapp.fragment.GameFragment;
 import com.stx.xhb.dmgameapp.fragment.VideoFragment;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.view.TipsToast;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,8 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.update(this);
         initWindow();
         initView();
         initData();
@@ -57,9 +59,6 @@ public class MainActivity extends FragmentActivity {
 
     //初始化控件
     private void initView() {
-     /*   //隐藏actionbar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();*/
         main_viewPager = (ViewPager) findViewById(R.id.main_viewpager);
         //设置viewpager的预加载页数，viewpager默认只会预加载左右两边的页面数据
         main_viewPager.setOffscreenPageLimit(4);
@@ -128,16 +127,10 @@ public class MainActivity extends FragmentActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                /*Toast.makeText(getApplicationContext(), "再按一次退出程序",
-                        Toast.LENGTH_SHORT).show();*/
                 showTips(R.drawable.tips_smile, "再按一次退出程序");
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
             }
             return true;
         }

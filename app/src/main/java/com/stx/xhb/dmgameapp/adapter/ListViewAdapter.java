@@ -9,10 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.cache.ImageLoader;
 import com.stx.xhb.dmgameapp.entity.ChapterListItem;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
+
+import org.xutils.x;
 
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class ListViewAdapter extends BaseAdapter {
         //地址拼接
         String imageUrl = HttpAdress.DMGEAME_URL + litpic;
         //下载图片，优先使用本地缓存图片
-        ImageLoader.getInstance().display(iv, imageUrl, R.drawable.product_default);
+        x.image().bind(iv,imageUrl);
         return convertView;
     }
 

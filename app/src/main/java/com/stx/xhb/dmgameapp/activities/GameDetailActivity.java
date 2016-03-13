@@ -11,19 +11,28 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.cache.ImageLoader;
 import com.stx.xhb.dmgameapp.entity.Detail;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 游戏详情界面
@@ -51,6 +60,8 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
     TextView tvGameDetail;
     @Bind(R.id.iv_game)
     ImageView ivGame;
+    @Bind(R.id.game_share)
+    ImageButton gameShare;
     private Toolbar toolbar;
     private String title;
     private String litpic;
@@ -64,6 +75,12 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
     private String language;
     private String websit;
     private ProgressDialog pd;//进度对话框
+    final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
+            {
+                    SHARE_MEDIA.WEIXIN,SHARE_MEDIA.SINA,
+                    SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+            };
+    private String arcurl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +110,7 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         getSupportActionBar().setTitle("游戏详情");
         //设置标题栏字体颜色
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.backup));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
     }
 
     //初始化窗体布局
@@ -119,11 +136,12 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         pd = new ProgressDialog(this);
         pd.setMessage("游戏详情加载中。。。");
         pd.show();
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+        //加载网络数据
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] data) {
+            public void onSuccess(String result) {
                 Log.i("------>ju", "我来了，，，，");
-                String json = new String(data);
+                String json = new String(result);
                 //json解析
                 Detail detail = new Gson().fromJson(json, Detail.class);
                 pd.dismiss();//隐藏进度对话框
@@ -139,12 +157,13 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                 terrace = detail.getTerrace();
                 language = detail.getLanguage();
                 websit = detail.getWebsit();
-
+                arcurl = detail.getArcurl();
                 tvGameName.setText(title);
                 //游戏封面链接
                 imageURl = HttpAdress.DMGEAME_URL + litpic;
                 //下载图片，优先使用缓存图片
-                ImageLoader.getInstance().disPlay(ivGame, imageURl);
+                x.view().inject(GameDetailActivity.this);
+                x.image().bind(ivGame, imageURl);
                 tvGameDetail.setText(description);
                 tvGameType.setText(typename);
                 tvReleaseCompany.setText(release_company);
@@ -157,6 +176,21 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                 tvGameUrl.setText(
                         Html.fromHtml("<a href=" + websit + ">点击进入</a> "));
                 tvGameUrl.setMovementMethod(LinkMovementMethod.getInstance());
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(GameDetailActivity.this, "游戏详情加载失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
 
             }
         });
@@ -176,4 +210,44 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         finish();
     }
 
+    @OnClick(R.id.game_share)
+    public void onClick() {
+        new ShareAction(this).setDisplayList( displaylist )
+                .withText(description)
+                .withTitle(title)
+                .withTargetUrl(arcurl)
+                .withMedia(new UMImage(this,R.drawable.app))
+                .setListenerList(new UMShareListener() {
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                }, new UMShareListener() {
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                })
+                .open();
+    }
 }

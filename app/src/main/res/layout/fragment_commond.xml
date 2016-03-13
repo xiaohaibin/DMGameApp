@@ -13,6 +13,7 @@
         <ListView
             android:id="@+id/lv_data"
             android:layout_width="match_parent"
+            android:scrollbars="none"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

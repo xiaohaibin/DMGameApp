@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,8 +22,11 @@ import com.stx.xhb.dmgameapp.activities.GameDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.GridViewAdapter;
 import com.stx.xhb.dmgameapp.entity.GameListItem;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +34,7 @@ import java.util.List;
 /**
  * 视频的Fragment
  */
-public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListener, AdapterView.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class GameFragment extends Fragment implements  AdapterView.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
 
     //游戏类型集合
     private static final String[] GAME_NAME = new String[]{
@@ -70,6 +74,9 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
 
     //初始化控件
     private void initView() {
+        //隐藏toolbar menu控件
+        ImageButton main_action_menu= (ImageButton) view.findViewById(R.id.main_action_menu);
+        main_action_menu.setVisibility(View.GONE);
         TextView tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("游戏");
         sp = (Spinner) view.findViewById(R.id.game_spinner);
@@ -82,10 +89,9 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
 
     //初始化数据
     private void initData() {
-
         //游戏列表地址
         game_url = String.format(HttpAdress.GAME_URL, typeid, currentPage);
-        HttpUtils.downLoadData(game_url, this);
+        downloadData(game_url);
     }
 
     //设置适配器
@@ -113,25 +119,6 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
         game_grid.setOnScrollListener(this);
     }
 
-    //网络下载数据的回调
-    @Override
-    public void OnFetch(String url, byte[] result) {
-        //获取到json数据
-        String json = new String(result);
-        //由于游戏列表的json数据格式有误，需要进行截取
-        //获取到“ {” 开始的位置
-        int index = json.indexOf("{");
-        //从“{” 开始的位置进行截取
-        String strjson = json.substring(index, json.length());
-        //开始json解析
-        data = JsonUtils.parseGameJson(strjson);
-        if (data != null) {
-            gameListItems.clear();
-            gameListItems.addAll(data);
-            gridViewAdapter.notifyDataSetChanged();
-        }
-    }
-
     //spinner的事件监听
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -147,12 +134,16 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
     //下拉刷新的事件方法
     @Override
     public void onRefresh() {
-
         //加载新数据
         game_url = String.format(HttpAdress.GAME_URL, typeid, currentPage);
-        HttpUtils.downLoadData(game_url, new HttpUtils.OnFetchDataListener() {
+        downloadData(game_url);
+        refreshLayout.setRefreshing(false);
+    }
+    //加载网络数据
+    private void downloadData(String url) {
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] result) {
+            public void onSuccess(String result) {
                 //获取到json数据
                 String json = new String(result);
                 //由于游戏列表的json数据格式有误，需要进行截取
@@ -168,15 +159,29 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
                     gridViewAdapter.notifyDataSetChanged();
                 }
             }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
         });
-        refreshLayout.setRefreshing(false);
     }
 
     //gridview的点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String game_ID = data.get(position).getId();//获取游戏id
-        String typeid = data.get(position).getTypeid();//获取游戏分类id
+        String game_ID = gameListItems.get(position).getId();//获取游戏id
+        String typeid = gameListItems.get(position).getTypeid();//获取游戏分类id
         Bundle bundle = new Bundle();
         bundle.putString("id", game_ID);
         bundle.putString("typeid", typeid);
@@ -197,9 +202,9 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
             currentPage++;
             //加载新数据
             game_url = String.format(HttpAdress.GAME_URL, typeid, currentPage);
-            HttpUtils.downLoadData(game_url, new HttpUtils.OnFetchDataListener() {
+            x.http().get(new RequestParams(game_url), new Callback.CommonCallback<String>() {
                 @Override
-                public void OnFetch(String url, byte[] result) {
+                public void onSuccess(String result) {
                     //获取到json数据
                     String json = new String(result);
                     //由于游戏列表的json数据格式有误，需要进行截取
@@ -213,6 +218,21 @@ public class GameFragment extends Fragment implements HttpUtils.OnFetchDataListe
                         gameListItems.addAll(data);
                         gridViewAdapter.notifyDataSetChanged();
                     }
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
                 }
             });
         }

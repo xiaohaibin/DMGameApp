@@ -9,9 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.cache.ImageLoader;
 import com.stx.xhb.dmgameapp.entity.GameListItem;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
+
+import org.xutils.x;
 
 import java.util.List;
 
@@ -76,8 +77,8 @@ public class GridViewAdapter extends BaseAdapter {
         //将图片与imageview绑定在一起
         game_iv.setTag(imageUrl);
         //下载图片,优先使用本地缓存图片
-        ImageLoader.getInstance().display(game_iv, imageUrl, R.drawable.gamedefault);
-
+//        ImageLoader.getInstance().display(game_iv, imageUrl, R.drawable.gamedefault);
+        x.image().bind(game_iv,imageUrl);
         return convertView;
     }
 

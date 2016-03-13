@@ -1,15 +1,18 @@
 package com.stx.xhb.dmgameapp.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.activities.SettingActivity;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
 import com.stx.xhb.dmgameapp.fragment.innerFragments.CommondFragment;
 import com.stx.xhb.dmgameapp.fragment.innerFragments.NewsFragment;
@@ -36,6 +39,7 @@ public class ArticleFragment extends Fragment {
     //fragment的集合
     private List<Fragment> fragments = new ArrayList<>();
     private TextView tv_title;
+    private ImageButton main_action_menu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +54,8 @@ public class ArticleFragment extends Fragment {
 
     //获取控件
     private void initView() {
+        //隐藏toolbar menu控件
+        main_action_menu = (ImageButton) view.findViewById(R.id.main_action_menu);
         //获取到标题栏控件
         tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("文章");
@@ -86,21 +92,20 @@ public class ArticleFragment extends Fragment {
     //设置监听
     private void setListener() {
         //indicator的滑动监听事件
-        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        indicator.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 //动态改变标题栏文字
                 tv_title.setText(TITLE[position]);
             }
-
+        });
+        //main_action_menu的点击事件
+        main_action_menu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onClick(View v) {
+                //跳转到个人设置界面
+                Intent intent=new Intent(getContext(), SettingActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -17,18 +17,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
-        <ListView
-            android:id="@+id/lv_comment"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
-
-        <TextView
-            android:id="@+id/tv_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="暂无评论" />
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/lv_comment"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:layout_height="match_parent"></ListView>
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/comment_empty"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/night_biz_chat_empty_view"/>
+        </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <View
@@ -40,25 +44,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
-
+        android:background="#edecec"
+        android:padding="8dp">
         <EditText
             android:id="@+id/ed_comment"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:background="@drawable/comment_input_bg"
+            android:drawableLeft="@drawable/night_biz_tie_comment_reply_write"
+            android:background="@drawable/btn_bg"
             android:hint="尽情吐槽吧~~~"
+            android:textColor="@color/colorBlack"
             android:singleLine="true" />
 
         <Button
             android:id="@+id/comment_btn"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:textColor="@color/colorWhite"
             android:background="@drawable/btn_commit"
             android:text="评论" />
     </LinearLayout>

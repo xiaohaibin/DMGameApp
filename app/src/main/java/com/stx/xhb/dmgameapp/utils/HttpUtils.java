@@ -1,8 +1,6 @@
 package com.stx.xhb.dmgameapp.utils;
 
 import android.os.Handler;
-import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -10,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -21,66 +18,8 @@ import java.util.Map;
  */
 public class HttpUtils {
     public static final int TIMEOUT_MILLIS = 10000;
-    private static final int TIME_OUT = 10000;//10秒超时
     //运送的Handler
     private static final Handler M_HANDLER = new Handler();
-
-    /**
-     * 下载的方法
-     *
-     * @param url                 网络数据url
-     * @param onFetchDataListener 回调的接口
-     */
-    public static void downLoadData(final String url, final OnFetchDataListener onFetchDataListener) {
-        //如果这两个都为空，那么直接返回
-        if (onFetchDataListener == null || TextUtils.isEmpty(url)) {
-            return;
-        }
-        //开启线程，加载网络数据
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //子线程执行耗时操作
-                try {
-                    URL netUrl = new URL(url);
-                    HttpURLConnection connection = (HttpURLConnection) netUrl.openConnection();
-                    //设置请求方式
-                    connection.setRequestMethod("GET");
-                    connection.setDoInput(true);
-                    //设置连接超时时间
-                    connection.setConnectTimeout(TIME_OUT);
-                    //设置读取超时时间
-                    connection.setReadTimeout(TIME_OUT);
-                    //开始连接
-                    connection.connect();
-                    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        //网络数据获取成功
-                        InputStream is = connection.getInputStream();
-                        //将输入流转为字节数组
-                        final byte[] data = isToByteArray(is);
-                        //运送结果到主线程
-                        M_HANDLER.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.i("====>", "我没进回调方法了。。。。。");
-                                //这个方法里面的语句，是执行在主线程的
-                                if (data != null) {
-                                    onFetchDataListener.OnFetch(url, data);
-                                    Log.i("====>", "我进回调方法了。。。。。");
-                                }
-
-                            }
-                        });
-
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 
     /**
      * 输入流转字节数组方法
@@ -221,11 +160,6 @@ public class HttpUtils {
         }
         result = new String(bos.toByteArray());
         return result;
-    }
-
-    //网络下载的回调
-    public interface OnFetchDataListener {
-        void OnFetch(String url, byte[] data);
     }
 
     //服务器响应处理回调接口

@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,9 @@ import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +44,7 @@ import java.util.Map;
 /**
  * 评论详情界面
  */
-public class CommentActivity extends ActionBarActivity implements View.OnClickListener, HttpUtils.OnFetchDataListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+public class CommentActivity extends ActionBarActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
     private ListView lv_comment;
     private Toolbar toolbar;
     private Button comment_btn;
@@ -59,7 +63,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
     private String url;
     private View mFootView;
     private LayoutInflater mInflater;
-
+    private ImageView comment_empty;//评论为空展示的界面
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +93,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
         if (mInflater == null) {
             mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+        comment_empty= (ImageView) findViewById(R.id.comment_empty);
         lv_comment = (ListView) findViewById(R.id.lv_comment);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         comment_btn = (Button) findViewById(R.id.comment_btn);
@@ -104,15 +109,11 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
         getSupportActionBar().setTitle("评论");
         //设置标题栏字体颜色
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.backup));
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.comment_refresh);
         //设置下拉刷新控件的颜色
         refreshLayout.setColorSchemeColors(Color.BLUE, Color.YELLOW);
-        //添加底部控件
-        mFootView = mInflater.inflate(R.layout.listview_footer, null);
-        mFootView.setVisibility(View.GONE);//默认隐藏
-        lv_comment.addFooterView(mFootView, null, false);
     }
 
     //初始化数据
@@ -122,7 +123,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
         typeid = getIntent().getStringExtra("typeid");
         //评论列表请求地址
         url = String.format(HttpAdress.COMMENT_URL, id, currentPage);
-        HttpUtils.downLoadData(url, this);
+        downLoad();
     }
 
     //设置适配器
@@ -165,9 +166,9 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
                                 Toast.makeText(CommentActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
                                 //重新加载数据
                                 url = String.format(HttpAdress.COMMENT_URL, id, currentPage);
-                                HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+                                x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
                                     @Override
-                                    public void OnFetch(String url, byte[] result) {
+                                    public void onSuccess(String result) {
                                         String json = new String(result);
                                         ChapterCommentListItem chapterCommentListItem = new Gson().fromJson(json, ChapterCommentListItem.class);
                                         data = chapterCommentListItem.getDescription().getData();
@@ -176,6 +177,21 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
                                             dataEntities.addAll(data);
                                             adapter.notifyDataSetChanged();
                                         }
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable ex, boolean isOnCallback) {
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(CancelledException cex) {
+
+                                    }
+
+                                    @Override
+                                    public void onFinished() {
+
                                     }
                                 });
                             } else {
@@ -198,26 +214,48 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
         finish();
     }
 
-    //网络数据回调方法
-    @Override
-    public void OnFetch(String url, byte[] result) {
-        String json = new String(result);
-        ChapterCommentListItem chapterCommentListItem = new Gson().fromJson(json, ChapterCommentListItem.class);
-        data = chapterCommentListItem.getDescription().getData();
-        if (chapterCommentListItem != null && data != null) {
-//            dataEntities.clear();
-            dataEntities.addAll(data);
-            adapter.notifyDataSetChanged();
-        }
-
-    }
 
     //下拉刷新方法
     @Override
     public void onRefresh() {
-        url = String.format(HttpAdress.COMMENT_URL, id, currentPage);
-        HttpUtils.downLoadData(url, this);
+        url = String.format(HttpAdress.COMMENT_URL, id, 1);
+        //xutils加载网络数据
+        downLoad();
         refreshLayout.setRefreshing(false);
+    }
+    //加载网络数据
+    private void downLoad() {
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                String json = new String(result);
+                ChapterCommentListItem chapterCommentListItem = new Gson().fromJson(json, ChapterCommentListItem.class);
+                data = chapterCommentListItem.getDescription().getData();
+//                if (data==null){
+//                    comment_empty.setVisibility(View.VISIBLE);
+//                }
+                if (chapterCommentListItem != null && data != null) {
+                    dataEntities.clear();
+                    dataEntities.addAll(data);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     //////////////////////////////listview的滚动监听事件/////////////////////////////
@@ -225,25 +263,40 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         //isBottom是自定义的boolean变量，用于标记是否滑动到底部
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && isBottom && !isLoadData) {
+
             //如果加载到底部则加载下一页的数据显示到listview中
             currentPage++;
             //加载新数据
             isLoadData = true;//将加载数据的状态设置为true
             //评论列表请求地址
             url = String.format(HttpAdress.COMMENT_URL, id, currentPage);
-            mFootView.setVisibility(View.VISIBLE);//设置进度条出现
-            HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+//            mFootView.setVisibility(View.VISIBLE);//设置进度条出现
+            x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
                 @Override
-                public void OnFetch(String url, byte[] result) {
+                public void onSuccess(String result) {
                     String json = new String(result);
                     ChapterCommentListItem chapterCommentListItem = new Gson().fromJson(json, ChapterCommentListItem.class);
                     data = chapterCommentListItem.getDescription().getData();
                     if (chapterCommentListItem != null && data != null) {
-                        mFootView.setVisibility(View.GONE);//设置隐藏进度条
                         dataEntities.addAll(data);
                         adapter.notifyDataSetChanged();
                         isLoadData = false;//下载完数据之后，将状态设为false
                     }
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
                 }
             });
         }

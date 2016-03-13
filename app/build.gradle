@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
-        versionName "1.1"
+        versionName "2.0"
     }
     buildTypes {
         release {
@@ -28,4 +28,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.xutils:xutils:3.3.12'
+    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+    compile 'com.github.shell-software:fab:1.1.2'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

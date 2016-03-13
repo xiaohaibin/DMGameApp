@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
@@ -35,7 +36,6 @@ public class VideoFragment extends Fragment {
     //fragment的集合
     private List<Fragment> fragments = new ArrayList<>();
     private TextView tv_title;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,6 +49,9 @@ public class VideoFragment extends Fragment {
 
     //获取控件
     private void initView() {
+        //隐藏toolbar menu控件
+        ImageButton main_action_menu= (ImageButton) view.findViewById(R.id.main_action_menu);
+        main_action_menu.setVisibility(View.GONE);
         //获取到标题栏控件
         tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("视频");

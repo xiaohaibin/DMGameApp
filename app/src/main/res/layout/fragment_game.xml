@@ -45,8 +45,9 @@
             android:layout_height="match_parent"
             android:columnWidth="100dp"
             android:horizontalSpacing="10dp"
-            android:numColumns="auto_fit"
+            android:numColumns="3"
             android:padding="5dp"
+            android:scrollbars="none"
             android:verticalSpacing="10dp" />
 
         <TextView

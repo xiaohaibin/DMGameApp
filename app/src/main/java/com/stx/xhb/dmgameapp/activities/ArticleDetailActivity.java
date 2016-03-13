@@ -1,49 +1,52 @@
 package com.stx.xhb.dmgameapp.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.google.gson.Gson;
+import com.software.shell.fab.ActionButton;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.Detail;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 /**
  * 文章详情界面
  */
 public class ArticleDetailActivity extends ActionBarActivity implements View.OnClickListener {
+    @Bind(R.id.article_share)
+    ImageButton articleShare;
     private WebView comment_web;
-    private EditText ed_comment;
-    private Button comment_btn;
-    private ProgressDialog dialog;
     private Toolbar toolbar;
     private String body;
     private String id;
@@ -51,31 +54,57 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     private String title;//标题
     private String writer;//作者
     private String senddate;//发布时间
+    private SmoothProgressBar webProgress;//进度条
+    private ActionButton actionButton;//评论按钮
+
+    final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
+            {
+                    SHARE_MEDIA.WEIXIN,SHARE_MEDIA.SINA,
+                    SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
+            };
+    private String decode;
+    private String arcurl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
         initWindow();
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
-        String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);//文章详情请求地址
+        String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);
         //下载网络数据
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] data) {
-                String json = new String(data);
+            public void onSuccess(String result) {
+                String json = new String(result);
                 //json解析
                 Detail detail = new Gson().fromJson(json, Detail.class);
                 body = detail.getBody();//文章内容
                 title = detail.getTitle();//文章标题
                 writer = detail.getWriter();//文章作者
                 senddate = detail.getSenddate();//文章发布时间
+                arcurl = detail.getArcurl();
                 initData();
             }
-        });
 
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
         initListener();
     }
 
@@ -95,21 +124,24 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     //获取控件
     private void initView() {
         comment_web = (WebView) findViewById(R.id.coment_web);
-        ed_comment = (EditText) findViewById(R.id.ed_comment);
-        comment_btn = (Button) findViewById(R.id.comment_btn);
+        actionButton = (ActionButton) findViewById(R.id.action_button);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        webProgress = (SmoothProgressBar) findViewById(R.id.web_progress);
         //2.替代
         setSupportActionBar(toolbar);
         //加载背景颜色
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
         //设置显示返回上一级的图标
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //设置标题
         getSupportActionBar().setTitle("文章详情");
         //设置标题栏字体颜色
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.backup));
-
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+        //设置悬浮按钮的背景图片
+        actionButton.setImageResource(R.drawable.note_publish_img_unpressed);//设置按钮资源文件
+        actionButton.setImageSize(65);//设置图片按钮的大小
     }
 
 
@@ -125,16 +157,14 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         settings.setDefaultTextEncodingName("utf-8");//设置默认编码格式
 //        //自适应屏幕
         settings.setUseWideViewPort(true);
-//        settings.setLoadWithOverviewMode(true);
         comment_web.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100) {
-                    //网页加载完成，关闭对话框
-                    closeDialog();
-                } else {
-                    //网页加载中，打开进度对话框
-                    openDialog(newProgress);
+                webProgress.setProgress(newProgress);
+                if (webProgress != null && newProgress != 100) {
+                    webProgress.setVisibility(View.VISIBLE);
+                } else if (webProgress != null) {
+                    webProgress.setVisibility(View.GONE);
                 }
             }
         });
@@ -143,7 +173,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
             try {
                 //由于body的数据进行了URLEncode编码，所以需要我们再进行URLDecoder解码
                 //否则只能显示图片
-                String decode = URLDecoder.decode(body, "utf-8");
+                decode = URLDecoder.decode(body, "utf-8");
                 Log.i("--------->decode", "" + decode);
                 String date = DateUtils.dateFromat(senddate);//发布时间
                 String html = "<html><body>"
@@ -156,7 +186,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                         + "发布时间:" + date
                         + "</p>"
                         + "<style>"
-//                                       +"body{text-align:center}"
                         + "img{width:100%;height:auto;}"//自定义样式，设置图片显示大小
                         + "</style>"
                         + decode
@@ -186,80 +215,34 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            comment_web.goBack();//返回上一页面
-            return true;
+            if (comment_web != null && comment_web.canGoBack()) {
+                comment_web.canGoBack();
+                return true;
+            } else {
+                return super.onKeyDown(keyCode, event);
+            }
         }
         return super.onKeyDown(keyCode, event);
 
-    }
-
-    //关闭进度对话框
-    private void closeDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-            dialog = null;
-        }
-    }
-
-    //显示进度对话框
-    private void openDialog(int newProgress) {
-        if (dialog == null) {
-            dialog = new ProgressDialog(ArticleDetailActivity.this);
-            dialog.setProgress(newProgress);
-            dialog.setMessage("文章详情加载中。。。");
-            dialog.show();
-        } else {
-            dialog.setProgress(newProgress);
-        }
     }
 
     //设置事件监听
     private void initListener() {
         //toolbard的返回按钮事件监听
         toolbar.setNavigationOnClickListener(this);
-        //评论提交按钮
-        comment_btn.setOnClickListener(new View.OnClickListener() {
+        //点击按钮跳转到评论界面
+        actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String commentContent = ed_comment.getText().toString();//获取到输入框中的评论内容
-                if (TextUtils.isEmpty(commentContent)) {
-                    Toast.makeText(ArticleDetailActivity.this, "评论内容不能为空！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                final Map<String, String> params = new HashMap<String, String>();
-                params.put("aid", id);
-                params.put("msg", commentContent);
-                HttpUtils.submitPostData(params, "utf-8", new HttpUtils.OnFetchResponseListener() {
-                    @Override
-                    public void OnFechResponse(String reponse) {
-                        Log.i("responseResult====>", reponse);
-                        //json解析，获取到响应状态码
-                        try {
-                            JSONObject object = new JSONObject(reponse);
-                            String code = object.getString("code");//响应状态码
-                            if ("1".equals(code)) {
-                                ed_comment.setText("");//清空输入框
-                                Toast.makeText(ArticleDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(ArticleDetailActivity.this, "评论失败", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
-
                 Intent intent = new Intent(ArticleDetailActivity.this, CommentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id", id);
                 bundle.putString("typeid", typeid);
                 intent.putExtras(bundle);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
             }
         });
+
     }
 
     //toolbar事件监听方法
@@ -267,5 +250,46 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     public void onClick(View v) {
         //返回上一页
         finish();
+    }
+    //点击分享
+    @OnClick(R.id.article_share)
+    public void onClick() {
+        new ShareAction(this).setDisplayList( displaylist )
+                .withText(title)
+                .withTitle(title)
+                .withTargetUrl(arcurl)
+                .withMedia(new UMImage(this,R.drawable.app))
+                .setListenerList(new UMShareListener() {
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                }, new UMShareListener() {
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                })
+                .open();
     }
 }

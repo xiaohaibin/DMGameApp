@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 /**
  * 论坛的Fragment
@@ -36,6 +37,9 @@ public class ForumFragment extends Fragment {
 
     //获取控件
     private void initView() {
+        //隐藏toolbar menu控件
+        ImageButton main_action_menu= (ImageButton) view.findViewById(R.id.main_action_menu);
+        main_action_menu.setVisibility(View.GONE);
         TextView tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("论坛");
         web_view = (WebView) view.findViewById(R.id.web_view);

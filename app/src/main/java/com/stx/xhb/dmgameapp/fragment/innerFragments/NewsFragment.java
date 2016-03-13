@@ -15,16 +15,18 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activities.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterListItem;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.view.ImageCycleView;
 
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.ArrayList;
@@ -78,7 +80,6 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         news_lv.addHeaderView(mHeadView);
         //添加底部控件
         mFootView = mInflater.inflate(R.layout.listview_footer, null);
-//        mFootView.setVisibility(View.GONE);//默认隐藏
         news_lv.addFooterView(mFootView, null, false);
         adapter = new ListViewAdapter(getContext(), data);
         //初始化图片轮播数据
@@ -116,7 +117,6 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 ImageView imageView = new ImageView(getContext());
                 x.image().bind(imageView, imageInfo.image.toString());
                 return imageView;
-
             }
         });
 
@@ -125,9 +125,14 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     //初始化数据
     private void initData() {
         url = String.format(HttpAdress.NEWS_URL, currenPage);
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+        downloadData();
+    }
+    //下载网络数据
+    private void downloadData() {
+        //使用xutils请求网络数据
+        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
-            public void OnFetch(String url, byte[] result) {
+            public void onSuccess(String result) {
                 String json = new String(result);
                 chapterListItems = JsonUtils.parseChapterJson(json);
                 if (chapterListItems != null) {
@@ -136,8 +141,22 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     adapter.notifyDataSetChanged();
                 }
             }
-        });
 
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(getActivity(), "网络请求失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     //设置适配器
@@ -159,18 +178,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
         //加载新数据
-        HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
-            @Override
-            public void OnFetch(String url, byte[] result) {
-                String json = new String(result);
-                chapterListItems = JsonUtils.parseChapterJson(json);
-                if (chapterListItems != null) {
-                    data.clear();
-                    data.addAll(chapterListItems);
-                    adapter.notifyDataSetChanged();
-                }
-            }
-        });
+        downloadData();
         //设置隐藏刷新控件
         refreshLayout.setRefreshing(false);
     }
@@ -211,9 +219,10 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             isLoadData = true;//将加载数据的状态设置为true
             url = String.format(HttpAdress.NEWS_URL, currenPage);
             mFootView.setVisibility(View.VISIBLE);//设置进度条出现
-            HttpUtils.downLoadData(url, new HttpUtils.OnFetchDataListener() {
+            //xutils加载网络数据
+            x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
                 @Override
-                public void OnFetch(String url, byte[] result) {
+                public void onSuccess(String result) {
                     String json = new String(result);
                     chapterListItems = JsonUtils.parseChapterJson(json);
                     if (chapterListItems != null) {
@@ -222,6 +231,21 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         adapter.notifyDataSetChanged();
                         isLoadData = false;//下载完数据之后，将状态设为false
                     }
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+                @Override
+                public void onFinished() {
+
                 }
             });
 
