@@ -9,34 +9,34 @@
   【论坛】
   【游戏】
   
-  ### 效果图
+### 效果图
   
    ![ABC](http://img.wdjimg.com/mms/screenshot/a/1a/2bd2c3b0fe829685f3ef7aff81d1e1aa_320_570.jpeg) 
    ![ABC](http://img.wdjimg.com/mms/screenshot/5/38/7149549951f8cb14fd85fce4f0eae385_320_570.jpeg) 
    ![ABC](http://img.wdjimg.com/mms/screenshot/0/94/937e3d55af7c63d59416faa90c064940_320_570.jpeg) 
    ![ABC](http://img.wdjimg.com/mms/screenshot/6/89/2ebfd3ad3a5a7dce7ae75c054786d896_320_570.jpeg) 
   
-  ### APK下载地址
+### APK下载地址
   
-    [豌豆荚下载地址](http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp)
-    [腾讯应用宝下载地址](http://android.myapp.com/myapp/detail.htm?apkName=com.stx.xhb.dmgameapp)
+  [豌豆荚下载地址](http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp)
+  [腾讯应用宝下载地址](http://android.myapp.com/myapp/detail.htm?apkName=com.stx.xhb.dmgameapp)
     
-  ### 技术要点  
+### 技术要点  
   
   整体架构采用了MVC的设计模式
   项目中由于存在大量网络图片，所以采用了二级缓存
-  主要使用的第三方开源框架有：
-  1.viewpagerindicator，主要使用在项目中Tab标签上
-  2.butterknife 一键注解，一个非常好用的工具
-  3.xutils网络加载框架
-  4.smoothprogressbar 一款比较好看的进度条
-  5.circleimageview 圆角图片处理
-  6.cardview 卡片视图
-  7.ultra-ptr 下拉刷新框架
-  8.multiple-status-view 多种加载视图框架
   目前这是该项目的2.0 版本，后面会持续进行优化
+  主要使用的第三方开源框架有：
+  - viewpagerindicator，主要使用在项目中Tab标签上
+  - butterknife 一键注解，一个非常好用的工具
+  - xutils网络加载框架
+  - smoothprogressbar 一款比较好看的进度条
+  - circleimageview 圆角图片处理
+  - cardview 卡片视图
+  - ultra-ptr 下拉刷新框架
+  - multiple-status-view 多种加载视图框架
   
-  ### 关于我
+### 关于我
   
 个人邮箱：xhb_199409@163.com
 
