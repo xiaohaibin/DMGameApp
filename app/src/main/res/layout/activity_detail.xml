@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ArticleDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/article_share"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
+            android:background="@null"/>
+    </android.support.v7.widget.Toolbar>
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/web_progress"
+        android:layout_width="match_parent"
+        android:indeterminate="true"
+        app:spb_sections_count="3"
+        app:spb_color="#05b2fc"
+        app:spb_speed="2.0"
+        app:spb_stroke_width="4dp"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_reversed="false"
+        app:spb_mirror_mode="false"
+        android:layout_below="@id/toolbar"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="1.5"
+        app:spb_progressiveStop_speed="3.4"
+        android:layout_height="2dp" />
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/coment_web"
+        android:layout_below="@id/web_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scrollbars="none"></com.tencent.smtt.sdk.WebView>
+
+    <com.software.shell.fab.ActionButton
+        android:id="@+id/action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="265dp"
+        android:layout_marginStart="265dp" />
+</RelativeLayout>

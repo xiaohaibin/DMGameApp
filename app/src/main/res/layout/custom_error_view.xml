@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/error_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:minHeight="200dp">
+
+    <ImageView
+        android:id="@+id/error_retry_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_error" />
+
+    <TextView
+        android:id="@+id/error_view_tv"
+        style="@style/MultipleStatusView.Content"
+        android:layout_below="@id/error_retry_view"
+        android:text="加载失败,点击重试" />
+</LinearLayout>

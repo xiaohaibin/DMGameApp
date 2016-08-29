@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+
+    <FrameLayout
+        android:id="@+id/fl_image_cycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="#66666666"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_indication_group"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingRight="15dp">
+
+        </LinearLayout>
+    </LinearLayout>
+    <!--图片轮播上显示的标题文字-->
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textColor="#ffffffff"
+        android:textSize="11sp" />
+
+
+</RelativeLayout>

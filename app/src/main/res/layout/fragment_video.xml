@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.stx.xhb.dmgameapp.fragment.VideoFragment">
+
+    <!-- 标题 -->
+    <include layout="@layout/title_layout"></include>
+
+    <com.viewpagerindicator.TabPageIndicator
+        android:id="@+id/video_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"></com.viewpagerindicator.TabPageIndicator>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/video_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
+</LinearLayout>

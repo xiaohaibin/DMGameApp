@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.stx.xhb.dmgameapp.fragment.ForumFragment">
+
+    <!-- 标题 -->
+    <include layout="@layout/title_layout"></include>
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_weight="1" />
+
+</LinearLayout>
