@@ -41,7 +41,7 @@
             android:name=".activities.GameDetailActivity"
             android:theme="@style/AppTheme" />
         <!-- 注册广播 -->
-        <receiver android:name=".service.NetStateReceiver">
+        <receiver android:name=".receiver.NetStateReceiver">
             <intent-filter>
 
                 <!-- 接收网络连接改变广播 -->

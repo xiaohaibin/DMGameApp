@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.service;
+package com.stx.xhb.dmgameapp.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
