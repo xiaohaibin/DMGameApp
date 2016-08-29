@@ -6,6 +6,7 @@
     android:orientation="horizontal">
 
     <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
         android:id="@+id/indeterminate_progress_library"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

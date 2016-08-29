@@ -6,6 +6,8 @@ import com.umeng.socialize.PlatformConfig;
 
 import org.xutils.x;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by xhb on 2016/1/19.
  * 程序主入口，当程序启动的时候，会调用这个方法
@@ -24,5 +26,8 @@ public class BaseApplication extends Application {
         //新浪微博 appkey appsecret
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         // QQ和Qzone appid appkey
+        //极光推送初始化
+        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);//设置是否开启log日志，正式打包发布时建议关闭使用
     }
 }
