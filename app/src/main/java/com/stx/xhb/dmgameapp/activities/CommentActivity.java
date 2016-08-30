@@ -15,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.classic.common.MultipleStatusView;
 import com.google.gson.Gson;
@@ -140,7 +139,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
             public void onClick(View v) {
                 String commentContent = ed_comment.getText().toString();//获取到输入框中的评论内容
                 if (TextUtils.isEmpty(commentContent)) {
-                    Toast.makeText(CommentActivity.this, "评论内容不能为空！", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showAtCenter(CommentActivity.this, "评论内容不能为空！");
                     return;
                 }
                 final Map<String, String> params = new HashMap<String, String>();
@@ -228,7 +227,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isNetConnected(CommentActivity.this)) {
+                if (NetConnectedUtils.isConnected(getApplication())) {
                     multiplestatusview.showError();
                 } else {
                     multiplestatusview.showNoNetwork();

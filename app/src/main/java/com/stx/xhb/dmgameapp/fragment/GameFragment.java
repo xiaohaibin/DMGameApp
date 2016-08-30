@@ -164,7 +164,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isNetConnected(getActivity())) {
+                if (NetConnectedUtils.isConnected(getActivity())) {
                     multiplestatusview.showError();
                 } else {
                     multiplestatusview.showNoNetwork();

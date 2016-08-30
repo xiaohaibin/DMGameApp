@@ -104,7 +104,7 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
                 String json = new String(result);
                 //解析json数据
                 datachapter = JsonUtils.parseChapterJson(json);
-                if (datachapter.isEmpty()){
+                if (datachapter.isEmpty()) {
                     multiplestatusview.showEmpty();
                 }
                 if (page == 1) {
@@ -117,9 +117,9 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                        if (NetConnectedUtils.isNetConnected(CommondFragment.this.getActivity())){
+                if (NetConnectedUtils.isConnected(getActivity())) {
                     multiplestatusview.showError();
-                }else {
+                } else {
                     multiplestatusview.showNoNetwork();
                 }
             }
@@ -134,7 +134,7 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
                 if (page == 1) {
                     ptrLayout.refreshComplete();
                 }
-                adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
             }
 
         });
@@ -271,7 +271,6 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
     /**
      * 判断是否滑动到顶端
      * 解决滑动冲突
-     *
      * @return
      */
     public boolean canChildScrollUp() {

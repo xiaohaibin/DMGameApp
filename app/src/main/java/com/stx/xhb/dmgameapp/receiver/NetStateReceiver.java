@@ -19,9 +19,9 @@ public class NetStateReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         //判断过来的广播，是否是我们想要的
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
-            if (NetConnectedUtils.isWifiNetConnected(context)) {
+            if (NetConnectedUtils.isWIFI(context)) {
                 Toast.makeText(context, "连接上wifi了", Toast.LENGTH_SHORT);
-            } else if (NetConnectedUtils.isPhoneNetConnected(context)) {
+            } else if (NetConnectedUtils.isPhone(context)) {
                 Toast.makeText(context, "连接上手机网络了", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "无网络连接", Toast.LENGTH_SHORT).show();

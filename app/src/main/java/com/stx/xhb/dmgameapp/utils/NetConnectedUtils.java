@@ -1,6 +1,9 @@
 package com.stx.xhb.dmgameapp.utils;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -9,84 +12,74 @@ import android.net.NetworkInfo;
  * 网络状态工具类
  */
 public class NetConnectedUtils {
-    /**
-     * 1.判断网络是否连接
-     *
-     * @param context 上下文，通过它获取到ConnectivityManager
-     * @return true 网络连接成功   false  网络连接失败
-     */
-    public static boolean isNetConnected(Context context) {
-        boolean ret = false;
-        //1.获取到ConnectivityManager
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        //获取到当前活动的网络（即正在传输数据的网络），若存在，那么可以确定网络连接存在；
-        //connectivityManager.getActiveNetwork();  版本23新添加的，不建议这么早使用
-
-        //返回当前正在传输数据的网络连接的信息，API 1 就存在了
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo == null) {//无网络连接
-            return ret;
-        }
-
-        //网络是否可用
-//        networkInfo.isAvailable();
-        //网络是否连接
-//        networkInfo.isConnected();
-        //只有两个都满足才能确保网络是连接上的
-        ret = networkInfo.isAvailable() & networkInfo.isConnected();
-        return ret;
+    private NetConnectedUtils() {
+        /* cannot be instantiated */
+        throw new UnsupportedOperationException("cannot be instantiated");
     }
 
     /**
-     * 2.判断手机网络是否存在
+     * 判断网络是否连接
      *
-     * @param context 上下文
-     * @return 返回 false 无手机网络   true 有手机网络
+     * @param context
+     * @return
      */
-    public static boolean isPhoneNetConnected(Context context) {
-        int typeMobile = ConnectivityManager.TYPE_MOBILE;//手机网络类型
-        return isNetworkConnected(context, typeMobile);
+    public static boolean isConnected(Context context) {
+        ConnectivityManager connectivityManager = null;
+        if (context!=null) {
+            connectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        if (null != connectivityManager) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTING) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-
     /**
-     * 2.判断WIFI网络是否存在
+     * 判断是否是WIFI连接
      *
-     * @param context 上下文
-     * @return 返回 false 无wifi网络   true 有wifi网络
+     * @param context
+     * @return
      */
-    public static boolean isWifiNetConnected(Context context) {
-        int typeMobile = ConnectivityManager.TYPE_WIFI;//WIFI网络类型
-        return isNetworkConnected(context, typeMobile);
+    public static boolean isWIFI(Context context) {
+
+        ConnectivityManager connectivityManager = null;
+        if (context!=null) {
+            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        if (connectivityManager == null)
+            return false;
+        return connectivityManager.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     /**
-     * 返回网络是否连接
-     *
-     * @param context    上下文
-     * @param typeMobile 网络类型
-     * @return true  有网络连接   false 无网络连接
+     * 判断是否是手机连接
+     * @param context
+     * @return
      */
-    private static boolean isNetworkConnected(Context context, int typeMobile) {
-        boolean ret = false;
-        //判断是否有网络
-        if (!isNetConnected(context)) {
-            //如果没有网络连接，直接返回
-            return ret;
+    public static boolean isPhone(Context context){
+        ConnectivityManager connectivityManager = null;
+        if (context!=null) {
+            connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         }
-        //获取到网络连接管理器
-        ConnectivityManager connectManger = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        //当获取到网络连接信息的时候，可以获取到某一个类型的网络连接
-        //获取到手机网络的信息
-        NetworkInfo networkInfo = connectManger.getNetworkInfo(typeMobile);
-        //如果不存在，那么就没有连接了
-        if (networkInfo == null) {
-            return ret;
-        }
-        //判断手机网络是否可用
-        ret = networkInfo.isAvailable() & networkInfo.isConnected();
-        return ret;
+        if (connectivityManager==null)
+               return false;
+          return connectivityManager.getActiveNetworkInfo().getType()==ConnectivityManager.TYPE_MOBILE;
+    }
+    /**
+     * 打开网络设置界面
+     */
+    public static void openSetting(Activity activity) {
+        Intent intent = new Intent("/");
+        ComponentName cm = new ComponentName("com.android.settings",
+                "com.android.settings.WirelessSettings");
+        intent.setComponent(cm);
+        intent.setAction("android.intent.action.VIEW");
+        activity.startActivityForResult(intent, 0);
     }
 }

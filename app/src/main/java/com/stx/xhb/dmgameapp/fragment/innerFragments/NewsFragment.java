@@ -156,7 +156,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isNetConnected(getActivity())){
+                if (NetConnectedUtils.isConnected(getActivity())){
                     multiplestatusview.showError();
                 }else {
                     multiplestatusview.showNoNetwork();

@@ -176,5 +176,4 @@ public class ToastUtil
 		TextView tv_message = (TextView) toast.getView().findViewById(R.id.message);
 		tv_message.setText(msg);
 	}
-
 }
