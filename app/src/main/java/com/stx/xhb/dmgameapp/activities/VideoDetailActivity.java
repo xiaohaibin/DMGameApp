@@ -30,6 +30,7 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +86,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
+                   ToastUtil.showShort(VideoDetailActivity.this,"加载失败");
             }
 
             @Override
@@ -292,5 +293,16 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
     public void onClick(View v) {
         //返回上一页
         finish();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onResume(this);       //统计时长
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPause(this);
     }
 }

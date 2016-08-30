@@ -1,6 +1,8 @@
 package com.stx.xhb.dmgameapp.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.umeng.socialize.PlatformConfig;
 
@@ -29,5 +31,10 @@ public class BaseApplication extends Application {
         //极光推送初始化
         JPushInterface.init(this);
         JPushInterface.setDebugMode(true);//设置是否开启log日志，正式打包发布时建议关闭使用
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

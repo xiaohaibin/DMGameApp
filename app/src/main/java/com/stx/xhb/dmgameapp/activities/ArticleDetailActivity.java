@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 
 import com.google.gson.Gson;
 import com.software.shell.fab.ActionButton;
@@ -24,6 +23,7 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -36,7 +36,6 @@ import org.xutils.x;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
@@ -45,8 +44,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
  * 文章详情界面
  */
 public class ArticleDetailActivity extends ActionBarActivity implements View.OnClickListener {
-    @Bind(R.id.article_share)
-    ImageButton articleShare;
+
     private WebView comment_web;
     private Toolbar toolbar;
     private String body;
@@ -109,6 +107,18 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         initListener();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onResume(this);       //统计时长
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPause(this);
+    }
+
     //初始化窗体布局
     private void initWindow() {
         SystemBarTintManager tintManager;
@@ -121,6 +131,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
             tintManager.setStatusBarTintEnabled(true);
         }
     }
+
 
     //获取控件
     private void initView() {

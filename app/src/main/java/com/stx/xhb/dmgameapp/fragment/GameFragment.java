@@ -95,7 +95,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
     private void setAdapter() {
         //实例化适配器
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, GAME_NAME);
-        gridViewAdapter = new GridViewAdapter(getContext(), gameListItems);
+        gridViewAdapter = new GridViewAdapter(getActivity(), gameListItems);
         //设置适配器
         sp.setAdapter(adapter);
         game_grid.setAdapter(gridViewAdapter);
@@ -164,7 +164,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isNetConnected(getContext())) {
+                if (NetConnectedUtils.isNetConnected(getActivity())) {
                     multiplestatusview.showError();
                 } else {
                     multiplestatusview.showNoNetwork();
@@ -198,7 +198,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
         bundle.putString("id", game_ID);
         bundle.putString("typeid", typeid);
         //跳转到游戏详情界面
-        Intent intent = new Intent(getContext(), GameDetailActivity.class);
+        Intent intent = new Intent(getActivity(), GameDetailActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
 

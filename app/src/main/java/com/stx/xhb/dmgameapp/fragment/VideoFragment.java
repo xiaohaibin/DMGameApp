@@ -83,21 +83,10 @@ public class VideoFragment extends Fragment {
     //设置事件监听
     private void setListener() {
         //indicator的事件处理方法
-        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        indicator.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-                //动态改变标题栏文字
                 tv_title.setText(TITLE[position]);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,10 @@ public class GridViewAdapter extends BaseAdapter {
         }
         //给缓存布局加载新的数据
         GameListItem gameListItem = gameListItems.get(position);
-        viewHodler.game_tv.setText(gameListItem.getTitle());
+        String title = gameListItem.getTitle();
+        if (!TextUtils.isEmpty(title)) {
+            viewHodler.game_tv.setText(title);
+        }
         viewHodler.tv_game_comment_number.setText(gameListItem.getTypename());
         viewHodler.game_iv.setImageResource(R.drawable.gamedefault);//设置默认图片
         ImageView game_iv = viewHodler.game_iv;

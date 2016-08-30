@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.activities;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.VersionUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,20 +31,15 @@ public class AboutActivity extends AppCompatActivity {
 
     @Bind(R.id.about_toolbar)
     Toolbar aboutToolbar;
-    @Bind(R.id.name)
-    TextView name;
     @Bind(R.id.version)
     TextView version;
-    @Bind(R.id.btn_csdn)
-    Button btnCsdn;
-    @Bind(R.id.btn_home)
-    Button btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
+        initWindow();
         initView();
         setListener();
     }
@@ -54,7 +52,18 @@ public class AboutActivity extends AppCompatActivity {
                 }
             });
     }
-
+    //初始化窗体布局
+    private void initWindow() {
+        SystemBarTintManager tintManager;
+        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
+            tintManager.setStatusBarTintEnabled(true);
+        }
+    }
     //初始化控件
     private void initView() {
         version.setText(VersionUtils.getVersion(this));
@@ -85,6 +94,18 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     /**

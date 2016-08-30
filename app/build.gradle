@@ -7,12 +7,12 @@ android {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 2
-        versionName "2.0"
+        versionCode 5
+        versionName "2.1"
+        multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86','x86_64'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86','x86_64','mips','mips64'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : "com.stx.xhb.dmgameapp",
@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -44,7 +44,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.xutils:xutils:3.3.12'
     compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
-    compile 'me.zhanghai.android.materialprogressbar:library:1.1.6'
     compile 'com.github.shell-software:fab:1.1.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support:cardview-v7:23.2.1'
@@ -54,4 +53,6 @@ dependencies {
     compile 'cn.finalteam.loadingviewfinal:loading-more-view:1.0.1'
     compile 'cn.finalteam.loadingviewfinal:ultra-pull-to-refresh:1.0.1'
     compile 'cn.jiguang:jpush:2.1.9'
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

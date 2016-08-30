@@ -17,6 +17,7 @@ import java.util.Map;
  * 网络工具类
  */
 public class HttpUtils {
+
     public static final int TIMEOUT_MILLIS = 10000;
     //运送的Handler
     private static final Handler M_HANDLER = new Handler();

@@ -29,6 +29,7 @@ import com.stx.xhb.dmgameapp.utils.NetConnectedUtils;
 import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -180,7 +181,17 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
             }
         });
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onResume(this);       //统计时长
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPause(this);
+    }
     //toolbar的返回事件
     @Override
     public void onClick(View v) {

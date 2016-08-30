@@ -11,7 +11,6 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +21,7 @@ import com.stx.xhb.dmgameapp.utils.HttpAdress;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -61,8 +61,6 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
     TextView tvGameDetail;
     @Bind(R.id.iv_game)
     ImageView ivGame;
-    @Bind(R.id.game_share)
-    ImageButton gameShare;
     private Toolbar toolbar;
     private String title;
     private String litpic;
@@ -210,7 +208,17 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         //返回上一级
         finish();
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onResume(this);       //统计时长
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPause(this);
+    }
     @OnClick(R.id.game_share)
     public void onClick() {
         new ShareAction(this).setDisplayList( displaylist )

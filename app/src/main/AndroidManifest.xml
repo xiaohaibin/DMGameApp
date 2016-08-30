@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 需要添加一个权限，获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -26,7 +29,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!--极光推送所需权限  end-->
-
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -34,12 +36,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/StyledIndicators">
+        <!--集成腾讯广告联盟  start-->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activities.WelcomeActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
             android:theme="@style/SplashTheme">
@@ -49,27 +52,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.ArticleDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".activities.CommentActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".activities.GameDetailActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
-        <!-- 注册广播 -->
-        <receiver android:name=".receiver.NetStateReceiver">
-            <intent-filter>
 
-                <!-- 接收网络连接改变广播 -->
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+        </activity>
 
         <activity
             android:name=".activities.VideoDetailActivity"
@@ -77,6 +80,7 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"
@@ -89,22 +93,21 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!-- 腾讯x5内核 -->
-        <meta-data
-            android:name="QBSDKAppKey"
-            android:value="YiAjQh+SwqZiSVQ2aBE/acQ5" />
 
         <activity
             android:name=".activities.SettingActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".activities.AboutActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:theme="@style/Theme.UMDefault"
             android:excludeFromRecents="true"/>
+
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -112,6 +115,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <!--新浪微博-->
         <activity
             android:name=".activities.WBShareActivity"
@@ -122,16 +126,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" >
         </activity>
-        <service
-            android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false">
-        </service>
+
         <!--QQ qq空间-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -144,19 +146,61 @@
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.stx.xhb.dmgameapp" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false"/>
+
+        <!-- 注册广播 -->
+        <receiver android:name=".receiver.NetStateReceiver">
+            <intent-filter>
+                <!-- 接收网络连接改变广播 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 腾讯x5内核 -->
+        <meta-data
+            android:name="QBSDKAppKey"
+            android:value="YiAjQh+SwqZiSVQ2aBE/acQ5" />
+
+        <service
+            android:name="com.sina.weibo.sdk.net.DownloadService"
+            android:exported="false">
+        </service>
+
         <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >
         </service>
+
         <receiver android:name=".receiver.BootCompletedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <!--极光推送相关配置  start-->
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -169,7 +213,7 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
             </intent-filter>
         </service>
-        <!-- Required -->
+
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true" >
@@ -189,37 +233,20 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="cn.jpush.android.ui.PushActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="cn.jpush.android.ui.PushActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.stx.xhb.dmgameapp" />
-            </intent-filter>
-        </activity>
-
-        <!-- Required SDK核心功能-->
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
             android:exported="false" >
         </service>
-        <!-- Required SDK核心功能-->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
         <!--极光推送相关配置  end-->
 
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
         <!--umeng社会化分享配置-->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="56de5a6567e58e3e5e000a25" >
         </meta-data>
-        <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
+        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
         <supports-screens
             android:smallScreens="true"
             android:normalScreens="true"

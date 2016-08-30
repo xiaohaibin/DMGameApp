@@ -104,7 +104,7 @@ public class ArticleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //跳转到个人设置界面
-                Intent intent=new Intent(getContext(), SettingActivity.class);
+                Intent intent=new Intent(getActivity(), SettingActivity.class);
                 startActivity(intent);
             }
         });

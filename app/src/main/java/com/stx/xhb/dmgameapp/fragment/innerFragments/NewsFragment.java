@@ -23,6 +23,7 @@ import com.stx.xhb.dmgameapp.entity.ChapterListItem;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.NetConnectedUtils;
+import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.view.ImageCycleView;
 
 import org.xutils.common.Callback;
@@ -76,7 +77,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     //获取控件
     private void initView() {
         if (mInflater == null) {
-            mInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         news_lv = (ListView) view.findViewById(R.id.content_view);
 
@@ -87,7 +88,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         //添加底部控件
         mFootView = mInflater.inflate(R.layout.listview_footer, null);
         news_lv.addFooterView(mFootView, null, false);
-        adapter = new ListViewAdapter(getContext(), data);
+        adapter = new ListViewAdapter(getActivity(), data);
         //初始化图片轮播数据
         initBanner();
     }
@@ -109,7 +110,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
                 bundle.putString("typeid", "2");
                 bundle.putString("id", imageInfo.value.toString());
                 //跳转到文章详情界面
-                Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
+                Intent intent = new Intent(getActivity(), ArticleDetailActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -155,7 +156,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isNetConnected(getContext())){
+                if (NetConnectedUtils.isNetConnected(getActivity())){
                     multiplestatusview.showError();
                 }else {
                     multiplestatusview.showNoNetwork();
@@ -251,7 +252,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-//                    Toast.makeText(getContext(), "加载失败", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showShort(getActivity(),"加载失败");
                 }
 
                 @Override

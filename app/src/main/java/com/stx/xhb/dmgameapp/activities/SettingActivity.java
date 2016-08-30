@@ -3,15 +3,19 @@ package com.stx.xhb.dmgameapp.activities;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.utils.VersionUtils;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -37,10 +41,23 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
+        initWindow();
         initView();
         setListener();
     }
 
+    //初始化窗体布局
+    private void initWindow() {
+        SystemBarTintManager tintManager;
+        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
+            tintManager.setStatusBarTintEnabled(true);
+        }
+    }
     //初始化控件
     private void initView() {
         version.setText(VersionUtils.getVersion(this));
@@ -106,6 +123,16 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onResume(this);       //统计时长
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPause(this);
+    }
 
 }
