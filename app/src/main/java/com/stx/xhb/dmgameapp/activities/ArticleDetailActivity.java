@@ -1,9 +1,11 @@
 package com.stx.xhb.dmgameapp.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,11 +21,13 @@ import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpAdress;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
+import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.Config;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -58,7 +62,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
 
     final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
             {
-                    SHARE_MEDIA.WEIXIN,SHARE_MEDIA.SINA,
+                    SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,
                     SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
             };
     private String decode;
@@ -154,6 +158,11 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         //设置悬浮按钮的背景图片
         actionButton.setImageResource(R.drawable.note_publish_img_unpressed);//设置按钮资源文件
         actionButton.setImageSize(65);//设置图片按钮的大小
+        //修改友盟分享对话框
+        ProgressDialog dialog =  new ProgressDialog(this);
+        dialog.setMessage("分享中...");
+        Config.dialog = dialog;
+
     }
 
 
@@ -271,37 +280,26 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                 .withTitle(title)
                 .withTargetUrl(arcurl)
                 .withMedia(new UMImage(this,R.drawable.app))
-                .setListenerList(new UMShareListener() {
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
+                .setListenerList(getUmShareListener(), getUmShareListener()).open();
+    }
 
-                    }
+    @NonNull
+    private UMShareListener getUmShareListener() {
+        return new UMShareListener() {
+            @Override
+            public void onResult(SHARE_MEDIA share_media) {
+                ToastUtil.showAtCenter(ArticleDetailActivity.this,"分享成功");
+            }
 
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+            @Override
+            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                ToastUtil.showAtCenter(ArticleDetailActivity.this,"分享失败");
+            }
 
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                }, new UMShareListener() {
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                })
-                .open();
+            @Override
+            public void onCancel(SHARE_MEDIA share_media) {
+                ToastUtil.showAtCenter(ArticleDetailActivity.this,"取消分享");
+            }
+        };
     }
 }
