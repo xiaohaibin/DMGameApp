@@ -88,14 +88,19 @@ public class SettingActivity extends AppCompatActivity {
                 UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
                     @Override
                     public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-                        if (i == 0) {
-                            ToastUtil.showAtCenter(SettingActivity.this, "有更新");
-                        } else if (i == 1) {
-                            ToastUtil.showAtCenter(SettingActivity.this, "暂无更新");
-                        } else if (i == 2) {
-                            ToastUtil.showAtCenter(SettingActivity.this, "非wifi状态");
-                        } else if (i == 3) {
-                            ToastUtil.showAtCenter(SettingActivity.this, "请求超时");
+                        switch (i){
+                            case 0:
+                                ToastUtil.showAtCenter(SettingActivity.this, "有更新");
+                                break;
+                            case 1:
+                                ToastUtil.showAtCenter(SettingActivity.this, "暂无更新");
+                                break;
+                            case 2:
+                                ToastUtil.showAtCenter(SettingActivity.this, "非wifi状态");
+                                break;
+                            case 3:
+                                ToastUtil.showAtCenter(SettingActivity.this, "请求超时");
+                                break;
                         }
                     }
                 });

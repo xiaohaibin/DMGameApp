@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:background="?attr/colorPrimary"
         app:theme="@style/ToolbarTheme"
-        android:layout_height="wrap_content"></android.support.v7.widget.Toolbar>
+        android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:textSize="35sp"
-            android:text="3DMGame"
+            android:text="游戏资讯"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
