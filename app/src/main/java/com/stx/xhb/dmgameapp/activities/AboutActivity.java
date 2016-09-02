@@ -126,7 +126,7 @@ public class AboutActivity extends AppCompatActivity {
         //分享的类型
         intent.setType("text/*");//设置分享文本内容
         //要分享的内容
-        intent.putExtra(Intent.EXTRA_TEXT,"快来使用三大妈app，掌握最新游戏资讯！推荐你也来使用，下载地址：http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp");
+        intent.putExtra(Intent.EXTRA_TEXT,"快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用，下载地址：http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp");
 //        intent.putExtra(Intent.EXTRA_STREAM,"要分享的图片的地址");
         //设置分享的意图
         shareActionProvider.setShareIntent(intent);
