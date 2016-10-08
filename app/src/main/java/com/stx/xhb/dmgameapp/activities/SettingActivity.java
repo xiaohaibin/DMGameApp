@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.utils.DataCleanManager;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.utils.VersionUtils;
@@ -19,8 +20,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
-
-import org.xutils.x;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,6 +34,8 @@ public class SettingActivity extends AppCompatActivity {
     Toolbar settingToolbar;
     @Bind(R.id.version)
     TextView version;
+    @Bind(R.id.tv_cache)
+    TextView mTvCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class SettingActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
         }
     }
+
     //初始化控件
     private void initView() {
         version.setText(VersionUtils.getVersion(this));
@@ -70,7 +72,7 @@ public class SettingActivity extends AppCompatActivity {
         //设置标题栏字体颜色
         settingToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         settingToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
-
+        mTvCache.setText(DataCleanManager.getTotalCacheSize(this));
     }
 
     //点击事件
@@ -78,8 +80,13 @@ public class SettingActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_iv_clearCache://清理缓存
-                x.image().clearCacheFiles();
-                ToastUtil.showAtCenter(SettingActivity.this, "缓存清理成功");
+                if ("0 KB".equals(DataCleanManager.getTotalCacheSize(this))) {
+                    ToastUtil.showAtCenter(SettingActivity.this, "暂无缓存");
+                } else {
+                    DataCleanManager.clearAllCache(this);
+                    mTvCache.setText(DataCleanManager.getTotalCacheSize(this));
+                    ToastUtil.showAtCenter(SettingActivity.this, "缓存清理成功");
+                }
                 break;
             case R.id.setting_iv_version://版本更新
                 UmengUpdateAgent.setUpdateOnlyWifi(false);
@@ -88,7 +95,7 @@ public class SettingActivity extends AppCompatActivity {
                 UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
                     @Override
                     public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-                        switch (i){
+                        switch (i) {
                             case 0:
                                 ToastUtil.showAtCenter(SettingActivity.this, "有更新");
                                 break;
@@ -128,6 +135,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onPause() {
         super.onPause();

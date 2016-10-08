@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ChapterListItem;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 
 import org.xutils.x;
 
@@ -88,7 +88,7 @@ public class ListViewAdapter extends BaseAdapter {
             iv.setImageResource(R.drawable.product_default);
         }
         //地址拼接
-        String imageUrl = HttpAdress.DMGEAME_URL + litpic;
+        String imageUrl = API.DMGEAME_URL + litpic;
         //下载图片，优先使用本地缓存图片
         x.image().bind(iv,imageUrl);
         return convertView;

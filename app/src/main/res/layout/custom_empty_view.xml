@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/empty_view"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:minHeight="200dp"
-    android:gravity="center"
-    android:layout_height="match_parent">
+              android:id="@+id/empty_view"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:minHeight="200dp"
+              android:orientation="vertical">
 
     <ImageView
         android:id="@+id/empty_retry_view"
@@ -16,8 +16,8 @@
         />
 
     <TextView
-        style="@style/MultipleStatusView.Content"
         android:id="@+id/empty_view_tv"
+        style="@style/MultipleStatusView.Content"
         android:layout_below="@id/empty_retry_view"
         android:text="@string/empty_view_hint"/>
 </LinearLayout>

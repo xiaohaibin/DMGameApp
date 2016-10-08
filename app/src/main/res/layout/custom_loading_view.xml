@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loading_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:minHeight="100dp">
-    <com.wang.avi.AVLoadingIndicatorView
-        android:layout_width="@dimen/custom_avloading_height"
-        android:layout_height="@dimen/custom_avloading_height"
-        android:layout_centerInParent="true"
-        android:visibility="visible"
-        app:indicator="BallClipRotateMultiple"
-        app:indicator_color="@color/colorAccent" />
+    <com.stx.xhb.dmgameapp.view.LoadingView.LVNews
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textColor="@color/colorGray"
+        android:textSize="13sp"
+        android:text="努力加载中..."/>
 </LinearLayout>

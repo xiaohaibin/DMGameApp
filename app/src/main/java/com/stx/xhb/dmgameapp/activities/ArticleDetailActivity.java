@@ -18,7 +18,7 @@ import com.software.shell.fab.ActionButton;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.Detail;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
@@ -77,7 +77,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
-        String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);
+        String url = String.format(API.ChapterContent_URL, id, typeid);
         //下载网络数据
         x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
@@ -212,7 +212,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                         + decode
                         + "</body></html>";
                 //使用这种方法，前面添加网站的地址 http://www.3dmgame.com，可以解决，有些图片前面乜有完整请求地址的问题
-                comment_web.loadDataWithBaseURL(HttpAdress.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
+                comment_web.loadDataWithBaseURL(API.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

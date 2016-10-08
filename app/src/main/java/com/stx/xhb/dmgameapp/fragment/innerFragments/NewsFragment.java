@@ -20,9 +20,9 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activities.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterListItem;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.NetConnectedUtils;
+import com.stx.xhb.dmgameapp.utils.NetUtils;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.view.ImageCycleView;
 
@@ -119,6 +119,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         mImageCycleView.loadData(list, new ImageCycleView.LoadImageCallBack() {
             @Override
             public ImageView loadAndDisplay(ImageCycleView.ImageInfo imageInfo) {
+
                 //使用BitmapUtils,只能使用网络图片
                 x.view().inject(view);
                 Context context = getContext();
@@ -137,7 +138,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     private void downloadData(final int page) {
         multiplestatusview.showLoading();
         //使用xutils请求网络数据
-        String stUrl = String.format(HttpAdress.NEWS_URL, page);
+        String stUrl = String.format(API.NEWS_URL, page);
         x.http().get(new RequestParams(stUrl), new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -156,7 +157,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isConnected(getActivity())){
+                if (NetUtils.isNetConnected(getActivity())){
                     multiplestatusview.showError();
                 }else {
                     multiplestatusview.showNoNetwork();
@@ -234,7 +235,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
             currenPage++;
             //加载新数据
             isLoadData = true;//将加载数据的状态设置为true
-            url = String.format(HttpAdress.NEWS_URL, currenPage);
+            url = String.format(API.NEWS_URL, currenPage);
             mFootView.setVisibility(View.VISIBLE);//设置进度条出现
             //xutils加载网络数据
             x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {

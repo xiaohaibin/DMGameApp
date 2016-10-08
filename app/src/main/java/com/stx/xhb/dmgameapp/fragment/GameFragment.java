@@ -20,9 +20,9 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activities.GameDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.GridViewAdapter;
 import com.stx.xhb.dmgameapp.entity.GameListItem;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.NetConnectedUtils;
+import com.stx.xhb.dmgameapp.utils.NetUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -131,7 +131,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
 
     //加载网络数据
     private void downloadData(final int page, int id) {
-        String strUrl = String.format(HttpAdress.GAME_URL, id, page);
+        String strUrl = String.format(API.GAME_URL, id, page);
         x.http().get(new RequestParams(strUrl), new Callback.CommonCallback<String>() {
 
             @Override
@@ -164,7 +164,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isConnected(getActivity())) {
+                if (NetUtils.isNetConnected(getActivity())) {
                     multiplestatusview.showError();
                 } else {
                     multiplestatusview.showNoNetwork();

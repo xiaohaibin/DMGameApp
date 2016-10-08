@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameListItem;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 
 import org.xutils.x;
 
@@ -75,7 +75,7 @@ public class GridViewAdapter extends BaseAdapter {
             game_iv.setImageResource(R.drawable.gamedefault);
         }
         //地址拼接
-        String imageUrl = HttpAdress.DMGEAME_URL + litpic;
+        String imageUrl = API.DMGEAME_URL + litpic;
         //将图片与imageview绑定在一起
         game_iv.setTag(imageUrl);
         //下载图片,优先使用本地缓存图片

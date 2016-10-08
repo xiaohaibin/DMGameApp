@@ -80,7 +80,7 @@ public class HttpUtils {
             @Override
             public void run() {
                 try {
-                    URL netUrl = new URL(HttpAdress.COMMENT_COMMIT_URL);
+                    URL netUrl = new URL(API.COMMENT_COMMIT_URL);
                     HttpURLConnection connection = (HttpURLConnection) netUrl.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setConnectTimeout(TIMEOUT_MILLIS);

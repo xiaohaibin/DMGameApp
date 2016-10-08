@@ -21,10 +21,10 @@ import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.CommentListviewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterCommentListItem;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.NetConnectedUtils;
+import com.stx.xhb.dmgameapp.utils.NetUtils;
 import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
@@ -142,6 +142,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
                     ToastUtil.showAtCenter(CommentActivity.this, "评论内容不能为空！");
                     return;
                 }
+                comment_btn.setEnabled(false);
                 final Map<String, String> params = new HashMap<String, String>();
                 params.put("aid", id);
                 params.put("msg", commentContent);
@@ -157,10 +158,12 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
                                 ed_comment.setText("");//评论成功后，清空输入框
                                 SoftKeyBoardUtils.closeSoftInputMethod(CommentActivity.this, ed_comment);
                                 ToastUtil.showAtCenter(CommentActivity.this, "评论成功");
+                                comment_btn.setEnabled(true);
                                 //重新加载数据
                                 downLoad(1);
                             } else {
                                 SoftKeyBoardUtils.closeSoftInputMethod(CommentActivity.this,ed_comment);
+                                comment_btn.setEnabled(true);
                                 ToastUtil.showAtCenter(CommentActivity.this, "评论失败");
                             }
                         } catch (JSONException e) {
@@ -200,7 +203,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
     //加载网络数据
     private void downLoad(final int page) {
         multiplestatusview.showLoading();
-        String strUrl = String.format(HttpAdress.COMMENT_URL, id, page);
+        String strUrl = String.format(API.COMMENT_URL, id, page);
         x.http().get(new RequestParams(strUrl), new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -227,7 +230,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetConnectedUtils.isConnected(getApplication())) {
+                if (NetUtils.isNetConnected(getApplication())) {
                     multiplestatusview.showError();
                 } else {
                     multiplestatusview.showNoNetwork();

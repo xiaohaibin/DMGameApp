@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.VideoDeatil;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
@@ -69,7 +69,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
-        String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);//文章详情请求地址
+        String url = String.format(API.ChapterContent_URL, id, typeid);//文章详情请求地址
         //下载网络数据
         x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
             @Override
@@ -183,7 +183,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
                         + decode
                         + "</body></html>";
                 //使用这种方法，前面添加网站的地址 http://www.3dmgame.com，可以解决，有些图片前面乜有完整请求地址的问题
-                comment_web.loadDataWithBaseURL(HttpAdress.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
+                comment_web.loadDataWithBaseURL(API.DMGEAME_URL, html, "text/html", "charset=UTF-8", null);
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

@@ -169,4 +169,10 @@ public class MainActivity extends FragmentActivity {
         tipsToast.setIcon(iconResId);
         tipsToast.setText(tips);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+    //此处解决有时候出现getActivity（）出现null的情况
+    }
 }

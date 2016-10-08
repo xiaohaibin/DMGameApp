@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.Detail;
-import com.stx.xhb.dmgameapp.utils.HttpAdress;
+import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
@@ -130,7 +130,7 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         //获取到从游戏列表中传递过来的参数
         String id = getIntent().getStringExtra("id");
         String typeid = getIntent().getStringExtra("typeid");
-        String url = String.format(HttpAdress.ChapterContent_URL, id, typeid);//游戏详情请求地址
+        String url = String.format(API.ChapterContent_URL, id, typeid);//游戏详情请求地址
         //下载网络数据
         pd = new ProgressDialog(this);
         pd.setMessage("游戏详情加载中。。。");
@@ -159,7 +159,7 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                 arcurl = detail.getArcurl();
                 tvGameName.setText(title);
                 //游戏封面链接
-                imageURl = HttpAdress.DMGEAME_URL + litpic;
+                imageURl = API.DMGEAME_URL + litpic;
                 //下载图片，优先使用缓存图片
                 x.view().inject(GameDetailActivity.this);
                 x.image().bind(ivGame, imageURl);

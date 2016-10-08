@@ -186,11 +186,6 @@
             android:value="YiAjQh+SwqZiSVQ2aBE/acQ5" />
 
         <service
-            android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false">
-        </service>
-
-        <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >
         </service>
@@ -246,7 +241,9 @@
             android:name="UMENG_APPKEY"
             android:value="56de5a6567e58e3e5e000a25" >
         </meta-data>
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:value="${CHANNEL}"
+            android:name="UMENG_CHANNEL"/>
         <supports-screens
             android:smallScreens="true"
             android:normalScreens="true"
