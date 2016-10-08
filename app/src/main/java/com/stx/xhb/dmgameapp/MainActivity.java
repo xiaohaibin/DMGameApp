@@ -18,10 +18,12 @@ import com.stx.xhb.dmgameapp.fragment.VideoFragment;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.view.TipsToast;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.hugeterry.updatefun.UpdateFunGO;
+import cn.hugeterry.updatefun.config.UpdateKey;
 
 public class MainActivity extends FragmentActivity {
     private ViewPager main_viewPager;
@@ -36,8 +38,9 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.update(this);
+        UpdateKey.API_TOKEN = "a7ba43ad6babc6e16f48621a78d97031";
+        UpdateKey.APP_ID = "57f8a276ca87a85350000915";
+        UpdateFunGO.init(this);
         initWindow();
         initView();
         initData();
@@ -45,10 +48,12 @@ public class MainActivity extends FragmentActivity {
         setListener();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        UpdateFunGO.onResume(this);
     }
 
     //初始化窗体布局
@@ -150,6 +155,12 @@ public class MainActivity extends FragmentActivity {
         MobclickAgent.onPause(this);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateFunGO.onStop(this);
+    }
+
     /**
      * 自定义toast
      *
@@ -173,6 +184,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);
-    //此处解决有时候出现getActivity（）出现null的情况
+        //此处解决有时候出现getActivity（）出现null的情况
     }
 }

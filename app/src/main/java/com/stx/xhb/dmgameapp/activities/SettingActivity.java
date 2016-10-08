@@ -17,13 +17,11 @@ import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.utils.VersionUtils;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateResponse;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.hugeterry.updatefun.UpdateFunGO;
 
 /**
  * 个人设置界面
@@ -89,28 +87,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.setting_iv_version://版本更新
-                UmengUpdateAgent.setUpdateOnlyWifi(false);
-                UmengUpdateAgent.forceUpdate(this);
-                //友盟自动更新回调
-                UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-                    @Override
-                    public void onUpdateReturned(int i, UpdateResponse updateResponse) {
-                        switch (i) {
-                            case 0:
-                                ToastUtil.showAtCenter(SettingActivity.this, "有更新");
-                                break;
-                            case 1:
-                                ToastUtil.showAtCenter(SettingActivity.this, "暂无更新");
-                                break;
-                            case 2:
-                                ToastUtil.showAtCenter(SettingActivity.this, "非wifi状态");
-                                break;
-                            case 3:
-                                ToastUtil.showAtCenter(SettingActivity.this, "请求超时");
-                                break;
-                        }
-                    }
-                });
+                UpdateFunGO.manualStart(this);
                 break;
             case R.id.setting_iv_heart://评分
                 Uri uri = Uri.parse("http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp");
@@ -140,12 +117,19 @@ public class SettingActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onResume(this);       //统计时长
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onPause(this);
+        UpdateFunGO.onResume(this);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateFunGO.onStop(this);
+    }
 }

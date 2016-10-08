@@ -163,11 +163,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-
         <service
             android:name="com.qq.e.comm.DownloadService"
             android:exported="false"/>
@@ -184,11 +179,6 @@
         <meta-data
             android:name="QBSDKAppKey"
             android:value="YiAjQh+SwqZiSVQ2aBE/acQ5" />
-
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
 
         <receiver android:name=".receiver.BootCompletedReceiver" >
             <intent-filter>
