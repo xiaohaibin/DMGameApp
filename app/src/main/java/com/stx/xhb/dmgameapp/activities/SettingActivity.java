@@ -7,10 +7,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.iflytek.autoupdate.IFlytekUpdate;
+import com.iflytek.autoupdate.IFlytekUpdateListener;
+import com.iflytek.autoupdate.UpdateConstants;
+import com.iflytek.autoupdate.UpdateErrorCode;
+import com.iflytek.autoupdate.UpdateInfo;
+import com.iflytek.autoupdate.UpdateType;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.utils.DataCleanManager;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
@@ -21,7 +29,6 @@ import com.umeng.analytics.MobclickAgent;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.hugeterry.updatefun.UpdateFunGO;
 
 /**
  * 个人设置界面
@@ -34,7 +41,8 @@ public class SettingActivity extends AppCompatActivity {
     TextView version;
     @Bind(R.id.tv_cache)
     TextView mTvCache;
-
+    private IFlytekUpdate mUpdManager;
+    private Toast mToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +79,7 @@ public class SettingActivity extends AppCompatActivity {
         settingToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         settingToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
         mTvCache.setText(DataCleanManager.getTotalCacheSize(this));
+        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
     }
 
     //点击事件
@@ -87,7 +96,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.setting_iv_version://版本更新
-                UpdateFunGO.manualStart(this);
+                checkUpdate();
                 break;
             case R.id.setting_iv_heart://评分
                 Uri uri = Uri.parse("http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp");
@@ -124,12 +133,49 @@ public class SettingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onPause(this);
-        UpdateFunGO.onResume(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        UpdateFunGO.onStop(this);
+    }
+
+    private void checkUpdate() {
+        //初始化自动更新对象
+        mUpdManager = IFlytekUpdate.getInstance(this);
+        //开启调试模式，默认不开启
+        mUpdManager.setDebugMode(true);
+        //开启wifi环境下检测更新，仅对自动更新有效，强制更新则生效
+        mUpdManager.setParameter(UpdateConstants.EXTRA_WIFIONLY, "true");
+        //设置通知栏使用应用icon，详情请见示例
+        mUpdManager.setParameter(UpdateConstants.EXTRA_NOTI_ICON, "true");
+        //设置更新提示类型，默认为通知栏提示
+        mUpdManager.setParameter(UpdateConstants.EXTRA_STYLE, UpdateConstants.UPDATE_UI_DIALOG);
+        // 启动自动更新
+        mUpdManager.autoUpdate(SettingActivity.this, new IFlytekUpdateListener() {
+            @Override
+            public void onResult(int errorcode, UpdateInfo result) {
+                Log.i("----result", result.getUpdateType() + "");
+                if (UpdateErrorCode.OK == errorcode && null != result) {
+                    if (UpdateType.NoNeed == result.getUpdateType()) {
+                        showTip("已经是最新版本!");
+                        return;
+                    }
+                    mUpdManager.showUpdateInfo(SettingActivity.this, result);
+                } else {
+                    showTip("请求更新失败\n更新错误码：" + errorcode);
+                }
+            }
+        });
+    }
+
+    private void showTip(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mToast.setText(str);
+                mToast.show();
+            }
+        });
     }
 }

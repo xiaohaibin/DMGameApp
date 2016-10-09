@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.stx.xhb.dmgameapp">
+          package="com.stx.xhb.dmgameapp">
 
     <!-- 用户权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <!-- 需要添加一个权限，获取网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <!--极光推送所需权限  start-->
     <!-- Required -->
     <permission
         android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
+        android:protectionLevel="signature"/>
     <!-- Required -->
-    <uses-permission android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <!--极光推送所需权限  end-->
     <application
         android:name=".base.BaseApplication"
@@ -39,35 +39,35 @@
         <!--集成腾讯广告联盟  start-->
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activities.ArticleDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name=".activities.CommentActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <activity
             android:name=".activities.GameDetailActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name="com.qq.e.ads.ADActivity"
@@ -79,35 +79,36 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
-                <action android:name="com.tencent.smtt.tbs.video.PLAY" />
+                <action android:name="com.tencent.smtt.tbs.video.PLAY"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activities.SettingActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
-        <activity android:name=".activities.AboutActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
-            android:theme="@style/Theme.UMDefault"
-            android:excludeFromRecents="true"/>
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault"/>
 
         <!--微信-->
         <activity
@@ -115,51 +116,54 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!--新浪微博-->
         <activity
             android:name=".activities.WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" >
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
         <!--QQ qq空间-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent100424468" />
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent100424468"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.ui.PushActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.stx.xhb.dmgameapp" />
+                <action android:name="cn.jpush.android.ui.PushActivity"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.stx.xhb.dmgameapp"/>
             </intent-filter>
         </activity>
 
@@ -171,18 +175,18 @@
         <receiver android:name=".receiver.NetStateReceiver">
             <intent-filter>
                 <!-- 接收网络连接改变广播 -->
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
         <!-- 腾讯x5内核 -->
         <meta-data
             android:name="QBSDKAppKey"
-            android:value="YiAjQh+SwqZiSVQ2aBE/acQ5" />
+            android:value="YiAjQh+SwqZiSVQ2aBE/acQ5"/>
 
-        <receiver android:name=".receiver.BootCompletedReceiver" >
+        <receiver android:name=".receiver.BootCompletedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
@@ -190,56 +194,69 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTER" />
-                <action android:name="cn.jpush.android.intent.REPORT" />
-                <action android:name="cn.jpush.android.intent.PushService" />
-                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+                <action android:name="cn.jpush.android.intent.REGISTER"/>
+                <action android:name="cn.jpush.android.intent.REPORT"/>
+                <action android:name="cn.jpush.android.intent.PushService"/>
+                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
             </intent-filter>
         </service>
 
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true" >
+            android:enabled="true">
             <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>
                 <category android:name="com.stx.xhb.dmgameapp"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
             <!-- Optional -->
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
 
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
         </service>
-        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver"/>
         <!--极光推送相关配置  end-->
 
         <!--umeng社会化分享配置-->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="56de5a6567e58e3e5e000a25" >
+            android:value="56de5a6567e58e3e5e000a25">
         </meta-data>
         <meta-data
-            android:value="${CHANNEL}"
-            android:name="UMENG_CHANNEL"/>
+            android:name="UMENG_CHANNEL"
+            android:value="${CHANNEL}"/>
+
+        <!--科大讯飞自动更新-->
+        <meta-data
+            android:name="IFLYTEK_APPKEY"
+            android:value="'57f99c49'"/>
+        <meta-data
+            android:name="IFLYTEK_CHANNEL"
+            android:value="${CHANNEL}"/>
+
+        <activity android:name="com.iflytek.autoupdate.IFlytekUpdateDialog"/>
+        <service android:name="com.iflytek.autoupdate.IFlytekDownloadService"/>
+
         <supports-screens
-            android:smallScreens="true"
-            android:normalScreens="true"
+            android:anyDensity="true"
             android:largeScreens="true"
+            android:normalScreens="true"
             android:resizeable="true"
-            android:anyDensity="true"/>
+            android:smallScreens="true"/>
     </application>
 
 </manifest>
