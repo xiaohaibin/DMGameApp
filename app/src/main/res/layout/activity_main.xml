@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.stx.xhb.dmgameapp.MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.stx.xhb.dmgameapp.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_viewpager"
@@ -33,7 +33,7 @@
             android:padding="8dp"
             android:text="文章"
             android:textColor="@drawable/menu_color_selector"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
 
         <RadioButton
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
             android:padding="8dp"
             android:text="视频"
             android:textColor="@drawable/menu_color_selector"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
 
         <RadioButton
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             android:padding="8dp"
             android:text="论坛"
             android:textColor="@drawable/menu_color_selector"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
 
         <RadioButton
             android:layout_width="0dp"
@@ -69,6 +69,6 @@
             android:padding="8dp"
             android:text="游戏"
             android:textColor="@drawable/menu_color_selector"
-            android:textSize="15sp" />
+            android:textSize="15sp"/>
     </RadioGroup>
 </LinearLayout>
