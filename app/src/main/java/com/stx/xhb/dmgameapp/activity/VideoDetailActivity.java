@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,9 +18,9 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.VideoDeatil;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
+import com.stx.xhb.dmgameapp.entity.VideoDeatilEntity;
 import com.stx.xhb.dmgameapp.utils.API;
+import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
@@ -31,17 +31,18 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.umeng.analytics.MobclickAgent;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * 视频详情界面
@@ -71,34 +72,27 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         typeid = getIntent().getStringExtra("typeid");
         String url = String.format(API.ChapterContent_URL, id, typeid);//文章详情请求地址
         //下载网络数据
-        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                String json = new String(result);
-                //json解析
-                VideoDeatil detail = new Gson().fromJson(JsonUtils.removeBOM(json), VideoDeatil.class);
-                body = detail.getVideolist().getBody();//视频内容
-                title = detail.getTitle();//文章标题
-                writer = detail.getWriter();//文章作者
-                senddate = detail.getSenddate();//文章发布时间
-                initData();
-            }
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.showShort(VideoDetailActivity.this,"加载失败");
+                    }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                   ToastUtil.showShort(VideoDetailActivity.this,"加载失败");
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //json解析
+                        VideoDeatilEntity detail = new Gson().fromJson(JsonUtils.removeBOM(response), VideoDeatilEntity.class);
+                        body = detail.getVideolist().getBody();//视频内容
+                        title = detail.getTitle();//文章标题
+                        writer = detail.getWriter();//文章作者
+                        senddate = detail.getSenddate();//文章发布时间
+                        initData();
+                    }
+                });
         initListener();
     }
 

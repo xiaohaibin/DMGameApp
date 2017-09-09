@@ -14,8 +14,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_height="1px"
+        android:background="@color/common_line"/>
 
     <RadioGroup
         android:id="@+id/main_rgp"
@@ -31,7 +31,7 @@
             android:drawableTop="@drawable/menu1_drawable_selector"
             android:gravity="center"
             android:padding="8dp"
-            android:text="文章"
+            android:text="资讯"
             android:textColor="@drawable/menu_color_selector"
             android:textSize="15sp"/>
 

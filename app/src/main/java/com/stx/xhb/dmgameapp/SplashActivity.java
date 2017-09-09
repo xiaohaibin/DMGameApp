@@ -1,16 +1,15 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
-import com.stx.xhb.dmgameapp.MainActivity;
-import com.stx.xhb.dmgameapp.R;
 import com.tencent.connect.dataprovider.Constants;
 import com.umeng.analytics.MobclickAgent;
 
@@ -18,7 +17,6 @@ import com.umeng.analytics.MobclickAgent;
  * 启动页
  */
 public class SplashActivity extends Activity implements SplashADListener{
-    private SplashAD splashAD;
     private LinearLayout ll_ad;
 
     @Override
@@ -35,9 +33,10 @@ public class SplashActivity extends Activity implements SplashADListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
         ll_ad = (LinearLayout) findViewById(R.id.ll_ad);
-        splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,5000);
+        SplashAD splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,5000);
     }
     @Override
     public void onADDismissed() {
@@ -78,5 +77,11 @@ public class SplashActivity extends Activity implements SplashADListener{
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }

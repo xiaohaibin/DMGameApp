@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
  * Created by xhb on 2016/3/9.
  * 版本工具类
  */
-public class VersionUtils {
+public class AppUtils {
     /**
      * 获取版本号
      *

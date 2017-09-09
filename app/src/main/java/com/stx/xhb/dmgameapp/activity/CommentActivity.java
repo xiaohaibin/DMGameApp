@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp.activity;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -20,7 +20,7 @@ import com.classic.common.MultipleStatusView;
 import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.CommentListviewAdapter;
-import com.stx.xhb.dmgameapp.entity.ChapterCommentListItem;
+import com.stx.xhb.dmgameapp.entity.ChapterCommentEntity;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
@@ -29,12 +29,11 @@ import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +47,8 @@ import cn.finalteam.loadingviewfinal.OnDefaultRefreshListener;
 import cn.finalteam.loadingviewfinal.OnLoadMoreListener;
 import cn.finalteam.loadingviewfinal.PtrClassicFrameLayout;
 import cn.finalteam.loadingviewfinal.PtrFrameLayout;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * 评论详情界面
@@ -61,10 +62,10 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
     private Toolbar toolbar;
     private Button comment_btn;
     private EditText ed_comment;
-    private List<ChapterCommentListItem.DescriptionEntity.DataEntity> dataEntities = new ArrayList<>();
+    private List<ChapterCommentEntity.DescriptionEntity.DataEntity> dataEntities = new ArrayList<>();
     private CommentListviewAdapter adapter;
     private int currentPage = 1;//当前页
-    private List<ChapterCommentListItem.DescriptionEntity.DataEntity> data;
+    private List<ChapterCommentEntity.DescriptionEntity.DataEntity> data;
     private String id;
     private LayoutInflater mInflater;
     private final int LIMIT = 10;
@@ -202,56 +203,58 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
 
     //加载网络数据
     private void downLoad(final int page) {
-        multiplestatusview.showLoading();
         String strUrl = String.format(API.COMMENT_URL, id, page);
-        x.http().get(new RequestParams(strUrl), new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                multiplestatusview.showContent();
-                String json = new String(result);
-                ChapterCommentListItem chapterCommentListItem = new Gson().fromJson(JsonUtils.removeBOM(json), ChapterCommentListItem.class);
-                data = chapterCommentListItem.getDescription().getData();
-                if (page == 1) {
-                    dataEntities.clear();
-                }
-                currentPage = page + 1;
-                if (data.size()!=0) {
-                    dataEntities.addAll(data);
-                    adapter.notifyDataSetChanged();
-                } else {
-                    multiplestatusview.showEmpty();
-                }
-                if (data.size() < LIMIT) {
-                    lv_comment.setHasLoadMore(false);
-                } else {
-                    lv_comment.setHasLoadMore(true);
-                }
-            }
+        OkHttpUtils
+                   .get()
+                   .url(strUrl)
+                   .build()
+                   .execute(new StringCallback() {
+                       @Override
+                       public void onBefore(Request request, int id) {
+                           multiplestatusview.showLoading();
+                       }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetUtils.isNetConnected(getApplication())) {
-                    multiplestatusview.showError();
-                } else {
-                    multiplestatusview.showNoNetwork();
-                }
-            }
+                       @Override
+                       public void onError(Call call, Exception e, int id) {
+                           if (NetUtils.isNetConnected(getApplication())) {
+                               multiplestatusview.showError();
+                           } else {
+                               multiplestatusview.showNoNetwork();
+                           }
+                       }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
+                       @Override
+                       public void onResponse(String response, int id) {
+                           multiplestatusview.showContent();
+                           ChapterCommentEntity chapterCommentEntity = new Gson().fromJson(JsonUtils.removeBOM(response), ChapterCommentEntity.class);
+                           data = chapterCommentEntity.getDescription().getData();
+                           if (page == 1) {
+                               dataEntities.clear();
+                           }
+                           currentPage = page + 1;
+                           if (data.size()!=0) {
+                               dataEntities.addAll(data);
+                               adapter.notifyDataSetChanged();
+                           } else {
+                               multiplestatusview.showEmpty();
+                           }
+                           if (data.size() < LIMIT) {
+                               lv_comment.setHasLoadMore(false);
+                           } else {
+                               lv_comment.setHasLoadMore(true);
+                           }
+                       }
 
-            }
-
-            @Override
-            public void onFinished() {
-                if (page == 1) {
-                    ptrLayout.onRefreshComplete();
-                } else {
-                    lv_comment.onLoadMoreComplete();
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
+                       @Override
+                       public void onAfter(int id) {
+                           if (page == 1) {
+                               ptrLayout.onRefreshComplete();
+                           } else {
+                               lv_comment.onLoadMoreComplete();
+                           }
+                           adapter.notifyDataSetChanged();
+                       }
+                   });
     }
 
 

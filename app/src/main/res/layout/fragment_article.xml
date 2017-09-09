@@ -1,22 +1,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.stx.xhb.dmgameapp.fragment.ArticleFragment">
-    <!-- 标题 -->
-    <include layout="@layout/title_layout"></include>
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              tools:context="com.stx.xhb.dmgameapp.fragment.ArticleFragment">
 
-    <com.viewpagerindicator.TabPageIndicator
-        android:id="@+id/article_indicator"
+    <!-- 标题 -->
+    <include layout="@layout/title_layout"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"/>
+        android:layout_height="35dp"
+        android:background="@color/colorWhite"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextAppearance="@style/TabTextAppearance"
+        app:tabTextColor="@color/colorBlack" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/common_line"
+        android:layout_height="1px"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/article_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
+
+
 
 </LinearLayout>

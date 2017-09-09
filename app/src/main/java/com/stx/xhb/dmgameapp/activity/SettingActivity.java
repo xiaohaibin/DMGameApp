@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -20,10 +20,10 @@ import com.iflytek.autoupdate.UpdateErrorCode;
 import com.iflytek.autoupdate.UpdateInfo;
 import com.iflytek.autoupdate.UpdateType;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.utils.DataCleanManager;
+import com.stx.xhb.dmgameapp.utils.CacheManager;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
-import com.stx.xhb.dmgameapp.utils.VersionUtils;
+import com.stx.xhb.dmgameapp.utils.AppUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
@@ -68,7 +68,7 @@ public class SettingActivity extends AppCompatActivity {
 
     //初始化控件
     private void initView() {
-        version.setText(VersionUtils.getVersion(this));
+        version.setText(AppUtils.getVersion(this));
         setSupportActionBar(settingToolbar);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
         //设置显示返回上一级的图标
@@ -78,7 +78,7 @@ public class SettingActivity extends AppCompatActivity {
         //设置标题栏字体颜色
         settingToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         settingToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
-        mTvCache.setText(DataCleanManager.getTotalCacheSize(this));
+        mTvCache.setText(CacheManager.getTotalCacheSize(this));
         mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
     }
 
@@ -87,11 +87,11 @@ public class SettingActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_iv_clearCache://清理缓存
-                if ("0 KB".equals(DataCleanManager.getTotalCacheSize(this))) {
+                if ("0 KB".equals(CacheManager.getTotalCacheSize(this))) {
                     ToastUtil.showAtCenter(SettingActivity.this, "暂无缓存");
                 } else {
-                    DataCleanManager.clearAllCache(this);
-                    mTvCache.setText(DataCleanManager.getTotalCacheSize(this));
+                    CacheManager.clearAllCache(this);
+                    mTvCache.setText(CacheManager.getTotalCacheSize(this));
                     ToastUtil.showAtCenter(SettingActivity.this, "缓存清理成功");
                 }
                 break;

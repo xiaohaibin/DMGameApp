@@ -3,7 +3,7 @@ package com.stx.xhb.dmgameapp.entity;
 /**
  * Created by xhb on 2016/1/25.
  */
-public class VideoDeatil {
+public class VideoDeatilEntity {
 
 
     /**

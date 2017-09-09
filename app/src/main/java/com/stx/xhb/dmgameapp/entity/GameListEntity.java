@@ -1,12 +1,85 @@
 package com.stx.xhb.dmgameapp.entity;
 
 /**
- * Created by xhb on 2016/1/22.
- * 文章详情实体类
- * 游戏详情实体类
+ * Created by xhb on 2016/1/20.详情
+ * 游戏
  */
-public class Detail {
+public class GameListEntity {
 
+    /**
+     * id : 3533128
+     * typeid : 192
+     * typeid2 : 0
+     * sortrank : 1448003123
+     * flag : c
+     * ismake : 1
+     * channel : 17
+     * arcrank : 0
+     * click : 9
+     * money : 0
+     * title : 最终幻想13：雷霆归来
+     * shorttitle : 最终幻想13雷霆归来
+     * color :
+     * writer : fuke
+     * source : 未知
+     * litpic : /uploads/allimg/151120/244-1511201456120-L.jpg
+     * pubdate : 1448003123
+     * senddate : 1449683737
+     * mid : 244
+     * keywords : 最终幻想13雷霆归来,最终幻想13雷霆归来中文版下载,截图,攻略,配置,汉化
+     * lastpost : 0
+     * scores : 0
+     * goodpost : 0
+     * badpost : 0
+     * voteid : 0
+     * notpost : 0
+     * description : 《最终幻想13：雷霆归来（LIGHTNING RETURNS: FINAL FANTASY XIII）》专题站提供本游戏攻略,完整硬盘版下载,官网,官方网站,存档,发售日期,新闻,截图,视频,评测,评分,破解,补丁,修改器,配置,中文,汉化,秘籍等游戏资料...
+     * filename : lrff13
+     * dutyadmin : 244
+     * tackid : 0
+     * mtype : 0
+     * weight : 370514
+     * fby_id : 0
+     * game_id : 0
+     * feedback : 0
+     * typedir : {cmspath}/a/games
+     * typename : 动作角色(ARPG)
+     * corank : 0
+     * isdefault : 1
+     * defaultname : index.html
+     * namerule : {typedir}/{Y}/{M}{D}/{aid}.html
+     * namerule2 : {typedir}/list_{tid}_{page}.html
+     * ispart : 0
+     * moresite : 0
+     * siteurl :
+     * sitepath : {cmspath}/a/games
+     * aid : 3533128
+     * redirecturl :
+     * templet :
+     * userip : 211.103.220.74
+     * vid : 206667
+     * game_bbs : http://bbs.3dmgame.com/forum-1714-1.html
+     * total : 0
+     * multiplayer : 0
+     * concept : 0
+     * sound : 0
+     * graphics : 0
+     * gameplay : 0
+     * websit : http://www.lightningreturns.com/
+     * release_company : SQUARE ENIX
+     * made_company : SQUARE ENIX
+     * terrace : PC,PS3,XBOX360
+     * language : 英文,繁体中文,日文
+     * release_date : 2015年12月10日
+     * game_trans_name : LIGHTNING RETURNS: FINAL FANTASY XIII
+     * fst : Z
+     * tid : 动作角色扮演（ARPG）
+     * game_othername1 :
+     * game_othername2 :
+     * arcurl : http://www.3dmgame.com/games/lrff13/
+     * typeurl : http://www.3dmgame.com/games/arpg/
+     * videolist : {"0":{"body":null}}
+     */
 
     private String id;
     private String typeid;
@@ -55,79 +128,43 @@ public class Detail {
     private String siteurl;
     private String sitepath;
     private String aid;
-    private String body;
     private String redirecturl;
     private String templet;
     private String userip;
-    private Object pingcejianjie;
-    private String tclitpic;
-    private String arcurl;
-    private String typeurl;
-    private Object topgl;
+    private String vid;
+    private String game_bbs;
+    private String total;
+    private String multiplayer;
+    private String concept;
+    private String sound;
+    private String graphics;
+    private String gameplay;
     private String websit;
     private String release_company;
     private String made_company;
     private String terrace;
     private String language;
     private String release_date;
+    private String game_trans_name;
+    private String fst;
+    private String tid;
+    private String game_othername1;
+    private String game_othername2;
+    private String arcurl;
+    private String typeurl;
 
 
-    private VideolistEntity videolist;
-
-    public VideolistEntity getVideolist() {
-        return videolist;
-    }
-
-    public void setVideolist(VideolistEntity videolist) {
-        this.videolist = videolist;
-    }
-
-    public String getWebsit() {
-        return websit;
-    }
-
-    public void setWebsit(String websit) {
-        this.websit = websit;
-    }
-
-    public String getRelease_company() {
-        return release_company;
-    }
-
-    public void setRelease_company(String release_company) {
-        this.release_company = release_company;
-    }
-
-    public String getMade_company() {
-        return made_company;
-    }
-
-    public void setMade_company(String made_company) {
-        this.made_company = made_company;
-    }
-
-    public String getTerrace() {
-        return terrace;
-    }
-
-    public void setTerrace(String terrace) {
-        this.terrace = terrace;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
+    public GameListEntity(String id, String typeid, String title, String litpic, String senddate, String keywords, String description, String typename, String language, String arcurl) {
+        this.id = id;
+        this.typeid = typeid;
+        this.title = title;
+        this.litpic = litpic;
+        this.senddate = senddate;
+        this.keywords = keywords;
+        this.description = description;
+        this.typename = typename;
         this.language = language;
-    }
-
-    public String getRelease_date() {
-        return release_date;
-    }
-
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+        this.arcurl = arcurl;
     }
 
     public String getId() {
@@ -506,14 +543,6 @@ public class Detail {
         this.aid = aid;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public String getRedirecturl() {
         return redirecturl;
     }
@@ -538,20 +567,156 @@ public class Detail {
         this.userip = userip;
     }
 
-    public Object getPingcejianjie() {
-        return pingcejianjie;
+    public String getVid() {
+        return vid;
     }
 
-    public void setPingcejianjie(Object pingcejianjie) {
-        this.pingcejianjie = pingcejianjie;
+    public void setVid(String vid) {
+        this.vid = vid;
     }
 
-    public String getTclitpic() {
-        return tclitpic;
+    public String getGame_bbs() {
+        return game_bbs;
     }
 
-    public void setTclitpic(String tclitpic) {
-        this.tclitpic = tclitpic;
+    public void setGame_bbs(String game_bbs) {
+        this.game_bbs = game_bbs;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public String getMultiplayer() {
+        return multiplayer;
+    }
+
+    public void setMultiplayer(String multiplayer) {
+        this.multiplayer = multiplayer;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
+    }
+
+    public String getSound() {
+        return sound;
+    }
+
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+
+    public String getGraphics() {
+        return graphics;
+    }
+
+    public void setGraphics(String graphics) {
+        this.graphics = graphics;
+    }
+
+    public String getGameplay() {
+        return gameplay;
+    }
+
+    public void setGameplay(String gameplay) {
+        this.gameplay = gameplay;
+    }
+
+    public String getWebsit() {
+        return websit;
+    }
+
+    public void setWebsit(String websit) {
+        this.websit = websit;
+    }
+
+    public String getRelease_company() {
+        return release_company;
+    }
+
+    public void setRelease_company(String release_company) {
+        this.release_company = release_company;
+    }
+
+    public String getMade_company() {
+        return made_company;
+    }
+
+    public void setMade_company(String made_company) {
+        this.made_company = made_company;
+    }
+
+    public String getTerrace() {
+        return terrace;
+    }
+
+    public void setTerrace(String terrace) {
+        this.terrace = terrace;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
+    public String getGame_trans_name() {
+        return game_trans_name;
+    }
+
+    public void setGame_trans_name(String game_trans_name) {
+        this.game_trans_name = game_trans_name;
+    }
+
+    public String getFst() {
+        return fst;
+    }
+
+    public void setFst(String fst) {
+        this.fst = fst;
+    }
+
+    public String getTid() {
+        return tid;
+    }
+
+    public void setTid(String tid) {
+        this.tid = tid;
+    }
+
+    public String getGame_othername1() {
+        return game_othername1;
+    }
+
+    public void setGame_othername1(String game_othername1) {
+        this.game_othername1 = game_othername1;
+    }
+
+    public String getGame_othername2() {
+        return game_othername2;
+    }
+
+    public void setGame_othername2(String game_othername2) {
+        this.game_othername2 = game_othername2;
     }
 
     public String getArcurl() {
@@ -569,25 +734,4 @@ public class Detail {
     public void setTypeurl(String typeurl) {
         this.typeurl = typeurl;
     }
-
-    public Object getTopgl() {
-        return topgl;
-    }
-
-    public void setTopgl(Object topgl) {
-        this.topgl = topgl;
-    }
-
-    public static class VideolistEntity {
-        private String body;
-
-        public String getBody() {
-            return body;
-        }
-
-        public void setBody(String body) {
-            this.body = body;
-        }
-    }
-
 }

@@ -2,8 +2,8 @@ package com.stx.xhb.dmgameapp.utils;
 
 import android.text.TextUtils;
 
-import com.stx.xhb.dmgameapp.entity.ChapterListItem;
-import com.stx.xhb.dmgameapp.entity.GameListItem;
+import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
+import com.stx.xhb.dmgameapp.entity.GameListEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -83,8 +83,8 @@ public class JsonUtils {
      * @param json 网络下载的json数据
      * @return
      */
-    public static List<ChapterListItem> parseChapterJson(String json) {
-        List<ChapterListItem> list = new ArrayList<>();
+    public static List<ChapterListEntity> parseChapterJson(String json) {
+        List<ChapterListEntity> list = new ArrayList<>();
         try {
             JSONObject object = new JSONObject(removeBOM(json));
             JSONObject data = object.optJSONObject("data");
@@ -98,8 +98,8 @@ public class JsonUtils {
                 String litpic = jsonObject.getString("litpic");
                 String arcurl = jsonObject.getString("arcurl");
                 String feedback = jsonObject.getString("feedback");
-                ChapterListItem chapterListItem = new ChapterListItem(id, typeid, title, senddate, litpic, feedback, arcurl);
-                list.add(chapterListItem);
+                ChapterListEntity chapterListEntity = new ChapterListEntity(id, typeid, title, senddate, litpic, feedback, arcurl);
+                list.add(chapterListEntity);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -113,8 +113,8 @@ public class JsonUtils {
      * @param json
      * @return
      */
-    public static List<GameListItem> parseGameJson(String json) {
-        List<GameListItem> list = new ArrayList<>();
+    public static List<GameListEntity> parseGameJson(String json) {
+        List<GameListEntity> list = new ArrayList<>();
         try {
             JSONObject object = new JSONObject(removeBOM(json));
             JSONObject data = (JSONObject) object.get("data");
@@ -131,8 +131,8 @@ public class JsonUtils {
                 String description = jsonObject.getString("description");
                 String typename = jsonObject.getString("typename");
                 String language = jsonObject.getString("language");
-                GameListItem gameListItem = new GameListItem(id, typeid, title, litpic, senddate, keywords, description, typename, language, arcurl);
-                list.add(gameListItem);
+                GameListEntity gameListEntity = new GameListEntity(id, typeid, title, litpic, senddate, keywords, description, typename, language, arcurl);
+                list.add(gameListEntity);
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,14 +1,17 @@
-package com.stx.xhb.dmgameapp.base;
+package com.stx.xhb.dmgameapp;
 
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.umeng.socialize.PlatformConfig;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.log.LoggerInterceptor;
 
-import org.xutils.x;
+import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by xhb on 2016/1/19.
@@ -18,10 +21,15 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //初始化xutils的操作
-        x.Ext.init(this);
-        //设置是否输出日志
-        x.Ext.setDebug(true);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new LoggerInterceptor("==3dm=="))
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
+
         //微信 appid appsecret
         PlatformConfig.setWeixin("wx152334f54a39c3b0", "24949aef9a179c253fdd55f12a576632");
         // QQ和Qzone appid appkey

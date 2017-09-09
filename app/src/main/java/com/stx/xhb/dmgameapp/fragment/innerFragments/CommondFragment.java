@@ -15,18 +15,16 @@ import android.widget.ListView;
 
 import com.classic.common.MultipleStatusView;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.activities.ArticleDetailActivity;
-import com.stx.xhb.dmgameapp.activities.VideoDetailActivity;
+import com.stx.xhb.dmgameapp.activity.ArticleDetailActivity;
+import com.stx.xhb.dmgameapp.activity.VideoDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
-import com.stx.xhb.dmgameapp.entity.ChapterListItem;
+import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.NetUtils;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +33,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * 通用的Fragment
@@ -50,9 +50,9 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
     PtrClassicFrameLayout ptrLayout;
     private ListView lv_data;
     private View inflate;
-    private List<ChapterListItem> chapterListItems = new ArrayList<>();
+    private List<ChapterListEntity> mChapterListItemEntities = new ArrayList<>();
     //加载的新数据
-    private List<ChapterListItem> datachapter;
+    private List<ChapterListEntity> datachapter;
     private ListViewAdapter adapter;
     private int currenPage = 1;//当前页
     private int typeid;
@@ -86,7 +86,7 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
         //网络请求地址
         url = String.format(API.ARTICLE_URL, typeid, currenPage);
         //实例化Adapter
-        adapter = new ListViewAdapter(getActivity(), chapterListItems);
+        adapter = new ListViewAdapter(getActivity(), mChapterListItemEntities);
         //给listview绑定适配器
         lv_data.setAdapter(adapter);
         setSwipeRefreshInfo();
@@ -96,48 +96,49 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
     private void downloadData(final int page) {
         //网络请求地址
         String strUrl = String.format(API.ARTICLE_URL, typeid, page);
-        multiplestatusview.showLoading();
-        x.http().get(new RequestParams(strUrl), new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                multiplestatusview.showContent();
-                String json = new String(result);
-                //解析json数据
-                datachapter = JsonUtils.parseChapterJson(json);
-                if (datachapter.isEmpty()) {
-                    multiplestatusview.showEmpty();
-                }
-                if (page == 1) {
-                    chapterListItems.clear();
-                }
-                chapterListItems.addAll(datachapter);
-                ptrLayout.refreshComplete();
-                adapter.notifyDataSetChanged();
-            }
+        OkHttpUtils
+                   .get()
+                   .url(strUrl)
+                   .build()
+                   .execute(new StringCallback() {
+                       @Override
+                       public void onBefore(Request request, int id) {
+                           multiplestatusview.showLoading();
+                       }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetUtils.isNetConnected(getActivity())) {
-                    multiplestatusview.showError();
-                } else {
-                    multiplestatusview.showNoNetwork();
-                }
-            }
+                       @Override
+                       public void onError(Call call, Exception e, int id) {
+                           if (NetUtils.isNetConnected(getActivity())) {
+                               multiplestatusview.showError();
+                           } else {
+                               multiplestatusview.showNoNetwork();
+                           }
+                       }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
+                       @Override
+                       public void onResponse(String response, int id) {
+                           multiplestatusview.showContent();
+                           //解析json数据
+                           datachapter = JsonUtils.parseChapterJson(response);
+                           if (datachapter.isEmpty()) {
+                               multiplestatusview.showEmpty();
+                           }
+                           if (page == 1) {
+                               mChapterListItemEntities.clear();
+                           }
+                           mChapterListItemEntities.addAll(datachapter);
+                           ptrLayout.refreshComplete();
+                           adapter.notifyDataSetChanged();
+                       }
 
-            }
-
-            @Override
-            public void onFinished() {
-                if (page == 1) {
-                    ptrLayout.refreshComplete();
-                }
-                    adapter.notifyDataSetChanged();
-            }
-
-        });
+                       @Override
+                       public void onAfter(int id) {
+                           if (page == 1) {
+                               ptrLayout.refreshComplete();
+                           }
+                           adapter.notifyDataSetChanged();
+                       }
+                   });
     }
 
     //设置事件监听
@@ -168,8 +169,8 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
 
         //将Url地址获取到
         Bundle bundle = new Bundle();
-        String typeid = chapterListItems.get(position).getTypeid();//获取到文章的分类id
-        String ariticleId = chapterListItems.get(position).getId();//文章id
+        String typeid = mChapterListItemEntities.get(position).getTypeid();//获取到文章的分类id
+        String ariticleId = mChapterListItemEntities.get(position).getId();//文章id
         Intent intent = new Intent();
         //遍历一下，判断是否为文章
         for (Integer item : VIDEO_TYPE_ID) {
@@ -199,36 +200,29 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
             isLoadData = true;//将加载新数据的标记设置为true
             //网络请求地址
             url = String.format(API.ARTICLE_URL, typeid, currenPage);
-            x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    String json = new String(result);
-                    //解析json数据
-                    datachapter = JsonUtils.parseChapterJson(json);
-                    if (datachapter != null) {
-                        mFootView.setVisibility(View.GONE);//设置底部控件隐藏
-                        chapterListItems.addAll(datachapter);
-                        adapter.notifyDataSetChanged();
-                        //加载完数据之后，将标记设置为false
-                        isLoadData = false;
-                    }
-                }
+            OkHttpUtils
+                      .get()
+                      .url(url)
+                      .build()
+                      .execute(new StringCallback() {
+                          @Override
+                          public void onError(Call call, Exception e, int id) {
+                              ToastUtil.showAtCenter(getActivity(), "网络请求失败");
+                          }
 
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-                    ToastUtil.showAtCenter(getActivity(), "网络请求失败");
-                }
-
-                @Override
-                public void onCancelled(CancelledException cex) {
-
-                }
-
-                @Override
-                public void onFinished() {
-
-                }
-            });
+                          @Override
+                          public void onResponse(String response, int id) {
+                              //解析json数据
+                              datachapter = JsonUtils.parseChapterJson(response);
+                              if (datachapter != null) {
+                                  mFootView.setVisibility(View.GONE);//设置底部控件隐藏
+                                  mChapterListItemEntities.addAll(datachapter);
+                                  adapter.notifyDataSetChanged();
+                                  //加载完数据之后，将标记设置为false
+                                  isLoadData = false;
+                              }
+                          }
+                      });
         }
     }
 

@@ -2,18 +2,17 @@ package com.stx.xhb.dmgameapp.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
 import com.stx.xhb.dmgameapp.fragment.innerFragments.CommondFragment;
-import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class VideoFragment extends Fragment {
     };
     private View view;
     private ViewPager video_viewpager;
-    private TabPageIndicator indicator;
+    private TabLayout mTabLayout;
     private TabPageIndicatorAdapter adapter;
     //fragment的集合
     private List<Fragment> fragments = new ArrayList<>();
@@ -49,15 +48,12 @@ public class VideoFragment extends Fragment {
 
     //获取控件
     private void initView() {
-        //隐藏toolbar menu控件
-        ImageButton main_action_menu= (ImageButton) view.findViewById(R.id.main_action_menu);
-        main_action_menu.setVisibility(View.GONE);
         //获取到标题栏控件
         tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("视频");
         video_viewpager = (ViewPager) view.findViewById(R.id.video_viewpager);
         //实例化indicator
-        indicator = (TabPageIndicator) view.findViewById(R.id.video_indicator);
+        mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
     }
 
     //初始化数据
@@ -77,16 +73,28 @@ public class VideoFragment extends Fragment {
     private void setAdapter() {
         adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, TITLE);
         video_viewpager.setAdapter(adapter);
-        indicator.setViewPager(video_viewpager);
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setupWithViewPager(video_viewpager);
     }
 
     //设置事件监听
     private void setListener() {
-        //indicator的事件处理方法
-        indicator.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageSelected(int position) {
-                tv_title.setText(TITLE[position]);
+            public void onTabSelected(TabLayout.Tab tab) {
+                //动态改变标题栏文字
+                tv_title.setText(TITLE[tab.getPosition()]);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
     }

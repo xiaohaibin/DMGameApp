@@ -30,19 +30,19 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
     <!--极光推送所需权限  end-->
     <application
-        android:name=".base.BaseApplication"
+        android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/app"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/StyledIndicators">
+        android:theme="@style/AppTheme.NoActionBar">
         <!--集成腾讯广告联盟  start-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -54,18 +54,18 @@
         </activity>
 
         <activity
-            android:name=".activities.ArticleDetailActivity"
+            android:name=".activity.ArticleDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".activities.CommentActivity"
+            android:name=".activity.CommentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <activity
-            android:name=".activities.GameDetailActivity"
+            android:name=".activity.GameDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
@@ -75,7 +75,7 @@
         </activity>
 
         <activity
-            android:name=".activities.VideoDetailActivity"
+            android:name=".activity.VideoDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
@@ -96,12 +96,12 @@
         </activity>
 
         <activity
-            android:name=".activities.SettingActivity"
+            android:name=".activity.SettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".activities.AboutActivity"
+            android:name=".activity.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
@@ -119,7 +119,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <!--新浪微博-->
         <activity
-            android:name=".activities.WBShareActivity"
+            android:name=".activity.WBShareActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait">
             <intent-filter>

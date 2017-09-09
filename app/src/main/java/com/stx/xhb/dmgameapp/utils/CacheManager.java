@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * @github: https://github.com/xiaohaibin
  * @description： 应用缓存清理工具
  */
-public class DataCleanManager {
+public class CacheManager {
     /**
      * 获取缓存大小
      * @param context

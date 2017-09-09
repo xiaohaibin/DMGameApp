@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp.activity;
 
 import android.app.ProgressDialog;
 import android.graphics.drawable.ColorDrawable;
@@ -8,15 +8,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.Detail;
+import com.stx.xhb.dmgameapp.entity.DetailEntity;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
@@ -26,14 +26,15 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+
+import static com.stx.xhb.dmgameapp.R.id.iv;
 
 /**
  * 游戏详情界面
@@ -136,64 +137,53 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
         pd.setMessage("游戏详情加载中。。。");
         pd.show();
         //加载网络数据
-        x.http().get(new RequestParams(url), new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Log.i("------>ju", "我来了，，，，");
-                String json = new String(result);
-                //json解析
-                Detail detail = new Gson().fromJson(JsonUtils.removeBOM(json), Detail.class);
-                pd.dismiss();//隐藏进度对话框
-                title = detail.getTitle();
-                description = detail.getDescription();
-                typename = detail.getTypename();
-                //游戏封面链接
-                litpic = detail.getLitpic();
-                release_company = detail.getRelease_company();
-                //发行时间
-                release_date = detail.getRelease_date();
-                made_company = detail.getMade_company();
-                terrace = detail.getTerrace();
-                language = detail.getLanguage();
-                websit = detail.getWebsit();
-                arcurl = detail.getArcurl();
-                tvGameName.setText(title);
-                //游戏封面链接
-                imageURl = API.DMGEAME_URL + litpic;
-                //下载图片，优先使用缓存图片
-                x.view().inject(GameDetailActivity.this);
-                x.image().bind(ivGame, imageURl);
-                tvGameDetail.setText(description);
-                tvGameType.setText(typename);
-                tvReleaseCompany.setText(release_company);
-                //发行时间
-                tvGameTime.setText(release_date);
-                tvGameProduct.setText(made_company);
-                tvGameTerrace.setText(terrace);
-                tvGameLanguage.setText(language);
-                //设置官网链接
-                tvGameUrl.setText(
-                        Html.fromHtml("<a href=" + websit + ">点击进入</a> "));
-                tvGameUrl.setMovementMethod(LinkMovementMethod.getInstance());
+        OkHttpUtils
+                .get()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.showShort(GameDetailActivity.this, "游戏详情加载失败");
+                    }
 
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                ToastUtil.showShort(GameDetailActivity.this, "游戏详情加载失败");
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //json解析
+                        DetailEntity detailEntity = new Gson().fromJson(JsonUtils.removeBOM(response), DetailEntity.class);
+                        pd.dismiss();//隐藏进度对话框
+                        title = detailEntity.getTitle();
+                        description = detailEntity.getDescription();
+                        typename = detailEntity.getTypename();
+                        //游戏封面链接
+                        litpic = detailEntity.getLitpic();
+                        release_company = detailEntity.getRelease_company();
+                        //发行时间
+                        release_date = detailEntity.getRelease_date();
+                        made_company = detailEntity.getMade_company();
+                        terrace = detailEntity.getTerrace();
+                        language = detailEntity.getLanguage();
+                        websit = detailEntity.getWebsit();
+                        arcurl = detailEntity.getArcurl();
+                        tvGameName.setText(title);
+                        //游戏封面链接
+                        imageURl = API.DMGEAME_URL + litpic;
+                        //下载图片，优先使用缓存图片
+                        Glide.with(GameDetailActivity.this).load(imageURl).into(ivGame);
+                        tvGameDetail.setText(description);
+                        tvGameType.setText(typename);
+                        tvReleaseCompany.setText(release_company);
+                        //发行时间
+                        tvGameTime.setText(release_date);
+                        tvGameProduct.setText(made_company);
+                        tvGameTerrace.setText(terrace);
+                        tvGameLanguage.setText(language);
+                        //设置官网链接
+                        tvGameUrl.setText(
+                                Html.fromHtml("<a href=" + websit + ">点击进入</a> "));
+                        tvGameUrl.setMovementMethod(LinkMovementMethod.getInstance());
+                    }
+                });
     }
 
     //设置监听

@@ -11,22 +11,19 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.classic.common.MultipleStatusView;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.activities.GameDetailActivity;
+import com.stx.xhb.dmgameapp.activity.GameDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.GridViewAdapter;
-import com.stx.xhb.dmgameapp.entity.GameListItem;
+import com.stx.xhb.dmgameapp.entity.GameListEntity;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.NetUtils;
-
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +35,8 @@ import cn.finalteam.loadingviewfinal.OnDefaultRefreshListener;
 import cn.finalteam.loadingviewfinal.OnLoadMoreListener;
 import cn.finalteam.loadingviewfinal.PtrClassicFrameLayout;
 import cn.finalteam.loadingviewfinal.PtrFrameLayout;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * 视频的Fragment
@@ -58,18 +57,17 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
     private View view;
     private GridViewFinal game_grid;
     private Spinner sp;
-    private List<GameListItem> gameListItems = new ArrayList<>();
+    private List<GameListEntity> mGameListItemEntities = new ArrayList<>();
     //GridView的适配器
     private GridViewAdapter gridViewAdapter;
     private int typeid = 179;
-    private List<GameListItem> data;
+    private List<GameListEntity> data;
     private int currentPage = 1;//当前页
     private final int LIMIT = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_game, container, false);
         ButterKnife.bind(this, view);
         initView();
@@ -82,9 +80,6 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
 
     //初始化控件
     private void initView() {
-        //隐藏toolbar menu控件
-        ImageButton main_action_menu = (ImageButton) view.findViewById(R.id.main_action_menu);
-        main_action_menu.setVisibility(View.GONE);
         TextView tv_title = (TextView) view.findViewById(R.id.title);
         tv_title.setText("游戏");
         sp = (Spinner) view.findViewById(R.id.game_spinner);
@@ -95,7 +90,7 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
     private void setAdapter() {
         //实例化适配器
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, GAME_NAME);
-        gridViewAdapter = new GridViewAdapter(getActivity(), gameListItems);
+        gridViewAdapter = new GridViewAdapter(getActivity(), mGameListItemEntities);
         //设置适配器
         sp.setAdapter(adapter);
         game_grid.setAdapter(gridViewAdapter);
@@ -132,68 +127,70 @@ public class GameFragment extends Fragment implements AdapterView.OnItemSelected
     //加载网络数据
     private void downloadData(final int page, int id) {
         String strUrl = String.format(API.GAME_URL, id, page);
-        x.http().get(new RequestParams(strUrl), new Callback.CommonCallback<String>() {
+        OkHttpUtils.get().url(strUrl)
+                   .build()
+                   .execute(new StringCallback() {
+                       @Override
+                       public void onBefore(Request request, int id) {
+                           if (page==1) {
+                               multiplestatusview.showLoading();
+                           }
+                       }
 
-            @Override
-            public void onSuccess(String result) {
-                multiplestatusview.showContent();
-                //获取到json数据
-                String json = new String(result);
-                //由于游戏列表的json数据格式有误，需要进行截取
-                //获取到“ {” 开始的位置
-                int index = json.indexOf("{");
-                //从“{” 开始的位置进行截取
-                String strjson = json.substring(index, json.length());
-                //开始json解析
-                data = JsonUtils.parseGameJson(strjson);
-                if (page == 1) {
-                    gameListItems.clear();
-                }
-                currentPage = page + 1;
-                if (data != null) {
-                    gameListItems.addAll(data);
-                }else {
-                    multiplestatusview.showEmpty();
-                }
-                if (data.size() < LIMIT) {
-                    game_grid.setHasLoadMore(false);
-                } else {
-                    game_grid.setHasLoadMore(true);
-                }
-            }
+                       @Override
+                       public void onError(Call call, Exception e, int id) {
+                           if (NetUtils.isNetConnected(getActivity())) {
+                               multiplestatusview.showError();
+                           } else {
+                               multiplestatusview.showNoNetwork();
+                           }
+                       }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                if (NetUtils.isNetConnected(getActivity())) {
-                    multiplestatusview.showError();
-                } else {
-                    multiplestatusview.showNoNetwork();
-                }
-            }
+                       @Override
+                       public void onResponse(String response, int id) {
+                           multiplestatusview.showContent();
+                           //获取到json数据
+                           //由于游戏列表的json数据格式有误，需要进行截取
+                           //获取到“ {” 开始的位置
+                           int index = response.indexOf("{");
+                           //从“{” 开始的位置进行截取
+                           String strjson = response.substring(index, response.length());
+                           //开始json解析
+                           data = JsonUtils.parseGameJson(strjson);
+                           if (page == 1) {
+                               mGameListItemEntities.clear();
+                           }
+                           currentPage = page + 1;
+                           if (data != null) {
+                               mGameListItemEntities.addAll(data);
+                           }else {
+                               multiplestatusview.showEmpty();
+                           }
+                           if (data.size() < LIMIT) {
+                               game_grid.setHasLoadMore(false);
+                           } else {
+                               game_grid.setHasLoadMore(true);
+                           }
+                       }
 
-            @Override
-            public void onCancelled(CancelledException cex) {
+                       @Override
+                       public void onAfter(int id) {
+                           if (page == 1) {
+                               ptrLayout.onRefreshComplete();
+                           } else {
+                               game_grid.onLoadMoreComplete();
+                           }
 
-            }
-
-            @Override
-            public void onFinished() {
-                if (page == 1) {
-                    ptrLayout.onRefreshComplete();
-                } else {
-                    game_grid.onLoadMoreComplete();
-                }
-
-                gridViewAdapter.notifyDataSetChanged();
-            }
-        });
+                           gridViewAdapter.notifyDataSetChanged();
+                       }
+                   });
     }
 
     //gridview的点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String game_ID = gameListItems.get(position).getId();//获取游戏id
-        String typeid = gameListItems.get(position).getTypeid();//获取游戏分类id
+        String game_ID = mGameListItemEntities.get(position).getId();//获取游戏id
+        String typeid = mGameListItemEntities.get(position).getTypeid();//获取游戏分类id
         Bundle bundle = new Bundle();
         bundle.putString("id", game_ID);
         bundle.putString("typeid", typeid);

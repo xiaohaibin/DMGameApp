@@ -4,7 +4,7 @@ package com.stx.xhb.dmgameapp.entity;
  * Created by xhb on 2016/1/19.
  * 文章列表实体类
  */
-public class ChapterListItem {
+public class ChapterListEntity {
 
 
     private String id;
@@ -56,7 +56,7 @@ public class ChapterListItem {
     private String arcurl;
     private String typeurl;
 
-    public ChapterListItem(String id, String typeid, String title, String senddate, String litpic, String feedback, String arcurl) {
+    public ChapterListEntity(String id, String typeid, String title, String senddate, String litpic, String feedback, String arcurl) {
         this.id = id;//文章id
         this.typeid = typeid;//分类id
         this.title = title;//文章标题

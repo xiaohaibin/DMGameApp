@@ -3,9 +3,8 @@ package com.stx.xhb.dmgameapp;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.RadioButton;
@@ -30,7 +29,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
     private ViewPager main_viewPager;
     private List<Fragment> fragemnts = new ArrayList<>();
     private MainFragmentPageAdapter adapter;
@@ -67,8 +66,7 @@ public class MainActivity extends FragmentActivity {
         mUpdManager.autoUpdate(MainActivity.this, new IFlytekUpdateListener() {
             @Override
             public void onResult(int errorcode, UpdateInfo result) {
-                Log.i("---->UPDAT",result.toString());
-                if (errorcode == UpdateErrorCode.OK && result != null) {
+                if (errorcode == UpdateErrorCode.OK) {
                     if (result.getUpdateType() == UpdateType.NoNeed) {
                         return;
                     }

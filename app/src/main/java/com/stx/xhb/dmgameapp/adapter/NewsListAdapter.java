@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
-import com.stx.xhb.dmgameapp.utils.API;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
+import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 
 import java.util.List;
 
@@ -20,13 +18,13 @@ import java.util.List;
  * Created by xhb on 2016/1/19.
  * Listview的自定义适配器
  */
-public class ListViewAdapter extends BaseAdapter {
-    private Context context;
-    private List<ChapterListEntity> mChapterListItemEntities;
+public class NewsListAdapter extends BaseAdapter {
+    private Context mContext;
+    private List<NewsListEntity.ChannelEntity.HtmlEntity> mChapterListItemEntities;
     private LayoutInflater mLayoutInflater;
 
-    public ListViewAdapter(Context context, List<ChapterListEntity> chapterListItemEntities) {
-        this.context = context;
+    public NewsListAdapter(Context context, List<NewsListEntity.ChannelEntity.HtmlEntity> chapterListItemEntities) {
+        this.mContext = context;
         this.mChapterListItemEntities = chapterListItemEntities;
         if (mLayoutInflater == null) {
             mLayoutInflater = (LayoutInflater) context
@@ -64,24 +62,26 @@ public class ListViewAdapter extends BaseAdapter {
             //获取缓存布局
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ChapterListEntity chapterListEntity = mChapterListItemEntities.get(position);
+        NewsListEntity.ChannelEntity.HtmlEntity chapterListEntity = mChapterListItemEntities.get(position);
         viewHolder.title.setText(chapterListEntity.getTitle());
         //格式化时间
         String senddate = chapterListEntity.getSenddate();
-        String time = DateUtils.dateFromat(senddate);
-        viewHolder.date.setText(time);//文章发布时间
+        viewHolder.date.setText(senddate);//文章发布时间
         viewHolder.iv.setImageResource(R.drawable.product_default);//设置默认图片
         final ImageView iv = viewHolder.iv;
         //获取到图片地址
-        String litpic = chapterListEntity.getLitpic();
         //如果图片地址为空，则设置默认图片
-        if (litpic == null) {
+        if (chapterListEntity.getLitpic() != null && !chapterListEntity.getLitpic().isEmpty()) {
+            List<String> stringList = chapterListEntity.getLitpic().get(0);
+            if (stringList != null && !stringList.isEmpty()) {
+                String imageUrl = stringList.get(0);
+                Glide.with(mContext).load(imageUrl).into(iv);
+            } else {
+                iv.setImageResource(R.drawable.product_default);
+            }
+        } else {
             iv.setImageResource(R.drawable.product_default);
         }
-        //地址拼接
-        String imageUrl = API.DMGEAME_URL + litpic;
-        //下载图片，优先使用本地缓存图片
-        Glide.with(context).load(imageUrl).into(iv);
         return convertView;
     }
 

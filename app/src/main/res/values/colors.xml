@@ -12,4 +12,6 @@
     <color name="text_gray">#ff909090</color>
     <color name="text_black">#212121</color>
     <color name="divider">#20000000</color>
+    <!--分割线-->
+    <color name="common_line">#ededed</color>
 </resources>

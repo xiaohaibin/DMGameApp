@@ -8,7 +8,7 @@
     tools:context="com.stx.xhb.dmgameapp.fragment.GameFragment">
 
     <!-- 标题 -->
-    <include layout="@layout/title_layout"></include>
+    <include layout="@layout/title_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,13 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="@drawable/edittext1"
-            android:spinnerMode="dialog"></Spinner>
+            android:spinnerMode="dialog"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@android:color/darker_gray"></View>
+        android:background="@android:color/darker_gray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

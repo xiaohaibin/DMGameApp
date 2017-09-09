@@ -6,7 +6,7 @@ import java.util.List;
  * Created by xhb on 2016/1/22.
  * 评论列表实体
  */
-public class ChapterCommentListItem {
+public class ChapterCommentEntity {
 
     /**
      * code : 1

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activities;
+package com.stx.xhb.dmgameapp.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
-import com.stx.xhb.dmgameapp.utils.VersionUtils;
+import com.stx.xhb.dmgameapp.utils.AppUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
@@ -66,7 +66,7 @@ public class AboutActivity extends AppCompatActivity {
     }
     //初始化控件
     private void initView() {
-        version.setText(VersionUtils.getVersion(this));
+        version.setText(AppUtils.getVersion(this));
         setSupportActionBar(aboutToolbar);
 //        aboutToolbar.setOverflowIcon(getResources().getDrawable(R.drawable.abc_ic_menu_share_mtrl_alpha));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));

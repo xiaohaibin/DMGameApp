@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ImageCycleView extends FrameLayout {
      * Map<String,String> map=new HashMap<String, String>();
      * map.put("","");
      */
-    private List<ImageInfo> data = new ArrayList<ImageInfo>();
+    private List<NewsListEntity.BannerEntity.HtmlEntity> data = new ArrayList<NewsListEntity.BannerEntity.HtmlEntity>();
     /**
      * 加载图片回调函数
      */
@@ -199,7 +200,7 @@ public class ImageCycleView extends FrameLayout {
      * @param list     数据
      * @param callBack 如何加载图片及显示的回调方法 not null
      */
-    public void loadData(List<ImageInfo> list, LoadImageCallBack callBack) {
+    public void loadData(List<NewsListEntity.BannerEntity.HtmlEntity> list, LoadImageCallBack callBack) {
         data = list;
         mCount = list.size();
         initIndication();
@@ -313,7 +314,7 @@ public class ImageCycleView extends FrameLayout {
          * @param imageView 被点击的View对象
          * @param imageInfo 数据信息
          */
-        void onClick(View imageView, ImageInfo imageInfo);
+        void onClick(View imageView, NewsListEntity.BannerEntity.HtmlEntity imageInfo);
     }
 
     /**
@@ -325,19 +326,7 @@ public class ImageCycleView extends FrameLayout {
          *
          * @param imageInfo 数据信息
          */
-        ImageView loadAndDisplay(ImageInfo imageInfo);
-    }
-
-    public static class ImageInfo {
-        public Object image;
-        public String text = "";
-        public Object value;
-
-        public ImageInfo(Object image, String text, Object value) {
-            this.image = image;
-            this.text = text;
-            this.value = value;
-        }
+        ImageView loadAndDisplay(NewsListEntity.BannerEntity.HtmlEntity imageInfo);
     }
 
     /**
@@ -352,7 +341,7 @@ public class ImageCycleView extends FrameLayout {
         public void onPageSelected(int index) {
             index = index % mCount;
             //更新文本信息
-            String text = data.get(index).text;
+            String text = data.get(index).getTitle();
             mText.setText(TextUtils.isEmpty(text) ? "" : text);
             //恢复默认没有获得焦点指示器样式
             ((ImageView) (mIndicationGroup.getChildAt(preIndex))).setImageBitmap(unFocusIndicationStyle);
@@ -378,7 +367,7 @@ public class ImageCycleView extends FrameLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            final ImageInfo imageInfo = data.get(position % mCount);
+            final NewsListEntity.BannerEntity.HtmlEntity imageInfo = data.get(position % mCount);
 
             ImageView imageView = mLoadImageCallBack.loadAndDisplay(imageInfo);
             if (imageView!=null) {

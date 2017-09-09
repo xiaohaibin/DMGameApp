@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.ChapterCommentListItem;
+import com.stx.xhb.dmgameapp.entity.ChapterCommentEntity;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
 
 import java.util.List;
@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class CommentListviewAdapter extends BaseAdapter {
     private Context context;
-    private List<ChapterCommentListItem.DescriptionEntity.DataEntity> dataEntities;
+    private List<ChapterCommentEntity.DescriptionEntity.DataEntity> dataEntities;
 
-    public CommentListviewAdapter(Context context, List<ChapterCommentListItem.DescriptionEntity.DataEntity> dataEntities) {
+    public CommentListviewAdapter(Context context, List<ChapterCommentEntity.DescriptionEntity.DataEntity> dataEntities) {
         this.context = context;
         this.dataEntities = dataEntities;
     }
@@ -57,7 +57,7 @@ public class CommentListviewAdapter extends BaseAdapter {
             viewHodler = (ViewHodler) convertView.getTag();
         }
         //给缓存布局设置新数据
-        ChapterCommentListItem.DescriptionEntity.DataEntity entity = dataEntities.get(position);
+        ChapterCommentEntity.DescriptionEntity.DataEntity entity = dataEntities.get(position);
         //判断是否是匿名发表
         if ("????".equals(entity.getUsername())) {
             viewHodler.tv_username.setText("匿名发表");

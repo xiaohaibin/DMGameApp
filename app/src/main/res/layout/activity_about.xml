@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/login_bg"
-    tools:context="com.stx.xhb.dmgameapp.activities.AboutActivity">
+    tools:context="com.stx.xhb.dmgameapp.activity.AboutActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/about_toolbar"
         android:layout_width="match_parent"
