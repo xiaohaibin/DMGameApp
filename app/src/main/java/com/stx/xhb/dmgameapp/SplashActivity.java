@@ -18,11 +18,10 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class SplashActivity extends Activity implements SplashADListener{
     private LinearLayout ll_ad;
-
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onResume(this);       //统计时长
+        MobclickAgent.onResume(this);
     }
 
     @Override
@@ -36,7 +35,7 @@ public class SplashActivity extends Activity implements SplashADListener{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
         ll_ad = (LinearLayout) findViewById(R.id.ll_ad);
-        SplashAD splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,5000);
+        SplashAD splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,3000);
     }
     @Override
     public void onADDismissed() {

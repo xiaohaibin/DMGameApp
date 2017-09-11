@@ -273,7 +273,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                 .withText(title)
                 .withTitle(title)
                 .withTargetUrl(arcurl)
-                .withMedia(new UMImage(this, R.drawable.app))
+                .withMedia(new UMImage(this, R.mipmap.ic_logo))
                 .setListenerList(getUmShareListener(), getUmShareListener()).open();
     }
 

@@ -32,7 +32,7 @@
             android:layout_height="70dp"
             android:clickable="true"
             android:layout_gravity="center"
-            android:src="@drawable/app"
+            android:src="@mipmap/ic_logo"
             app:civ_border_color="#fcfcfc"
             app:civ_border_width="2dp" />
         <TextView

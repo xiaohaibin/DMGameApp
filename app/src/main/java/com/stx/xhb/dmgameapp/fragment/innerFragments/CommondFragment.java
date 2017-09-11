@@ -151,7 +151,7 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
         multiplestatusview.setOnRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadData(1);
+                downloadData(currenPage);
             }
         });
     }
@@ -255,7 +255,8 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
 
             @Override
             public void onRefreshBegin(in.srain.cube.views.ptr.PtrFrameLayout frame) {
-                downloadData(1);
+                currenPage=1;
+                downloadData(currenPage);
             }
         });
         ptrLayout.setLastUpdateTimeRelateObject(this);//设置是否显示上次更新时间

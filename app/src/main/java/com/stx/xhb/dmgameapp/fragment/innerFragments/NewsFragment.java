@@ -175,7 +175,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         multiplestatusview.setOnRetryClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadData(1);
+                downloadData(currenPage);
             }
         });
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
@@ -235,7 +235,8 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onRefreshBegin(cn.finalteam.loadingviewfinal.PtrFrameLayout frame) {
-                downloadData(1);
+                currenPage=1;
+                downloadData(currenPage);
             }
         });
         news_lv.setOnLoadMoreListener(new OnLoadMoreListener() {

@@ -34,8 +34,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-import static com.stx.xhb.dmgameapp.R.id.iv;
-
 /**
  * 游戏详情界面
  */
@@ -215,7 +213,7 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                 .withText(description)
                 .withTitle(title)
                 .withTargetUrl(arcurl)
-                .withMedia(new UMImage(this,R.drawable.app))
+                .withMedia(new UMImage(this,R.mipmap.ic_logo))
                 .setListenerList(new UMShareListener() {
                     @Override
                     public void onResult(SHARE_MEDIA share_media) {

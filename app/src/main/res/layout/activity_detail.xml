@@ -36,13 +36,14 @@
         app:spb_progressiveStart_speed="1.5"
         app:spb_progressiveStop_speed="3.4"
         android:layout_height="2dp" />
+
     <com.tencent.smtt.sdk.WebView
         android:id="@+id/coment_web"
         android:layout_below="@id/web_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:scrollbars="none"></com.tencent.smtt.sdk.WebView>
+        android:scrollbars="none"/>
 
     <com.software.shell.fab.ActionButton
         android:id="@+id/action_button"

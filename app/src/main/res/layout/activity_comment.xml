@@ -60,7 +60,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:drawableLeft="@drawable/night_biz_tie_comment_reply_write"
-            android:background="@drawable/btn_bg"
+            android:background="@drawable/shape_btn_bg_white"
             android:hint="尽情吐槽吧~~~"
             android:textColor="@color/colorBlack"
             android:singleLine="true" />
@@ -73,7 +73,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:textColor="@color/colorWhite"
-            android:background="@drawable/btn_commit"
+            android:background="@drawable/shape_btn_commit_red"
             android:text="评论" />
     </LinearLayout>
 </LinearLayout>
