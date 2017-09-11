@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.stx.xhb.dmgameapp.fragment.GameFragment">
+    tools:context="com.stx.xhb.dmgameapp.fragment.MyFragment">
 
     <!-- 标题 -->
     <include layout="@layout/title_layout"/>

@@ -19,7 +19,7 @@ import com.iflytek.autoupdate.UpdateType;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.fragment.ArticleFragment;
 import com.stx.xhb.dmgameapp.fragment.ForumFragment;
-import com.stx.xhb.dmgameapp.fragment.GameFragment;
+import com.stx.xhb.dmgameapp.fragment.MyFragment;
 import com.stx.xhb.dmgameapp.fragment.VideoFragment;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         ArticleFragment airticle_fragemnt = new ArticleFragment();
         ForumFragment forum_Fragment = new ForumFragment();
-        GameFragment game_Fragment = new GameFragment();
+        MyFragment game_Fragment = new MyFragment();
         VideoFragment video_Fragment = new VideoFragment();
         fragemnts.add(airticle_fragemnt);//文章
         fragemnts.add(video_Fragment);//视频
