@@ -16,4 +16,5 @@
     <color name="color_888888">#888888</color>
     <!--分割线-->
     <color name="common_line">#ededed</color>
+    <color name="color_f3f3f3">#f3f3f3</color>
 </resources>

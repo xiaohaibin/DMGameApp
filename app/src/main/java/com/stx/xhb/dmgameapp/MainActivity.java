@@ -10,13 +10,13 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
-import com.stx.xhb.dmgameapp.fragment.ArticleFragment;
-import com.stx.xhb.dmgameapp.fragment.ForumFragment;
-import com.stx.xhb.dmgameapp.fragment.MyFragment;
-import com.stx.xhb.dmgameapp.fragment.VideoFragment;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
-import com.stx.xhb.dmgameapp.view.TipsToast;
+import com.stx.xhb.dmgameapp.main.ArticleFragment;
+import com.stx.xhb.dmgameapp.main.ForumFragment;
+import com.stx.xhb.dmgameapp.main.MyFragment;
+import com.stx.xhb.dmgameapp.main.VideoFragment;
+import com.stx.xhb.dmgameapp.widget.TipsToast;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package com.stx.xhb.dmgameapp.utils;
 import android.text.TextUtils;
 
 import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,39 +107,6 @@ public class JsonUtils {
     }
 
     /**
-     * 游戏列表json解析
-     *
-     * @param json
-     * @return
-     */
-    public static List<GameListEntity> parseGameJson(String json) {
-        List<GameListEntity> list = new ArrayList<>();
-        try {
-            JSONObject object = new JSONObject(removeBOM(json));
-            JSONObject data = (JSONObject) object.get("data");
-            for (int index = 0; index < data.length(); index++) {
-                //根据键值对来进行json解析
-                JSONObject jsonObject = (JSONObject) data.get(index + "");
-                String id = jsonObject.getString("id");
-                String typeid = jsonObject.getString("typeid");
-                String title = jsonObject.getString("title");
-                String senddate = jsonObject.getString("senddate");
-                String litpic = jsonObject.getString("litpic");
-                String arcurl = jsonObject.getString("arcurl");
-                String keywords = jsonObject.getString("keywords");
-                String description = jsonObject.getString("description");
-                String typename = jsonObject.getString("typename");
-                String language = jsonObject.getString("language");
-                GameListEntity gameListEntity = new GameListEntity(id, typeid, title, litpic, senddate, keywords, description, typename, language, arcurl);
-                list.add(gameListEntity);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    /**
      * 异常信息：org.json.JSONException: Value ﻿ of type java.lang.String cannot be converted to JSONObject
      * json串头部出现字符："\ufeff" 解决方法
      * @param data
@@ -150,7 +116,6 @@ public class JsonUtils {
         if (TextUtils.isEmpty(data)) {
             return data;
         }
-
         if (data.startsWith("\ufeff")) {
             return data.substring(1);
         } else {

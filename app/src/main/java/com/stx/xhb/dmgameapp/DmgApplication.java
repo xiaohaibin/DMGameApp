@@ -1,6 +1,5 @@
 package com.stx.xhb.dmgameapp;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
@@ -9,6 +8,8 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.stx.core.base.BaseApplication;
+import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.umeng.analytics.MobclickAgent;
@@ -27,12 +28,16 @@ import okhttp3.OkHttpClient;
  * Created by xhb on 2016/1/19.
  * 程序主入口，当程序启动的时候，会调用这个方法
  */
-public class DmgApplication extends Application {
+public class DmgApplication extends BaseApplication {
+
     @Override
     public void onCreate() {
         super.onCreate();
+
         //初始化Toast
         ToastManager.instance.init(this);
+        //用户数据初始化
+        AppUser.init();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("==3dm=="))
@@ -109,4 +114,5 @@ public class DmgApplication extends Application {
         Beta.canShowUpgradeActs.add(MainActivity.class);
         Bugly.init(getApplicationContext(), "1105172050", false);
     }
+
 }

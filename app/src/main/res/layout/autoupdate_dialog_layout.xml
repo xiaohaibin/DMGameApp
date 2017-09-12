@@ -9,15 +9,13 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#e9eaed"
-            android:padding="7dp"
-            >
+            android:padding="7dp">
 
             <ImageView
                 android:id="@+id/update_image"
@@ -26,8 +24,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/iflytek_dialog_image"
-                />
+                android:src="@drawable/iflytek_dialog_image"/>
 
             <TextView
                 android:id="@+id/iflytek_update_title"
@@ -37,8 +34,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/update_image"
                 android:textAppearance="?android:attr/textAppearanceMediumInverse"
-                android:textColor="#494c53"
-                />
+                android:textColor="#494c53"/>
         </RelativeLayout>
 
         <ScrollView

@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.stx.core.utils.AppUtils;
+import com.stx.core.utils.CacheManager;
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.utils.AppUtils;
-import com.stx.xhb.dmgameapp.utils.CacheManager;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;

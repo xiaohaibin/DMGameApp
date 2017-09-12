@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标题颜色-->
+    <color name="common_title">#1c1c1c</color>
+    <color name="color_888888">#888888</color>
+    <!--分割线-->
+    <color name="common_line">#ededed</color>
+    <!--页面背景颜色-->
+    <color name="common_background">#f3f3f3</color>
+</resources>

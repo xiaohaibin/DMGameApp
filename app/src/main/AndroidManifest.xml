@@ -66,11 +66,6 @@
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <activity
-            android:name=".activity.GameDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
-
-        <activity
             android:name=".activity.VideoDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
@@ -86,13 +81,6 @@
             android:name=".activity.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
-
-        <!-- 注册广播 -->
-        <receiver android:name=".receiver.NetStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
 
         <receiver android:name=".receiver.BootCompletedReceiver">
             <intent-filter>

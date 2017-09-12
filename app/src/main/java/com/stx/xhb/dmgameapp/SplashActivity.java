@@ -33,7 +33,7 @@ public class SplashActivity extends Activity implements SplashADListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_spalsh);
         ll_ad = (LinearLayout) findViewById(R.id.ll_ad);
         SplashAD splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,3000);
     }

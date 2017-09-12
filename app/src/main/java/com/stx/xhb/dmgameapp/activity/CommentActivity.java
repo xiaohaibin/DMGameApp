@@ -18,15 +18,15 @@ import android.widget.EditText;
 
 import com.classic.common.MultipleStatusView;
 import com.google.gson.Gson;
+import com.stx.core.utils.NetUtils;
+import com.stx.core.utils.SoftKeyBoardUtils;
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.CommentListviewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterCommentEntity;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.NetUtils;
-import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;

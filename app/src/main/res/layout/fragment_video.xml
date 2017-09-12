@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.stx.xhb.dmgameapp.fragment.VideoFragment">
+              tools:context="com.stx.xhb.dmgameapp.main.VideoFragment">
 
     <!-- 标题 -->
     <include layout="@layout/title_layout"/>

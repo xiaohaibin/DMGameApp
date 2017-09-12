@@ -10,13 +10,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.google.gson.Gson;
+import com.stx.core.utils.DateUtils;
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.DetailEntity;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.utils.API;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -202,7 +202,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
                 return true;
             }
         }
-        return false;
+        return super.onKeyDown(keyCode, event);
 
     }
 

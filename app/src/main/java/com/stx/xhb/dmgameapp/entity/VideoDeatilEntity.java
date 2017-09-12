@@ -5,7 +5,6 @@ package com.stx.xhb.dmgameapp.entity;
  */
 public class VideoDeatilEntity {
 
-
     /**
      * id : 3544505
      * typeid : 180

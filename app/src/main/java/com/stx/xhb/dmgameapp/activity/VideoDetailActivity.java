@@ -17,14 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.stx.core.utils.DateUtils;
+import com.stx.core.utils.SoftKeyBoardUtils;
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.VideoDeatilEntity;
 import com.stx.xhb.dmgameapp.utils.API;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
-import com.stx.xhb.dmgameapp.utils.SoftKeyBoardUtils;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -196,21 +196,28 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
 
     }
     //改写物理按键——返回的逻辑
+    //改写物理按键——返回的逻辑
     //返回无效是重定向的原因
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (comment_web!=null&&comment_web.canGoBack()){
-                comment_web.canGoBack();
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_BACK && comment_web.canGoBack()) {
+                goBack();
                 return true;
-            }else {
-                return super.onKeyDown(keyCode, event);
             }
         }
         return super.onKeyDown(keyCode, event);
-
     }
+
+
+    private void goBack() {
+        if (comment_web != null && comment_web.canGoBack()) {
+            comment_web.goBack();
+        } else {
+            finish();
+        }
+    }
+
     //关闭进度对话框
     private void closeDialog() {
         if (dialog != null && dialog.isShowing()) {

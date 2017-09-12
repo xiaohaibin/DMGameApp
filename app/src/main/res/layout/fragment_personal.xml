@@ -1,7 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/user_head"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_user_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/ic_logo"
+            app:civ_border_color="#fcfcfc"
+            app:civ_border_width="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="登录/注册"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:drawableTop="@drawable/user_collect"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="收藏"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/divider"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:drawableTop="@drawable/user_information"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="消息"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/color_f3f3f3"/>
+
+    <com.stx.core.widget.LabelIndicatorView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:foreground="?selectableItemBackground"
+        app:label_Indicator="@drawable/img_cmmon_next"
+        app:label_title="设置"/>
+
+    <include layout="@layout/layout_divider_panding"/>
+
+    <com.stx.core.widget.LabelIndicatorView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:visibility="visible"
+        android:background="@color/colorWhite"
+        android:foreground="?selectableItemBackground"
+        app:label_Indicator="@drawable/img_cmmon_next"
+        app:label_title="关于"/>
 </LinearLayout>

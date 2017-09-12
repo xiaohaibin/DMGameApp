@@ -8,8 +8,8 @@ package com.stx.xhb.dmgameapp.entity;
  * Describe：
  */
 public class ContentEntity {
-        private String appid;
-        private int page;
+    private String appid;
+    private int page;
 
     public ContentEntity(String appid, int page) {
         this.appid = appid;

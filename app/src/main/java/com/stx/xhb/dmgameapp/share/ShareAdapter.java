@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.stx.core.base.BaseAdapter;
+import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.base.BaseAdapter;
-import com.stx.xhb.dmgameapp.utils.ScreenUtil;
 
 
 /**

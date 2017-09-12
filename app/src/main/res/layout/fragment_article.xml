@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
-              tools:context="com.stx.xhb.dmgameapp.fragment.ArticleFragment">
+              tools:context="com.stx.xhb.dmgameapp.main.ArticleFragment">
 
     <!-- 标题 -->
     <include layout="@layout/title_layout"/>

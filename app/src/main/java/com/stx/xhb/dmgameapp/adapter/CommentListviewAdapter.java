@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ChapterCommentEntity;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
 
 import java.util.List;
 

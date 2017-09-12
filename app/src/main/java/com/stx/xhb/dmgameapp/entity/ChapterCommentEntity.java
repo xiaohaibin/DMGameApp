@@ -95,45 +95,11 @@ public class ChapterCommentEntity {
             private String total;
             private int totalpage;
 
-            public String getN() {
-                return n;
-            }
-
-            public void setN(String n) {
-                this.n = n;
-            }
 
             public int getSize() {
                 return size;
             }
 
-            public void setSize(int size) {
-                this.size = size;
-            }
-
-            public int getStart() {
-                return start;
-            }
-
-            public void setStart(int start) {
-                this.start = start;
-            }
-
-            public String getTotal() {
-                return total;
-            }
-
-            public void setTotal(String total) {
-                this.total = total;
-            }
-
-            public int getTotalpage() {
-                return totalpage;
-            }
-
-            public void setTotalpage(int totalpage) {
-                this.totalpage = totalpage;
-            }
         }
 
         public static class DataEntity {
@@ -162,161 +128,26 @@ public class ChapterCommentEntity {
                 return id;
             }
 
-            public void setId(String id) {
-                this.id = id;
-            }
-
-            public String getAid() {
-                return aid;
-            }
-
-            public void setAid(String aid) {
-                this.aid = aid;
-            }
-
             public String getTypeid() {
                 return typeid;
-            }
-
-            public void setTypeid(String typeid) {
-                this.typeid = typeid;
             }
 
             public String getUsername() {
                 return username;
             }
 
-            public void setUsername(String username) {
-                this.username = username;
-            }
-
-            public String getIp() {
-                return ip;
-            }
-
-            public void setIp(String ip) {
-                this.ip = ip;
-            }
-
-            public String getIp1() {
-                return ip1;
-            }
-
-            public void setIp1(String ip1) {
-                this.ip1 = ip1;
-            }
-
-            public String getIp2() {
-                return ip2;
-            }
-
-            public void setIp2(String ip2) {
-                this.ip2 = ip2;
-            }
-
-            public String getIscheck() {
-                return ischeck;
-            }
-
-            public void setIscheck(String ischeck) {
-                this.ischeck = ischeck;
-            }
-
             public String getDtime() {
                 return dtime;
-            }
-
-            public void setDtime(String dtime) {
-                this.dtime = dtime;
-            }
-
-            public String getMid() {
-                return mid;
-            }
-
-            public void setMid(String mid) {
-                this.mid = mid;
-            }
-
-            public String getBad() {
-                return bad;
-            }
-
-            public void setBad(String bad) {
-                this.bad = bad;
-            }
-
-            public String getGood() {
-                return good;
-            }
-
-            public void setGood(String good) {
-                this.good = good;
-            }
-
-            public String getFtype() {
-                return ftype;
-            }
-
-            public void setFtype(String ftype) {
-                this.ftype = ftype;
-            }
-
-            public String getFace() {
-                return face;
-            }
-
-            public void setFace(String face) {
-                this.face = face;
             }
 
             public String getMsg() {
                 return msg;
             }
 
-            public void setMsg(String msg) {
-                this.msg = msg;
-            }
-
-            public String getCid() {
-                return cid;
-            }
-
-            public void setCid(String cid) {
-                this.cid = cid;
-            }
-
-            public String getReid() {
-                return reid;
-            }
-
-            public void setReid(String reid) {
-                this.reid = reid;
-            }
-
-            public String getTopid() {
-                return topid;
-            }
-
-            public void setTopid(String topid) {
-                this.topid = topid;
-            }
-
             public String getFloor() {
                 return floor;
             }
 
-            public void setFloor(String floor) {
-                this.floor = floor;
-            }
-
-            public String getReply() {
-                return reply;
-            }
-
-            public void setReply(String reply) {
-                this.reply = reply;
-            }
         }
     }
 }

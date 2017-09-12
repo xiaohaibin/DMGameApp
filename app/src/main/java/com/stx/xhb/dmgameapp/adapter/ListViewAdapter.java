@@ -9,10 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
 import com.stx.xhb.dmgameapp.utils.API;
-import com.stx.xhb.dmgameapp.utils.DateUtils;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ import java.util.List;
  * Listview的自定义适配器
  */
 public class ListViewAdapter extends BaseAdapter {
+
     private Context context;
     private List<ChapterListEntity> mChapterListItemEntities;
     private LayoutInflater mLayoutInflater;

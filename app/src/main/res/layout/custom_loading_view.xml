@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:minHeight="100dp">
-    <com.stx.xhb.dmgameapp.view.LoadingView.LVNews
+    <com.stx.xhb.dmgameapp.widget.LoadingView.LVNews
         android:layout_width="40dp"
         android:layout_height="40dp"/>
     <TextView

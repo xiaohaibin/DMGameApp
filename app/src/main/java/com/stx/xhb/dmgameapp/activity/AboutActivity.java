@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.stx.core.utils.AppUtils;
+import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
-import com.stx.xhb.dmgameapp.utils.AppUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
