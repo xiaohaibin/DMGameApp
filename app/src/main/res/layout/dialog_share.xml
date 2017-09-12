@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="分享到"
+            android:gravity="center"
+            android:textColor="@color/color_1c1c1c"
+            android:textSize="18dp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/share_channel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/common_line" />
+
+    <TextView
+        android:id="@+id/share_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:text="取消分享"
+        android:textColor="@color/color_888888"
+        android:textSize="16dp" />
+
+</LinearLayout>

@@ -1,11 +1,8 @@
 package com.stx.xhb.dmgameapp.activity;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -13,24 +10,18 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.google.gson.Gson;
-import com.software.shell.fab.ActionButton;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.DetailEntity;
+import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.DateUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
-import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.Config;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -56,15 +47,8 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     private String writer;//作者
     private String senddate;//发布时间
     private SmoothProgressBar webProgress;//进度条
-    private ActionButton actionButton;//评论按钮
-
-    final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
-            {
-                    SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
-                    SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
-            };
     private String decode;
-    private String arcurl;
+    private String aurl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,26 +62,26 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         String url = String.format(API.ChapterContent_URL, id, typeid);
 
         OkHttpUtils.get()
-                   .url(url)
-                   .build()
-                   .execute(new StringCallback() {
-                       @Override
-                       public void onError(Call call, Exception e, int id) {
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
 
-                       }
+                    }
 
-                       @Override
-                       public void onResponse(String response, int id) {
-                           //json解析
-                           DetailEntity detailEntity = new Gson().fromJson(JsonUtils.removeBOM(response), DetailEntity.class);
-                           body = detailEntity.getBody();//文章内容
-                           title = detailEntity.getTitle();//文章标题
-                           writer = detailEntity.getWriter();//文章作者
-                           senddate = detailEntity.getSenddate();//文章发布时间
-                           arcurl = detailEntity.getArcurl();
-                           initData();
-                       }
-                   });
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //json解析
+                        DetailEntity detailEntity = new Gson().fromJson(JsonUtils.removeBOM(response), DetailEntity.class);
+                        body = detailEntity.getBody();//文章内容
+                        title = detailEntity.getTitle();//文章标题
+                        writer = detailEntity.getWriter();//文章作者
+                        senddate = detailEntity.getSenddate();//文章发布时间
+                        aurl = detailEntity.getArcurl();
+                        initData();
+                    }
+                });
         initListener();
     }
 
@@ -130,7 +114,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     //获取控件
     private void initView() {
         comment_web = (WebView) findViewById(R.id.coment_web);
-        actionButton = (ActionButton) findViewById(R.id.action_button);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         webProgress = (SmoothProgressBar) findViewById(R.id.web_progress);
         //2.替代
@@ -145,14 +128,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         //设置标题栏字体颜色
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
-        //设置悬浮按钮的背景图片
-        actionButton.setImageResource(R.drawable.note_publish_img_unpressed);//设置按钮资源文件
-        actionButton.setImageSize(65);//设置图片按钮的大小
-        //修改友盟分享对话框
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setMessage("分享中...");
-        Config.dialog = dialog;
-
     }
 
 
@@ -223,7 +198,7 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
 
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             if (keyCode == KeyEvent.KEYCODE_BACK && comment_web.canGoBack()) {
-               goBack();
+                goBack();
                 return true;
             }
         }
@@ -244,19 +219,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     private void initListener() {
         //toolbard的返回按钮事件监听
         toolbar.setNavigationOnClickListener(this);
-        //点击按钮跳转到评论界面
-        actionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ArticleDetailActivity.this, CommentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", id);
-                bundle.putString("typeid", typeid);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-
     }
 
     //toolbar事件监听方法
@@ -269,31 +231,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     //点击分享
     @OnClick(R.id.article_share)
     public void onClick() {
-        new ShareAction(this).setDisplayList(displaylist)
-                .withText(title)
-                .withTitle(title)
-                .withTargetUrl(arcurl)
-                .withMedia(new UMImage(this, R.mipmap.ic_logo))
-                .setListenerList(getUmShareListener(), getUmShareListener()).open();
-    }
-
-    @NonNull
-    private UMShareListener getUmShareListener() {
-        return new UMShareListener() {
-            @Override
-            public void onResult(SHARE_MEDIA share_media) {
-                ToastUtil.showAtCenter(ArticleDetailActivity.this, "分享成功");
-            }
-
-            @Override
-            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                ToastUtil.showAtCenter(ArticleDetailActivity.this, "分享失败");
-            }
-
-            @Override
-            public void onCancel(SHARE_MEDIA share_media) {
-                ToastUtil.showAtCenter(ArticleDetailActivity.this, "取消分享");
-            }
-        };
+        ShareDialog.share(getSupportFragmentManager(), title, aurl, title,"");
     }
 }

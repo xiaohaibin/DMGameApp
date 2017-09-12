@@ -34,9 +34,6 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="umeng_socialize_popup_dialog_anim" parent="@style/umeng_socialize_popup_dialog">
-        <item name="android:windowAnimationStyle">@style/umeng_socialize_dialog_animations</item>
-    </style>
 
     <style name="umeng_socialize_popup_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -49,20 +46,6 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <style name="umeng_socialize_dialog_animations">
-        <item name="android:windowEnterAnimation">@anim/umeng_socialize_slide_in_from_bottom</item>
-        <item name="android:windowExitAnimation">@anim/umeng_socialize_slide_out_from_bottom</item>
-    </style>
-
-    <style name="umeng_socialize_dialog_anim_fade">
-        <item name="android:windowEnterAnimation">@anim/umeng_socialize_fade_in</item>
-        <item name="android:windowExitAnimation">@anim/umeng_socialize_fade_out</item>
-    </style>
-
-    <style name="umeng_socialize_shareboard_animation">
-        <item name="android:windowEnterAnimation">@anim/umeng_socialize_shareboard_animation_in</item>
-        <item name="android:windowExitAnimation">@anim/umeng_socialize_shareboard_animation_out</item>
-    </style>
 
     <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>

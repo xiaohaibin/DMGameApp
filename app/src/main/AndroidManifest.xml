@@ -37,19 +37,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <!--集成腾讯广告联盟  start-->
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".SplashActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -71,30 +71,11 @@
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name="com.qq.e.ads.ADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-        </activity>
-
-        <activity
             android:name=".activity.VideoDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
-
-        <activity
-            android:name="com.tencent.smtt.sdk.VideoActivity"
-            android:alwaysRetainTaskState="true"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:exported="false"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-            <intent-filter>
-                <action android:name="com.tencent.smtt.tbs.video.PLAY"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.SettingActivity"
@@ -106,55 +87,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <activity
-            android:name="com.umeng.socialize.editorpage.ShareActivity"
-            android:excludeFromRecents="true"
-            android:theme="@style/Theme.UMDefault"/>
-
-        <!--微信-->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <!--新浪微博-->
-        <activity
-            android:name=".activity.WBShareActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait">
+        <!-- 注册广播 -->
+        <receiver android:name=".receiver.NetStateReceiver">
             <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
-        </activity>
+        </receiver>
 
-        <activity
-            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
-        <!--QQ qq空间-->
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
+        <receiver android:name=".receiver.BootCompletedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data android:scheme="tencent1105172050"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
-        </activity>
+        </receiver>
 
-        <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!--极光推送相关配置  start-->
 
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
@@ -168,30 +114,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.qq.e.comm.DownloadService"
-            android:exported="false"/>
-
-        <!-- 注册广播 -->
-        <receiver android:name=".receiver.NetStateReceiver">
-            <intent-filter>
-                <!-- 接收网络连接改变广播 -->
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-
-        <!-- 腾讯x5内核 -->
-        <meta-data
-            android:name="QBSDKAppKey"
-            android:value="YiAjQh+SwqZiSVQ2aBE/acQ5"/>
-
-        <receiver android:name=".receiver.BootCompletedReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
-        <!--极光推送相关配置  start-->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
@@ -230,34 +152,84 @@
             android:exported="false">
         </service>
         <receiver android:name="cn.jpush.android.service.AlarmReceiver"/>
+
         <!--极光推送相关配置  end-->
 
-        <!--umeng社会化分享配置-->
+        <!-- 友盟相关配置 -->
+
+        <!-- 微信 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!-- QQ精简版 -->
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1105172050"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <!--友盟key-->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="56de5a6567e58e3e5e000a25">
         </meta-data>
+
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${CHANNEL}"/>
 
-        <!--科大讯飞自动更新-->
-        <meta-data
-            android:name="IFLYTEK_APPKEY"
-            android:value="'57f99c49'"/>
-        <meta-data
-            android:name="IFLYTEK_CHANNEL"
-            android:value="${CHANNEL}"/>
+        <!-- 友盟相关配置 -->
 
-        <activity android:name="com.iflytek.autoupdate.IFlytekUpdateDialog"/>
-        <service android:name="com.iflytek.autoupdate.IFlytekDownloadService"/>
+        <!--腾讯Bugly相关配置-->
 
-        <supports-screens
-            android:anyDensity="true"
-            android:largeScreens="true"
-            android:normalScreens="true"
-            android:resizeable="true"
-            android:smallScreens="true"/>
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+
+        <!--腾讯Bugly相关配置-->
+
+        <!--腾讯广点通配置-->
+
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+        </activity>
+
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false"/>
+
+        <!--腾讯广点通配置-->
+
     </application>
 
 </manifest>

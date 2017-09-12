@@ -207,7 +207,7 @@ public class CommondFragment extends Fragment implements AdapterView.OnItemClick
                       .execute(new StringCallback() {
                           @Override
                           public void onError(Call call, Exception e, int id) {
-                              ToastUtil.showAtCenter(getActivity(), "网络请求失败");
+                              ToastUtil.show("网络请求失败");
                           }
 
                           @Override

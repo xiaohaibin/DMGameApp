@@ -18,6 +18,7 @@
             android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
             android:background="@null"/>
     </android.support.v7.widget.Toolbar>
+
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -44,14 +45,4 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:scrollbars="none"/>
-
-    <com.software.shell.fab.ActionButton
-        android:id="@+id/action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="265dp"
-        android:layout_marginStart="265dp" />
 </RelativeLayout>

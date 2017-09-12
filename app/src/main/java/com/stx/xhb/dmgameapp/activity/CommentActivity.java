@@ -140,7 +140,7 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
             public void onClick(View v) {
                 String commentContent = ed_comment.getText().toString();//获取到输入框中的评论内容
                 if (TextUtils.isEmpty(commentContent)) {
-                    ToastUtil.showAtCenter(CommentActivity.this, "评论内容不能为空！");
+                    ToastUtil.show("评论内容不能为空！");
                     return;
                 }
                 comment_btn.setEnabled(false);
@@ -158,14 +158,14 @@ public class CommentActivity extends ActionBarActivity implements View.OnClickLi
                             if ("1".equals(code)) {
                                 ed_comment.setText("");//评论成功后，清空输入框
                                 SoftKeyBoardUtils.closeSoftInputMethod(CommentActivity.this, ed_comment);
-                                ToastUtil.showAtCenter(CommentActivity.this, "评论成功");
+                                ToastUtil.show("评论成功");
                                 comment_btn.setEnabled(true);
                                 //重新加载数据
                                 downLoad(1);
                             } else {
                                 SoftKeyBoardUtils.closeSoftInputMethod(CommentActivity.this,ed_comment);
                                 comment_btn.setEnabled(true);
-                                ToastUtil.showAtCenter(CommentActivity.this, "评论失败");
+                                ToastUtil.show("评论失败");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

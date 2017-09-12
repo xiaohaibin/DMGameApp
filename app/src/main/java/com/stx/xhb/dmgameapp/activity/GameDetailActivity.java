@@ -22,10 +22,6 @@ import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -73,12 +69,6 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
     private String language;
     private String websit;
     private ProgressDialog pd;//进度对话框
-    final SHARE_MEDIA[] displaylist = new SHARE_MEDIA[]
-            {
-                    SHARE_MEDIA.WEIXIN,SHARE_MEDIA.SINA,
-                    SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE
-            };
-    private String arcurl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +132,7 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        ToastUtil.showShort(GameDetailActivity.this, "游戏详情加载失败");
+                        ToastUtil.show("游戏详情加载失败");
                     }
 
                     @Override
@@ -162,7 +152,6 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
                         terrace = detailEntity.getTerrace();
                         language = detailEntity.getLanguage();
                         websit = detailEntity.getWebsit();
-                        arcurl = detailEntity.getArcurl();
                         tvGameName.setText(title);
                         //游戏封面链接
                         imageURl = API.DMGEAME_URL + litpic;
@@ -209,42 +198,6 @@ public class GameDetailActivity extends ActionBarActivity implements View.OnClic
     }
     @OnClick(R.id.game_share)
     public void onClick() {
-        new ShareAction(this).setDisplayList( displaylist )
-                .withText(description)
-                .withTitle(title)
-                .withTargetUrl(arcurl)
-                .withMedia(new UMImage(this,R.mipmap.ic_logo))
-                .setListenerList(new UMShareListener() {
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                }, new UMShareListener() {
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                })
-                .open();
+        // TODO: 2017/9/11 分享对话框
     }
 }

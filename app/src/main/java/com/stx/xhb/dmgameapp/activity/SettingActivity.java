@@ -5,25 +5,20 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.iflytek.autoupdate.IFlytekUpdate;
-import com.iflytek.autoupdate.IFlytekUpdateListener;
-import com.iflytek.autoupdate.UpdateConstants;
-import com.iflytek.autoupdate.UpdateErrorCode;
-import com.iflytek.autoupdate.UpdateInfo;
-import com.iflytek.autoupdate.UpdateType;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.utils.AppUtils;
 import com.stx.xhb.dmgameapp.utils.CacheManager;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
-import com.stx.xhb.dmgameapp.utils.AppUtils;
+import com.tencent.bugly.beta.Beta;
+import com.tencent.bugly.beta.UpgradeInfo;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
@@ -41,8 +36,9 @@ public class SettingActivity extends AppCompatActivity {
     TextView version;
     @Bind(R.id.tv_cache)
     TextView mTvCache;
-    private IFlytekUpdate mUpdManager;
-    private Toast mToast;
+    @Bind(R.id.tv_version)
+    TextView mTvVersion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,16 +66,28 @@ public class SettingActivity extends AppCompatActivity {
     private void initView() {
         version.setText(AppUtils.getVersion(this));
         setSupportActionBar(settingToolbar);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
-        //设置显示返回上一级的图标
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //设置标题
-        getSupportActionBar().setTitle("设置");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null) {
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
+            //设置显示返回上一级的图标
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //设置标题
+            actionBar.setTitle("设置");
+        }
         //设置标题栏字体颜色
         settingToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
         settingToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
         mTvCache.setText(CacheManager.getTotalCacheSize(this));
-        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+
+        /***** 获取升级信息 *****/
+        UpgradeInfo upgradeInfo = Beta.getUpgradeInfo();
+        if (upgradeInfo == null) {
+            mTvVersion.setTextColor(getResources().getColor(R.color.color_888888));
+            mTvVersion.setText(" 已是最新版本");
+        } else {
+            mTvVersion.setTextColor(getResources().getColor(R.color.colorPrimary));
+            mTvVersion.setText("有新版本，点击立即更新");
+        }
     }
 
     //点击事件
@@ -88,15 +96,15 @@ public class SettingActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.setting_iv_clearCache://清理缓存
                 if ("0 KB".equals(CacheManager.getTotalCacheSize(this))) {
-                    ToastUtil.showAtCenter(SettingActivity.this, "暂无缓存");
+                    ToastUtil.show("暂无缓存");
                 } else {
                     CacheManager.clearAllCache(this);
                     mTvCache.setText(CacheManager.getTotalCacheSize(this));
-                    ToastUtil.showAtCenter(SettingActivity.this, "缓存清理成功");
+                    ToastUtil.show("缓存清理成功");
                 }
                 break;
             case R.id.setting_iv_version://版本更新
-                checkUpdate();
+                Beta.checkUpgrade();//检查更新
                 break;
             case R.id.setting_iv_heart://评分
                 Uri uri = Uri.parse("http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp");
@@ -141,41 +149,6 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void checkUpdate() {
-        //初始化自动更新对象
-        mUpdManager = IFlytekUpdate.getInstance(this);
-        //开启调试模式，默认不开启
-        mUpdManager.setDebugMode(true);
-        //开启wifi环境下检测更新，仅对自动更新有效，强制更新则生效
-        mUpdManager.setParameter(UpdateConstants.EXTRA_WIFIONLY, "true");
-        //设置通知栏使用应用icon，详情请见示例
-        mUpdManager.setParameter(UpdateConstants.EXTRA_NOTI_ICON, "true");
-        //设置更新提示类型，默认为通知栏提示
-        mUpdManager.setParameter(UpdateConstants.EXTRA_STYLE, UpdateConstants.UPDATE_UI_DIALOG);
-        // 启动自动更新
-        mUpdManager.autoUpdate(SettingActivity.this, new IFlytekUpdateListener() {
-            @Override
-            public void onResult(int errorcode, UpdateInfo result) {
-                Log.i("----result", result.getUpdateType() + "");
-                if (UpdateErrorCode.OK == errorcode && null != result) {
-                    if (UpdateType.NoNeed == result.getUpdateType()) {
-                        showTip("已经是最新版本!");
-                        return;
-                    }
-                    mUpdManager.showUpdateInfo(SettingActivity.this, result);
-                } else {
-                    showTip("请求更新失败\n更新错误码：" + errorcode);
-                }
-            }
-        });
-    }
 
-    private void showTip(final String str) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mToast.setText(str);
-                mToast.show();
-            }
-        });
     }
 }

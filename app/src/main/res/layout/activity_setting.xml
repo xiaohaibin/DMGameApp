@@ -1,60 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.stx.xhb.dmgameapp.activity.SettingActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.stx.xhb.dmgameapp.activity.SettingActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/setting_toolbar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ToolbarTheme"
-        android:layout_height="wrap_content">
+        app:theme="@style/ToolbarTheme">
     </android.support.v7.widget.Toolbar>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGray"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:background="@drawable/biz_read_subscription_source_list_header_bg"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/biz_read_subscription_source_list_header_bg">
+        android:orientation="vertical">
+
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_marginTop="15dp"
             android:id="@+id/user_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:clickable="true"
             android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
             android:src="@mipmap/ic_logo"
             app:civ_border_color="#fcfcfc"
-            app:civ_border_width="2dp" />
+            app:civ_border_width="2dp"/>
+
         <TextView
             android:id="@+id/version"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text=""/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorWhite"/>
+
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/setting_iv_clearCache"
         android:layout_width="match_parent"
-        android:padding="15dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/selector_trans_divider"
-        android:layout_height="wrap_content">
+        android:padding="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:text="清除缓存"
             android:textColor="#000000"
-            android:text="清除缓存"/>
+            android:textSize="15sp"/>
 
         <ImageView
             android:id="@+id/iv_right"
@@ -62,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/app_ic_goto"/>
+
         <TextView
             android:id="@+id/tv_cache"
             android:layout_width="wrap_content"
@@ -69,74 +76,90 @@
             android:layout_toLeftOf="@id/iv_right"
             android:text="0kb"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGray"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"/>
+
     <RelativeLayout
         android:id="@+id/setting_iv_version"
         android:layout_width="match_parent"
-        android:padding="15dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/selector_trans_divider"
-        android:layout_height="wrap_content">
+        android:padding="15dp">
+
         <TextView
+            android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:text="检查更新"
             android:textColor="#000000"
-            android:text="检查更新"/>
+            android:textSize="15sp"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/app_ic_goto"/>
+
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGray"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"/>
+
     <RelativeLayout
         android:id="@+id/setting_iv_heart"
         android:layout_width="match_parent"
-        android:padding="15dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/selector_trans_divider"
-        android:layout_height="wrap_content">
+        android:padding="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:text="给我评分"
             android:textColor="#000000"
-            android:text="给我评分"/>
+            android:textSize="15sp"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/app_ic_goto"/>
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGray"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"/>
+
     <RelativeLayout
         android:id="@+id/setting_iv_about"
         android:layout_width="match_parent"
-        android:padding="15dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/selector_trans_divider"
-        android:layout_height="wrap_content">
+        android:padding="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:text="关于"
             android:textColor="#000000"
-            android:text="关于"/>
+            android:textSize="15sp"/>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/app_ic_goto"/>
+
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
-        android:background="@color/colorGray"
-        android:layout_height="0.5dp"/>
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"/>
 </LinearLayout>

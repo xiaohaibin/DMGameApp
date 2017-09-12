@@ -54,7 +54,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
-    compile 'com.github.shell-software:fab:1.1.2'
     //圆角图片
     compile 'de.hdodenhof:circleimageview:2.0.0'
     //多状态视图
@@ -70,5 +69,9 @@ dependencies {
     //极光推送
     compile 'cn.jiguang:jpush:2.1.9'
     compile 'com.android.support:multidex:1.0.1'
+    //友盟统计
     compile 'com.umeng.analytics:analytics:latest.integration'
+    //bugly
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
 }

@@ -79,7 +79,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        ToastUtil.showShort(VideoDetailActivity.this,"加载失败");
+                        ToastUtil.show("加载失败");
                     }
 
                     @Override
@@ -241,7 +241,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
             public void onClick(View v) {
                 String commentContent = ed_comment.getText().toString();//获取到输入框中的评论内容
                 if (TextUtils.isEmpty(commentContent)) {
-                    ToastUtil.showAtCenter(VideoDetailActivity.this, "评论内容不能为空！");
+                    ToastUtil.show("评论内容不能为空！");
                     return;
                 }
                 final Map<String, String> params = new HashMap<String, String>();
@@ -258,10 +258,10 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
                             if ("1".equals(code)) {
                                 ed_comment.setText("");//清空输入框
                                 SoftKeyBoardUtils.closeSoftInputMethod(VideoDetailActivity.this, ed_comment);
-                                ToastUtil.showAtCenter(VideoDetailActivity.this, "评论成功");
+                                ToastUtil.show("评论成功");
                             } else {
                                 SoftKeyBoardUtils.closeSoftInputMethod(VideoDetailActivity.this, ed_comment);
-                                ToastUtil.showAtCenter(VideoDetailActivity.this, "评论失败");
+                                ToastUtil.show("评论失败");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

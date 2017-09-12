@@ -10,19 +10,12 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.iflytek.autoupdate.IFlytekUpdate;
-import com.iflytek.autoupdate.IFlytekUpdateListener;
-import com.iflytek.autoupdate.UpdateConstants;
-import com.iflytek.autoupdate.UpdateErrorCode;
-import com.iflytek.autoupdate.UpdateInfo;
-import com.iflytek.autoupdate.UpdateType;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.fragment.ArticleFragment;
 import com.stx.xhb.dmgameapp.fragment.ForumFragment;
 import com.stx.xhb.dmgameapp.fragment.MyFragment;
 import com.stx.xhb.dmgameapp.fragment.VideoFragment;
 import com.stx.xhb.dmgameapp.utils.SystemBarTintManager;
-import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.view.TipsToast;
 import com.umeng.analytics.MobclickAgent;
 
@@ -37,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private TipsToast tipsToast;
     //退出时间
     private long exitTime = 0;
-    private IFlytekUpdate mUpdManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,34 +40,6 @@ public class MainActivity extends AppCompatActivity {
         initData();
         setAdapter();
         setListener();
-        checkUpdate();
-    }
-
-    private void checkUpdate() {
-        //初始化自动更新对象
-        mUpdManager = IFlytekUpdate.getInstance(this);
-        //开启调试模式，默认不开启
-        mUpdManager.setDebugMode(true);
-        //开启wifi环境下检测更新，仅对自动更新有效，强制更新则生效
-        mUpdManager.setParameter(UpdateConstants.EXTRA_WIFIONLY, "true");
-        //设置通知栏使用应用icon，详情请见示例
-        mUpdManager.setParameter(UpdateConstants.EXTRA_NOTI_ICON, "true");
-        //设置更新提示类型，默认为通知栏提示
-        mUpdManager.setParameter(UpdateConstants.EXTRA_STYLE, UpdateConstants.UPDATE_UI_DIALOG);
-        // 启动自动更新
-        mUpdManager.autoUpdate(MainActivity.this, new IFlytekUpdateListener() {
-            @Override
-            public void onResult(int errorcode, UpdateInfo result) {
-                if (errorcode == UpdateErrorCode.OK) {
-                    if (result.getUpdateType() == UpdateType.NoNeed) {
-                        return;
-                    }
-                    mUpdManager.showUpdateInfo(MainActivity.this, result);
-                } else {
-                    ToastUtil.showShort(MainActivity.this, "请求更新失败\n更新错误码：" + errorcode);
-                }
-            }
-        });
     }
 
 
