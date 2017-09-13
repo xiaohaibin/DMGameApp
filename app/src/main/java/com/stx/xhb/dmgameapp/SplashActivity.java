@@ -1,9 +1,9 @@
 package com.stx.xhb.dmgameapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -16,8 +16,9 @@ import com.umeng.analytics.MobclickAgent;
 /**
  * 启动页
  */
-public class SplashActivity extends Activity implements SplashADListener{
+public class SplashActivity extends AppCompatActivity implements SplashADListener{
     private LinearLayout ll_ad;
+
     @Override
     protected void onPause() {
         super.onPause();

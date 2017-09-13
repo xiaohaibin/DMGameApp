@@ -19,6 +19,7 @@ import java.util.List;
  * Listview的自定义适配器
  */
 public class NewsListAdapter extends BaseAdapter {
+
     private Context mContext;
     private List<NewsListEntity.ChannelEntity.HtmlEntity> mChapterListItemEntities;
     private LayoutInflater mLayoutInflater;

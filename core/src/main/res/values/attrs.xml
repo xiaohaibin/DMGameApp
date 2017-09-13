@@ -6,4 +6,10 @@
         <attr name="label_tips" format="string"/>
         <attr name="label_Indicator" format="reference"/>
     </declare-styleable>
+
+    <!--自定义隐藏/显示密码的的EditText-->
+    <declare-styleable name="HidePwEditText">
+        <attr name="hideDrawable" format="reference"/>
+        <attr name="showDrawable" format="reference"/>
+    </declare-styleable>
 </resources>

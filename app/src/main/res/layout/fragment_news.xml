@@ -4,36 +4,32 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".fragment.innerFragments.NewsFragment">
+              tools:context=".fragment.NewsFragment">
 
-    <FrameLayout
+
+    <cn.finalteam.loadingviewfinal.PtrClassicFrameLayout
+        android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <cn.finalteam.loadingviewfinal.PtrClassicFrameLayout
-            android:id="@+id/ptr_layout"
+        <com.classic.common.MultipleStatusView
+            android:id="@+id/multiplestatusview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:emptyView="@layout/custom_empty_view"
+            app:errorView="@layout/custom_error_view"
+            app:loadingView="@layout/custom_loading_view"
+            app:noNetworkView="@layout/custom_no_network_view">
 
-            <com.classic.common.MultipleStatusView
-                android:id="@+id/multiplestatusview"
+            <cn.finalteam.loadingviewfinal.ListViewFinal
+                android:id="@+id/content_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                app:emptyView="@layout/custom_empty_view"
-                app:errorView="@layout/custom_error_view"
-                app:loadingView="@layout/custom_loading_view"
-                app:noNetworkView="@layout/custom_no_network_view">
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:focusable="false"
+                android:scrollbars="none"/>
 
-                <cn.finalteam.loadingviewfinal.ListViewFinal
-                    android:id="@+id/content_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:divider="@null"
-                    android:focusable="false"
-                    android:scrollbars="none"/>
-
-            </com.classic.common.MultipleStatusView>
-        </cn.finalteam.loadingviewfinal.PtrClassicFrameLayout>
-    </FrameLayout>
+        </com.classic.common.MultipleStatusView>
+    </cn.finalteam.loadingviewfinal.PtrClassicFrameLayout>
 </LinearLayout>

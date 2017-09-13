@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
-import com.stx.xhb.dmgameapp.fragment.CommondFragment;
+import com.stx.xhb.dmgameapp.fragment.CommonFragment;
 import com.stx.xhb.dmgameapp.fragment.NewsFragment;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class ArticleFragment extends Fragment {
         fragments.add(newsFragment);
         //循环创建7个子fragment
         for (int i = 0; i < TYPE_ID.length; i++) {
-            CommondFragment fragment = new CommondFragment();//杂谈
+            CommonFragment fragment = new CommonFragment();//杂谈
             Bundle bundle = new Bundle();
             bundle.putInt("typeid", TYPE_ID[i]);
             fragment.setArguments(bundle);

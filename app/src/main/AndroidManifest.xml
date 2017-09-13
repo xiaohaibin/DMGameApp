@@ -38,11 +38,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
+        <!--主页面-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
+        <!--启动页-->
         <activity
             android:name=".SplashActivity"
             android:launchMode="singleTop"
@@ -54,17 +56,13 @@
             </intent-filter>
         </activity>
 
+        <!--文章详情-->
         <activity
             android:name=".activity.ArticleDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <activity
-            android:name=".activity.CommentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-
+        <!--视频详情-->
         <activity
             android:name=".activity.VideoDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
@@ -72,13 +70,27 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!--设置页面-->
         <activity
             android:name=".activity.SettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
+        <!--关于页面-->
         <activity
             android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--登录页面-->
+        <activity
+            android:name=".user.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--注册页面-->
+        <activity
+            android:name=".user.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
@@ -190,7 +202,7 @@
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

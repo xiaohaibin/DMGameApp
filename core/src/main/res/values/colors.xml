@@ -2,9 +2,11 @@
 <resources>
     <!--标题颜色-->
     <color name="common_title">#1c1c1c</color>
+    <color name="common_main">#FF6347</color>
     <color name="color_888888">#888888</color>
     <!--分割线-->
     <color name="common_line">#ededed</color>
     <!--页面背景颜色-->
     <color name="common_background">#f3f3f3</color>
+    <color name="colorWhite">#ffffff</color>
 </resources>

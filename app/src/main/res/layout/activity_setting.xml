@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:theme="@style/ToolbarTheme">
-    </android.support.v7.widget.Toolbar>
+        app:theme="@style/ToolbarTheme"/>
 
     <View
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <com.github.siyamed.shapeimageview.CircularImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/user_image"
             android:layout_width="70dp"
@@ -36,8 +35,8 @@
             android:layout_marginTop="15dp"
             android:clickable="true"
             android:src="@mipmap/ic_logo"
-            app:civ_border_color="#fcfcfc"
-            app:civ_border_width="2dp"/>
+            app:siBorderColor="#fcfcfc"
+            app:siBorderWidth="2dp"/>
 
         <TextView
             android:id="@+id/version"

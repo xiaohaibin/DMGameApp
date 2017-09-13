@@ -12,7 +12,7 @@
         android:gravity="center"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:textColor="@color/common_title"
+        android:textColor="@color/color_888888"
         android:textSize="16dp"/>
 
     <LinearLayout

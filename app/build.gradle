@@ -55,7 +55,6 @@ dependencies {
     compile 'com.xhb:xbanner:1.3.0'
     //极光推送
     compile 'cn.jiguang:jpush:2.1.9'
-    compile 'com.android.support:multidex:1.0.1'
     //友盟统计
     compile 'com.umeng.analytics:analytics:latest.integration'
     //bugly

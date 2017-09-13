@@ -1,56 +1,39 @@
 package com.stx.xhb.dmgameapp.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.stx.core.utils.DateUtils;
-import com.stx.core.utils.SoftKeyBoardUtils;
-import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.entity.VideoDeatilEntity;
 import com.stx.xhb.dmgameapp.utils.API;
-import com.stx.xhb.dmgameapp.utils.HttpUtils;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 
 /**
  * 视频详情界面
  */
-public class VideoDetailActivity extends ActionBarActivity implements View.OnClickListener {
+public class VideoDetailActivity extends BaseAppActitity implements View.OnClickListener {
+
     private WebView comment_web;
-    private EditText ed_comment;
-    private Button comment_btn;
     private ProgressDialog dialog;
     private Toolbar toolbar;
     private String body;
@@ -63,10 +46,9 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSatusBar();
         setContentView(R.layout.activity_video_detail);
-        ////网页中的视频，上屏幕的时候，可能出现闪烁的情况，需要如下设置：Activity在onCreate时需要设置:
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        initWindow();
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
@@ -96,42 +78,16 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         initListener();
     }
 
-    //初始化窗体布局
-    private void initWindow() {
-        SystemBarTintManager tintManager;
-        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
-            tintManager.setStatusBarTintEnabled(true);
-        }
-    }
-
     //获取控件
     private void initView() {
         comment_web = (WebView) findViewById(R.id.coment_web);
-        ed_comment = (EditText) findViewById(R.id.ed_comment);
-        comment_btn = (Button) findViewById(R.id.comment_btn);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //2.替代
-        setSupportActionBar(toolbar);
-        //加载背景颜色
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
-        //设置显示返回上一级的图标
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //设置标题
-        getSupportActionBar().setTitle("视频详情");
-        //设置标题栏字体颜色
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
-
+        initToolBar(toolbar, "视频详情");
     }
 
     //初始化数据
     private void initData() {
-        comment_web.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+        comment_web.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         comment_web.setDrawingCacheEnabled(true);
         //启用支持javascript
         WebSettings settings = comment_web.getSettings();
@@ -195,6 +151,7 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
         }
 
     }
+
     //改写物理按键——返回的逻辑
     //改写物理按键——返回的逻辑
     //返回无效是重定向的原因
@@ -240,70 +197,12 @@ public class VideoDetailActivity extends ActionBarActivity implements View.OnCli
 
     //设置事件监听
     private void initListener() {
-        //toolbard的返回按钮事件监听
         toolbar.setNavigationOnClickListener(this);
-        //评论提交按钮
-        comment_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String commentContent = ed_comment.getText().toString();//获取到输入框中的评论内容
-                if (TextUtils.isEmpty(commentContent)) {
-                    ToastUtil.show("评论内容不能为空！");
-                    return;
-                }
-                final Map<String, String> params = new HashMap<String, String>();
-                params.put("aid", id);
-                params.put("msg", commentContent);
-                HttpUtils.submitPostData(params, "utf-8", new HttpUtils.OnFetchResponseListener() {
-                    @Override
-                    public void OnFechResponse(String reponse) {
-                        Log.i("responseResult====>", reponse);
-                        //json解析，获取到响应状态码
-                        try {
-                            JSONObject object = new JSONObject(reponse);
-                            String code = object.getString("code");//响应状态码
-                            if ("1".equals(code)) {
-                                ed_comment.setText("");//清空输入框
-                                SoftKeyBoardUtils.closeSoftInputMethod(VideoDetailActivity.this, ed_comment);
-                                ToastUtil.show("评论成功");
-                            } else {
-                                SoftKeyBoardUtils.closeSoftInputMethod(VideoDetailActivity.this, ed_comment);
-                                ToastUtil.show("评论失败");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
-
-                Intent intent = new Intent(VideoDetailActivity.this, CommentActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", id);
-                bundle.putString("typeid", typeid);
-                intent.putExtras(bundle);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-            }
-        });
     }
 
-    //toolbar的事件监听
     @Override
     public void onClick(View v) {
         //返回上一页
         finish();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onResume(this);       //统计时长
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onPause(this);
     }
 }

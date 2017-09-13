@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
-import com.stx.xhb.dmgameapp.fragment.CommondFragment;
+import com.stx.xhb.dmgameapp.fragment.CommonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class VideoFragment extends Fragment {
     private void initData() {
         //循环创建11个Fragment
         for (int i = 0; i < TYPE_ID.length; i++) {
-            CommondFragment fragment = new CommondFragment();
+            CommonFragment fragment = new CommonFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("typeid", TYPE_ID[i]);
             fragment.setArguments(bundle);

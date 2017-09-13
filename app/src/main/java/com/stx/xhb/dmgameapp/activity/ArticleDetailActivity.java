@@ -1,18 +1,14 @@
 package com.stx.xhb.dmgameapp.activity;
 
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.google.gson.Gson;
 import com.stx.core.utils.DateUtils;
-import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.entity.DetailEntity;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.utils.API;
@@ -21,7 +17,6 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -36,7 +31,7 @@ import okhttp3.Call;
 /**
  * 文章详情界面
  */
-public class ArticleDetailActivity extends ActionBarActivity implements View.OnClickListener {
+public class ArticleDetailActivity extends BaseAppActitity implements View.OnClickListener {
 
     private WebView comment_web;
     private Toolbar toolbar;
@@ -54,8 +49,8 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        setSatusBar();
         ButterKnife.bind(this);
-        initWindow();
         initView();
         id = getIntent().getStringExtra("id");
         typeid = getIntent().getStringExtra("typeid");
@@ -85,49 +80,12 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
         initListener();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onResume(this);       //统计时长
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onPause(this);
-    }
-
-    //初始化窗体布局
-    private void initWindow() {
-        SystemBarTintManager tintManager;
-        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
-            tintManager.setStatusBarTintEnabled(true);
-        }
-    }
-
-
     //获取控件
     private void initView() {
         comment_web = (WebView) findViewById(R.id.coment_web);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         webProgress = (SmoothProgressBar) findViewById(R.id.web_progress);
-        //2.替代
-        setSupportActionBar(toolbar);
-        //加载背景颜色
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
-        //设置显示返回上一级的图标
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //设置标题
-        getSupportActionBar().setTitle("文章详情");
-        //设置标题栏字体颜色
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+        initToolBar(toolbar,"文章详情");
     }
 
 
@@ -195,7 +153,6 @@ public class ArticleDetailActivity extends ActionBarActivity implements View.OnC
     //返回无效是重定向的原因
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             if (keyCode == KeyEvent.KEYCODE_BACK && comment_web.canGoBack()) {
                 goBack();

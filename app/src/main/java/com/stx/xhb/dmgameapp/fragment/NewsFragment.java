@@ -21,7 +21,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activity.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.NewsListAdapter;
 import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.entity.ContentEntity;
+import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 import com.stx.xhb.xbanner.XBanner;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -94,7 +94,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     private void downloadData(final int page) {
         OkHttpUtils.postString()
                 .url(API.NEWS_CHANNEL)
-                .content(GsonUtil.newGson().toJson(new ContentEntity("1", page)))
+                .content(GsonUtil.newGson().toJson(new NewsContentEntity("1", page)))
                 .build()
                 .execute(new StringCallback() {
                     @Override

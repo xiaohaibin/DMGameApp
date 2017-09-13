@@ -1,5 +1,7 @@
 package com.stx.xhb.dmgameapp.entity;
 
+import com.stx.xhb.dmgameapp.base.BaseEntity;
+
 /**
  * Author：xiaohaibin
  * Time：2017/9/12
@@ -8,7 +10,7 @@ package com.stx.xhb.dmgameapp.entity;
  * Describe：
  */
 
-public class UserEntity {
+public class UserEntity extends BaseEntity{
 
     /**
      * code : 1
@@ -16,7 +18,6 @@ public class UserEntity {
      * username : jxnk25
      */
 
-    private int code;
     private String uid;
     private String username;
     private HtmlEntity html;
@@ -38,10 +39,6 @@ public class UserEntity {
 
     public String getExpires_in() {
         return expires_in;
-    }
-
-    public int getCode() {
-        return code;
     }
 
     public String getUid() {

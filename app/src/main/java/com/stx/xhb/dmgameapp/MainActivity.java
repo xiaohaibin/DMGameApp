@@ -6,11 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.stx.core.utils.SystemBarTintManager;
+import com.jaeger.library.StatusBarUtil;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.main.ArticleFragment;
 import com.stx.xhb.dmgameapp.main.ForumFragment;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initWindow();
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary));
         initView();
         initData();
         setAdapter();
@@ -47,19 +46,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-    }
-
-    //初始化窗体布局
-    private void initWindow() {
-        SystemBarTintManager tintManager;
-        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
-            tintManager.setStatusBarTintEnabled(true);
-        }
     }
 
     //初始化控件
@@ -148,10 +134,6 @@ public class MainActivity extends AppCompatActivity {
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     /**
      * 自定义toast

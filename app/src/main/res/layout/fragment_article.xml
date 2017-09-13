@@ -7,7 +7,7 @@
               tools:context="com.stx.xhb.dmgameapp.main.ArticleFragment">
 
     <!-- 标题 -->
-    <include layout="@layout/title_layout"/>
+    <include layout="@layout/layout_title"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"

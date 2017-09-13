@@ -1,25 +1,19 @@
 package com.stx.xhb.dmgameapp.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stx.core.utils.AppUtils;
 import com.stx.core.utils.CacheManager;
-import com.stx.core.utils.SystemBarTintManager;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
-import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,7 +22,7 @@ import butterknife.OnClick;
 /**
  * 个人设置界面
  */
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends BaseAppActitity {
 
     @Bind(R.id.setting_toolbar)
     Toolbar settingToolbar;
@@ -43,40 +37,16 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        setSatusBar();
         ButterKnife.bind(this);
-        initWindow();
         initView();
         setListener();
-    }
-
-    //初始化窗体布局
-    private void initWindow() {
-        SystemBarTintManager tintManager;
-        //由于沉浸式状态栏需要在Android4.4.4以上才能使用
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.colorBackground));
-            tintManager.setStatusBarTintEnabled(true);
-        }
     }
 
     //初始化控件
     private void initView() {
         version.setText(AppUtils.getVersion(this));
-        setSupportActionBar(settingToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null) {
-            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackground)));
-            //设置显示返回上一级的图标
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            //设置标题
-            actionBar.setTitle("设置");
-        }
-        //设置标题栏字体颜色
-        settingToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        settingToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+        initToolBar(settingToolbar, "设置");
         mTvCache.setText(CacheManager.getTotalCacheSize(this));
 
         /***** 获取升级信息 *****/
@@ -130,25 +100,4 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onResume(this);       //统计时长
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onPause(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    private void checkUpdate() {
-
-    }
 }
