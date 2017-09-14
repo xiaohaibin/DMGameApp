@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--********************* Dialog *********************-->
+
+    <style name="QMUI.Dialog" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@color/qmui_config_color_transparent</item>
+        <item name="android:windowNoTitle">true</item><!-- 不用window title，使用自己的layout来做title -->
+        <!-- <item name="android:windowTitleStyle">@style/dialog_title</item> --><!-- 不用设置windowStyleStyle，因为windowNoTitle=true -->
+        <item name="android:windowIsFloating">true</item><!-- 在中间弹框、背后有遮罩的效果 -->
+        <item name="android:minWidth">?attr/qmui_dialog_min_width</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">?attr/qmui_dialog_margin_horizontal</item>
+        <item name="android:layout_marginRight">?attr/qmui_dialog_margin_horizontal</item>
+    </style>
+
+    <!--**********************************************
+  *                  Dialog                        *
+  **********************************************-->
+    <style name="qmui_dialog_wrap">
+        <item name="android:background">?attr/qmui_dialog_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">?attr/qmui_dialog_margin_vertical</item>
+        <item name="android:layout_marginBottom">?attr/qmui_dialog_margin_vertical</item>
+    </style>
+
+    <style name="qmui_tip_dialog_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">?attr/qmui_tip_dialog_min_width</item>
+        <item name="android:minHeight">?attr/qmui_tip_dialog_min_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">?attr/qmui_content_spacing_horizontal</item>
+        <item name="android:layout_marginRight">?attr/qmui_content_spacing_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">?attr/qmui_tip_dialog_padding_horizontal</item>
+        <item name="android:paddingRight">?attr/qmui_tip_dialog_padding_horizontal</item>
+        <item name="android:paddingTop">?attr/qmui_tip_dialog_padding_vertical</item>
+        <item name="android:paddingBottom">?attr/qmui_tip_dialog_padding_vertical</item>
+        <item name="android:background">?attr/qmui_tip_dialog_bg</item>
+    </style>
+
+
+    <style name="QMUI.TipDialog" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+</resources>

@@ -55,7 +55,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_btn_commit_red"
-            android:text="CSDN博客"
+            android:text="简书"
             android:textColor="@color/colorWhite"/>
 
         <Button

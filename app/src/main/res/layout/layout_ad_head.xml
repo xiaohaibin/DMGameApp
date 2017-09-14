@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/fl_banner"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
 
     <com.stx.xhb.xbanner.XBanner
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/xbanner"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         app:AutoPlayTime="3000"
-        app:pointsContainerBackground="#44aaaaaa"
-        app:pointsPosition="RIGHT"
-        app:tipTextSize="12sp"
-        app:isShowNumberIndicator="true"
         app:isShowIndicatorOnlyOne="true"
-        app:pageChangeDuration="800"/>
+        app:isShowNumberIndicator="true"
+        app:pageChangeDuration="800"
+        app:pointsContainerBackground="#44000000"
+        app:pointsPosition="RIGHT"
+        app:tipTextSize="12sp"/>
 
-</LinearLayout>
+</FrameLayout>

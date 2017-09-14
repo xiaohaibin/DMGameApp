@@ -31,7 +31,7 @@ import okhttp3.Call;
 /**
  * 文章详情界面
  */
-public class ArticleDetailActivity extends BaseAppActitity implements View.OnClickListener {
+public class ArticleDetailActivity extends BaseAppActitity {
 
     private WebView comment_web;
     private Toolbar toolbar;
@@ -77,7 +77,6 @@ public class ArticleDetailActivity extends BaseAppActitity implements View.OnCli
                         initData();
                     }
                 });
-        initListener();
     }
 
     //获取控件
@@ -170,19 +169,6 @@ public class ArticleDetailActivity extends BaseAppActitity implements View.OnCli
         } else {
             finish();
         }
-    }
-
-    //设置事件监听
-    private void initListener() {
-        //toolbard的返回按钮事件监听
-        toolbar.setNavigationOnClickListener(this);
-    }
-
-    //toolbar事件监听方法
-    @Override
-    public void onClick(View v) {
-        //返回上一页
-        finish();
     }
 
     //点击分享

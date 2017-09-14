@@ -1,3 +1,6 @@
 <resources>
+    <!-- common 公共 -->
+    <!-- 零宽空格，用于修复小米等系统对字符的缩略错误 -->
+    <string name="qmui_tool_fixellipsize">\u200b</string>
     <string name="app_name">core</string>
 </resources>

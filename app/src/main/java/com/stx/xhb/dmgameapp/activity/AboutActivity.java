@@ -37,17 +37,6 @@ public class AboutActivity extends BaseAppActitity {
         setSatusBar();
         ButterKnife.bind(this);
         initView();
-        setListener();
-    }
-
-    //设置事件监听
-    private void setListener() {
-        aboutToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     //初始化控件
@@ -58,16 +47,17 @@ public class AboutActivity extends BaseAppActitity {
 
     @OnClick({R.id.btn_csdn, R.id.btn_home})
     public void onClick(View view) {
+        Intent intent=null;
         switch (view.getId()) {
             case R.id.btn_csdn://博客
-                Uri uri = Uri.parse("http://blog.csdn.net/jxnk25");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Uri uri = Uri.parse("http://www.jianshu.com/u/42aed90cf5af");
+                intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
             case R.id.btn_home://github
                 Uri github = Uri.parse("https://github.com/xiaohaibin/DMGameApp");
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, github);
-                startActivity(intent1);
+                intent = new Intent(Intent.ACTION_VIEW, github);
+                startActivity(intent);
                 break;
         }
     }

@@ -12,4 +12,5 @@
         <attr name="hideDrawable" format="reference"/>
         <attr name="showDrawable" format="reference"/>
     </declare-styleable>
+
 </resources>

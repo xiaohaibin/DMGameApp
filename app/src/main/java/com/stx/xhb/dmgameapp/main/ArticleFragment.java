@@ -33,7 +33,7 @@ public class ArticleFragment extends Fragment {
     private ViewPager article_viewpager;
     private TabPageIndicatorAdapter adapter;
     //fragment的集合
-    private List<Fragment> fragments = new ArrayList<>();
+    private List<Fragment> fragments;
     private TextView tv_title;
     private TabLayout mTabLayout;
 
@@ -61,7 +61,7 @@ public class ArticleFragment extends Fragment {
 
     //初始化数据
     private void initData() {
-
+        fragments=new ArrayList<>();
         NewsFragment newsFragment = new NewsFragment();//新闻
         fragments.add(newsFragment);
         //循环创建7个子fragment

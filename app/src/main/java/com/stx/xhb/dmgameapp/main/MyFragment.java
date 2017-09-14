@@ -11,6 +11,8 @@ import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.activity.AboutActivity;
+import com.stx.xhb.dmgameapp.activity.SettingActivity;
 import com.stx.xhb.dmgameapp.user.LoginActivity;
 
 import butterknife.Bind;
@@ -63,8 +65,10 @@ public class MyFragment extends BaseFragment {
             case R.id.tv_message://消息
                 break;
             case R.id.btn_setting://设置
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.btn_about://关于
+                startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.btn_login_out://退出登录
                 break;

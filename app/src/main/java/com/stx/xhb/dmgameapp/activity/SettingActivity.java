@@ -30,7 +30,7 @@ public class SettingActivity extends BaseAppActitity {
     TextView version;
     @Bind(R.id.tv_cache)
     TextView mTvCache;
-    @Bind(R.id.tv_version)
+    @Bind(R.id.tv_update)
     TextView mTvVersion;
 
     @Override
@@ -40,7 +40,6 @@ public class SettingActivity extends BaseAppActitity {
         setSatusBar();
         ButterKnife.bind(this);
         initView();
-        setListener();
     }
 
     //初始化控件
@@ -61,7 +60,7 @@ public class SettingActivity extends BaseAppActitity {
     }
 
     //点击事件
-    @OnClick({R.id.setting_iv_clearCache, R.id.setting_iv_version, R.id.setting_iv_heart, R.id.setting_iv_about})
+    @OnClick({R.id.setting_iv_clearCache, R.id.setting_iv_version, R.id.setting_iv_heart})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_iv_clearCache://清理缓存
@@ -82,22 +81,7 @@ public class SettingActivity extends BaseAppActitity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
-            case R.id.setting_iv_about://关于
-                Intent about = new Intent(this, AboutActivity.class);
-                startActivity(about);
-                break;
         }
-    }
-
-    //设置事件监听
-    private void setListener() {
-        //toolbar的点击事件
-        settingToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
 }

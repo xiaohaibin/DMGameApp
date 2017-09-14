@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.classic.common.MultipleStatusView;
 import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.NetUtils;
+import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.activity.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.NewsListAdapter;
@@ -45,6 +47,7 @@ import okhttp3.Request;
  * 新闻类的Fragemnt
  */
 public class NewsFragment extends Fragment implements AdapterView.OnItemClickListener {
+
     @Bind(R.id.multiplestatusview)
     MultipleStatusView multiplestatusview;
     @Bind(R.id.ptr_layout)
@@ -81,6 +84,9 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
         news_lv = (ListViewFinal) view.findViewById(R.id.content_view);
         // 初始化HeaderView
         View headerView = View.inflate(getActivity(), R.layout.layout_ad_head, null);
+        FrameLayout flBanner = (FrameLayout) headerView.findViewById(R.id.fl_banner);
+        AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth(getActivity()) / 2.0f));
+        flBanner.setLayoutParams(layoutParams);
         mBanner = (XBanner) headerView.findViewById(R.id.xbanner);
         news_lv.addHeaderView(headerView);
         adapter = new NewsListAdapter(getActivity(), newsList);
@@ -235,7 +241,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                currenPage=1;
+                currenPage = 1;
                 downloadData(currenPage);
             }
         });

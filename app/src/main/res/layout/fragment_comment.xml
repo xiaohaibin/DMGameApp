@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.stx.xhb.dmgameapp.fragment.CommentFragment">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <cn.finalteam.loadingviewfinal.PtrClassicFrameLayout
+            android:id="@+id/ptr_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.classic.common.MultipleStatusView
+                android:id="@+id/multiplestatusview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:emptyView="@layout/custom_empty_view"
+                app:errorView="@layout/custom_error_view"
+                app:loadingView="@layout/custom_loading_view"
+                app:noNetworkView="@layout/custom_no_network_view">
+
+                <cn.finalteam.loadingviewfinal.ListViewFinal
+                    android:id="@+id/content_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="#00000000"
+                    android:divider="@null"
+                    android:scrollbars="none"
+                    app:loadMoreMode="scroll"/>
+            </com.classic.common.MultipleStatusView>
+
+        </cn.finalteam.loadingviewfinal.PtrClassicFrameLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#edecec"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <EditText
+            android:id="@+id/ed_comment"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_btn_bg_white"
+            android:drawableLeft="@drawable/night_biz_tie_comment_reply_write"
+            android:drawablePadding="5dp"
+            android:hint="尽情吐槽吧~~~"
+            android:padding="4dp"
+            android:singleLine="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/comment_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/shape_btn_commit_red"
+            android:text="评论"
+            android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+</LinearLayout>

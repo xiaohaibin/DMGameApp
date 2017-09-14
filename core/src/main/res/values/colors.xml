@@ -9,4 +9,12 @@
     <!--页面背景颜色-->
     <color name="common_background">#f3f3f3</color>
     <color name="colorWhite">#ffffff</color>
+
+
+    <!--*********************************************
+  *              Config Color                  *
+  **********************************************-->
+    <color name="qmui_config_color_transparent">#00000000</color>
+    <color name="qmui_config_color_link">#547FB0</color>
+    <color name="qmui_config_color_white">#ffffff</color>
 </resources>

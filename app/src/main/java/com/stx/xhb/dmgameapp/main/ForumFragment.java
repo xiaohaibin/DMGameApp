@@ -1,7 +1,6 @@
 package com.stx.xhb.dmgameapp.main;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
-import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -23,12 +21,10 @@ public class ForumFragment extends Fragment {
     public static final String HTTP_FORM_URL = "http://bbs.3dmgame.com/forum.php";
     private WebView web_view;
     private View view;
-    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_forum, container, false);
         initView();
         return view;
@@ -50,43 +46,10 @@ public class ForumFragment extends Fragment {
                 return true;
             }
         });
-        web_view.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100) {
-                    //网页加载完成，关闭对话框
-//                    closeDialog();
-                } else {
-                    //网页加载中，打开进度对话框
-//                    openDialog(newProgress);
-                }
-            }
-        });
         //启用支持javascript
         WebSettings settings = web_view.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-    }
-
-    //关闭进度对话框
-    private void closeDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-            dialog = null;
-        }
-    }
-
-    //显示进度对话框
-    private void openDialog(int newProgress) {
-        if (dialog == null) {
-            dialog = new ProgressDialog(getContext());
-            dialog.setProgress(newProgress);
-            dialog.setMessage("加载中。。。");
-            dialog.setCancelable(false);
-            dialog.show();
-        } else {
-            dialog.setProgress(newProgress);
-        }
     }
 
 }

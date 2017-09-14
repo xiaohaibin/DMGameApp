@@ -31,7 +31,7 @@ import okhttp3.Call;
 /**
  * 视频详情界面
  */
-public class VideoDetailActivity extends BaseAppActitity implements View.OnClickListener {
+public class VideoDetailActivity extends BaseAppActitity{
 
     private WebView comment_web;
     private ProgressDialog dialog;
@@ -75,7 +75,6 @@ public class VideoDetailActivity extends BaseAppActitity implements View.OnClick
                         initData();
                     }
                 });
-        initListener();
     }
 
     //获取控件
@@ -193,16 +192,5 @@ public class VideoDetailActivity extends BaseAppActitity implements View.OnClick
         } else {
             dialog.setProgress(newProgress);
         }
-    }
-
-    //设置事件监听
-    private void initListener() {
-        toolbar.setNavigationOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        //返回上一页
-        finish();
     }
 }
