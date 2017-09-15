@@ -11,8 +11,8 @@ import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.activity.AboutActivity;
-import com.stx.xhb.dmgameapp.activity.SettingActivity;
+import com.stx.xhb.dmgameapp.ui.activity.AboutActivity;
+import com.stx.xhb.dmgameapp.ui.activity.SettingActivity;
 import com.stx.xhb.dmgameapp.user.LoginActivity;
 
 import butterknife.Bind;

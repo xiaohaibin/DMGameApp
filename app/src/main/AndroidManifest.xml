@@ -58,13 +58,13 @@
 
         <!--文章详情-->
         <activity
-            android:name=".activity.ArticleDetailActivity"
+            android:name=".ui.activity.ArticleDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <!--视频详情-->
         <activity
-            android:name=".activity.VideoDetailActivity"
+            android:name=".ui.activity.VideoDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
@@ -72,13 +72,13 @@
 
         <!--设置页面-->
         <activity
-            android:name=".activity.SettingActivity"
+            android:name=".ui.activity.SettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <!--关于页面-->
         <activity
-            android:name=".activity.AboutActivity"
+            android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 

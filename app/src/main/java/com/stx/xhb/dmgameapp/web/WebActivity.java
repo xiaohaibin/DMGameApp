@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.web;
 import android.os.Bundle;
 
 import com.stx.core.base.BaseActivity;
+import com.stx.xhb.dmgameapp.R;
 
 /**
  * Author：xiaohaibin
@@ -15,7 +16,7 @@ import com.stx.core.base.BaseActivity;
 public class WebActivity extends BaseActivity{
     @Override
     protected int getLayoutResource() {
-        return 0;
+        return R.layout.activity_web;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.fragment;
+package com.stx.xhb.dmgameapp.ui.fragment;
 
 
 import android.content.Context;
@@ -20,7 +20,7 @@ import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.NetUtils;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.activity.ArticleDetailActivity;
+import com.stx.xhb.dmgameapp.ui.activity.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.NewsListAdapter;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.entity.NewsContentEntity;

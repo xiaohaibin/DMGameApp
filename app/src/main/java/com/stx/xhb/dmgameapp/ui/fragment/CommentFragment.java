@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.fragment;
+package com.stx.xhb.dmgameapp.ui.fragment;
 
 import android.os.Bundle;
 

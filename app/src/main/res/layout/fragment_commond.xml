@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context=".fragment.CommonFragment">
+              tools:context=".ui.fragment.CommonFragment">
 
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/ptr_layout"

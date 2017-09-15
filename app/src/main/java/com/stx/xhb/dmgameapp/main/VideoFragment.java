@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
-import com.stx.xhb.dmgameapp.fragment.CommonFragment;
+import com.stx.xhb.dmgameapp.ui.fragment.CommonFragment;
 
 import java.util.ArrayList;
 import java.util.List;

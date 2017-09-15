@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.activity;
+package com.stx.xhb.dmgameapp.ui.activity;
 
 import android.content.Intent;
 import android.net.Uri;

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.fragment;
+package com.stx.xhb.dmgameapp.ui.fragment;
 
 
 import android.content.Context;
@@ -16,8 +16,8 @@ import android.widget.ListView;
 import com.classic.common.MultipleStatusView;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.activity.ArticleDetailActivity;
-import com.stx.xhb.dmgameapp.activity.VideoDetailActivity;
+import com.stx.xhb.dmgameapp.ui.activity.ArticleDetailActivity;
+import com.stx.xhb.dmgameapp.ui.activity.VideoDetailActivity;
 import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
 import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
 import com.stx.xhb.dmgameapp.utils.API;
