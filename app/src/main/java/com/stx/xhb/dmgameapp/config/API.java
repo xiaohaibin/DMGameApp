@@ -9,10 +9,25 @@ package com.stx.xhb.dmgameapp.config;
  */
 
 public class API {
+
     /**
      * 请求：POST
      * 参数：appid：1
      *       page  1   页码
      */
     public static final String NEWS_CHANNEL="http://m.3dmgame.com/y3wap/ajaxappchannel.php";
+
+    /**
+     * 用户登录、注册相关接口
+     */
+    public static final String USER_API="http://bbs.3dmgame.com/api/3dmapp/index.php";
+
+    //3DMGame网站地址
+    public static final String DMGEAME_URL = "http://www.3dmgame.com";
+
+    //文章列表接口地址
+    public static final String ARTICLE_URL = "http://www.3dmgame.com/sitemap/api.php?row=10&typeid=%s&paging=1&page=%s";
+
+    //文章详情的接口地址
+    public static final String ChapterContent_URL = "http://www.3dmgame.com/sitemap/api.php?id=%s&typeid=%s";
 }

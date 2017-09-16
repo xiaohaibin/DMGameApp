@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.web;
+package com.stx.xhb.dmgameapp.ui.activity;
 
 import android.os.Bundle;
 
@@ -22,5 +22,20 @@ public class WebActivity extends BaseActivity{
     @Override
     protected void onInitialization(Bundle bundle) {
 
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    protected Class getLogicClazz() {
+        return null;
     }
 }

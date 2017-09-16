@@ -16,11 +16,11 @@ import android.widget.ListView;
 import com.classic.common.MultipleStatusView;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
+import com.stx.xhb.dmgameapp.config.API;
+import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
 import com.stx.xhb.dmgameapp.ui.activity.ArticleDetailActivity;
 import com.stx.xhb.dmgameapp.ui.activity.VideoDetailActivity;
-import com.stx.xhb.dmgameapp.adapter.ListViewAdapter;
-import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
-import com.stx.xhb.dmgameapp.utils.API;
 import com.stx.xhb.dmgameapp.utils.JsonUtils;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -96,49 +96,48 @@ public class CommonFragment extends Fragment implements AdapterView.OnItemClickL
     private void downloadData(final int page) {
         //网络请求地址
         String strUrl = String.format(API.ARTICLE_URL, typeid, page);
-        OkHttpUtils
-                   .get()
-                   .url(strUrl)
-                   .build()
-                   .execute(new StringCallback() {
-                       @Override
-                       public void onBefore(Request request, int id) {
-                           multiplestatusview.showLoading();
-                       }
+        OkHttpUtils.get()
+                .url(strUrl)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onBefore(Request request, int id) {
+                        multiplestatusview.showLoading();
+                    }
 
-                       @Override
-                       public void onError(Call call, Exception e, int id) {
-                           if (NetUtils.isNetConnected(getActivity())) {
-                               multiplestatusview.showError();
-                           } else {
-                               multiplestatusview.showNoNetwork();
-                           }
-                       }
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        if (NetUtils.isNetConnected(getActivity())) {
+                            multiplestatusview.showError();
+                        } else {
+                            multiplestatusview.showNoNetwork();
+                        }
+                    }
 
-                       @Override
-                       public void onResponse(String response, int id) {
-                           multiplestatusview.showContent();
-                           //解析json数据
-                           datachapter = JsonUtils.parseChapterJson(response);
-                           if (datachapter.isEmpty()) {
-                               multiplestatusview.showEmpty();
-                           }
-                           if (page == 1) {
-                               mChapterListItemEntities.clear();
-                           }
-                           mChapterListItemEntities.addAll(datachapter);
-                           ptrLayout.refreshComplete();
-                           adapter.notifyDataSetChanged();
-                       }
+                    @Override
+                    public void onResponse(String response, int id) {
+                        multiplestatusview.showContent();
+                        //解析json数据
+                        datachapter = JsonUtils.parseChapterJson(response);
+                        if (datachapter.isEmpty()) {
+                            multiplestatusview.showEmpty();
+                        }
+                        if (page == 1) {
+                            mChapterListItemEntities.clear();
+                        }
+                        mChapterListItemEntities.addAll(datachapter);
+                        ptrLayout.refreshComplete();
+                        adapter.notifyDataSetChanged();
+                    }
 
-                       @Override
-                       public void onAfter(int id) {
-                           if (page == 1) {
-                               ptrLayout.refreshComplete();
-                           }
-                           adapter.notifyDataSetChanged();
-                       }
-                   });
+                    @Override
+                    public void onAfter(int id) {
+                        if (page == 1) {
+                            ptrLayout.refreshComplete();
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     //设置事件监听
@@ -201,28 +200,28 @@ public class CommonFragment extends Fragment implements AdapterView.OnItemClickL
             //网络请求地址
             url = String.format(API.ARTICLE_URL, typeid, currenPage);
             OkHttpUtils
-                      .get()
-                      .url(url)
-                      .build()
-                      .execute(new StringCallback() {
-                          @Override
-                          public void onError(Call call, Exception e, int id) {
-                              ToastUtil.show("网络请求失败");
-                          }
+                    .get()
+                    .url(url)
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            ToastUtil.show("网络请求失败");
+                        }
 
-                          @Override
-                          public void onResponse(String response, int id) {
-                              //解析json数据
-                              datachapter = JsonUtils.parseChapterJson(response);
-                              if (datachapter != null) {
-                                  mFootView.setVisibility(View.GONE);//设置底部控件隐藏
-                                  mChapterListItemEntities.addAll(datachapter);
-                                  adapter.notifyDataSetChanged();
-                                  //加载完数据之后，将标记设置为false
-                                  isLoadData = false;
-                              }
-                          }
-                      });
+                        @Override
+                        public void onResponse(String response, int id) {
+                            //解析json数据
+                            datachapter = JsonUtils.parseChapterJson(response);
+                            if (datachapter != null) {
+                                mFootView.setVisibility(View.GONE);//设置底部控件隐藏
+                                mChapterListItemEntities.addAll(datachapter);
+                                adapter.notifyDataSetChanged();
+                                //加载完数据之后，将标记设置为false
+                                isLoadData = false;
+                            }
+                        }
+                    });
         }
     }
 
@@ -255,7 +254,7 @@ public class CommonFragment extends Fragment implements AdapterView.OnItemClickL
 
             @Override
             public void onRefreshBegin(in.srain.cube.views.ptr.PtrFrameLayout frame) {
-                currenPage=1;
+                currenPage = 1;
                 downloadData(currenPage);
             }
         });
@@ -266,6 +265,7 @@ public class CommonFragment extends Fragment implements AdapterView.OnItemClickL
     /**
      * 判断是否滑动到顶端
      * 解决滑动冲突
+     *
      * @return
      */
     public boolean canChildScrollUp() {

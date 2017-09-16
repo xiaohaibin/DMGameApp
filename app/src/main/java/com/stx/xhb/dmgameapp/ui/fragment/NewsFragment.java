@@ -100,6 +100,7 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     private void downloadData(final int page) {
         OkHttpUtils.postString()
                 .url(API.NEWS_CHANNEL)
+                .tag(this)
                 .content(GsonUtil.newGson().toJson(new NewsContentEntity("1", page)))
                 .build()
                 .execute(new StringCallback() {
@@ -292,5 +293,6 @@ public class NewsFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onStop() {
         super.onStop();
         mBanner.stopAutoPlay();
+        OkHttpUtils.getInstance().cancelTag(this);
     }
 }

@@ -19,4 +19,19 @@ public class CommentFragment extends BaseFragment {
     protected void onInitView(Bundle savedInstanceState) {
 
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    protected Class getLogicClazz() {
+        return null;
+    }
 }

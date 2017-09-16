@@ -84,13 +84,13 @@
 
         <!--登录页面-->
         <activity
-            android:name=".user.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <!--注册页面-->
         <activity
-            android:name=".user.RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 

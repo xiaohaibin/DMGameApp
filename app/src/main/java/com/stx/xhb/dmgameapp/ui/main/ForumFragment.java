@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.main;
+package com.stx.xhb.dmgameapp.ui.main;
 
 
 import android.os.Bundle;

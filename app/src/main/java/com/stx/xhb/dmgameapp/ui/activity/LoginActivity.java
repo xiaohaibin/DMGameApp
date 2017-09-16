@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.user;
+package com.stx.xhb.dmgameapp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.stx.core.base.BaseActivity;
 import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.presenter.user.LoginContact;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -63,5 +64,20 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    protected Class getLogicClazz() {
+        return LoginContact.class;
     }
 }

@@ -21,9 +21,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected abstract void onInitView(Bundle savedInstanceState);
 
-    protected Class getLogicClazz() {
-        return null;
-    }
+    protected abstract Class getLogicClazz();
 
     protected void onInitData2Remote() {
         if (getLogicClazz() != null)

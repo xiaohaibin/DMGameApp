@@ -11,10 +11,10 @@ import android.widget.RadioGroup;
 
 import com.jaeger.library.StatusBarUtil;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
-import com.stx.xhb.dmgameapp.main.ArticleFragment;
-import com.stx.xhb.dmgameapp.main.ForumFragment;
-import com.stx.xhb.dmgameapp.main.MyFragment;
-import com.stx.xhb.dmgameapp.main.VideoFragment;
+import com.stx.xhb.dmgameapp.ui.main.ArticleFragment;
+import com.stx.xhb.dmgameapp.ui.main.ForumFragment;
+import com.stx.xhb.dmgameapp.ui.main.MyFragment;
+import com.stx.xhb.dmgameapp.ui.main.VideoFragment;
 import com.stx.xhb.dmgameapp.widget.TipsToast;
 import com.umeng.analytics.MobclickAgent;
 

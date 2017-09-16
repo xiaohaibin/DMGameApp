@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.main;
+package com.stx.xhb.dmgameapp.ui.main;
 
 
 import android.content.Intent;
@@ -13,7 +13,7 @@ import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.ui.activity.AboutActivity;
 import com.stx.xhb.dmgameapp.ui.activity.SettingActivity;
-import com.stx.xhb.dmgameapp.user.LoginActivity;
+import com.stx.xhb.dmgameapp.ui.activity.LoginActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -73,5 +73,20 @@ public class MyFragment extends BaseFragment {
             case R.id.btn_login_out://退出登录
                 break;
         }
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    protected Class getLogicClazz() {
+        return null;
     }
 }

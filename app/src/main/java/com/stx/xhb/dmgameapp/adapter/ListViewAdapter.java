@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.entity.ChapterListEntity;
-import com.stx.xhb.dmgameapp.utils.API;
 
 import java.util.List;
 
