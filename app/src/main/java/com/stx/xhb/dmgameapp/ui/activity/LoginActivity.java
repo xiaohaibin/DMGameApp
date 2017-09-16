@@ -12,6 +12,7 @@ import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.presenter.user.LoginContact;
+import com.stx.xhb.dmgameapp.presenter.user.LoginImpl;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -42,6 +43,7 @@ public class LoginActivity extends BaseActivity {
     TextView mBtnLogin;
     @Bind(R.id.btn_register)
     TextView mBtnRegister;
+    private String questionsId="0";
 
     @Override
     protected int getLayoutResource() {
@@ -59,6 +61,7 @@ public class LoginActivity extends BaseActivity {
             case R.id.btn_question://选择问题
                 break;
             case R.id.btn_login://登录
+                ((LoginImpl)mPresenter).login(mEdAccount.getText().toString(),mEdPwd.getText().toString(),questionsId,mEdAnswer.getText().toString());
                 break;
             case R.id.btn_register://注册
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
