@@ -11,10 +11,10 @@ import android.widget.RadioGroup;
 
 import com.jaeger.library.StatusBarUtil;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
-import com.stx.xhb.dmgameapp.ui.main.ArticleFragment;
+import com.stx.xhb.dmgameapp.ui.main.ArticleFragmentCopy;
 import com.stx.xhb.dmgameapp.ui.main.ForumFragment;
 import com.stx.xhb.dmgameapp.ui.main.MyFragment;
-import com.stx.xhb.dmgameapp.ui.main.VideoFragment;
+import com.stx.xhb.dmgameapp.ui.main.GameFragment;
 import com.stx.xhb.dmgameapp.widget.TipsToast;
 import com.umeng.analytics.MobclickAgent;
 
@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
     //初始化数据
     private void initData() {
-        ArticleFragment airticle_fragemnt = new ArticleFragment();
+        ArticleFragmentCopy airticle_fragemnt = new ArticleFragmentCopy();
         ForumFragment forum_Fragment = new ForumFragment();
         MyFragment game_Fragment = new MyFragment();
-        VideoFragment video_Fragment = new VideoFragment();
+        GameFragment video_Fragment = new GameFragment();
         fragemnts.add(airticle_fragemnt);//文章
         fragemnts.add(video_Fragment);//视频
         fragemnts.add(forum_Fragment);//论坛

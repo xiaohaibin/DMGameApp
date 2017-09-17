@@ -62,6 +62,13 @@ public class CommonFragment extends Fragment implements AdapterView.OnItemClickL
     private boolean isLoadData = false;//是否正在加载新数据的标记
     private String url;
 
+    public static CommonFragment newInstance(String typeId) {
+        Bundle args = new Bundle();
+        CommonFragment fragment = new CommonFragment();
+        args.putString("typeid",typeId);
+        fragment.setArguments(args);
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

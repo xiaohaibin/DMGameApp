@@ -22,6 +22,12 @@ public class API {
      */
     public static final String USER_API="http://bbs.3dmgame.com/api/3dmapp/index.php";
 
+    /**
+     * 获取文章频道列表
+     * 方式：GET
+     */
+    public static final String GET_NEWS_CHANNEL="http://m.3dmgame.com/y3wap/ajaxappchannels.php";
+
     //3DMGame网站地址
     public static final String DMGEAME_URL = "http://www.3dmgame.com";
 

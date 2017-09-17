@@ -55,7 +55,6 @@ public class ArticleFragment extends Fragment {
         tv_title.setText("文章");
         article_viewpager = (ViewPager) view.findViewById(R.id.article_viewpager);
         mTabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
-
     }
 
     //初始化数据
@@ -76,7 +75,7 @@ public class ArticleFragment extends Fragment {
     //设置适配器
     private void setAdapter() {
         //实例化适配器
-        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, TITLE);
+//        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, TITLE);
         //设置适配器
         article_viewpager.setAdapter(adapter);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);

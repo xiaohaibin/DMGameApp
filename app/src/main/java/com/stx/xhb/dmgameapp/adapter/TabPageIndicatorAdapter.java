@@ -14,13 +14,13 @@ import java.util.List;
 public class TabPageIndicatorAdapter extends FragmentPagerAdapter {
     //fragments集合
     private List<Fragment> fragments;
-    //标题
-    private String[] title;
 
-    public TabPageIndicatorAdapter(FragmentManager fm, List<Fragment> fragments, String[] title) {
+    private List<String> channelist;
+
+    public TabPageIndicatorAdapter(FragmentManager fm, List<Fragment> fragments, List<String> channelist) {
         super(fm);
         this.fragments = fragments;
-        this.title = title;
+        this.channelist = channelist;
     }
 
     @Override
@@ -30,13 +30,13 @@ public class TabPageIndicatorAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return title.length;
+        return channelist.size();
     }
 
     //获取当前位置的标题
     @Override
     public CharSequence getPageTitle(int position) {
-        return title[position % title.length];
+        return channelist.get(position % channelist.size());
     }
 
     @Override
