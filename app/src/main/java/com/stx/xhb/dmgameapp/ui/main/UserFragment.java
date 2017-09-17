@@ -27,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 个人中心Fragment
  */
-public class MyFragment extends BaseFragment {
+public class UserFragment extends BaseFragment {
 
     @Bind(R.id.iv_user_img)
     PorterShapeImageView mIvUserImg;
@@ -93,7 +93,7 @@ public class MyFragment extends BaseFragment {
                                 showUserInfo();
                                 dialog.dismiss();
                             }
-                        }).setMessage("是否要确认退出登录？").create();
+                        }).setMessage("是否要退出登录？").create();
                 dialog.show();
                 break;
         }
