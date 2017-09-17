@@ -22,10 +22,10 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class RegisterImpl extends BasePresenter<RegisterContact.registerView> implements RegisterContact {
+public class RegisterImpl extends BasePresenter<RegisterContract.registerView> implements RegisterContract {
 
     @Override
-    public void register(final String username, String passwd, String ckpasswd, String email) {
+    public void register(final String username, final String passwd, String ckpasswd, String email) {
         if (TextUtils.isEmpty(username)) {
             ToastUtil.show("请填写用户名");
             return;
@@ -52,6 +52,61 @@ public class RegisterImpl extends BasePresenter<RegisterContact.registerView> im
                         getView().showLoading();
                     }
 
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        getView().hideLoading();
+                        getView().registerFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
+                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                toLogin(username,passwd,"0","");
+                            } else {
+                                getView().hideLoading();
+                                getView().registerFailed(userInfoEntity.getMsg());
+                            }
+                        }
+                    }
+                });
+    }
+
+    public void toLogin(String username, String pwd, String questionid, String answer) {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new LoginImpl.LoginContentEntity("userlogin", username, pwd, answer, questionid)))
+                .url(API.USER_API)
+                .build()
+                .execute(new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        getView().hideLoading();
+                        getView().registerFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
+                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                getUserInfo(userInfoEntity);
+                            } else {
+                                getView().hideLoading();
+                                getView().registerFailed(userInfoEntity.getMsg());
+                            }
+                        }
+                    }
+                });
+    }
+
+    public void getUserInfo(UserInfoEntity infoEntity) {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new LoginImpl.getUserInfoContentEntity("userinfo", infoEntity.getUid())))
+                .url(API.USER_API)
+                .build()
+                .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         getView().registerFailed(e.getMessage());

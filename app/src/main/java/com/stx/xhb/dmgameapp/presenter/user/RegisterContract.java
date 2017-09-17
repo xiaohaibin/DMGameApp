@@ -12,7 +12,7 @@ import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
  * Describe：
  */
 @Implement(RegisterImpl.class)
-public interface RegisterContact {
+public interface RegisterContract {
 
     void register(String username, String passwd, String ckpasswd, String email);
 

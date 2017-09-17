@@ -1,19 +1,25 @@
 package com.stx.xhb.dmgameapp.ui.main;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
 import com.stx.xhb.dmgameapp.ui.activity.AboutActivity;
-import com.stx.xhb.dmgameapp.ui.activity.SettingActivity;
 import com.stx.xhb.dmgameapp.ui.activity.LoginActivity;
+import com.stx.xhb.dmgameapp.ui.activity.SettingActivity;
+import com.stx.xhb.dmgameapp.utils.AppUser;
+import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -51,7 +57,13 @@ public class MyFragment extends BaseFragment {
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
+        showUserInfo();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showUserInfo();
     }
 
     @OnClick({R.id.ll_no_login, R.id.tv_collect, R.id.tv_message, R.id.btn_setting, R.id.btn_about, R.id.btn_login_out})
@@ -61,8 +73,10 @@ public class MyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.tv_collect://收藏
+                ToastUtil.show("收藏");
                 break;
             case R.id.tv_message://消息
+                ToastUtil.show("消息");
                 break;
             case R.id.btn_setting://设置
                 startActivity(new Intent(getActivity(), SettingActivity.class));
@@ -71,6 +85,16 @@ public class MyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.btn_login_out://退出登录
+                AlertDialog dialog = new AlertDialog.Builder(getActivity()).setTitle("退出提示")
+                        .setNegativeButton("取消", null).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AppUser.logout();
+                                showUserInfo();
+                                dialog.dismiss();
+                            }
+                        }).setMessage("是否要确认退出登录？").create();
+                dialog.show();
                 break;
         }
     }
@@ -88,5 +112,25 @@ public class MyFragment extends BaseFragment {
     @Override
     protected Class getLogicClazz() {
         return null;
+    }
+
+    private void showUserInfo() {
+        if (AppUser.isLogin()) {
+            mLlLoginInfo.setVisibility(View.VISIBLE);
+            mLlNoLogin.setVisibility(View.GONE);
+            mBtnLoginOut.setVisibility(View.VISIBLE);
+            UserInfoEntity userInfoEntity = AppUser.getUserInfoEntity();
+            if (userInfoEntity.getHtml() != null) {
+                mTvAccount.setText(userInfoEntity.getHtml().getUsername());
+                mTvInfo.setText("等级：" + userInfoEntity.getHtml().getGrouptitle() + "\n"
+                        + "积分：" + userInfoEntity.getHtml().getCredits() + "\n"
+                        + "帖子：" + userInfoEntity.getHtml().getPosts());
+            }
+            Glide.with(getContext()).load(userInfoEntity.getHtml().getAuthimg()).into(mIvUserImg);
+        } else {
+            mLlNoLogin.setVisibility(View.VISIBLE);
+            mLlLoginInfo.setVisibility(View.GONE);
+            mBtnLoginOut.setVisibility(View.GONE);
+        }
     }
 }

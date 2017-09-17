@@ -40,7 +40,7 @@ public class DmgApplication extends BaseApplication {
         AppUser.init();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new LoggerInterceptor("==3dm=="))
+                .addInterceptor(new LoggerInterceptor("==3dm==",BuildConfig.DEBUG))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置

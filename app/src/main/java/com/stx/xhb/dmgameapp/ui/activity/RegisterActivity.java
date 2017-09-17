@@ -1,15 +1,19 @@
 package com.stx.xhb.dmgameapp.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.stx.core.base.BaseActivity;
 import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
+import com.stx.core.widget.dialog.DialogMaker;
+import com.stx.xhb.dmgameapp.MainActivity;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
-import com.stx.xhb.dmgameapp.presenter.user.RegisterContact;
+import com.stx.xhb.dmgameapp.presenter.user.RegisterContract;
 import com.stx.xhb.dmgameapp.presenter.user.RegisterImpl;
+import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
@@ -53,7 +57,9 @@ public class RegisterActivity extends BaseActivity implements RegisterImpl.regis
 
     @Override
     public void registerSuccess(UserInfoEntity infoEntity) {
-
+        AppUser.login(infoEntity);
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+        finish();
     }
 
     @Override
@@ -63,16 +69,16 @@ public class RegisterActivity extends BaseActivity implements RegisterImpl.regis
 
     @Override
     public void showLoading() {
-
+        DialogMaker.showProgressDialog(this, "正在注册");
     }
 
     @Override
     public void hideLoading() {
-
+        DialogMaker.dismissProgressDialog();
     }
 
     @Override
     protected Class getLogicClazz() {
-        return RegisterContact.class;
+        return RegisterContract.class;
     }
 }

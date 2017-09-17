@@ -17,12 +17,10 @@ import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
 
 public class AppUser {
 
-    private static String token;
     private static UserInfoEntity sUserInfoEntity;
 
     public static void init(){
         String userInfo = SPUtils.getString(DmgApplication.getInstance().getContext(), "userInfo", "");
-        token = SPUtils.getString(DmgApplication.getInstance().getContext(), "token", "");
         if (!TextUtils.isEmpty(userInfo)) {
             sUserInfoEntity = GsonUtil.newGson().fromJson(userInfo, UserInfoEntity.class);
         }
@@ -35,12 +33,8 @@ public class AppUser {
         return sUserInfoEntity;
     }
 
-    public static String getToken() {
-        return token;
-    }
-
     public static boolean isLogin() {
-        return sUserInfoEntity != null && !TextUtils.isEmpty(token);
+        return sUserInfoEntity != null;
     }
 
 
@@ -50,8 +44,6 @@ public class AppUser {
      * @param userInfoEntity
      */
     public static void login(UserInfoEntity userInfoEntity) {
-        AppUser.token = userInfoEntity.getAccess_token();
-        SPUtils.putString(DmgApplication.getInstance().getContext(), "token", token);
         setUserInfo(userInfoEntity);
     }
 
@@ -70,7 +62,6 @@ public class AppUser {
      */
     public static void logout() {
         sUserInfoEntity = null;
-        token = "";
     }
 
 }

@@ -7,8 +7,8 @@ android {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 10
-        versionName "2.5"
+        versionCode 11
+        versionName "3.0"
         multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -47,17 +47,19 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':core')
     compile 'com.zhy:okhttputils:2.6.2'
-    //下拉刷新
+    //for refresh
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'cn.finalteam.loadingviewfinal:loading-more-view:1.0.1'
     compile 'cn.finalteam.loadingviewfinal:ultra-pull-to-refresh:1.0.1'
-    //xbanner
+    //for xbanner
     compile 'com.xhb:xbanner:1.3.0'
-    //极光推送
+    //for jpush
     compile 'cn.jiguang:jpush:2.1.9'
-    //友盟统计
+    //for umeng
     compile 'com.umeng.analytics:analytics:latest.integration'
-    //bugly
+    //for bugly
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    //for dialog
+    compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
 }

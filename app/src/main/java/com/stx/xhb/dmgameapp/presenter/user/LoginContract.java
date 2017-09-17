@@ -12,7 +12,7 @@ import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
  * Describe：
  */
 @Implement(LoginImpl.class)
-public interface LoginContact {
+public interface LoginContract {
 
     void login(String username, String pwd, String questionid, String answer);
 

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 import com.stx.core.R;
-import com.stx.core.widget.dialog.QMUIDisplayHelper;
+import com.stx.core.utils.ScreenUtil;
 
 /**
  * 用于显示 Loading 的 {@link View}，支持颜色和大小的设置。
@@ -19,7 +19,7 @@ import com.stx.core.widget.dialog.QMUIDisplayHelper;
  * @author cginechen
  * @date 2016-09-21
  */
-public class QMUILoadingView extends View {
+public class TipsLoadingView extends View {
 
     private int mSize;
     private int mPaintColor;
@@ -29,24 +29,24 @@ public class QMUILoadingView extends View {
     private static final int LINE_COUNT = 12;
     private static final int DEGREE_PER_LINE = 360 / LINE_COUNT;
 
-    public QMUILoadingView(Context context) {
+    public TipsLoadingView(Context context) {
         this(context, null);
     }
 
-    public QMUILoadingView(Context context, AttributeSet attrs) {
+    public TipsLoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.QMUILoadingStyle);
     }
 
-    public QMUILoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TipsLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.QMUILoadingView, defStyleAttr, 0);
-        mSize = array.getDimensionPixelSize(R.styleable.QMUILoadingView_qmui_loading_view_size, QMUIDisplayHelper.dp2px(context, 32));
-        mPaintColor = array.getInt(R.styleable.QMUILoadingView_android_color, Color.WHITE);
+        TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.TipsLoadingView, defStyleAttr, 0);
+        mSize = array.getDimensionPixelSize(R.styleable.TipsLoadingView_qmui_loading_view_size, ScreenUtil.dip2px(context,32));
+        mPaintColor = array.getInt(R.styleable.TipsLoadingView_android_color, Color.WHITE);
         array.recycle();
         initPaint();
     }
 
-    public QMUILoadingView(Context context, int size, int color) {
+    public TipsLoadingView(Context context, int size, int color) {
         super(context);
         mSize = size;
         mPaintColor = color;
