@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
 import com.stx.xhb.dmgameapp.presenter.game.GameContract;
 import com.stx.xhb.dmgameapp.presenter.game.GameImpl;
@@ -33,7 +32,7 @@ public class GameFragment extends BaseFragment implements GameContract.getChanne
     TabLayout mTabLayout;
     @Bind(R.id.video_viewpager)
     ViewPager mVideoViewpager;
-    private TabPageIndicatorAdapter adapter;
+//    private TabPageIndicatorAdapter adapter;
     private List<Fragment> fragments;
     private List<String> titleList;
 
@@ -76,8 +75,8 @@ public class GameFragment extends BaseFragment implements GameContract.getChanne
 
     //设置适配器
     private void setAdapter() {
-        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, titleList);
-        mVideoViewpager.setAdapter(adapter);
+//        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, titleList);
+//        mVideoViewpager.setAdapter(adapter);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(mVideoViewpager);

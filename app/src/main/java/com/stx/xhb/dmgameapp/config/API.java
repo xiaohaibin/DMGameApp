@@ -12,7 +12,7 @@ public class API {
 
     /**
      * 请求：POST
-     * 参数：appid：1
+     * 参数：appid：1   2为视频
      *       page  1   页码
      */
     public static final String NEWS_CHANNEL_DATA="http://m.3dmgame.com/y3wap/ajaxappchannel.php";

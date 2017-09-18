@@ -3,20 +3,17 @@ package com.stx.xhb.dmgameapp.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
+import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
 import com.stx.xhb.dmgameapp.presenter.news.NewsContract;
 import com.stx.xhb.dmgameapp.presenter.news.NewsImpl;
-import com.stx.xhb.dmgameapp.ui.fragment.NewsCommonFragment;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,9 +29,7 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
     TabLayout mTabLayout;
     @Bind(R.id.article_viewpager)
     ViewPager article_viewpager;
-    private TabPageIndicatorAdapter adapter;
-    private List<Fragment> fragments;
-    private List<String> titleList;
+    private NewsViewPagerFragmentAdapter adapter;
 
     public static NewsFragment newInstance() {
         return new NewsFragment();
@@ -47,7 +42,6 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
-        initData();
         initView();
         setListener();
     }
@@ -57,10 +51,6 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
         return NewsContract.class;
     }
 
-    private void initData() {
-        fragments = new ArrayList<>();
-        titleList = new ArrayList<>();
-    }
 
     //获取控件
     private void initView() {
@@ -74,9 +64,9 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
     }
 
     //设置适配器
-    private void setAdapter() {
+    private void setAdapter(List<NewsChannelListEntity.HtmlEntity> channelList) {
         //实例化适配器
-        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, titleList);
+        adapter = new NewsViewPagerFragmentAdapter(getFragmentManager(), channelList);
         //设置适配器
         article_viewpager.setAdapter(adapter);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -89,7 +79,7 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mTitle.setText(titleList.get(tab.getPosition()));
+
             }
 
             @Override
@@ -106,13 +96,7 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
 
     @Override
     public void getChannelSuccess(List<NewsChannelListEntity.HtmlEntity> channelList) {
-        fragments.clear();
-        titleList.clear();
-        for (int i = 0; i < channelList.size(); i++) {
-            fragments.add(NewsCommonFragment.newInstance(channelList.get(i).getAppid()));
-            titleList.add(channelList.get(i).getTitle());
-        }
-        setAdapter();
+        setAdapter(channelList);
     }
 
     @Override

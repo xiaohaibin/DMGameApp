@@ -1,0 +1,49 @@
+package com.stx.xhb.dmgameapp.adapter;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+
+import com.stx.core.base.BaseFragment;
+import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.ui.fragment.NewsCommonFragment;
+import com.stx.xhb.dmgameapp.ui.fragment.VideoFragment;
+
+import java.util.List;
+
+/**
+ * Author: Mr.xiao on 2017/3/5
+ *
+ * @mail:xhb_199409@163.com
+ * @github:https://github.com/xiaohaibin
+ * @describe: ViewPager适配器
+ */
+public class NewsViewPagerFragmentAdapter extends FragmentPagerAdapter {
+    private List<NewsChannelListEntity.HtmlEntity> mNewsTagList;
+
+    public NewsViewPagerFragmentAdapter(FragmentManager fm, List<NewsChannelListEntity.HtmlEntity> newsTagList) {
+        super(fm);
+        this.mNewsTagList = newsTagList;
+    }
+
+    @Override
+    public BaseFragment getItem(int position) {
+        NewsChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
+        if ("2".equals(entity.getAppid())) {
+            return VideoFragment.newInstance();
+        } else {
+            return NewsCommonFragment.newInstance(entity.getAppid());
+        }
+
+    }
+
+    @Override
+    public int getCount() {
+        return mNewsTagList.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mNewsTagList.get(position % mNewsTagList.size()).getTitle();
+    }
+
+}

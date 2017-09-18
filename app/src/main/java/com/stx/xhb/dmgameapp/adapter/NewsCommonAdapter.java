@@ -14,8 +14,6 @@ import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 
 import java.util.List;
 
-import static com.umeng.socialize.utils.DeviceConfig.context;
-
 /**
  * Author：xiaohaibin
  * Time：2017/9/18
@@ -26,10 +24,11 @@ import static com.umeng.socialize.utils.DeviceConfig.context;
 
 public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.ChannelEntity.HtmlEntity> {
 
+
     private List<NewsListEntity.BannerEntity.HtmlEntity> mAdList;
     private LayoutInflater mLayoutInflater;
 
-    public NewsCommonAdapter(Context contex) {
+    public NewsCommonAdapter(Context context) {
         super(context);
         mLayoutInflater = LayoutInflater.from(context);
     }
@@ -37,7 +36,7 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.Chann
     public void setAdList(List<NewsListEntity.BannerEntity.HtmlEntity> adList) {
         this.mAdList = adList;
         if (mAdList != null && mAdList.size() > 0 && getHeaderCount() == 0) {
-            addHeader(new RecyclerArrayAdapter.ItemView() {
+            addHeader(new ItemView() {
                 NewsAdViewHolder viewHolder;
 
                 @Override

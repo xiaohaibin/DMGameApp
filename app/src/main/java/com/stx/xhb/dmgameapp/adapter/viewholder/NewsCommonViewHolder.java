@@ -1,9 +1,18 @@
 package com.stx.xhb.dmgameapp.adapter.viewholder;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Author：xiaohaibin
@@ -13,9 +22,34 @@ import com.stx.xhb.dmgameapp.entity.NewsListEntity;
  * Describe：
  */
 
-public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelEntity.HtmlEntity>{
+public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelEntity.HtmlEntity> {
+    @Bind(R.id.title)
+    TextView mTitle;
+    @Bind(R.id.date)
+    TextView mDate;
+    @Bind(R.id.iv)
+    ImageView mIv;
 
     public NewsCommonViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
+    }
+
+    @Override
+    public void setData(NewsListEntity.ChannelEntity.HtmlEntity data) {
+        super.setData(data);
+        mTitle.setText(data.getTitle());
+        mDate.setText(data.getSenddate());
+        List<List<String>> litpic = data.getLitpic();
+        if (litpic != null && !litpic.isEmpty()) {
+            List<String> stringList = litpic.get(0);
+            if (stringList != null && !stringList.isEmpty()) {
+                Glide.with(getContext()).load(stringList.get(0)).into(mIv);
+            } else {
+                Glide.with(getContext()).load(getContext().getResources().getDrawable(R.drawable.default_image)).into(mIv);
+            }
+        } else {
+            Glide.with(getContext()).load(getContext().getResources().getDrawable(R.drawable.default_image)).into(mIv);
+        }
     }
 }

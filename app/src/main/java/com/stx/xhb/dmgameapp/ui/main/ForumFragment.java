@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
 import com.stx.xhb.dmgameapp.presenter.forum.ForumContract;
 import com.stx.xhb.dmgameapp.presenter.forum.ForumImpl;
@@ -32,7 +31,7 @@ public class ForumFragment extends BaseFragment implements ForumContract.getChan
     TabLayout mTabLayout;
     @Bind(R.id.viewpager_forum)
     ViewPager mViewPager;
-    private TabPageIndicatorAdapter adapter;
+//    private TabPageIndicatorAdapter adapter;
     private List<Fragment> fragments;
     private List<String> titleList;
 
@@ -77,9 +76,9 @@ public class ForumFragment extends BaseFragment implements ForumContract.getChan
     //设置适配器
     private void setAdapter() {
         //实例化适配器
-        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, titleList);
+//        adapter = new TabPageIndicatorAdapter(getFragmentManager(), fragments, titleList);
         //设置适配器
-        mViewPager.setAdapter(adapter);
+//        mViewPager.setAdapter(adapter);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(mViewPager);

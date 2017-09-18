@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
     //初始化控件
     private void initView() {
         main_viewPager = (ViewPager) findViewById(R.id.main_viewpager);
-        //设置viewpager的预加载页数，viewpager默认只会预加载左右两边的页面数据
-        main_viewPager.setOffscreenPageLimit(4);
         rgp = (RadioGroup) findViewById(R.id.main_rgp);
         //设置默认第一个为选中状态
         RadioButton rb = (RadioButton) rgp.getChildAt(0);
