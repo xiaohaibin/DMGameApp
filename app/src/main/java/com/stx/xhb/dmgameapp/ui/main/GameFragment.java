@@ -10,55 +10,58 @@ import android.widget.TextView;
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
+import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.presenter.game.GameContract;
+import com.stx.xhb.dmgameapp.presenter.game.GameImpl;
+import com.stx.xhb.dmgameapp.ui.fragment.GameCommonFragment;
+import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 
-import static com.stx.xhb.dmgameapp.R.id.video_viewpager;
-
 /**
  * 视频的Fragment
  */
-public class GameFragment extends BaseFragment {
+public class GameFragment extends BaseFragment implements GameContract.getChannelListView {
 
 
     @Bind(R.id.title)
     TextView mTitle;
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
-    @Bind(video_viewpager)
+    @Bind(R.id.video_viewpager)
     ViewPager mVideoViewpager;
     private TabPageIndicatorAdapter adapter;
     private List<Fragment> fragments;
     private List<String> titleList;
 
-    @Override
-    public void showLoading() {
-
+    public static GameFragment newInstance() {
+        return new GameFragment();
     }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_video;
+        return R.layout.fragment_game;
     }
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
+        initData();
         initView();
         setListener();
     }
 
     @Override
     protected Class getLogicClazz() {
-        return null;
+        return GameContract.class;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((GameImpl) mPresenter).getChannelList();
+    }
 
     //获取控件
     private void initView() {
@@ -67,7 +70,8 @@ public class GameFragment extends BaseFragment {
 
     //初始化数据
     private void initData() {
-
+        fragments = new ArrayList<>();
+        titleList = new ArrayList<>();
     }
 
     //设置适配器
@@ -84,7 +88,7 @@ public class GameFragment extends BaseFragment {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                mTitle.setText(titleList.get(tab.getPosition()));
             }
 
             @Override
@@ -98,4 +102,32 @@ public class GameFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    public void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList) {
+        fragments.clear();
+        titleList.clear();
+        for (int i = 0; i < channelList.size(); i++) {
+            fragments.add(GameCommonFragment.newInstance(channelList.get(i).getAppid()));
+            titleList.add(channelList.get(i).getTitle());
+        }
+        setAdapter();
+    }
+
+    @Override
+    public void getChanelFailed(String msg) {
+        ToastUtil.show(msg);
+    }
+
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
 }

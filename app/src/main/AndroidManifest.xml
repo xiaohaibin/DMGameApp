@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <!--极光推送所需权限  start-->
+    <!-- 极光推送所需权限  start -->
     <!-- Required -->
     <permission
         android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE"
@@ -28,23 +28,24 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <!--极光推送所需权限  end-->
 
+    <!-- 极光推送所需权限  end -->
     <application
         android:name=".DmgApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <!--主页面-->
+        <!-- 主页面 -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
-        <!--启动页-->
+        <!-- 启动页 -->
         <activity
             android:name=".SplashActivity"
             android:launchMode="singleTop"
@@ -52,45 +53,44 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--文章详情-->
-        <activity
-            android:name=".ui.activity.ArticleDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+        <!-- 文章详情 -->
 
-        <!--视频详情-->
-        <activity
-            android:name=".ui.activity.VideoDetailActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
 
-        <!--设置页面-->
+        <!-- 视频详情 -->
+
+
+        <!-- 设置页面 -->
         <activity
             android:name=".ui.activity.SettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <!--关于页面-->
+        <!-- 关于页面 -->
         <activity
             android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <!--登录页面-->
+        <!-- 登录页面 -->
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-        <!--注册页面-->
+        <!-- 注册页面 -->
         <activity
             android:name=".ui.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+
+        <!--游戏详情-->
+        <activity
+            android:name=".ui.activity.GameDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
@@ -100,7 +100,7 @@
             </intent-filter>
         </receiver>
 
-        <!--极光推送相关配置  start-->
+        <!-- 极光推送相关配置  start -->
 
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
@@ -131,6 +131,7 @@
             android:enabled="true">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>
+
                 <category android:name="com.stx.xhb.dmgameapp"/>
             </intent-filter>
             <intent-filter>
@@ -151,11 +152,14 @@
             android:enabled="true"
             android:exported="false">
         </service>
+
         <receiver android:name="cn.jpush.android.service.AlarmReceiver"/>
 
-        <!--极光推送相关配置  end-->
+        <!-- 极光推送相关配置  end -->
+
 
         <!-- 友盟相关配置 -->
+
 
         <!-- 微信 -->
         <activity
@@ -185,19 +189,19 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
-        <!--友盟key-->
+        <!-- 友盟key -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="56de5a6567e58e3e5e000a25">
         </meta-data>
-
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${CHANNEL}"/>
 
         <!-- 友盟相关配置 -->
 
-        <!--腾讯Bugly相关配置-->
+
+        <!-- 腾讯Bugly相关配置 -->
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -214,10 +218,10 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
+        <!-- 腾讯Bugly相关配置 -->
 
-        <!--腾讯Bugly相关配置-->
 
-        <!--腾讯广点通配置-->
+        <!-- 腾讯广点通配置 -->
 
         <activity
             android:name="com.qq.e.ads.ADActivity"
@@ -228,7 +232,7 @@
             android:name="com.qq.e.comm.DownloadService"
             android:exported="false"/>
 
-        <!--腾讯广点通配置-->
+        <!-- 腾讯广点通配置 -->
 
     </application>
 

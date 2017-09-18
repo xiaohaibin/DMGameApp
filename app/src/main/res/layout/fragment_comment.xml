@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -13,32 +12,6 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <cn.finalteam.loadingviewfinal.PtrClassicFrameLayout
-            android:id="@+id/ptr_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.classic.common.MultipleStatusView
-                android:id="@+id/multiplestatusview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                app:emptyView="@layout/custom_empty_view"
-                app:errorView="@layout/custom_error_view"
-                app:loadingView="@layout/custom_loading_view"
-                app:noNetworkView="@layout/custom_no_network_view">
-
-                <cn.finalteam.loadingviewfinal.ListViewFinal
-                    android:id="@+id/content_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:cacheColorHint="#00000000"
-                    android:divider="@null"
-                    android:scrollbars="none"
-                    app:loadMoreMode="scroll"/>
-            </com.classic.common.MultipleStatusView>
-
-        </cn.finalteam.loadingviewfinal.PtrClassicFrameLayout>
     </FrameLayout>
 
     <View

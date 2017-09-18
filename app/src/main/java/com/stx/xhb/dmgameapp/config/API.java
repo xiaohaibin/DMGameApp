@@ -15,10 +15,10 @@ public class API {
      * 参数：appid：1
      *       page  1   页码
      */
-    public static final String NEWS_CHANNEL="http://m.3dmgame.com/y3wap/ajaxappchannel.php";
+    public static final String NEWS_CHANNEL_DATA="http://m.3dmgame.com/y3wap/ajaxappchannel.php";
 
     /**
-     * 用户登录、注册相关接口
+     * 用户登录、注册、论坛相关接口
      */
     public static final String USER_API="http://bbs.3dmgame.com/api/3dmapp/index.php";
 
@@ -28,12 +28,23 @@ public class API {
      */
     public static final String GET_NEWS_CHANNEL="http://m.3dmgame.com/y3wap/ajaxappchannels.php";
 
-    //3DMGame网站地址
-    public static final String DMGEAME_URL = "http://www.3dmgame.com";
+    /**
+     * 获取游戏频道列表
+     * 方式：GET
+     */
+    public static final String GET_GAME_CHANNEL="http://m.3dmgame.com/y3wap/appgamechannels.php";
 
-    //文章列表接口地址
-    public static final String ARTICLE_URL = "http://www.3dmgame.com/sitemap/api.php?row=10&typeid=%s&paging=1&page=%s";
+    /**
+     * 获取热门搜索关键词
+     * 方式:POST
+     */
+    public static final String GET_SERACH_HOT_KEYWORD="http://m.3dmgame.com/y3wap/ajaxappsearch.php";
 
-    //文章详情的接口地址
-    public static final String ChapterContent_URL = "http://www.3dmgame.com/sitemap/api.php?id=%s&typeid=%s";
+    /**
+     * 获取游戏各个频道数据
+     * 方式：POST
+     * 参数：{"page":"1","appid":"1"}
+     */
+    public static final String GET_GAME_CHANNEL_DATA="http://m.3dmgame.com/y3wap/appgamechannel.php";
+
 }

@@ -50,6 +50,10 @@ public class UserFragment extends BaseFragment {
     @Bind(R.id.btn_login_out)
     TextView mBtnLoginOut;
 
+    public static UserFragment newInstance() {
+        UserFragment fragment = new UserFragment();
+        return fragment;
+    }
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_personal;

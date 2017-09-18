@@ -13,7 +13,7 @@ import com.stx.xhb.dmgameapp.adapter.TabPageIndicatorAdapter;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
 import com.stx.xhb.dmgameapp.presenter.news.NewsContract;
 import com.stx.xhb.dmgameapp.presenter.news.NewsImpl;
-import com.stx.xhb.dmgameapp.ui.fragment.CommonFragment;
+import com.stx.xhb.dmgameapp.ui.fragment.NewsCommonFragment;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import butterknife.Bind;
 /**
  * 文章的Fragment
  */
-public class ArticleFragment extends BaseFragment implements NewsImpl.getChannelListView {
+public class NewsFragment extends BaseFragment implements NewsImpl.getChannelListView {
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -36,24 +36,13 @@ public class ArticleFragment extends BaseFragment implements NewsImpl.getChannel
     private List<Fragment> fragments;
     private List<String> titleList;
 
-    public static ArticleFragment newInstance() {
-        ArticleFragment fragment = new ArticleFragment();
-        return fragment;
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
+    public static NewsFragment newInstance() {
+        return new NewsFragment();
     }
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_article;
+        return R.layout.fragment_news;
     }
 
     @Override
@@ -100,7 +89,7 @@ public class ArticleFragment extends BaseFragment implements NewsImpl.getChannel
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                mTitle.setText(titleList.get(tab.getPosition()));
             }
 
             @Override
@@ -120,7 +109,7 @@ public class ArticleFragment extends BaseFragment implements NewsImpl.getChannel
         fragments.clear();
         titleList.clear();
         for (int i = 0; i < channelList.size(); i++) {
-            fragments.add(CommonFragment.newInstance(channelList.get(i).getAppid()));
+            fragments.add(NewsCommonFragment.newInstance(channelList.get(i).getAppid()));
             titleList.add(channelList.get(i).getTitle());
         }
         setAdapter();
@@ -129,5 +118,16 @@ public class ArticleFragment extends BaseFragment implements NewsImpl.getChannel
     @Override
     public void getChanelFailed(String msg) {
         ToastUtil.show(msg);
+    }
+
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 }

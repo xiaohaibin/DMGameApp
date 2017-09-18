@@ -12,12 +12,12 @@ android {
         multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86','x86_64','mips','mips64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME : "com.stx.xhb.dmgameapp",
+                JPUSH_PKGNAME: "com.stx.xhb.dmgameapp",
                 JPUSH_APPKEY : "1d606486b7fd03d82a683ecd", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     buildTypes {
@@ -46,11 +46,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':core')
+    //for okhttputils
     compile 'com.zhy:okhttputils:2.6.2'
-    //for refresh
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
-    compile 'cn.finalteam.loadingviewfinal:loading-more-view:1.0.1'
-    compile 'cn.finalteam.loadingviewfinal:ultra-pull-to-refresh:1.0.1'
     //for xbanner
     compile 'com.xhb:xbanner:1.3.0'
     //for jpush
@@ -62,4 +59,6 @@ dependencies {
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
     //for dialog
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.2@aar'
+    //for recyclerview
+    compile 'com.jude:easyrecyclerview:4.4.2'
 }
