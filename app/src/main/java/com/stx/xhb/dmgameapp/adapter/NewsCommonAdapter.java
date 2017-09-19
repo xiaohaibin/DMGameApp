@@ -24,7 +24,6 @@ import java.util.List;
 
 public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.ChannelEntity.HtmlEntity> {
 
-
     private List<NewsListEntity.BannerEntity.HtmlEntity> mAdList;
     private LayoutInflater mLayoutInflater;
 

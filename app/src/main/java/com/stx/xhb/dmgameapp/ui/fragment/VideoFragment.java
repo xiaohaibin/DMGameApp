@@ -2,14 +2,19 @@ package com.stx.xhb.dmgameapp.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseFragment;
+import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
 import com.stx.xhb.dmgameapp.entity.VideoListEntity;
 import com.stx.xhb.dmgameapp.presenter.video.getVideoContract;
+import com.stx.xhb.dmgameapp.presenter.video.getVideoListImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
@@ -22,15 +27,15 @@ import butterknife.Bind;
  * @describe:
  */
 
-public class VideoFragment extends BaseFragment implements getVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
+public class VideoFragment extends BaseFragment implements getVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView mRecyclerView;
+    private VideoListAdapter mVideoListAdapter;
 
-    public static NewsCommonFragment newInstance() {
-        return new NewsCommonFragment();
+    public static VideoFragment newInstance() {
+        return new VideoFragment();
     }
-
 
     @Override
     protected int getLayoutResource() {
@@ -40,8 +45,27 @@ public class VideoFragment extends BaseFragment implements getVideoContract.getV
     @Override
     protected void onInitView(Bundle savedInstanceState) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setRefreshingColor(Color.rgb(0, 140, 240), Color.rgb(0, 140, 240), Color.rgb(0, 140, 240));
+        DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.color_eeeeee),
+                ScreenUtil.dip2px(getContext(), 12));
+        dividerDecoration.setDrawLastItem(false);
+        mRecyclerView.addItemDecoration(dividerDecoration);
+        mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
+        mVideoListAdapter = new VideoListAdapter(getActivity());
+        mVideoListAdapter.setMore(R.layout.view_more, this);
+        mVideoListAdapter.setNoMore(R.layout.view_nomore);
+        mVideoListAdapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
+            @Override
+            public void onErrorShow() {
+                mVideoListAdapter.resumeMore();
+            }
+
+            @Override
+            public void onErrorClick() {
+                mVideoListAdapter.resumeMore();
+            }
+        });
+        mRecyclerView.setAdapter(mVideoListAdapter);
     }
 
     @Override
@@ -51,6 +75,18 @@ public class VideoFragment extends BaseFragment implements getVideoContract.getV
 
     @Override
     public void getVideoListSuccess(VideoListEntity videoListEntity) {
+        if (videoListEntity != null) {
+            if (currentpage == 1) {
+                mVideoListAdapter.clear();
+            }
+            mVideoListAdapter.addAll(videoListEntity.getVideo());
+            if (mVideoListAdapter.getCount() < page_size) {
+                mVideoListAdapter.stopMore();
+            }
+            if (mVideoListAdapter.getCount() == 0) {
+                mRecyclerView.showEmpty();
+            }
+        }
     }
 
     @Override
@@ -58,23 +94,34 @@ public class VideoFragment extends BaseFragment implements getVideoContract.getV
         ToastUtil.show(msg);
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
 
     @Override
     public void onLoadMore() {
-
+        currentpage++;
+        ((getVideoListImpl) mPresenter).getVideoList(currentpage);
     }
 
     @Override
     public void onRefresh() {
-
+        currentpage = 1;
+        ((getVideoListImpl) mPresenter).getVideoList(currentpage);
     }
+
+    @Override
+    protected void lazyLoad() {
+        onRefresh();
+    }
+
+    @Override
+    public void showLoading() {
+        if (currentpage == 1)
+            mRecyclerView.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (currentpage == 1)
+            mRecyclerView.setRefreshing(false);
+    }
+
 }

@@ -13,4 +13,30 @@
         <attr name="showDrawable" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="ColorTrackTabViewIndicator">
+        <attr name="ctTabSelectedTextColor" format="color"/>
+        <attr name="ctTabIndicatorColor" format="color"/>
+        <attr name="ctTabTextColor" format="color"/>
+        <attr name="ctTabTextSize" format="dimension"/>
+        <attr name="ctTabWidth" format="dimension"/>
+        <attr name="ctTabGravity" format="enum">
+            <enum name="Grivity_Fill" value="0"/>
+            <enum name="Grivity_Center" value="1"/>
+        </attr>
+        <attr name="ctMode">
+            <enum name="scrollable" value="0"/>
+            <enum name="fixed" value="1"/>
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="ColorTrackView">
+        <attr name="ctvText" format="string"/>
+        <attr name="ctvText_size" format="dimension"/>
+        <attr name="ctvText_origin_color" format="color"/>
+        <attr name="ctvText_change_color" format="color"/>
+        <attr name="ctvProgress" format="float"/>
+        <attr name="ctvDirection" format="integer"/>
+    </declare-styleable>
+
 </resources>

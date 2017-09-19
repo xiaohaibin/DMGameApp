@@ -1,7 +1,7 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
@@ -15,9 +15,9 @@ import java.util.List;
  *
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe: ViewPager适配器
+ * @describe: 资讯ViewPager适配器
  */
-public class NewsViewPagerFragmentAdapter extends FragmentPagerAdapter {
+public class NewsViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     private List<NewsChannelListEntity.HtmlEntity> mNewsTagList;
 
     public NewsViewPagerFragmentAdapter(FragmentManager fm, List<NewsChannelListEntity.HtmlEntity> newsTagList) {
@@ -33,7 +33,6 @@ public class NewsViewPagerFragmentAdapter extends FragmentPagerAdapter {
         } else {
             return NewsCommonFragment.newInstance(entity.getAppid());
         }
-
     }
 
     @Override
@@ -44,6 +43,11 @@ public class NewsViewPagerFragmentAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mNewsTagList.get(position % mNewsTagList.size()).getTitle();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
 }

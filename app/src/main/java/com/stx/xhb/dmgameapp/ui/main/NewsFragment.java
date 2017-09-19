@@ -43,7 +43,6 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
     @Override
     protected void onInitView(Bundle savedInstanceState) {
         initView();
-        setListener();
     }
 
     @Override
@@ -54,44 +53,24 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
 
     //获取控件
     private void initView() {
-        mTitle.setText("最新");
+        mTitle.setText("资讯");
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void lazyLoad() {
         ((NewsImpl) mPresenter).getChannelList();
     }
 
     //设置适配器
     private void setAdapter(List<NewsChannelListEntity.HtmlEntity> channelList) {
         //实例化适配器
-        adapter = new NewsViewPagerFragmentAdapter(getFragmentManager(), channelList);
+        adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         //设置适配器
         article_viewpager.setAdapter(adapter);
+        article_viewpager.setOffscreenPageLimit(channelList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(article_viewpager);
-    }
-
-    //设置监听
-    private void setListener() {
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override

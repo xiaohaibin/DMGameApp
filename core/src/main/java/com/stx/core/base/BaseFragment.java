@@ -16,6 +16,16 @@ import com.stx.core.mvp.BaseView;
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment implements BaseView {
+    //是否可见
+    protected boolean isViable = false;
+
+    // 标志位，标志Fragment已经初始化完成。
+    protected boolean isPrepared = false;
+
+    //标记已加载完成，保证懒加载只能加载一次
+    protected boolean hasLoaded = false;
+    protected int currentpage = 1;//当前页码
+    protected int page_size = 20;//页面数据量
 
     protected abstract int getLayoutResource();
 
@@ -154,14 +164,5 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected BasePresenter mPresenter;
     protected View rootView;
     protected Context mContext = null;//context
-    //是否可见
-    protected boolean isViable = false;
 
-    // 标志位，标志Fragment已经初始化完成。
-    protected boolean isPrepared = false;
-
-    //标记已加载完成，保证懒加载只能加载一次
-    protected boolean hasLoaded = false;
-    protected int currentpage = 1;//当前页码
-    protected int page_size = 20;//页面数据量
 }

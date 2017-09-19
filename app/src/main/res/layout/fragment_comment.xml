@@ -33,7 +33,7 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/shape_btn_bg_white"
-            android:drawableLeft="@drawable/night_biz_tie_comment_reply_write"
+            android:drawableLeft="@drawable/icon_reply_write"
             android:drawablePadding="5dp"
             android:hint="尽情吐槽吧~~~"
             android:padding="4dp"

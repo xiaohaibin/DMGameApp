@@ -5,18 +5,28 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseFragment;
+import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
+import com.stx.xhb.dmgameapp.config.API;
+import com.stx.xhb.dmgameapp.config.Constants;
+import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 import com.stx.xhb.dmgameapp.presenter.news.getNewsListContract;
-import com.stx.xhb.dmgameapp.presenter.news.getNewsListImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * 通用的Fragment
@@ -25,6 +35,8 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView mRecyclerView;
+    @Bind(R.id.tag)
+    TextView mTag;
     private String mAppId = "0";
     private NewsCommonAdapter mNewsCommonAdapter;
 
@@ -42,10 +54,12 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
         if (bundle != null) {
             if (bundle.containsKey("id")) {
                 mAppId = bundle.getString("id");
+                mTag.setText(mAppId);
+                Log.i("===>mAppId", mAppId);
             }
         }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setRefreshingColor(Color.rgb(0, 140, 240), Color.rgb(0, 140, 240), Color.rgb(0, 140, 240));
+        mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
         mNewsCommonAdapter = new NewsCommonAdapter(getActivity());
         mNewsCommonAdapter.setMore(R.layout.view_more, this);
@@ -69,10 +83,11 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
         return getNewsListContract.class;
     }
 
-
     @Override
     protected void lazyLoad() {
-        ((getNewsListImpl) mPresenter).getNewsList(mAppId, currentpage);
+        if (mNewsCommonAdapter != null && mNewsCommonAdapter.getCount() <= 0) {
+            onRefresh();
+        }
     }
 
     @Override
@@ -81,31 +96,24 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
     }
 
     @Override
-    public void showLoading() {
-        mRecyclerView.setRefreshing(true);
-    }
-
-    @Override
-    public void hideLoading() {
-        mRecyclerView.setRefreshing(false);
-    }
-
-    @Override
     public void getNewListSuccess(NewsListEntity listEntity) {
-        if (listEntity != null) {
-            if (currentpage == 1) {
-                mNewsCommonAdapter.clear();
-                if ("1".equals(mAppId) && listEntity.getBanner() != null) {
-                    mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
-                }
-            }
-            if (listEntity.getChannel() != null) {
-                mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
-            }
-            if (mNewsCommonAdapter.getCount() < page_size) {
-                mNewsCommonAdapter.stopMore();
-            }
-        }
+//        if (listEntity != null) {
+//            if (currentpage == 1) {
+//                mNewsCommonAdapter.clear();
+//                if ("1".equals(mAppId) && listEntity.getBanner() != null) {
+//                    mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
+//                }
+//            }
+//            if (listEntity.getChannel() != null) {
+//                mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
+//            }
+//            if (mNewsCommonAdapter.getCount() < page_size) {
+//                mNewsCommonAdapter.stopMore();
+//            }
+//            if (mNewsCommonAdapter.getCount() == 0) {
+//                mRecyclerView.showEmpty();
+//            }
+//        }
     }
 
     @Override
@@ -117,12 +125,74 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
     @Override
     public void onRefresh() {
         currentpage = 1;
-        ((getNewsListImpl) mPresenter).getNewsList(mAppId, currentpage);
+        getData();
+//        ((getNewsListImpl) mPresenter).getNewsList(mAppId, currentpage);
     }
 
     @Override
     public void onLoadMore() {
         currentpage++;
-        ((getNewsListImpl) mPresenter).getNewsList(mAppId, currentpage);
+        getData();
+//        ((getNewsListImpl) mPresenter).getNewsList(mAppId, currentpage);
+    }
+
+    @Override
+    public void showLoading() {
+    }
+
+    @Override
+    public void hideLoading() {
+    }
+
+    private void getData() {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new NewsContentEntity(mAppId, currentpage)))
+                .url(API.NEWS_CHANNEL_DATA)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onBefore(Request request, int id) {
+                        if (currentpage == 1) {
+                            mRecyclerView.setRefreshing(true);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.show(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            NewsListEntity listEntity = GsonUtil.newGson().fromJson(response, NewsListEntity.class);
+                            if (listEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                if (currentpage == 1) {
+                                    mNewsCommonAdapter.clear();
+                                    if ("1".equals(mAppId) && listEntity.getBanner() != null) {
+                                        mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
+                                    }
+                                }
+                                if (listEntity.getChannel() != null) {
+                                    mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
+                                }
+                                if (mNewsCommonAdapter.getCount() < page_size) {
+                                    mNewsCommonAdapter.stopMore();
+                                }
+                                if (mNewsCommonAdapter.getCount() == 0) {
+                                    mRecyclerView.showEmpty();
+                                }
+                            } else {
+                                mRecyclerView.setRefreshing(false);
+                                ToastUtil.show(listEntity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        mRecyclerView.setRefreshing(false);
+                    }
+                });
     }
 }

@@ -45,11 +45,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
             List<String> stringList = litpic.get(0);
             if (stringList != null && !stringList.isEmpty()) {
                 Glide.with(getContext()).load(stringList.get(0)).into(mIv);
-            } else {
-                Glide.with(getContext()).load(getContext().getResources().getDrawable(R.drawable.default_image)).into(mIv);
             }
-        } else {
-            Glide.with(getContext()).load(getContext().getResources().getDrawable(R.drawable.default_image)).into(mIv);
         }
     }
 }
