@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -35,8 +34,6 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView mRecyclerView;
-    @Bind(R.id.tag)
-    TextView mTag;
     private String mAppId = "0";
     private NewsCommonAdapter mNewsCommonAdapter;
 
@@ -54,7 +51,6 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
         if (bundle != null) {
             if (bundle.containsKey("id")) {
                 mAppId = bundle.getString("id");
-                mTag.setText(mAppId);
                 Log.i("===>mAppId", mAppId);
             }
         }
