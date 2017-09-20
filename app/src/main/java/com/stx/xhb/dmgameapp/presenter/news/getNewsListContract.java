@@ -17,6 +17,7 @@ public interface getNewsListContract {
     void getNewsList(String appId, int page);
 
     interface getNewListView extends BaseView {
+
         void getNewListSuccess(NewsListEntity listEntity);
 
         void getNewListFailed(String msg);

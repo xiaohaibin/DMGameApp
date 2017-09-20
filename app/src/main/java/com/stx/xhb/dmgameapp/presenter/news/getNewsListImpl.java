@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.presenter.news;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
@@ -25,6 +26,7 @@ import okhttp3.Request;
 public class getNewsListImpl extends BasePresenter<getNewsListContract.getNewListView> implements getNewsListContract {
     @Override
     public void getNewsList(String appId, int page) {
+        Log.i("===dsds",appId+"====");
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new NewsContentEntity(appId, page)))
                 .url(API.NEWS_CHANNEL_DATA)
@@ -48,7 +50,7 @@ public class getNewsListImpl extends BasePresenter<getNewsListContract.getNewLis
                                 getView().getNewListSuccess(newsListEntity);
                             } else {
                                 getView().hideLoading();
-                                getView().getNewListFailed(newsListEntity.getMsg());
+                                getView().getNewListFailed(TextUtils.isEmpty(newsListEntity.getMsg()) ? "服务器请求失败，请重试" : newsListEntity.getMsg());
                             }
                         }
                     }

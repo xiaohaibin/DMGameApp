@@ -13,9 +13,10 @@ import com.stx.xhb.dmgameapp.entity.VideoListEntity;
  */
 @Implement(getVideoListImpl.class)
 public interface getVideoContract {
-       void  getVideoList(int page);
 
-    interface getVideoListView extends BaseView{
+    void getVideoList(int page);
+
+    interface getVideoListView extends BaseView {
 
         void getVideoListSuccess(VideoListEntity videoListEntity);
 

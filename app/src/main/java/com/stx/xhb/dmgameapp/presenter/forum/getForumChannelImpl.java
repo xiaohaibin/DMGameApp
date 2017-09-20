@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.presenter.game;
+package com.stx.xhb.dmgameapp.presenter.forum;
 
 import android.text.TextUtils;
 
@@ -6,7 +6,8 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.CommonContentEntity;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -21,12 +22,13 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class GameImpl extends BasePresenter<GameContract.getChannelListView> implements GameContract{
+public class getForumChannelImpl extends BasePresenter<getForumChannelContract.getChannelListView> implements getForumChannelContract {
 
     @Override
     public void getChannelList() {
-        OkHttpUtils.get()
-                .url(API.GET_GAME_CHANNEL)
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new CommonContentEntity("groups")))
+                .url(API.USER_API)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -42,14 +44,14 @@ public class GameImpl extends BasePresenter<GameContract.getChannelListView> imp
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            GameChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, GameChannelListEntity.class);
+                            ForumChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, ForumChannelListEntity.class);
                             if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 if (forumChannelListEntity.getHtml() != null) {
                                     getView().getChannelSuccess(forumChannelListEntity.getHtml());
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getChanelFailed(forumChannelListEntity.getMsg());
+                                getView().getChanelFailed(TextUtils.isEmpty(forumChannelListEntity.getMsg()) ? "服务器请求失败，请重试" : forumChannelListEntity.getMsg());
                             }
                         }
                     }

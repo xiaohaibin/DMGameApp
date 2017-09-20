@@ -13,8 +13,8 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-@Implement(NewsImpl.class)
-public interface NewsContract {
+@Implement(getNewsChannelImpl.class)
+public interface getNewsChannelContract {
 
     void getChannelList();
 

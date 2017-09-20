@@ -13,8 +13,8 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-@Implement(ForumImpl.class)
-public interface ForumContract {
+@Implement(getForumChannelImpl.class)
+public interface getForumChannelContract {
 
     void getChannelList();
 

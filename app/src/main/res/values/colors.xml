@@ -8,6 +8,8 @@
     <color name="colorBlack">#575757</color>
     <color name="colorBackground">#FF6347</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="color_7f7f7f">#7f7f7f</color>
+    <color name="color_535353">#535353</color>
     <color name="grey700">#616161</color>
     <color name="text_gray">#ff909090</color>
     <color name="text_black">#212121</color>

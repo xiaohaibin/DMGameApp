@@ -10,8 +10,8 @@ import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
-import com.stx.xhb.dmgameapp.presenter.news.NewsContract;
-import com.stx.xhb.dmgameapp.presenter.news.NewsImpl;
+import com.stx.xhb.dmgameapp.presenter.news.getNewsChannelContract;
+import com.stx.xhb.dmgameapp.presenter.news.getNewsChannelImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.Bind;
 /**
  * 文章的Fragment
  */
-public class NewsFragment extends BaseFragment implements NewsImpl.getChannelListView {
+public class NewsFragment extends BaseFragment implements getNewsChannelImpl.getChannelListView {
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -47,7 +47,7 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
 
     @Override
     protected Class getLogicClazz() {
-        return NewsContract.class;
+        return getNewsChannelContract.class;
     }
 
 
@@ -58,7 +58,7 @@ public class NewsFragment extends BaseFragment implements NewsImpl.getChannelLis
 
     @Override
     protected void lazyLoad() {
-        ((NewsImpl) mPresenter).getChannelList();
+        ((getNewsChannelImpl) mPresenter).getChannelList();
     }
 
     //设置适配器

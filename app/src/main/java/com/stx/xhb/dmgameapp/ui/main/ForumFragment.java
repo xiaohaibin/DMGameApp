@@ -10,8 +10,8 @@ import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
-import com.stx.xhb.dmgameapp.presenter.forum.ForumContract;
-import com.stx.xhb.dmgameapp.presenter.forum.ForumImpl;
+import com.stx.xhb.dmgameapp.presenter.forum.getForumChannelContract;
+import com.stx.xhb.dmgameapp.presenter.forum.getForumChannelImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.Bind;
 /**
  * 论坛的Fragment
  */
-public class ForumFragment extends BaseFragment implements ForumContract.getChannelListView {
+public class ForumFragment extends BaseFragment implements getForumChannelContract.getChannelListView {
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -48,12 +48,12 @@ public class ForumFragment extends BaseFragment implements ForumContract.getChan
 
     @Override
     protected void lazyLoad() {
-        ((ForumImpl) mPresenter).getChannelList();
+        ((getForumChannelImpl) mPresenter).getChannelList();
     }
 
     @Override
     protected Class getLogicClazz() {
-        return ForumContract.class;
+        return getForumChannelContract.class;
     }
 
     //获取控件

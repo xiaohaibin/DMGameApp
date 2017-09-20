@@ -10,8 +10,8 @@ import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
-import com.stx.xhb.dmgameapp.presenter.game.GameContract;
-import com.stx.xhb.dmgameapp.presenter.game.GameImpl;
+import com.stx.xhb.dmgameapp.presenter.game.getGameChannelContract;
+import com.stx.xhb.dmgameapp.presenter.game.getGameChannelImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.Bind;
 /**
  * 视频的Fragment
  */
-public class GameFragment extends BaseFragment implements GameContract.getChannelListView {
+public class GameFragment extends BaseFragment implements getGameChannelContract.getChannelListView {
 
 
     @Bind(R.id.title)
@@ -48,12 +48,12 @@ public class GameFragment extends BaseFragment implements GameContract.getChanne
 
     @Override
     protected Class getLogicClazz() {
-        return GameContract.class;
+        return getGameChannelContract.class;
     }
 
     @Override
     protected void lazyLoad() {
-        ((GameImpl) mPresenter).getChannelList();
+        ((getGameChannelImpl) mPresenter).getChannelList();
     }
 
     //获取控件

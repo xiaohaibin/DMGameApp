@@ -5,18 +5,18 @@
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent"/>
             <corners android:radius="3dp"/>
-            <stroke android:width="1px" android:color="@color/color_eeeeee" android:dashGap="0dp" android:dashWidth="0dp"/>
+            <stroke android:width="1px" android:color="@color/colorGray" android:dashGap="0dp" android:dashWidth="0dp"/>
 
-            <padding android:bottom="6dp" android:left="6dp" android:right="6dp" android:top="6dp"/>
+            <padding android:bottom="3dp" android:left="8dp" android:right="8dp" android:top="3dp"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent"/>
             <corners android:radius="3dp"/>
-            <stroke android:width="1px" android:color="@color/color_eeeeee" android:dashGap="0dp" android:dashWidth="0dp"/>
+            <stroke android:width="1px" android:color="@color/colorGray" android:dashGap="0dp" android:dashWidth="0dp"/>
 
-            <padding android:bottom="6dp" android:left="6dp" android:right="6dp" android:top="6dp"/>
+            <padding android:bottom="3dp" android:left="8dp" android:right="8dp" android:top="3dp"/>
         </shape>
     </item>
 

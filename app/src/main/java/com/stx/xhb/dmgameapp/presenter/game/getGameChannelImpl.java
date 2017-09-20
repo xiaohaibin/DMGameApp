@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.presenter.news;
+package com.stx.xhb.dmgameapp.presenter.game;
 
 import android.text.TextUtils;
 
@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -15,17 +15,18 @@ import okhttp3.Request;
 
 /**
  * Author：xiaohaibin
- * Time：2017/9/17
+ * Time：2017/9/18
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
 
-public class NewsImpl extends BasePresenter<NewsContract.getChannelListView> implements NewsContract {
+public class getGameChannelImpl extends BasePresenter<getGameChannelContract.getChannelListView> implements getGameChannelContract {
+
     @Override
     public void getChannelList() {
         OkHttpUtils.get()
-                .url(API.GET_NEWS_CHANNEL)
+                .url(API.GET_GAME_CHANNEL)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -41,14 +42,14 @@ public class NewsImpl extends BasePresenter<NewsContract.getChannelListView> imp
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsChannelListEntity.class);
-                            if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumChannelListEntity.getHtml() != null) {
-                                    getView().getChannelSuccess(forumChannelListEntity.getHtml());
+                            GameChannelListEntity gameChannelListEntity = GsonUtil.newGson().fromJson(response, GameChannelListEntity.class);
+                            if (gameChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                if (gameChannelListEntity.getHtml() != null) {
+                                    getView().getChannelSuccess(gameChannelListEntity.getHtml());
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getChanelFailed(forumChannelListEntity.getMsg());
+                                getView().getChanelFailed(TextUtils.isEmpty(gameChannelListEntity.getMsg()) ? "服务器请求失败，请重试" : gameChannelListEntity.getMsg());
                             }
                         }
                     }

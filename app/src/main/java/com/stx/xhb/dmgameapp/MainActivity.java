@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapter() {
         //实例化适配器
         adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts);
+        main_viewPager.setOffscreenPageLimit(fragemnts.size());
         //设置适配器
         main_viewPager.setAdapter(adapter);
     }

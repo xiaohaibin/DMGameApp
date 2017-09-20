@@ -86,6 +86,7 @@ public class NewsListEntity extends BaseEntity{
             private String lmfl;
             private String changyan_id;
 
+
             public void setArcurl(String arcurl) {
                 this.arcurl = arcurl;
             }

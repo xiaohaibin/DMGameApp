@@ -2,8 +2,7 @@ package com.stx.xhb.dmgameapp.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * Created by xhb on 2016/1/18.
  * 主界面Fragment的适配器
  */
-public class MainFragmentPageAdapter extends FragmentPagerAdapter {
+public class MainFragmentPageAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
 
@@ -31,7 +30,7 @@ public class MainFragmentPageAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-//        super.destroyItem(container, position, object);
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 }

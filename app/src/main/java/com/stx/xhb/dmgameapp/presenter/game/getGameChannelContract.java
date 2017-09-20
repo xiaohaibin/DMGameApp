@@ -13,8 +13,8 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-@Implement(GameImpl.class)
-public interface GameContract {
+@Implement(getGameChannelImpl.class)
+public interface getGameChannelContract {
 
     void getChannelList();
 
