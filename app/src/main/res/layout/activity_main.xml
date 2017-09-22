@@ -73,5 +73,6 @@
             android:text="我的"
             android:textColor="@drawable/menu_color_selector"
             android:textSize="14sp"/>
+
     </RadioGroup>
 </LinearLayout>

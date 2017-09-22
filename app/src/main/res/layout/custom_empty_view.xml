@@ -19,4 +19,5 @@
         style="@style/MultipleStatusView.Content"
         android:layout_below="@id/empty_retry_view"
         android:text="@string/empty_view_hint"/>
+
 </LinearLayout>

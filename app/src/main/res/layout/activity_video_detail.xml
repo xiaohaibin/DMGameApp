@@ -7,13 +7,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"/>
 
-    <com.tencent.smtt.sdk.WebView
-        android:id="@+id/coment_web"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:scrollbars="none"
-        android:layout_weight="1"/>
 </LinearLayout>
