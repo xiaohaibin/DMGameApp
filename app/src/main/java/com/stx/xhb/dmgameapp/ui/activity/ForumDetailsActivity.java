@@ -3,17 +3,20 @@ package com.stx.xhb.dmgameapp.ui.activity;
 import android.os.Bundle;
 
 import com.stx.core.base.BaseActivity;
-import com.stx.xhb.dmgameapp.R;
 
 /**
- * 游戏详情
+ * Author：xiaohaibin
+ * Time：2017/9/21
+ * Emil：xhb_199409@163.com
+ * Github：https://github.com/xiaohaibin/
+ * Describe：论坛详情
  */
-public class GameDetailsActivity extends BaseActivity {
 
+public class ForumDetailsActivity  extends BaseActivity{
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_game_details;
+        return 0;
     }
 
     @Override
@@ -35,4 +38,5 @@ public class GameDetailsActivity extends BaseActivity {
     public void hideLoading() {
 
     }
+
 }

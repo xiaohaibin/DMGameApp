@@ -41,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="今日12086"
                 android:textColor="@color/color_888888"
                 android:textSize="12sp"/>
 
@@ -51,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="排名：1"
                 android:textColor="@color/color_888888"
                 android:textSize="12sp"/>
 

@@ -1,7 +1,7 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
@@ -16,7 +16,7 @@ import java.util.List;
  * @github:https://github.com/xiaohaibin
  * @describe: 游戏ViewPager适配器
  */
-public class GameViewPagerFragmentAdapter extends FragmentPagerAdapter {
+public class GameViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     private List<GameChannelListEntity.HtmlEntity> mNewsTagList;
 
     public GameViewPagerFragmentAdapter(FragmentManager fm, List<GameChannelListEntity.HtmlEntity> newsTagList) {
@@ -40,4 +40,8 @@ public class GameViewPagerFragmentAdapter extends FragmentPagerAdapter {
         return mNewsTagList.get(position % mNewsTagList.size()).getTitle();
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }

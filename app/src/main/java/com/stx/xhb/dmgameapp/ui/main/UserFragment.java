@@ -97,7 +97,7 @@ public class UserFragment extends BaseFragment {
                                 showUserInfo();
                                 dialog.dismiss();
                             }
-                        }).setMessage("是否要退出登录？").create();
+                        }).setMessage("确定要退出登录？").create();
                 dialog.show();
                 break;
         }

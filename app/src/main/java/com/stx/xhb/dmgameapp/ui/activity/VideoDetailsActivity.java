@@ -3,25 +3,31 @@ package com.stx.xhb.dmgameapp.ui.activity;
 import android.os.Bundle;
 
 import com.stx.core.base.BaseActivity;
-import com.stx.xhb.dmgameapp.R;
 
 /**
  * Author：xiaohaibin
- * Time：2017/9/11
+ * Time：2017/9/21
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：web页面
+ * Describe：视频详情
  */
 
-public class WebActivity extends BaseActivity{
+public class VideoDetailsActivity extends BaseActivity {
+
+
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_web;
+        return 0;
     }
 
     @Override
     protected void onInitialization(Bundle bundle) {
 
+    }
+
+    @Override
+    protected Class getLogicClazz() {
+        return null;
     }
 
     @Override
@@ -32,10 +38,5 @@ public class WebActivity extends BaseActivity{
     @Override
     public void hideLoading() {
 
-    }
-
-    @Override
-    protected Class getLogicClazz() {
-        return null;
     }
 }

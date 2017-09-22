@@ -58,12 +58,6 @@
             </intent-filter>
         </activity>
 
-        <!-- 文章详情 -->
-
-
-        <!-- 视频详情 -->
-
-
         <!-- 设置页面 -->
         <activity
             android:name=".ui.activity.SettingActivity"
@@ -93,6 +87,21 @@
             android:name=".ui.activity.GameDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
+        <!-- 文章详情 -->
+        <activity android:name=".ui.activity.NewsDetailsActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+
+        <!-- 视频详情 -->
+        <activity android:name=".ui.activity.VideoDetailsActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+
+        <!--论坛详情-->
+        <activity android:name=".ui.activity.ForumDetailsActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
 
         <receiver android:name=".receiver.BootCompletedReceiver">
             <intent-filter>

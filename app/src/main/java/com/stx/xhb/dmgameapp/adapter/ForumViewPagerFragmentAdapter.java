@@ -1,7 +1,7 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
@@ -16,7 +16,7 @@ import java.util.List;
  * @github:https://github.com/xiaohaibin
  * @describe: 论坛ViewPager适配器
  */
-public class ForumViewPagerFragmentAdapter extends FragmentPagerAdapter {
+public class ForumViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     private List<ForumChannelListEntity.HtmlEntity> mNewsTagList;
 
     public ForumViewPagerFragmentAdapter(FragmentManager fm, List<ForumChannelListEntity.HtmlEntity> newsTagList) {
@@ -40,4 +40,8 @@ public class ForumViewPagerFragmentAdapter extends FragmentPagerAdapter {
         return mNewsTagList.get(position % mNewsTagList.size()).getName();
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }

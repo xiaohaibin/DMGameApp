@@ -45,7 +45,7 @@ public class ShareUtils {
      */
     public void sharePlatform(final Activity activity, final SHARE_MEDIA platform, final String url, final String title, final String text, final UMImage image) {
         //由于qq空间分享友盟判断有问题，暂时这么处理
-        if (platform != SHARE_MEDIA.QZONE && !UMShareAPI.get(activity).isInstall(activity, platform)) {
+        if (!UMShareAPI.get(activity).isInstall(activity, platform)) {
             switch (platform) {
                 case QQ:
                 case QZONE:
@@ -61,7 +61,6 @@ public class ShareUtils {
             }
             return;
         }
-
         new ShareAction(activity)
                 .setPlatform(platform)
                 .withMedia(new UMWeb(url,title,text,image))

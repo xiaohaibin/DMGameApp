@@ -63,17 +63,23 @@ public class GameFragment extends BaseFragment implements getGameChannelContract
 
     //设置适配器
     private void setAdapter(List<GameChannelListEntity.HtmlEntity> channelList) {
-        adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(),channelList);
+        adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         mVideoViewpager.setAdapter(adapter);
+        mVideoViewpager.setOffscreenPageLimit(channelList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mVideoViewpager);
     }
 
 
     @Override
     public void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList) {
-        setAdapter(channelList);
+        if (channelList.size() > 4) {
+            channelList.remove(4);
+            setAdapter(channelList);
+        } else {
+            setAdapter(channelList);
+        }
     }
 
     @Override

@@ -31,7 +31,6 @@ public class ForumFragment extends BaseFragment implements getForumChannelContra
     ViewPager mViewPager;
     private ForumViewPagerFragmentAdapter adapter;
 
-
     public static ForumFragment newInstance() {
         return new ForumFragment();
     }
@@ -64,9 +63,10 @@ public class ForumFragment extends BaseFragment implements getForumChannelContra
     //设置适配器
     private void setAdapter(List<ForumChannelListEntity.HtmlEntity> channelList) {
         //实例化适配器
-        adapter = new ForumViewPagerFragmentAdapter(getChildFragmentManager(),channelList);
+        adapter = new ForumViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         //设置适配器
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(channelList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(mViewPager);
