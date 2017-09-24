@@ -4,22 +4,35 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseFragment;
+import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.ForumListAdapter;
+import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.entity.ForumEntity;
 import com.stx.xhb.dmgameapp.presenter.forum.getForumListContract;
 import com.stx.xhb.dmgameapp.presenter.forum.getForumListImpl;
+import com.stx.xhb.dmgameapp.utils.JsonResponse;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Author：xiaohaibin
@@ -29,7 +42,7 @@ import butterknife.Bind;
  * Describe：
  */
 
-public class ForumCommonFragment extends BaseFragment implements getForumListContract.getForumListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class ForumCommonFragment extends BaseFragment implements getForumListContract.getForumListView, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView mRecyclerView;
@@ -65,7 +78,6 @@ public class ForumCommonFragment extends BaseFragment implements getForumListCon
         mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
         mForumListAdapter = new ForumListAdapter(getActivity());
-        mForumListAdapter.setMore(R.layout.view_more, this);
         mForumListAdapter.setNoMore(R.layout.view_nomore);
         mForumListAdapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
             @Override
@@ -125,12 +137,85 @@ public class ForumCommonFragment extends BaseFragment implements getForumListCon
     @Override
     public void onRefresh() {
         currentpage = 1;
-        ((getForumListImpl) mPresenter).getForumListData(mId);
+//        ((getForumListImpl) mPresenter).getForumListData(mId);
+        getData();
     }
 
-    @Override
-    public void onLoadMore() {
-        currentpage++;
-        ((getForumListImpl) mPresenter).getForumListData(mId);
+
+    private void getData() {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new getForumListImpl.ForumContentEntity(mId, "forums")))
+                .url(API.USER_API)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onBefore(Request request, int id) {
+                        if (currentpage == 1)
+                            mRecyclerView.setRefreshing(true);
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ToastUtil.show(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            try {
+                                JsonResponse jsonResponse = new JsonResponse(new JSONObject(response));
+                                if (jsonResponse.isSuccess()) {
+                                    List<ForumEntity> dataList = new ArrayList<>();
+                                    JSONArray array = jsonResponse.getDataList();
+                                    JSONObject object = jsonResponse.getObject();
+                                    if (array != null && object != null) {
+                                        for (int i = 0; i < array.length(); i++) {
+                                            ForumEntity forumEntity = new ForumEntity();
+                                            JSONObject jsonObject = object.getJSONObject(array.getString(i));
+                                            forumEntity.setFid(jsonObject.getString("fid"));
+                                            forumEntity.setName(jsonObject.getString("name"));
+                                            forumEntity.setTodayposts(jsonObject.getString("todayposts"));
+                                            forumEntity.setRank(jsonObject.getString("rank"));
+                                            forumEntity.setType(jsonObject.getString("type"));
+                                            forumEntity.setIcon(jsonObject.getString("icon"));
+                                            dataList.add(forumEntity);
+                                        }
+                                        if (currentpage == 1) {
+                                            mForumListAdapter.clear();
+                                        }
+                                        mForumListAdapter.addAll(dataList);
+                                        if (mForumListAdapter.getCount() < page_size) {
+                                            mForumListAdapter.stopMore();
+                                        }
+                                        if (mForumListAdapter.getCount() == 0) {
+                                            mRecyclerView.showEmpty();
+                                        }
+                                    } else {
+                                        if (currentpage == 1)
+                                            mRecyclerView.setRefreshing(false);
+                                        ToastUtil.show(jsonResponse.getMsg());
+                                    }
+                                } else {
+                                    if (currentpage == 1)
+                                        mRecyclerView.setRefreshing(false);
+                                    if (mForumListAdapter.getCount() == 0) {
+                                        mRecyclerView.showEmpty();
+                                    }
+                                    ToastUtil.show(jsonResponse.getMsg());
+                                }
+                            } catch (JSONException e) {
+                                if (currentpage == 1)
+                                    mRecyclerView.setRefreshing(false);
+                                ToastUtil.show(e.getMessage());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        if (currentpage == 1)
+                            mRecyclerView.setRefreshing(false);
+                    }
+                });
     }
 }

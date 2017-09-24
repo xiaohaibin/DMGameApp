@@ -19,6 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:text="@string/string_view_empty"
+        android:textColor="@color/color_888888"
         android:textSize="16sp"/>
 
 

@@ -91,7 +91,7 @@ public class getForumListImpl extends BasePresenter<getForumListContract.getForu
     }
 
 
-    private class ForumContentEntity {
+    public static class ForumContentEntity {
 
         /**
          * fid : 441
@@ -101,7 +101,7 @@ public class getForumListImpl extends BasePresenter<getForumListContract.getForu
         private String fid;
         private String module;
 
-        ForumContentEntity(String fid, String module) {
+        public ForumContentEntity(String fid, String module) {
             this.fid = fid;
             this.module = module;
         }
