@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Describe：
  */
 
-public class ForumListViewHodler extends BaseViewHolder<ForumEntity>{
+public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
     @Bind(R.id.iv_forum)
     ImageView mIvForum;
     @Bind(R.id.tv_forum_title)
@@ -31,17 +31,18 @@ public class ForumListViewHodler extends BaseViewHolder<ForumEntity>{
     TextView mTvSort;
     @Bind(R.id.btn_collect)
     TextView mBtnCollect;
+
     public ForumListViewHodler(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void setData(ForumEntity data) {
         Glide.with(getContext()).load(data.getIcon()).placeholder(R.drawable.product_default).error(R.drawable.product_default).into(mIvForum);
         mTvForumTitle.setText(data.getName());
-        mTvCount.setText("今日："+data.getTodayposts());
-        mTvSort.setText("排名："+data.getRank());
+        mTvCount.setText("今日：" + data.getTodayposts());
+        mTvSort.setText("排名：" + data.getRank());
         mBtnCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

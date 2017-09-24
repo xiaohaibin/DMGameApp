@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.VideoListEntity;
 
 import butterknife.Bind;
@@ -33,15 +34,21 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBea
 
     public VideoListViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
-    public void setData(VideoListEntity.VideoBean data) {
+    public void setData(final VideoListEntity.VideoBean data) {
         super.setData(data);
         mTvVideoTitle.setText(data.getTitle());
         mTvVideoTime.setText(data.getSenddate());
-        mTvPlayCount.setText(data.getClick()+"次播放");
+        mTvPlayCount.setText(data.getClick() + "次播放");
         Glide.with(getContext()).load(data.getVideopic()).into(mIvVideoImg);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebDetailsActivity.start(getContext(), data.getVideourl());
+            }
+        });
     }
 }

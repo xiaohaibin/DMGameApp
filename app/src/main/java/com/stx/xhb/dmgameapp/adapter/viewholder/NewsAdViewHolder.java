@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class NewsAdViewHolder {
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
-                ToastUtil.show("点击了"+position);
+                WebDetailsActivity.start(mContext, bannerList.get(position).getArcurl());
             }
         });
     }

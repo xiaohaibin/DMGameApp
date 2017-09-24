@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
     }
 
     @Override
-    public void setData(NewsListEntity.ChannelEntity.HtmlEntity data) {
+    public void setData(final NewsListEntity.ChannelEntity.HtmlEntity data) {
         super.setData(data);
         mTitle.setText(data.getTitle());
         mDate.setText(data.getSenddate());
@@ -47,5 +48,11 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
                 Glide.with(getContext()).load(stringList.get(0)).into(mIv);
             }
         }
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebDetailsActivity.start(getContext(), data.getArcurl());
+            }
+        });
     }
 }
