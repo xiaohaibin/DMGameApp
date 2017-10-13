@@ -16,6 +16,9 @@
     <color name="divider">#20000000</color>
     <color name="color_1c1c1c">#1c1c1c</color>
     <color name="color_888888">#888888</color>
+    <color name="color_8f9897">#8f9897</color>
+    <color name="color_e2c523">#e2c523</color>
+    <color name="color_f9e369">#f9e369</color>
     <!--分割线-->
     <color name="common_line">#ededed</color>
     <color name="color_f3f3f3">#f3f3f3</color>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +11,123 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"/>
+        android:background="?attr/colorPrimary" />
 
+    <com.classic.common.MultipleStatusView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyView="@layout/custom_empty_view"
+        app:errorView="@layout/custom_error_view"
+        app:loadingView="@layout/custom_loading_view"
+        app:noNetworkView="@layout/custom_no_network_view">
+
+        <LinearLayout
+            android:id="@+id/content_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.stx.core.widget.StickyNavLayout
+                android:id="@+id/id_stick"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:isStickNav="false">
+
+                <LinearLayout
+                    android:id="@+id/id_stickynavlayout_topview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@drawable/user_head"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp">
+
+                        <ImageView
+                            android:layout_width="110dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_gamed_efault" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="游戏名称"
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_weight="1"
+                                android:text="游戏介绍"
+                                android:textColor="@color/color_8f9897" />
+
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="bottom"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/selector_btn_collect"
+                                android:gravity="center"
+                                android:text="收藏"
+                                android:textColor="@color/colorWhite" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/id_stickynavlayout_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@color/colorWhite"
+                    app:tabIndicatorColor="@color/common_main"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabSelectedTextColor="@color/common_main"
+                    app:tabTextAppearance="@style/TabTextAppearance">
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:icon="@null"
+                        android:text="新闻" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:icon="@null"
+                        android:text="攻略" />
+
+                    <android.support.design.widget.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:icon="@null"
+                        android:text="视频" />
+
+                </android.support.design.widget.TabLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/common_line" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/id_stickynavlayout_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.stx.core.widget.StickyNavLayout>
+        </LinearLayout>
+    </com.classic.common.MultipleStatusView>
 </LinearLayout>
