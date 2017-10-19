@@ -106,12 +106,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
-
         <activity
             android:name=".WebDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            />
+            android:theme="@style/AppTheme" />
 
         <receiver android:name=".receiver.BootCompletedReceiver">
             <intent-filter>

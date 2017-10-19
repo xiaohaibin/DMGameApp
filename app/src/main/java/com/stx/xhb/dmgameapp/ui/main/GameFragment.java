@@ -4,9 +4,12 @@ package com.stx.xhb.dmgameapp.ui.main;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.TextView;
 
+import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseFragment;
+import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
@@ -30,7 +33,8 @@ public class GameFragment extends BaseFragment implements getGameChannelContract
     TabLayout mTabLayout;
     @Bind(R.id.video_viewpager)
     ViewPager mVideoViewpager;
-    private GameViewPagerFragmentAdapter adapter;
+    @Bind(R.id.multiplestatusview)
+    MultipleStatusView multiplestatusview;
 
     public static GameFragment newInstance() {
         return new GameFragment();
@@ -59,11 +63,17 @@ public class GameFragment extends BaseFragment implements getGameChannelContract
     //获取控件
     private void initView() {
         mTitle.setText("游戏");
+        multiplestatusview.setOnRetryClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lazyLoad();
+            }
+        });
     }
 
     //设置适配器
     private void setAdapter(List<GameChannelListEntity.HtmlEntity> channelList) {
-        adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
+        GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         mVideoViewpager.setAdapter(adapter);
         mVideoViewpager.setOffscreenPageLimit(channelList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -74,6 +84,9 @@ public class GameFragment extends BaseFragment implements getGameChannelContract
 
     @Override
     public void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList) {
+        if (multiplestatusview != null) {
+            multiplestatusview.showContent();
+        }
         if (channelList.size() > 4) {
             channelList.remove(4);
             setAdapter(channelList);
@@ -85,17 +98,24 @@ public class GameFragment extends BaseFragment implements getGameChannelContract
     @Override
     public void getChanelFailed(String msg) {
         ToastUtil.show(msg);
+        if (multiplestatusview != null) {
+            multiplestatusview.showError();
+        }
     }
-
 
     @Override
     public void showLoading() {
-
+        if (multiplestatusview != null) {
+            multiplestatusview.showLoading();
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        if (multiplestatusview != null) {
+            if (!NetUtils.isNetConnected(getActivity())) {
+                multiplestatusview.showNoNetwork();
+            }
+        }
     }
-
 }

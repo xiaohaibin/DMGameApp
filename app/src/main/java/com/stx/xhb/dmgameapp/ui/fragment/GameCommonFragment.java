@@ -118,14 +118,16 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
 
     @Override
     public void showLoading() {
-        if (currentpage == 1)
+        if (currentpage == 1) {
             mRecyclerView.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-        if (currentpage == 1)
+        if (currentpage == 1) {
             mRecyclerView.setRefreshing(false);
+        }
     }
 
     @Override
@@ -150,8 +152,9 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(Request request, int id) {
-                        if (currentpage == 1)
+                        if (currentpage == 1) {
                             mRecyclerView.setRefreshing(true);
+                        }
                     }
 
                     @Override
@@ -177,8 +180,9 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
                                     mRecyclerView.showEmpty();
                                 }
                             } else {
-                                if (currentpage == 1)
+                                if (currentpage == 1) {
                                     mRecyclerView.setRefreshing(false);
+                                }
                                 ToastUtil.show(gameListEntity.getMsg());
                             }
                         }
@@ -186,8 +190,9 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
 
                     @Override
                     public void onAfter(int id) {
-                        if (currentpage == 1)
+                        if (currentpage == 1) {
                             mRecyclerView.setRefreshing(false);
+                        }
                     }
                 });
     }

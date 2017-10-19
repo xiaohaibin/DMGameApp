@@ -42,8 +42,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         Logger.d("name (%s.java:0)", getClass().getSimpleName());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.common_main));
-        if (getLayoutResource() != 0)
+        if (getLayoutResource() != 0) {
             setContentView(getLayoutResource());
+        }
         ButterKnife.bind(this);
         this.onInitialization(savedInstanceState);
         this.onInitData2Remote();

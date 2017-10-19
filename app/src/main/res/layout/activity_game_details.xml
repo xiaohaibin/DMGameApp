@@ -14,6 +14,7 @@
         android:background="?attr/colorPrimary" />
 
     <com.classic.common.MultipleStatusView
+        android:id="@+id/multiplestatusview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:emptyView="@layout/custom_empty_view"
@@ -47,7 +48,8 @@
                         android:paddingTop="15dp">
 
                         <ImageView
-                            android:layout_width="110dp"
+                            android:id="@+id/iv_game_img"
+                            android:layout_width="120dp"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="12dp"
                             android:scaleType="centerCrop"
@@ -61,17 +63,17 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_game_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="游戏名称"
                                 android:textColor="@color/colorWhite" />
 
                             <TextView
+                                android:id="@+id/tv_game_details"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_marginTop="15dp"
                                 android:layout_weight="1"
-                                android:text="游戏介绍"
                                 android:textColor="@color/color_8f9897" />
 
                             <TextView
@@ -82,7 +84,9 @@
                                 android:background="@drawable/selector_btn_collect"
                                 android:gravity="center"
                                 android:text="收藏"
+                                android:visibility="gone"
                                 android:textColor="@color/colorWhite" />
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -95,27 +99,7 @@
                     app:tabIndicatorColor="@color/common_main"
                     app:tabIndicatorHeight="2dp"
                     app:tabSelectedTextColor="@color/common_main"
-                    app:tabTextAppearance="@style/TabTextAppearance">
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:icon="@null"
-                        android:text="新闻" />
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:icon="@null"
-                        android:text="攻略" />
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:icon="@null"
-                        android:text="视频" />
-
-                </android.support.design.widget.TabLayout>
+                    app:tabTextAppearance="@style/TabTextAppearance"/>
 
                 <View
                     android:layout_width="match_parent"

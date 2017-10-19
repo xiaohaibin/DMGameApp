@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager main_viewPager;
-    private List<Fragment> fragemnts = new ArrayList<>();
+    private List<Fragment> fragemnts ;
     private MainFragmentPageAdapter adapter;
     private RadioGroup rgp;
     private TipsToast tipsToast;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     //初始化数据
     private void initData() {
+        fragemnts = new ArrayList<>();
         fragemnts.add(NewsFragment.newInstance());
         fragemnts.add(GameFragment.newInstance());
         fragemnts.add(ForumFragment.newInstance());

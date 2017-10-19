@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameListEntity;
+import com.stx.xhb.dmgameapp.ui.activity.GameDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,7 +35,7 @@ public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity
     }
 
     @Override
-    public void setData(GameListEntity.HtmlEntity data) {
+    public void setData(final GameListEntity.HtmlEntity data) {
         super.setData(data);
         Glide.with(getContext()).load(data.getLitpic()).placeholder(R.drawable.icon_gamed_efault).error(R.drawable.icon_gamed_efault).into(mIvGameImg);
        mTvGameTitle.setText(data.getTitle());
@@ -43,5 +44,11 @@ public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity
                                 +"发售日期："+data.getRelease_date()+"\n"
                                 +"游戏平台："+data.getTerrace()+"\n"
                                 +"发行商家："+data.getRelease_company());
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GameDetailsActivity.start(getContext(),data.getId(),data.getLitpic(),data.getTitle(),mTvGameDetails.getText().toString());
+            }
+        });
     }
 }

@@ -47,4 +47,11 @@ public class API {
      */
     public static final String GET_GAME_CHANNEL_DATA="http://m.3dmgame.com/y3wap/appgamechannel.php";
 
+    /**
+     * 获取游戏详情
+     * 方式：post
+     * 参数：{"appid":"1","page":"1","id":"3505044","key":"南方公园：完整破碎","type":"1"}
+     */
+    public static final String GET_GAME_DETAILS="http://m.3dmgame.com/y3wap/appgamesmsearch.php";
+
 }

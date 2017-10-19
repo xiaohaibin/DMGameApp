@@ -1,0 +1,32 @@
+package com.stx.xhb.dmgameapp.entity;
+
+/**
+ * Author : jxnk25
+ * Time: 2017/10/19 0019
+ * Email:xhb_199409@163.com
+ * Email:xhb_199409@163.com
+ * Github:https://github.com/xiaohaibin/
+ * Drscribe:
+ */
+
+public class GameDetailsContent {
+
+    /**
+     * page : 1
+     * id : 3604471
+     * key : 恶灵附身2
+     * type : 3
+     */
+
+    private int page;
+    private String id;
+    private String key;
+    private String type;
+
+    public GameDetailsContent(int page, String id, String key, String type) {
+        this.page = page;
+        this.id = id;
+        this.key = key;
+        this.type = type;
+    }
+}

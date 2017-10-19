@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -13,10 +14,17 @@ import java.util.List;
 public class MainFragmentPageAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
+    private String[] titleList;
 
     public MainFragmentPageAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
+    }
+
+    public MainFragmentPageAdapter(FragmentManager fm, List<Fragment> fragments, String[] titleList) {
+        super(fm);
+        this.fragments = fragments;
+        this.titleList = titleList;
     }
 
     @Override
@@ -30,7 +38,18 @@ public class MainFragmentPageAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
+    public CharSequence getPageTitle(int position) {
+        return titleList == null ? "" : titleList[position % titleList.length];
+    }
+
+
+    @Override
+    public Object instantiateItem(ViewGroup container, final int position) {
+        return super.instantiateItem(container, position);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+//        super.destroyItem(container, position, object);
     }
 }

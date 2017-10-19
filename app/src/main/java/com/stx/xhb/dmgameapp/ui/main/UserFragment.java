@@ -51,8 +51,7 @@ public class UserFragment extends BaseFragment {
     TextView mBtnLoginOut;
 
     public static UserFragment newInstance() {
-        UserFragment fragment = new UserFragment();
-        return fragment;
+        return new UserFragment();
     }
     @Override
     protected int getLayoutResource() {

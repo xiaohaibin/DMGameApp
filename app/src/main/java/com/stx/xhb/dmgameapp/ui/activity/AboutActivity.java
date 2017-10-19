@@ -56,6 +56,8 @@ public class AboutActivity extends BaseAppActitity {
                 intent = new Intent(Intent.ACTION_VIEW, github);
                 startActivity(intent);
                 break;
+            default:
+                break;
         }
     }
 
