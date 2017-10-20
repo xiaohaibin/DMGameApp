@@ -1,8 +1,6 @@
 package com.stx.xhb.dmgameapp.ui.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -12,7 +10,7 @@ import com.stx.core.base.BaseFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
 import com.stx.xhb.dmgameapp.presenter.video.getGameVideoContract;
 import com.stx.xhb.dmgameapp.presenter.video.getGameVideoListImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
@@ -27,7 +25,7 @@ import butterknife.Bind;
  * @describe: 游戏详情视频
  */
 
-public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener {
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView mRecyclerView;
@@ -57,8 +55,6 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
                 ScreenUtil.dip2px(getContext(), 12));
         dividerDecoration.setDrawLastItem(false);
         mRecyclerView.addItemDecoration(dividerDecoration);
-        mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
-        mRecyclerView.setRefreshListener(this);
         mVideoListAdapter = new VideoListAdapter(getActivity());
         mVideoListAdapter.setMore(R.layout.view_more, this);
         mVideoListAdapter.setNoMore(R.layout.view_nomore);
@@ -94,12 +90,12 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
     }
 
     @Override
-    public void getVideoListSuccess(VideoListEntity videoListEntity) {
+    public void getVideoListSuccess(GameVideoEntity videoListEntity) {
         if (videoListEntity != null) {
             if (currentpage == 1) {
                 mVideoListAdapter.clear();
             }
-            mVideoListAdapter.addAll(videoListEntity.getVideo());
+            mVideoListAdapter.addAll(videoListEntity.getHtml());
             if (mVideoListAdapter.getCount() < page_size) {
                 mVideoListAdapter.stopMore();
             }
@@ -122,14 +118,9 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
     }
 
     @Override
-    public void onRefresh() {
-        currentpage = 1;
-        ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
-    }
-
-    @Override
     protected void lazyLoad() {
-        onRefresh();
+        currentpage=1;
+        ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
     }
 
     @Override
@@ -145,5 +136,4 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
             mRecyclerView.setRefreshing(false);
         }
     }
-
 }

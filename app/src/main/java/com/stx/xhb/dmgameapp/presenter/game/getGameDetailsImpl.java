@@ -9,4 +9,5 @@ package com.stx.xhb.dmgameapp.presenter.game;
  */
 
 public class getGameDetailsImpl {
+
 }

@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.presenter.video;
 
 import com.stx.core.model.annotation.Implement;
 import com.stx.core.mvp.BaseView;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
 
 /**
  * Author: Mr.xiao on 2017/9/18
@@ -18,7 +18,7 @@ public interface getGameVideoContract {
 
     interface getVideoListView extends BaseView {
 
-        void getVideoListSuccess(VideoListEntity videoListEntity);
+        void getVideoListSuccess(GameVideoEntity videoListEntity);
 
         void getVideoListFailed(String msg);
     }

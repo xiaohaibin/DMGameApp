@@ -13,26 +13,11 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary" />
 
-    <com.classic.common.MultipleStatusView
-        android:id="@+id/multiplestatusview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:emptyView="@layout/custom_empty_view"
-        app:errorView="@layout/custom_error_view"
-        app:loadingView="@layout/custom_loading_view"
-        app:noNetworkView="@layout/custom_no_network_view">
-
-        <LinearLayout
-            android:id="@+id/content_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <com.stx.core.widget.StickyNavLayout
                 android:id="@+id/id_stick"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 app:isStickNav="false">
 
                 <LinearLayout
@@ -40,55 +25,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@drawable/user_head"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp">
+                   <include layout="@layout/layout_game_details_top_view"/>
 
-                        <ImageView
-                            android:id="@+id/iv_game_img"
-                            android:layout_width="120dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="12dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/icon_gamed_efault" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="12dp"
-                            android:layout_marginRight="12dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_game_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/colorWhite" />
-
-                            <TextView
-                                android:id="@+id/tv_game_details"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_weight="1"
-                                android:textColor="@color/color_8f9897" />
-
-                            <TextView
-                                android:layout_width="80dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="bottom"
-                                android:layout_marginTop="10dp"
-                                android:background="@drawable/selector_btn_collect"
-                                android:gravity="center"
-                                android:text="收藏"
-                                android:visibility="gone"
-                                android:textColor="@color/colorWhite" />
-
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
 
                 <android.support.design.widget.TabLayout
@@ -112,6 +50,4 @@
                     android:layout_height="match_parent" />
 
             </com.stx.core.widget.StickyNavLayout>
-        </LinearLayout>
-    </com.classic.common.MultipleStatusView>
 </LinearLayout>

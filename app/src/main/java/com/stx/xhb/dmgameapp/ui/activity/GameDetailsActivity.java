@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseActivity;
 import com.stx.core.widget.StickyNavLayout;
 import com.stx.xhb.dmgameapp.R;
@@ -39,18 +38,14 @@ public class GameDetailsActivity extends BaseActivity {
     ViewPager viewPager;
     @Bind(R.id.id_stick)
     StickyNavLayout stickyNavLayout;
-    @Bind(R.id.multiplestatusview)
-    MultipleStatusView multiplestatusview;
     @Bind(R.id.iv_game_img)
     ImageView ivGameImg;
     @Bind(R.id.tv_game_title)
     TextView tvGameTitle;
     @Bind(R.id.tv_game_details)
     TextView tvGameDetails;
-    private List<Fragment> fragemnts ;
-    private MainFragmentPageAdapter adapter;
-    private String[] TITLE_LIST=new String[]{"新闻","攻略","视频"};
-    private String game_id;
+    private String[] titleList =new String[]{"新闻","攻略","视频"};
+    private String gameId;
     private String gameName;
 
     public static void start(Context context, String gameId,String img, String name, String gameDetails) {
@@ -71,12 +66,12 @@ public class GameDetailsActivity extends BaseActivity {
 
     @Override
     protected void onInitialization(Bundle bundle) {
-        fragemnts=new ArrayList<>();
+        List<Fragment> fragemnts = new ArrayList<>();
         initToolBar(mToolbar, "游戏详情");
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if (extras.containsKey("id")){
-                game_id = extras.getString("id");
+                gameId = extras.getString("id");
             }
             if (extras.containsKey("img")) {
                 String img = extras.getString("img");
@@ -87,14 +82,14 @@ public class GameDetailsActivity extends BaseActivity {
                 tvGameTitle.setText(gameName);
             }
             if (extras.containsKey("game_details")) {
-                String game_details = extras.getString("game_details");
-                tvGameDetails.setText(game_details);
+                String gameDetails = extras.getString("game_details");
+                tvGameDetails.setText(gameDetails);
             }
         }
         fragemnts.add(GameDetailsCommonFragment.newInstance());
         fragemnts.add(GameDetailsCommonFragment.newInstance());
-        fragemnts.add(GameVideoFragment.newInstance(game_id,gameName));
-        adapter=new MainFragmentPageAdapter(getSupportFragmentManager(),fragemnts,TITLE_LIST);
+        fragemnts.add(GameVideoFragment.newInstance(gameId,gameName));
+        MainFragmentPageAdapter adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts, titleList);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -107,15 +102,10 @@ public class GameDetailsActivity extends BaseActivity {
 
     @Override
     public void showLoading() {
-        if (multiplestatusview != null) {
-            multiplestatusview.showLoading();
-        }
     }
 
     @Override
     public void hideLoading() {
-        if (multiplestatusview != null) {
-            multiplestatusview.showContent();
-        }
     }
+
 }

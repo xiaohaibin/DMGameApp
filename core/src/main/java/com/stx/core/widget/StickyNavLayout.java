@@ -272,6 +272,8 @@ public class StickyNavLayout extends LinearLayout {
                     isSticky = false;
                     return super.dispatchTouchEvent(ev);
                 }
+                default:
+                    break;
         }
         return super.dispatchTouchEvent(ev);
     }
@@ -348,6 +350,8 @@ public class StickyNavLayout extends LinearLayout {
                 mDragging = false;
                 recycleVelocityTracker();
                 break;
+            default:
+                break;
         }
         return super.onInterceptTouchEvent(ev);
     }
@@ -386,8 +390,9 @@ public class StickyNavLayout extends LinearLayout {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                if (!mScroller.isFinished())
+                if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
+                }
                 mLastY = y;
                 return true;
             case MotionEvent.ACTION_MOVE:
@@ -425,6 +430,8 @@ public class StickyNavLayout extends LinearLayout {
                     fling(-velocityY);
                 }
                 recycleVelocityTracker();
+                break;
+            default:
                 break;
         }
 

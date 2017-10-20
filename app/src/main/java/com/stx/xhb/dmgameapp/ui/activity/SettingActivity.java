@@ -81,6 +81,8 @@ public class SettingActivity extends BaseAppActitity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
+            default:
+                break;
         }
     }
 

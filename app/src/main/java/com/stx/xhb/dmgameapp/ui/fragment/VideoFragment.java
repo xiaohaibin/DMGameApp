@@ -24,7 +24,7 @@ import butterknife.Bind;
  *
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe:
+ * @describe: 首页视频
  */
 
 public class VideoFragment extends BaseFragment implements getVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
