@@ -1,8 +1,9 @@
 package com.stx.xhb.dmgameapp.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.stx.core.base.BaseFragment;
 import com.stx.xhb.dmgameapp.R;
 
@@ -17,10 +18,11 @@ import butterknife.Bind;
  * Drscribe:游戏资讯
  */
 
-public class GameDetailsCommonFragment extends BaseFragment{
+public class GameDetailsCommonFragment extends BaseFragment {
 
-    @Bind(R.id.recyclerView)
-    EasyRecyclerView mRecyclerView;
+
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
+    RecyclerView recyclerView;
 
     public static GameDetailsCommonFragment newInstance() {
         Bundle args = new Bundle();
@@ -28,14 +30,15 @@ public class GameDetailsCommonFragment extends BaseFragment{
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_common;
+        return R.layout.fragment_common_recyclerview;
     }
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -53,5 +56,4 @@ public class GameDetailsCommonFragment extends BaseFragment{
     public void hideLoading() {
 
     }
-
 }

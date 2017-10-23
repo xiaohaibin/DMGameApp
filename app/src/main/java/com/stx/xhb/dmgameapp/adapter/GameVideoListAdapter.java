@@ -1,0 +1,37 @@
+package com.stx.xhb.dmgameapp.adapter;
+
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+
+/**
+ * Author : jxnk25
+ * Time: 2017/10/23 0023
+ * Email:xhb_199409@163.com
+ * Email:xhb_199409@163.com
+ * Github:https://github.com/xiaohaibin/
+ * Drscribe:
+ */
+
+public class GameVideoListAdapter extends BaseQuickAdapter<VideoListEntity.VideoBean, BaseViewHolder> {
+    private Context context;
+
+    public GameVideoListAdapter(Context context) {
+        super(R.layout.list_item_video);
+        this.context = context;
+    }
+
+    @Override
+    protected void convert(BaseViewHolder helper, VideoListEntity.VideoBean data) {
+        helper.setText(R.id.tv_video_title, data.getTitle());
+        helper.setText(R.id.tv_video_time, data.getSenddate());
+        helper.setText(R.id.tv_play_count, data.getClick() + "次播放");
+        ImageView mIvVideoImg = helper.getView(R.id.iv_video_img);
+        Glide.with(context).load(data.getVideopic()).into(mIvVideoImg);
+    }
+}

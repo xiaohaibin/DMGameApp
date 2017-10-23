@@ -2,20 +2,23 @@ package com.stx.xhb.dmgameapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.stx.core.base.BaseFragment;
-import com.stx.core.utils.ScreenUtil;
+import com.stx.core.widget.CustomRefreshListview;
+import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
+import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
 import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
 import com.stx.xhb.dmgameapp.presenter.video.getGameVideoContract;
 import com.stx.xhb.dmgameapp.presenter.video.getGameVideoListImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
 
 import butterknife.Bind;
+
+import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
 
 /**
  * Author: Mr.xiao on 2017/9/18
@@ -25,13 +28,13 @@ import butterknife.Bind;
  * @describe: 游戏详情视频
  */
 
-public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener {
+public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, CustomRefreshListview.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    @Bind(R.id.recyclerView)
-    EasyRecyclerView mRecyclerView;
-    private VideoListAdapter mVideoListAdapter;
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
+    RecyclerView mRecyclerView;
     private String gameId;
     private String gameKey;
+    private GameVideoListAdapter gameVideoListAdapter;
 
     public static GameVideoFragment newInstance(String id, String key) {
         Bundle bundle = new Bundle();
@@ -44,32 +47,22 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_common;
+        return R.layout.fragment_common_recyclerview;
     }
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
-        initData();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.color_eeeeee),
-                ScreenUtil.dip2px(getContext(), 12));
-        dividerDecoration.setDrawLastItem(false);
-        mRecyclerView.addItemDecoration(dividerDecoration);
-        mVideoListAdapter = new VideoListAdapter(getActivity());
-        mVideoListAdapter.setMore(R.layout.view_more, this);
-        mVideoListAdapter.setNoMore(R.layout.view_nomore);
-        mVideoListAdapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-            @Override
-            public void onErrorShow() {
-                mVideoListAdapter.resumeMore();
-            }
+        initData();
+        setAdapter();
+    }
 
-            @Override
-            public void onErrorClick() {
-                mVideoListAdapter.resumeMore();
-            }
-        });
-        mRecyclerView.setAdapter(mVideoListAdapter);
+    private void setAdapter() {
+        gameVideoListAdapter = new GameVideoListAdapter(getActivity());
+        gameVideoListAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        gameVideoListAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
+        gameVideoListAdapter.setLoadMoreView(new CustomLoadMoreView());
+        mRecyclerView.setAdapter(gameVideoListAdapter);
     }
 
     private void initData() {
@@ -93,14 +86,12 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
     public void getVideoListSuccess(GameVideoEntity videoListEntity) {
         if (videoListEntity != null) {
             if (currentpage == 1) {
-                mVideoListAdapter.clear();
+                gameVideoListAdapter.setNewData(videoListEntity.getHtml());
+            } else {
+                gameVideoListAdapter.addData(videoListEntity.getHtml());
             }
-            mVideoListAdapter.addAll(videoListEntity.getHtml());
-            if (mVideoListAdapter.getCount() < page_size) {
-                mVideoListAdapter.stopMore();
-            }
-            if (mVideoListAdapter.getCount() == 0) {
-                mRecyclerView.showEmpty();
+            if (videoListEntity.getHtml().isEmpty()){
+                gameVideoListAdapter.setEmptyView(R.layout.view_empty);
             }
         }
     }
@@ -108,32 +99,42 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
     @Override
     public void getVideoListFailed(String msg) {
         ToastUtil.show(msg);
-    }
-
-
-    @Override
-    public void onLoadMore() {
-        currentpage++;
-        ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
+        gameVideoListAdapter.loadMoreFail();
     }
 
     @Override
     protected void lazyLoad() {
-        currentpage=1;
+        currentpage = 1;
         ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
     }
 
     @Override
     public void showLoading() {
         if (currentpage == 1) {
-            mRecyclerView.setRefreshing(true);
+            DialogMaker.showProgressDialog(getActivity(), "正在加载...");
         }
     }
 
     @Override
     public void hideLoading() {
         if (currentpage == 1) {
-            mRecyclerView.setRefreshing(false);
+            DialogMaker.dismissProgressDialog();
+        }
+        gameVideoListAdapter.loadMoreComplete();
+    }
+
+    @Override
+    public void onLoadingMore() {
+        currentpage++;
+        ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        if (gameVideoListAdapter.getData().size() < PAGE_SIZE) {
+            gameVideoListAdapter.loadMoreEnd(true);
+        } else {
+            gameVideoListAdapter.loadMoreEnd(false);
         }
     }
 }

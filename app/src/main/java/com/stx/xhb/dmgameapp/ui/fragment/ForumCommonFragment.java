@@ -44,7 +44,7 @@ import okhttp3.Request;
 
 public class ForumCommonFragment extends BaseFragment implements getForumListContract.getForumListView, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.recyclerView)
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private String mId = "0";
     private ForumListAdapter mForumListAdapter;

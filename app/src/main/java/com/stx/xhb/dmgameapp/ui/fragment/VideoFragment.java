@@ -29,7 +29,7 @@ import butterknife.Bind;
 
 public class VideoFragment extends BaseFragment implements getVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.recyclerView)
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private VideoListAdapter mVideoListAdapter;
 

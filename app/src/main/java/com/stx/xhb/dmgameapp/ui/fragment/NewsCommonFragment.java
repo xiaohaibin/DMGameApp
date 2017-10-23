@@ -32,7 +32,7 @@ import okhttp3.Request;
  */
 public class NewsCommonFragment extends BaseFragment implements getNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.recyclerView)
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private String mAppId = "0";
     private NewsCommonAdapter mNewsCommonAdapter;

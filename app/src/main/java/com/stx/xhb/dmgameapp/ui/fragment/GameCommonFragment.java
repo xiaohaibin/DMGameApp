@@ -38,7 +38,7 @@ import okhttp3.Request;
 
 public class GameCommonFragment extends BaseFragment implements getGameListContract.getGameListDataView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.recyclerView)
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private GameListAdapter mGameListAdapter;
     private String mAppId = "0";
