@@ -1,12 +1,14 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.VideoListEntity;
 
 /**
@@ -27,11 +29,17 @@ public class GameVideoListAdapter extends BaseQuickAdapter<VideoListEntity.Video
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, VideoListEntity.VideoBean data) {
+    protected void convert(BaseViewHolder helper, final VideoListEntity.VideoBean data) {
         helper.setText(R.id.tv_video_title, data.getTitle());
         helper.setText(R.id.tv_video_time, data.getSenddate());
         helper.setText(R.id.tv_play_count, data.getClick() + "次播放");
         ImageView mIvVideoImg = helper.getView(R.id.iv_video_img);
         Glide.with(context).load(data.getVideopic()).into(mIvVideoImg);
+        helper.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebDetailsActivity.start(context, data.getVideourl());
+            }
+        });
     }
 }

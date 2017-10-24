@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.stx.core.base.BaseFragment;
-import com.stx.core.widget.CustomRefreshListview;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
@@ -18,8 +17,6 @@ import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
 
 import butterknife.Bind;
 
-import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
-
 /**
  * Author: Mr.xiao on 2017/9/18
  *
@@ -28,7 +25,7 @@ import static android.nfc.tech.MifareUltralight.PAGE_SIZE;
  * @describe: 游戏详情视频
  */
 
-public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, CustomRefreshListview.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class GameVideoFragment extends BaseFragment implements getGameVideoContract.getVideoListView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     RecyclerView mRecyclerView;
@@ -90,8 +87,13 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
             } else {
                 gameVideoListAdapter.addData(videoListEntity.getHtml());
             }
-            if (videoListEntity.getHtml().isEmpty()){
+            if (videoListEntity.getHtml().isEmpty()) {
                 gameVideoListAdapter.setEmptyView(R.layout.view_empty);
+            }
+            if (videoListEntity.getHtml().size()<page_size) {
+                gameVideoListAdapter.loadMoreEnd(true);
+            } else {
+                gameVideoListAdapter.loadMoreEnd(false);
             }
         }
     }
@@ -124,17 +126,8 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
     }
 
     @Override
-    public void onLoadingMore() {
+    public void onLoadMoreRequested() {
         currentpage++;
         ((getGameVideoListImpl) mPresenter).getVideoList(gameId, gameKey, "3", currentpage);
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        if (gameVideoListAdapter.getData().size() < PAGE_SIZE) {
-            gameVideoListAdapter.loadMoreEnd(true);
-        } else {
-            gameVideoListAdapter.loadMoreEnd(false);
-        }
     }
 }

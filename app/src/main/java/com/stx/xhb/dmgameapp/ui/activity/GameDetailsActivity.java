@@ -44,14 +44,14 @@ public class GameDetailsActivity extends BaseActivity {
     TextView tvGameTitle;
     @Bind(R.id.tv_game_details)
     TextView tvGameDetails;
-    private String[] titleList =new String[]{"新闻","攻略","视频"};
+    private String[] titleList = new String[]{"新闻", "攻略", "视频"};
     private String gameId;
     private String gameName;
 
-    public static void start(Context context, String gameId,String img, String name, String gameDetails) {
+    public static void start(Context context, String gameId, String img, String name, String gameDetails) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, GameDetailsActivity.class);
-        bundle.putString("id",gameId);
+        bundle.putString("id", gameId);
         bundle.putString("img", img);
         bundle.putString("name", name);
         bundle.putString("game_details", gameDetails);
@@ -70,7 +70,7 @@ public class GameDetailsActivity extends BaseActivity {
         initToolBar(mToolbar, "游戏详情");
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if (extras.containsKey("id")){
+            if (extras.containsKey("id")) {
                 gameId = extras.getString("id");
             }
             if (extras.containsKey("img")) {
@@ -86,9 +86,9 @@ public class GameDetailsActivity extends BaseActivity {
                 tvGameDetails.setText(gameDetails);
             }
         }
-        fragemnts.add(GameDetailsCommonFragment.newInstance());
-        fragemnts.add(GameDetailsCommonFragment.newInstance());
-        fragemnts.add(GameVideoFragment.newInstance(gameId,gameName));
+        fragemnts.add(GameDetailsCommonFragment.newInstance("1", gameId, gameName));
+        fragemnts.add(GameDetailsCommonFragment.newInstance("2", gameId, gameName));
+        fragemnts.add(GameVideoFragment.newInstance(gameId, gameName));
         MainFragmentPageAdapter adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts, titleList);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

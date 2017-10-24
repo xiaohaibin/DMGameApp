@@ -24,7 +24,6 @@ public class GameVideoEntity extends BaseEntity{
     private String totalrow;
     private List<VideoListEntity.VideoBean> html;
 
-
     public String getTotalrow() {
         return totalrow;
     }

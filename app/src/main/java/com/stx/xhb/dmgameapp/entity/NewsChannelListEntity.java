@@ -42,7 +42,6 @@ public class NewsChannelListEntity extends BaseEntity{
         private String title;
         private String type;
 
-
         public String getAppid() {
             return appid;
         }
