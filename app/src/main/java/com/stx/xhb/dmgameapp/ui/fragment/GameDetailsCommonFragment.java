@@ -32,7 +32,6 @@ import butterknife.Bind;
 
 public class GameDetailsCommonFragment extends BaseFragment implements getGameDetailsCommonContract.getGameDetailsDataView, BaseQuickAdapter.RequestLoadMoreListener {
 
-
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     RecyclerView mRecyclerView;
     private String type = "";

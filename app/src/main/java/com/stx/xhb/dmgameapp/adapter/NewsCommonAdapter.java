@@ -56,6 +56,11 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.Chann
     }
 
     @Override
+    public int getViewType(int position) {
+        return super.getViewType(position);
+    }
+
+    @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new NewsCommonViewHolder(mLayoutInflater.inflate(R.layout.list_item_news, parent, false));
     }

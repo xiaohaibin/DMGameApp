@@ -16,4 +16,10 @@ public class Constants {
 
     public static final int SERVER_FAILED=0;
 
+    public static final String APPID = "1105172050";
+
+    public static final String SplashPosID="4080314488610390";
+
+    public static final String NativePosID = "4010024710499065";
+
 }

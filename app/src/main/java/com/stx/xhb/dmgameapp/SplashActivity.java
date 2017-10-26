@@ -10,14 +10,15 @@ import android.widget.LinearLayout;
 
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
-import com.tencent.connect.dataprovider.Constants;
+import com.qq.e.comm.util.AdError;
+import com.stx.xhb.dmgameapp.config.Constants;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.utils.Log;
 
 /**
  * 启动页
  */
 public class SplashActivity extends AppCompatActivity implements SplashADListener{
-    private LinearLayout ll_ad;
 
     @Override
     protected void onPause() {
@@ -35,8 +36,8 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_spalsh);
-        ll_ad = (LinearLayout) findViewById(R.id.ll_ad);
-        SplashAD splashAD = new SplashAD(this, ll_ad, Constants.APPID, "4080314488610390", this,3000);
+        LinearLayout llAd = (LinearLayout) findViewById(R.id.ll_ad);
+        SplashAD splashAD = new SplashAD(this, llAd,Constants.APPID, Constants.SplashPosID, this,3000);
     }
     @Override
     public void onADDismissed() {
@@ -56,8 +57,19 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
     }
 
     @Override
-    public void onNoAD(int i) {
+    public void onNoAD(AdError adError) {
         jumpToMain();
+    }
+
+    /**
+     * 倒计时回调，返回广告还将被展示的剩余时间。
+     * 通过这个接口，开发者可以自行决定是否显示倒计时提示，或者还剩几秒的时候显示倒计时
+     *
+     * @param millisUntilFinished 剩余毫秒数
+     */
+    @Override
+    public void onADTick(long millisUntilFinished) {
+
     }
 
     @Override
@@ -67,13 +79,13 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
 
     @Override
     public void onADClicked() {
-
+        Log.i("3DMGAME", "SplashADClicked");
     }
 
     //防止用户返回键退出APP
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
+        if(keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
             return true;
         }
         return super.onKeyDown(keyCode, event);
