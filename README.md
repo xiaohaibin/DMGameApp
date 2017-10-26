@@ -50,9 +50,6 @@
 
 ![欢迎关注“大话安卓”微信公众号](http://upload-images.jianshu.io/upload_images/1956769-2f49dcb0dc5195b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-##欢迎加入“大话安卓”技术交流群，一起分享，共同进步##
-![欢迎加入“大话安卓”技术交流群，互相学习提升](http://upload-images.jianshu.io/upload_images/1956769-326c166b86ed8e94.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
 ### 声明
 
   DMGameApp是一款基于3DMGAME的一个游戏门户app，非官方版本，数据来源于游戏门户网站3DM，数据接口均属于非正常渠道获取，请勿用于商业用途，原作公司拥有所有权利。
