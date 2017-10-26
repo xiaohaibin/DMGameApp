@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +34,14 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     protected abstract Class getLogicClazz();
 
     protected void onInitData2Remote() {
-        if (getLogicClazz() != null)
+        if (getLogicClazz() != null) {
             mPresenter = getLogicImpl();
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i("===>onCreateView","====");
         if (getLayoutResource() != 0) {
             rootView = inflater.inflate(getLayoutResource(), null);
         } else {
@@ -64,7 +63,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         onInitData2Remote();
-        Log.i("===>onViewCreated","====");
         if (!isPrepared && getUserVisibleHint()) {
             onFragmentVisibleChange(true);
             isViable = true;
@@ -82,22 +80,20 @@ public abstract class BaseFragment extends Fragment implements BaseView {
             LogicProxy.getInstance().bind(getLogicClazz(), this);
         }
         super.onStart();
-        Log.i("===>onStart","====");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("===>onDestroy","====");
         ButterKnife.unbind(this);
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.detachView();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i("===>onDestroyView","====");
         isPrepared = false;
         hasLoaded = false;
     }
@@ -165,9 +161,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         }
     }
 
-
     protected BasePresenter mPresenter;
     protected View rootView;
-    protected Context mContext = null;//context
+    protected Context mContext = null;
 
 }

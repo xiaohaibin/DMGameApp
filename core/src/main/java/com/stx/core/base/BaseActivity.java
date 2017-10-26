@@ -32,8 +32,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected abstract Class getLogicClazz();
 
     protected void onInitData2Remote() {
-        if (getLogicClazz() != null)
+        if (getLogicClazz() != null) {
             mPresenter = getLogicImpl();
+        }
     }
 
     @Override
@@ -68,8 +69,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onDestroy();
         ButterKnife.unbind(this);
         LogicProxy.getInstance().unbind(getLogicClazz(), this);
-        if (mPresenter != null)
+        if (mPresenter != null) {
             mPresenter.detachView();
+        }
     }
 
 
@@ -78,8 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(Color.BLACK);
         }
-        if (isChangeToolbar)
+        if (isChangeToolbar) {
             toolbar.setBackgroundColor(vibrantColor);
+        }
         if (isChangeStatusBar) {
             StatusBarUtil.setColor(this, vibrantColor);
         }

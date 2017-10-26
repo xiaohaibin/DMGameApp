@@ -102,6 +102,7 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
                 ((getGameDetailsCommonImpl) mPresenter).getGameToolsListData("2", id, key, currentpage);
                 break;
             default:
+                ((getGameDetailsCommonImpl) mPresenter).getGameNewsListData("1", id, key, currentpage);
                 break;
         }
     }

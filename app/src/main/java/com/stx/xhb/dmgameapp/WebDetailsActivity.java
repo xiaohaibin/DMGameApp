@@ -1,5 +1,6 @@
 package com.stx.xhb.dmgameapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -45,6 +46,7 @@ public class WebDetailsActivity extends BaseAppActitity {
         setListener();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initWeb() {
         WebSettings settings = webView.getSettings();
         webView.setWebViewClient(new WebViewClient() {

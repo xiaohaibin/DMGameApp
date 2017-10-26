@@ -114,14 +114,16 @@ public class VideoFragment extends BaseFragment implements getVideoContract.getV
 
     @Override
     public void showLoading() {
-        if (currentpage == 1)
+        if (currentpage == 1) {
             mRecyclerView.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-        if (currentpage == 1)
+        if (currentpage == 1) {
             mRecyclerView.setRefreshing(false);
+        }
     }
 
 }

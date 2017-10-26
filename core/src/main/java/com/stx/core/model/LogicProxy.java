@@ -17,20 +17,18 @@ public class LogicProxy {
     }
 
     private LogicProxy() {
-        m_objects = new HashMap<>();
+        mObjects = new HashMap<>();
     }
 
-    private Map<Class, Object> m_objects;
+    private Map<Class, Object> mObjects;
 
     public void init(Class... clss) {
-//        List<Class> list = new LinkedList<Class>();
         for (Class cls : clss) {
             if (cls.isAnnotationPresent(Implement.class)) {
-//                list.add(cls);
                 for (Annotation ann : cls.getDeclaredAnnotations()) {
                     if (ann instanceof Implement) {
                         try {
-                            m_objects.put(cls, ((Implement) ann).value().newInstance());
+                            mObjects.put(cls, ((Implement) ann).value().newInstance());
                         } catch (InstantiationException e) {
                             e.printStackTrace();
                         } catch (IllegalAccessException e) {
@@ -44,10 +42,10 @@ public class LogicProxy {
 
     // 初始化presenter add map
     public <T> T bind(Class clzz, BaseView var1) {
-        if (!m_objects.containsKey(clzz)) {
+        if (!mObjects.containsKey(clzz)) {
             init(clzz);
         }
-        BasePresenter presenter = ((BasePresenter) m_objects.get(clzz));
+        BasePresenter presenter = ((BasePresenter) mObjects.get(clzz));
         if (var1 != presenter.getView()) {
             if (presenter.getView() != null) {
                 presenter.detachView();
@@ -59,12 +57,13 @@ public class LogicProxy {
 
     // 解除绑定 移除map
     public void unbind(Class clzz, BaseView var1) {
-        if (m_objects.containsKey(clzz)) {
-            BasePresenter presenter = ((BasePresenter) m_objects.get(clzz));
+        if (mObjects.containsKey(clzz)) {
+            BasePresenter presenter = ((BasePresenter) mObjects.get(clzz));
             if (var1 != presenter.getView()) {
-                if (presenter.getView() != null)
+                if (presenter.getView() != null) {
                     presenter.detachView();
-                m_objects.remove(clzz);
+                }
+                mObjects.remove(clzz);
             }
 
         }
