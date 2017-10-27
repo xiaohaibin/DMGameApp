@@ -3,23 +3,32 @@ package com.stx.xhb.dmgameapp.ui.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseFragment;
+import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
+import com.stx.xhb.dmgameapp.config.API;
+import com.stx.xhb.dmgameapp.config.Constants;
+import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
+import com.stx.xhb.dmgameapp.entity.GameNewsListEntity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 import com.stx.xhb.dmgameapp.presenter.game.getGameDetailsCommonContract;
-import com.stx.xhb.dmgameapp.presenter.game.getGameDetailsCommonImpl;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * Author : jxnk25
@@ -59,7 +68,7 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
         initVariable();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.color_eeeeee),
-                ScreenUtil.dip2px(getContext(), 1), ScreenUtil.dip2px(getContext(), 12),ScreenUtil.dip2px(getContext(), 12));
+                ScreenUtil.dip2px(getContext(), 1), ScreenUtil.dip2px(getContext(), 12), ScreenUtil.dip2px(getContext(), 12));
         dividerDecoration.setDrawLastItem(false);
         mRecyclerView.addItemDecoration(dividerDecoration);
         setAdapter();
@@ -95,18 +104,21 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
     private void getListData() {
         switch (type) {
             case "1"://新闻
-                ((getGameDetailsCommonImpl) mPresenter).getGameNewsListData("1", id, key, currentpage);
+                getGameNewsList();
+//                ((getGameDetailsCommonImpl) mPresenter).getGameNewsListData("1", id, key, currentpage);
                 break;
             case "2"://攻略
-                ((getGameDetailsCommonImpl) mPresenter).getGameToolsListData("2", id, key, currentpage);
+//                ((getGameDetailsCommonImpl) mPresenter).getGameToolsListData("2", id, key, currentpage);
+                getGameToolsList();
                 break;
             default:
-                ((getGameDetailsCommonImpl) mPresenter).getGameNewsListData("1", id, key, currentpage);
+//                ((getGameDetailsCommonImpl) mPresenter).getGameNewsListData("1", id, key, currentpage);
+                getGameNewsList();
                 break;
         }
     }
 
-    private void setAdapter(){
+    private void setAdapter() {
         gameNewsListAdapter = new GameNewsListAdapter(getActivity());
         gameNewsListAdapter.setOnLoadMoreListener(this, mRecyclerView);
         gameNewsListAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
@@ -131,16 +143,16 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
 
     @Override
     public void getGameNewsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list) {
-            if (list!=null){
-                if (currentpage==1){
-                    gameNewsListAdapter.setNewData(list);
-                }else {
-                    gameNewsListAdapter.addData(list);
-                }
-                if (list.isEmpty()){
-                    gameNewsListAdapter.setEmptyView(R.layout.view_empty);
-                }
+        if (list != null) {
+            if (currentpage == 1) {
+                gameNewsListAdapter.setNewData(list);
+            } else {
+                gameNewsListAdapter.addData(list);
             }
+            if (list.isEmpty()) {
+                gameNewsListAdapter.setEmptyView(R.layout.view_empty);
+            }
+        }
     }
 
     @Override
@@ -151,13 +163,13 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
 
     @Override
     public void getGameToolsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list) {
-        if (list!=null){
-            if (currentpage==1){
+        if (list != null) {
+            if (currentpage == 1) {
                 gameNewsListAdapter.setNewData(list);
-            }else {
+            } else {
                 gameNewsListAdapter.addData(list);
             }
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 gameNewsListAdapter.setEmptyView(R.layout.view_empty);
             }
             if (gameNewsListAdapter.getData().size() < page_size) {
@@ -177,5 +189,77 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
     public void onLoadMoreRequested() {
         currentpage++;
         getListData();
+    }
+
+    private void getGameNewsList() {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new GameDetailsContent(currentpage, id, key, "1")))
+                .url(API.GET_GAME_DETAILS)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onBefore(Request request, int id) {
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        getGameNewsListFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            GameNewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListEntity.class);
+                            if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                getGameNewsListDataSuccess(newsListEntity.getHtml());
+                            } else {
+                                hideLoading();
+                                getGameNewsListFailed(newsListEntity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        hideLoading();
+                    }
+                });
+    }
+
+    private void getGameToolsList() {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new GameDetailsContent(currentpage, id, key, "2")))
+                .url(API.GET_GAME_DETAILS)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onBefore(Request request, int id) {
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        getGameToolsListFailed(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        if (!TextUtils.isEmpty(response)) {
+                            GameNewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListEntity.class);
+                            if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                getGameToolsListDataSuccess(newsListEntity.getHtml());
+                            } else {
+                                hideLoading();
+                                getGameToolsListFailed(newsListEntity.getMsg());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        hideLoading();
+                    }
+                });
     }
 }
