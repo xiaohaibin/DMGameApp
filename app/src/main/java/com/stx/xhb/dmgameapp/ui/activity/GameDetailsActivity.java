@@ -90,6 +90,7 @@ public class GameDetailsActivity extends BaseActivity {
         fragemnts.add(GameDetailsCommonFragment.newInstance("2", gameId, gameName));
         fragemnts.add(GameVideoFragment.newInstance(gameId, gameName));
         MainFragmentPageAdapter adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts, titleList);
+        viewPager.setOffscreenPageLimit(fragemnts.size());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
