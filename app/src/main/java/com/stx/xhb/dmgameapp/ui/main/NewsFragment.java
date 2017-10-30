@@ -31,7 +31,7 @@ public class NewsFragment extends BaseFragment implements getNewsChannelImpl.get
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
     @Bind(R.id.article_viewpager)
-    ViewPager article_viewpager;
+    ViewPager articleViewpager;
     @Bind(R.id.multiplestatusview)
     MultipleStatusView multiplestatusview;
 
@@ -76,11 +76,11 @@ public class NewsFragment extends BaseFragment implements getNewsChannelImpl.get
         //实例化适配器
         NewsViewPagerFragmentAdapter adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         //设置适配器
-        article_viewpager.setAdapter(adapter);
-        article_viewpager.setOffscreenPageLimit(channelList.size());
+        articleViewpager.setAdapter(adapter);
+        articleViewpager.setOffscreenPageLimit(channelList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        mTabLayout.setupWithViewPager(article_viewpager);
+        mTabLayout.setupWithViewPager(articleViewpager);
     }
 
     @Override

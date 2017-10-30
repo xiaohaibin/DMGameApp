@@ -21,5 +21,9 @@ public interface getNewsListContract {
         void getNewListSuccess(NewsListEntity listEntity);
 
         void getNewListFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

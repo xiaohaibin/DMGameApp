@@ -23,5 +23,9 @@ public interface getForumListContract {
         void getForumListDataSuccess(List<ForumEntity> listData);
 
         void getForumListDataFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

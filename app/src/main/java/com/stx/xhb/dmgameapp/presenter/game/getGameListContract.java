@@ -24,5 +24,9 @@ public interface getGameListContract {
 
         void getGameListDataFailed(String msg);
 
+        void showLoading();
+
+        void hideLoading();
+
     }
 }

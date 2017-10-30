@@ -25,18 +25,4 @@ public class NewsDetailsActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected Class getLogicClazz() {
-        return null;
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
 }

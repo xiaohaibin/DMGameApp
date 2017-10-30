@@ -21,5 +21,9 @@ public interface RegisterContract {
         void registerSuccess(UserInfoEntity infoEntity);
 
         void registerFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

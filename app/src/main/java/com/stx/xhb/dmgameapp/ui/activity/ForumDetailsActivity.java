@@ -29,14 +29,5 @@ public class ForumDetailsActivity  extends BaseActivity{
         return null;
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
 
 }

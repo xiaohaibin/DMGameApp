@@ -23,5 +23,9 @@ public interface getGameChannelContract {
         void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

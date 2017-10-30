@@ -29,6 +29,10 @@ public interface getGameDetailsCommonContract {
         void getGameToolsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list);
 
         void getGameToolsListFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 
 }

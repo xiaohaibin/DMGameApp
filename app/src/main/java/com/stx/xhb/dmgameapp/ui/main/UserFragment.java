@@ -99,22 +99,9 @@ public class UserFragment extends BaseFragment {
                         }).setMessage("确定要退出登录？").create();
                 dialog.show();
                 break;
+            default:
+                break;
         }
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    protected Class getLogicClazz() {
-        return null;
     }
 
     private void showUserInfo() {

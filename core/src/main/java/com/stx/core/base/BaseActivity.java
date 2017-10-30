@@ -29,7 +29,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected abstract void onInitialization(Bundle bundle);
 
-    protected abstract Class getLogicClazz();
+    protected  Class getLogicClazz(){
+        return null;
+    };
 
     protected void onInitData2Remote() {
         if (getLogicClazz() != null) {

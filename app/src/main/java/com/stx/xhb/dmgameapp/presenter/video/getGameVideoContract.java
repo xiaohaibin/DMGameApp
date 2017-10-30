@@ -21,5 +21,9 @@ public interface getGameVideoContract {
         void getVideoListSuccess(GameVideoEntity videoListEntity);
 
         void getVideoListFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

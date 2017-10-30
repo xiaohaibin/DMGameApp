@@ -73,7 +73,6 @@ public class AboutActivity extends BaseAppActitity {
         MobclickAgent.onPause(this);
     }
 
-    //点击分享
     @OnClick(R.id.article_share)
     public void onClick() {
         ShareDialog.share(getSupportFragmentManager(),"快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用!", "http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp", "快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用","");

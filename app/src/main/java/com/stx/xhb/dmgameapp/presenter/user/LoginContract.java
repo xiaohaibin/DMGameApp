@@ -22,6 +22,10 @@ public interface LoginContract {
 
         void loginFailed(String msg);
 
+        void showLoading();
+
+        void hideLoading();
+
     }
 
 }

@@ -20,18 +20,4 @@ public class CommentFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    protected Class getLogicClazz() {
-        return null;
-    }
 }

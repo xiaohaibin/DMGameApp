@@ -23,5 +23,9 @@ public interface getNewsChannelContract {
         void getChannelSuccess(List<NewsChannelListEntity.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

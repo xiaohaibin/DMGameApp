@@ -23,5 +23,9 @@ public interface getForumChannelContract {
         void getChannelSuccess(List<ForumChannelListEntity.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
     }
 }

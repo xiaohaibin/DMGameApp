@@ -29,7 +29,6 @@ import butterknife.Bind;
  */
 public class GameDetailsActivity extends BaseActivity {
 
-
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.id_stickynavlayout_indicator)
@@ -93,20 +92,6 @@ public class GameDetailsActivity extends BaseActivity {
         viewPager.setOffscreenPageLimit(fragemnts.size());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    protected Class getLogicClazz() {
-        return null;
-    }
-
-
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
     }
 
 }

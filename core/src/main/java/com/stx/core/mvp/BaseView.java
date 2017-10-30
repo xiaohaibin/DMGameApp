@@ -10,7 +10,4 @@ package com.stx.core.mvp;
 
 public interface BaseView {
 
-    void showLoading();
-
-    void hideLoading();
 }
