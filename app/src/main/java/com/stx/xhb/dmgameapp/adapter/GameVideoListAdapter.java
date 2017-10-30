@@ -38,7 +38,7 @@ public class GameVideoListAdapter extends BaseQuickAdapter<VideoListEntity.Video
         helper.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(context, data.getVideourl());
+                WebDetailsActivity.start(context, data.getVideourl(),data.getDescription(),data.getVideopic());
             }
         });
     }

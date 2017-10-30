@@ -23,7 +23,9 @@ import java.util.List;
  */
 
 public class GameNewsListAdapter extends BaseQuickAdapter<NewsListEntity.ChannelEntity.HtmlEntity,BaseViewHolder> {
+
     private Context mContext;
+    private String imgUrl="";
     public GameNewsListAdapter(Context context) {
         super(R.layout.list_item_news);
         this.mContext=context;
@@ -38,13 +40,14 @@ public class GameNewsListAdapter extends BaseQuickAdapter<NewsListEntity.Channel
         if (litpic != null && !litpic.isEmpty()) {
             List<String> stringList = litpic.get(0);
             if (stringList != null && !stringList.isEmpty()) {
+                imgUrl=stringList.get(0);
                 Glide.with(mContext).load(stringList.get(0)).into(imageView);
             }
         }
         helper.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(mContext, data.getArcurl());
+                WebDetailsActivity.start(mContext, data.getArcurl(),data.getDescription(),imgUrl);
             }
         });
     }

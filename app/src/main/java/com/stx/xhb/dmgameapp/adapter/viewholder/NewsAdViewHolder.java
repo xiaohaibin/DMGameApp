@@ -52,7 +52,7 @@ public class NewsAdViewHolder {
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
-                WebDetailsActivity.start(mContext, bannerList.get(position).getArcurl());
+                WebDetailsActivity.start(mContext, bannerList.get(position).getArcurl(), bannerList.get(position).getDescription(),bannerList.get(position).getLitpic());
             }
         });
     }

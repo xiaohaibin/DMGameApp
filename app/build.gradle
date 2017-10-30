@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 21
         versionCode 11
         versionName "3.0"
         multiDexEnabled true
@@ -20,9 +20,32 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('3dmgame.jks')
+            storePassword "xhbxysy9862377"
+            keyAlias "3dmgame"
+            keyPassword "xhbxysy9862377"
+        }
+        release {
+            storeFile file('3dmgame.jks')
+            storePassword "xhbxysy9862377"
+            keyAlias "3dmgame"
+            keyPassword "xhbxysy9862377"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled false //是否混淆
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug{
+            minifyEnabled false //是否混淆
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

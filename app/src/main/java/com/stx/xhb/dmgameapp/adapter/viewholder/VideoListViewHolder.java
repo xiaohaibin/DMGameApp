@@ -47,7 +47,7 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBea
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(), data.getVideourl());
+                WebDetailsActivity.start(getContext(), data.getVideourl(),data.getDescription(),data.getVideopic());
             }
         });
     }

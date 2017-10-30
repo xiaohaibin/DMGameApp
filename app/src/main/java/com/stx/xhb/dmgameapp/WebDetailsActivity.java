@@ -16,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.stx.xhb.dmgameapp.base.BaseAppActitity;
+import com.stx.xhb.dmgameapp.share.ShareDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 页面详情
@@ -34,6 +36,8 @@ public class WebDetailsActivity extends BaseAppActitity {
     @Bind(R.id.web_go_top)
     ImageView mWebGoTop;
     private String url = "";
+    private String content="";
+    private String imgUrl="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +97,16 @@ public class WebDetailsActivity extends BaseAppActitity {
     }
 
     private void init() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            if (intent.hasExtra("url")) {
-                url = intent.getStringExtra("url");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            if (bundle.containsKey("url")) {
+                url = bundle.getString("url");
+            }
+            if (bundle.containsKey("content")){
+                content = bundle.getString("content");
+            }
+            if (bundle.containsKey("imageUrl")){
+                imgUrl = bundle.getString("imageUrl");
             }
         }
     }
@@ -125,9 +135,19 @@ public class WebDetailsActivity extends BaseAppActitity {
         return true;
     }
 
-    public static void start(Context context, String url) {
+    public static void start(Context context, String url,String content,String imageUrl) {
+        Bundle bundle = new Bundle();
         Intent intent = new Intent(context, WebDetailsActivity.class);
-        intent.putExtra("url", url);
+        bundle.putString("url", url);
+        bundle.putString("content", content);
+        bundle.putString("imageUrl", imageUrl);
+        intent.putExtras(bundle);
         context.startActivity(intent);
+    }
+
+    //点击分享
+    @OnClick(R.id.article_share)
+    public void onClick() {
+        ShareDialog.share(getSupportFragmentManager(),webView.getTitle(), url, content,imgUrl);
     }
 }

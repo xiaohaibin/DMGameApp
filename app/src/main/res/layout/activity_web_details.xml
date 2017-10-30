@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"/>
+        android:background="?attr/colorPrimary">
+
+        <ImageButton
+            android:id="@+id/article_share"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:background="@null"
+            android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,14 +28,14 @@
             android:id="@+id/web_webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
 
         <ProgressBar
             android:id="@+id/web_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/web_go_top"
@@ -34,7 +44,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="8dp"
             android:scaleType="fitCenter"
-            android:src="@mipmap/v300_icon_top"/>
+            android:src="@mipmap/v300_icon_top" />
 
     </FrameLayout>
 
