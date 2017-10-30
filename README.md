@@ -11,10 +11,7 @@
   
 ### 效果图
   
-   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/1.jpg) 
-   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/2.jpg) 
-   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/3.jpg) 
-   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/4.jpg) 
+   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/1.jpg) ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/2.jpg) ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/3.jpg) ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/4.jpg) 
   
 ### APK下载地址
   
