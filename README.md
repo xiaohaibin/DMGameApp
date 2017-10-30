@@ -11,10 +11,10 @@
   
 ### 效果图
   
-   ![ABC](http://api.open.qq.com/tfs/show_img.php?appid=1105172050&uuid=E4658A363448460AA559BDAB6EE87AE9.jpg%7C1048576%7C1509096057.6761) 
-   ![ABC](http://api.open.qq.com/tfs/show_img.php?appid=1105172050&uuid=9A97D902F23F506B27EB1ADD5FB7E656.jpg%7C1048576%7C1509096064.2801) 
-   ![ABC](http://api.open.qq.com/tfs/show_img.php?appid=1105172050&uuid=9E11D372056B7CFB5AE5B6DDCF72CCAD.jpg%7C1048576%7C1509096069.0899) 
-   ![ABC](http://api.open.qq.com/tfs/show_img.php?appid=1105172050&uuid=BE7622A80A934D8D2F162F7C0324EA17.jpg%7C1048576%7C1509096075.2748) 
+   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/1.jpg) 
+   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/2.jpg) 
+   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/3.jpg) 
+   ![ABC](https://github.com/xiaohaibin/DMGameApp/blob/master/screenshot/4.jpg) 
   
 ### APK下载地址
   
