@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+def keyStoreFile = rootProject.file("keystore.properties")
+def keyStoreProperties = new Properties()
+keyStoreProperties.load(new FileInputStream(keyStoreFile))
+
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -21,18 +25,19 @@ android {
         ]
     }
 
+    //签名信息配置
     signingConfigs {
         debug {
-            storeFile file('3dmgame.jks')
-            storePassword "xhbxysy9862377"
-            keyAlias "3dmgame"
-            keyPassword "xhbxysy9862377"
+            storeFile file(keyStoreProperties['storeFile'])
+            storePassword keyStoreProperties['storePassword']
+            keyAlias keyStoreProperties['keyAlias']
+            keyPassword keyStoreProperties['keyPassword']
         }
         release {
-            storeFile file('3dmgame.jks')
-            storePassword "xhbxysy9862377"
-            keyAlias "3dmgame"
-            keyPassword "xhbxysy9862377"
+            storeFile file(keyStoreProperties['storeFile'])
+            storePassword keyStoreProperties['storePassword']
+            keyAlias keyStoreProperties['keyAlias']
+            keyPassword keyStoreProperties['keyPassword']
         }
     }
 

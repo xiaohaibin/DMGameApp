@@ -14,3 +14,9 @@
 .DS_Store
 /build
 /captures
+/keystore.properties
+.idea/gradle.xml
+app/app-tencent-release.apk
+app/app-wandoujia-release.apk
+app/build/
+key/
