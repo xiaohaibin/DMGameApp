@@ -24,14 +24,11 @@
   项目中由于存在大量网络图片，所以采用了二级缓存
   目前这是该项目的2.0 版本，后面会持续进行优化
   主要使用的第三方开源框架有：
-  - viewpagerindicator，主要使用在项目中Tab标签上
-  - butterknife 一键注解，一个非常好用的工具
-  - xutils网络加载框架
-  - smoothprogressbar 一款比较好看的进度条
-  - circleimageview 圆角图片处理
-  - cardview 卡片视图
-  - ultra-ptr 下拉刷新框架
-  - multiple-status-view 多种加载视图框架
+  [Xbanner 图片轮播控件](https://github.com/xiaohaibin/XBanner) 
+  [Butterknife  一键注解，一个非常好用的工具](https://github.com/JakeWharton/butterknife)
+  [Okhttputils 网络加载框架](https://github.com/hongyangAndroid/okhttputils)
+  [Circleimageview 圆角图片处理](https://github.com/hdodenhof/CircleImageView)
+  [multiple-status-view 多种加载视图框架](https://github.com/qyxxjd/MultipleStatusView)
   
 ### 关于我
   
