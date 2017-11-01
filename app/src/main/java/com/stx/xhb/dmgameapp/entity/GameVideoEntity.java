@@ -21,10 +21,10 @@ public class GameVideoEntity extends BaseEntity{
      * totalrow : 5
      */
 
-    private String totalrow;
+    private int totalrow;
     private List<VideoListEntity.VideoBean> html;
 
-    public String getTotalrow() {
+    public int getTotalrow() {
         return totalrow;
     }
 

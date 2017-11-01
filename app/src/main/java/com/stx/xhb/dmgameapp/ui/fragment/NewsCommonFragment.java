@@ -172,7 +172,7 @@ public class NewsCommonFragment extends BaseFragment implements getNewsListContr
                                 if (listEntity.getChannel() != null) {
                                     mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
                                 }
-                                if (mNewsCommonAdapter.getCount() < page_size) {
+                                if (mNewsCommonAdapter.getCount() >= listEntity.getChannel().getTotalrow()) {
                                     mNewsCommonAdapter.stopMore();
                                 }
                                 if (mNewsCommonAdapter.getCount() == 0) {

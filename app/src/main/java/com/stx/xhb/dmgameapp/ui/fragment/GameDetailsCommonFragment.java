@@ -60,7 +60,7 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_common_recyclerview;
+        return R.layout.layout_common_recyclerview;
     }
 
     @Override

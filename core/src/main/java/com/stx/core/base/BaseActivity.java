@@ -23,6 +23,9 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
+    protected int currentpage = 1;//当前页码
+    protected int page_size = 20;//页面数据量
+
     protected BasePresenter mPresenter;
 
     protected abstract int getLayoutResource();

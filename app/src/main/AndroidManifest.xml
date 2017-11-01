@@ -13,8 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
-    <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <!-- 极光推送所需权限  start -->
@@ -102,7 +100,7 @@
 
         <!-- 论坛详情 -->
         <activity
-            android:name=".ui.activity.ForumDetailsActivity"
+            android:name=".ui.activity.ForumListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 

@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ForumEntity;
+import com.stx.xhb.dmgameapp.ui.activity.ForumListActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,7 +39,7 @@ public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
     }
 
     @Override
-    public void setData(ForumEntity data) {
+    public void setData(final ForumEntity data) {
         Glide.with(getContext()).load(data.getIcon()).placeholder(R.drawable.product_default).error(R.drawable.product_default).into(mIvForum);
         mTvForumTitle.setText(data.getName());
         mTvCount.setText("今日：" + data.getTodayposts());
@@ -46,7 +47,7 @@ public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
         mBtnCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ForumListActivity.start(getContext(),data.getFid(),data.getName());
             }
         });
     }

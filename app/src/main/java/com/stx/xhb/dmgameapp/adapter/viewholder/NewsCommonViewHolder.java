@@ -38,7 +38,6 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
 
     @Override
     public void setData(final NewsListEntity.ChannelEntity.HtmlEntity data) {
-        super.setData(data);
         mTitle.setText(data.getTitle());
         mDate.setText(data.getSenddate());
         List<List<String>> litpic = data.getLitpic();

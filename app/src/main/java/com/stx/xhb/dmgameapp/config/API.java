@@ -54,4 +54,8 @@ public class API {
      */
     public static final String GET_GAME_DETAILS="http://m.3dmgame.com/y3wap/appgamesmsearch.php";
 
+    /**
+     * web论坛链接
+     */
+    public static final String GET_3DM_WEB_FORUM="http://bbs.3dmgame.com/forum.php?mod=viewthread&tid=%s&page=1&mobile=3dmapp";
 }
