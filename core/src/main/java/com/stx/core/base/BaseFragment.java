@@ -12,6 +12,7 @@ import com.stx.core.log.Logger;
 import com.stx.core.model.LogicProxy;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.mvp.BaseView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
 
@@ -88,6 +89,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        OkHttpUtils.getInstance().cancelTag(this);
         if (mPresenter != null) {
             mPresenter.detachView();
         }

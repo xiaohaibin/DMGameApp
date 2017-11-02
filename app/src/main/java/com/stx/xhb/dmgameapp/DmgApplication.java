@@ -21,7 +21,6 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 /**
@@ -40,7 +39,7 @@ public class DmgApplication extends BaseApplication {
         AppUser.init();
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new LoggerInterceptor("==3dm==",BuildConfig.DEBUG))
+                .addInterceptor(new LoggerInterceptor("==3dm==", BuildConfig.DEBUG))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置
@@ -50,10 +49,6 @@ public class DmgApplication extends BaseApplication {
         initUMShare();
 
         initBugly();
-
-        //极光推送初始化
-        JPushInterface.init(this);
-        JPushInterface.setDebugMode(true);//设置是否开启log日志，正式打包发布时建议关闭使用
     }
 
     @Override
@@ -96,10 +91,9 @@ public class DmgApplication extends BaseApplication {
 
         MobclickAgent.openActivityDurationTrack(false);
 
-        if (BuildConfig.DEBUG) {
-            Config.DEBUG = true;
-            MobclickAgent.setDebugMode(true);
-        }
+        Config.DEBUG = BuildConfig.DEBUG;
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
+
         //微信 appid appsecret
         PlatformConfig.setWeixin("wx152334f54a39c3b0", "24949aef9a179c253fdd55f12a576632");
         // QQ和Qzone appid appkey

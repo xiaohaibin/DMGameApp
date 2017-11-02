@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -90,8 +91,8 @@ public class ForumListActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         onRefresh();
     }
 
@@ -102,6 +103,9 @@ public class ForumListActivity extends BaseActivity implements SwipeRefreshLayou
 
     @Override
     public void getForumListDataSuccess(List<ForumListEntity.HtmlBean> data) {
+        if (currentpage == 1) {
+            forumDetailsListAdapter.clear();
+        }
         forumDetailsListAdapter.addAll(data);
     }
 

@@ -31,6 +31,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
         super.onResume();
         MobclickAgent.onPause(this);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

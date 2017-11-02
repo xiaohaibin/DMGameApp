@@ -15,19 +15,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <!-- 极光推送所需权限  start -->
-    <!-- Required -->
-    <permission
-        android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature"/>
-    <!-- Required -->
-    <uses-permission android:name="com.stx.xhb.dmgameapp.permission.JPUSH_MESSAGE"/>
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-
-    <!-- 极光推送所需权限  end -->
     <application
         android:name=".DmgApplication"
         android:allowBackup="true"
@@ -108,70 +95,6 @@
             android:name=".WebDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
-        <receiver android:name=".receiver.BootCompletedReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
-        <!-- 极光推送相关配置  start -->
-
-        <activity
-            android:name="cn.jpush.android.ui.PushActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="cn.jpush.android.ui.PushActivity"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="com.stx.xhb.dmgameapp"/>
-            </intent-filter>
-        </activity>
-
-        <service
-            android:name="cn.jpush.android.service.PushService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTER"/>
-                <action android:name="cn.jpush.android.intent.REPORT"/>
-                <action android:name="cn.jpush.android.intent.PushService"/>
-                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
-            </intent-filter>
-        </service>
-
-        <receiver
-            android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true">
-            <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>
-
-                <category android:name="com.stx.xhb.dmgameapp"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-            <!-- Optional -->
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-
-                <data android:scheme="package"/>
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="cn.jpush.android.service.DownloadService"
-            android:enabled="true"
-            android:exported="false">
-        </service>
-
-        <receiver android:name="cn.jpush.android.service.AlarmReceiver"/>
-
-        <!-- 极光推送相关配置  end -->
-
 
         <!-- 友盟相关配置 -->
 

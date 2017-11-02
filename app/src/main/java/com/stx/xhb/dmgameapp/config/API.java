@@ -21,7 +21,6 @@ public class API {
      * 用户登录、注册、论坛相关接口
      */
     public static final String USER_API="http://bbs.3dmgame.com/api/3dmapp/index.php";
-
     /**
      * 获取文章频道列表
      * 方式：GET

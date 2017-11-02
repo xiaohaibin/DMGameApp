@@ -30,6 +30,8 @@ public class ForumDetailsListViewHodler extends BaseViewHolder<ForumListEntity.H
     TextView mTitle;
     @Bind(R.id.date)
     TextView mDate;
+    @Bind(R.id.author)
+    TextView tvAuthor;
     @Bind(R.id.tv_count)
     TextView tvCount;
     @Bind(R.id.iv)
@@ -44,7 +46,8 @@ public class ForumDetailsListViewHodler extends BaseViewHolder<ForumListEntity.H
     @Override
     public void setData(final ForumListEntity.HtmlBean data) {
         mTitle.setText(data.getSubject());
-        mDate.setText(data.getAuthor()+"  "+data.getDateline());
+        tvAuthor.setText(data.getAuthor());
+        mDate.setText(data.getDateline());
         tvCount.setText(data.getReplies()+"评论");
         List<String> litpic = data.getLitpic();
         if (litpic != null && !litpic.isEmpty()) {

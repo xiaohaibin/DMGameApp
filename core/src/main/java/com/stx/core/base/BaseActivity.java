@@ -18,6 +18,8 @@ import com.stx.core.log.Logger;
 import com.stx.core.model.LogicProxy;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.mvp.BaseView;
+import com.umeng.analytics.MobclickAgent;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
 
@@ -32,9 +34,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected abstract void onInitialization(Bundle bundle);
 
-    protected  Class getLogicClazz(){
+    protected Class getLogicClazz() {
         return null;
-    };
+    }
+
+    ;
 
     protected void onInitData2Remote() {
         if (getLogicClazz() != null) {
@@ -47,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onCreate(savedInstanceState);
         Logger.d("name (%s.java:0)", getClass().getSimpleName());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        StatusBarUtil.setColor(this,getResources().getColor(R.color.common_main));
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.common_main));
         if (getLayoutResource() != 0) {
             setContentView(getLayoutResource());
         }
@@ -74,6 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         super.onDestroy();
         ButterKnife.unbind(this);
         LogicProxy.getInstance().unbind(getLogicClazz(), this);
+        OkHttpUtils.getInstance().cancelTag(this);
         if (mPresenter != null) {
             mPresenter.detachView();
         }
@@ -97,11 +102,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return vibrantColor;
     }
 
-    protected void initToolBar(Toolbar toolbar,String title){
-        if (toolbar!=null){
+    protected void initToolBar(Toolbar toolbar, String title) {
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
-            if (actionBar!=null) {
+            if (actionBar != null) {
                 actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.common_main)));
                 //设置显示返回上一级的图标
                 actionBar.setDisplayHomeAsUpEnabled(true);
@@ -121,4 +126,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

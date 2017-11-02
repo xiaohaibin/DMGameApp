@@ -44,7 +44,7 @@ public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
         mTvForumTitle.setText(data.getName());
         mTvCount.setText("今日：" + data.getTodayposts());
         mTvSort.setText("排名：" + data.getRank());
-        mBtnCollect.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ForumListActivity.start(getContext(),data.getFid(),data.getName());

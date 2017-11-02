@@ -1,9 +1,11 @@
 package com.stx.xhb.dmgameapp.presenter.forum;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
+import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.ForumListEntity;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -27,6 +29,7 @@ public class getForumDetailsListImpl extends BasePresenter<getForumDetailsListCo
         OkHttpUtils
                 .postString()
                 .content(GsonUtil.newGson().toJson(new ForumListContent(fid,page,"forumdisplay")))
+                .url(API.USER_API)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -60,7 +63,6 @@ public class getForumDetailsListImpl extends BasePresenter<getForumDetailsListCo
                     }
                 });
     }
-
 
     class ForumListContent{
 
