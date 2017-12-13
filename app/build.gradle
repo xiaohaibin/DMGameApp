@@ -5,15 +5,16 @@ keyStoreProperties.load(new FileInputStream(keyStoreFile))
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 11
-        versionName "3.0"
+        versionCode 12
+        versionName "3.1"
         multiDexEnabled true
+        flavorDimensions "DimenA"
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
@@ -57,9 +58,11 @@ android {
 
     productFlavors {
         tencent {
+            dimension "DimenA"
             manifestPlaceholders = [CHANNEL: "Tencent"]
         }
         wandoujia {
+            dimension "DimenA"
             manifestPlaceholders = [CHANNEL: "Wandoujia"]
         }
     }

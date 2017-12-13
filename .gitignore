@@ -1,13 +1,12 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+/.idea
 /build
 /captures
 keystore.properties
-.idea/gradle.xml
 app/app-tencent-release.apk
 app/app-wandoujia-release.apk
 app/build/
 key/
+app/src/main/java/com/stx/xhb/dmgameapp/entity/ForumListContentEntity.java
