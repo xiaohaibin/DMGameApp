@@ -172,7 +172,7 @@ public class GameDetailsCommonFragment extends BaseFragment implements getGameDe
             if (list.isEmpty()) {
                 gameNewsListAdapter.setEmptyView(R.layout.view_empty);
             }
-            if (gameNewsListAdapter.getData().size() < page_size) {
+            if (gameNewsListAdapter.getData().size() < pageSize) {
                 gameNewsListAdapter.loadMoreEnd(true);
             } else {
                 gameNewsListAdapter.loadMoreEnd(false);

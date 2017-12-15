@@ -80,7 +80,7 @@ public class VideoFragment extends BaseFragment implements getVideoContract.getV
                 mVideoListAdapter.clear();
             }
             mVideoListAdapter.addAll(videoListEntity.getVideo());
-            if (mVideoListAdapter.getCount() < page_size) {
+            if (mVideoListAdapter.getCount() < pageSize) {
                 mVideoListAdapter.stopMore();
             }
             if (mVideoListAdapter.getCount() == 0) {

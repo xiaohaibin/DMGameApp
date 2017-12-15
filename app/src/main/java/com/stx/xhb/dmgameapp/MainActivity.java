@@ -22,9 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private ViewPager main_viewPager;
+    private ViewPager mainViewpager;
     private List<Fragment> fragemnts ;
-    private MainFragmentPageAdapter adapter;
     private RadioGroup rgp;
     private TipsToast tipsToast;
     //退出时间
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     //初始化控件
     private void initView() {
-        main_viewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        mainViewpager = (ViewPager) findViewById(R.id.main_viewpager);
         rgp = (RadioGroup) findViewById(R.id.main_rgp);
         //设置默认第一个为选中状态
         RadioButton rb = (RadioButton) rgp.getChildAt(0);
@@ -69,16 +68,16 @@ public class MainActivity extends AppCompatActivity {
     //设置适配器
     private void setAdapter() {
         //实例化适配器
-        adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts);
-        main_viewPager.setOffscreenPageLimit(fragemnts.size());
+        MainFragmentPageAdapter adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts);
+        mainViewpager.setOffscreenPageLimit(fragemnts.size());
         //设置适配器
-        main_viewPager.setAdapter(adapter);
+        mainViewpager.setAdapter(adapter);
     }
 
     //设置监听
     private void setListener() {
         //viewPager的滑动监听
-        main_viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mainViewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 //获取当前位置的RadioButton
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int index = 0; index < rgp.getChildCount(); index++) {
                     RadioButton rb = (RadioButton) rgp.getChildAt(index);
                     if (rb.isChecked()) {
-                        main_viewPager.setCurrentItem(index, false);
+                        mainViewpager.setCurrentItem(index, false);
                         break;
                     }
                 }

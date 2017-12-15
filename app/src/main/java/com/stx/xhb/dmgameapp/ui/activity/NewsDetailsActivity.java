@@ -19,7 +19,6 @@ import butterknife.Bind;
 
 public class NewsDetailsActivity extends BaseActivity {
 
-
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.vp_container)

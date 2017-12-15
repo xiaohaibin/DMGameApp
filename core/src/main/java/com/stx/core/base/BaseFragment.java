@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     //标记已加载完成，保证懒加载只能加载一次
     protected boolean hasLoaded = false;
     protected int currentpage = 1;//当前页码
-    protected int page_size = 20;//页面数据量
+    protected int pageSize = 20;//页面数据量
 
     protected abstract int getLayoutResource();
 

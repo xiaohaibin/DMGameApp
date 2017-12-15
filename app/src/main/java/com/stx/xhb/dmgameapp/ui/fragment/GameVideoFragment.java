@@ -90,7 +90,7 @@ public class GameVideoFragment extends BaseFragment implements getGameVideoContr
             if (videoListEntity.getHtml().isEmpty()) {
                 gameVideoListAdapter.setEmptyView(R.layout.view_empty);
             }
-            if (videoListEntity.getHtml().size()<page_size) {
+            if (videoListEntity.getHtml().size()<pageSize) {
                 gameVideoListAdapter.loadMoreEnd(true);
             } else {
                 gameVideoListAdapter.loadMoreEnd(false);

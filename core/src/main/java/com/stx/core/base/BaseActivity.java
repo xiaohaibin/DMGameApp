@@ -25,8 +25,15 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
-    protected int currentpage = 1;//当前页码
-    protected int page_size = 20;//页面数据量
+    /**
+     * 当前页码
+     */
+    protected int currentpage = 1;
+
+    /**
+     * 页面数据量
+     */
+    protected int pageSize = 20;
 
     protected BasePresenter mPresenter;
 
@@ -37,8 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected Class getLogicClazz() {
         return null;
     }
-
-    ;
 
     protected void onInitData2Remote() {
         if (getLogicClazz() != null) {

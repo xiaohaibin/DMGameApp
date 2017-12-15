@@ -9,6 +9,7 @@ package com.stx.xhb.dmgameapp.base;
  */
 
 public class BaseEntity {
+
     private int code=0;
     private String msg="";
 

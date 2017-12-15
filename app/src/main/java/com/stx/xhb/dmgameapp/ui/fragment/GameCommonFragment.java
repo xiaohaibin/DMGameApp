@@ -103,7 +103,7 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
         if (listEntity != null) {
             mGameListAdapter.addAll(listEntity);
         }
-        if (mGameListAdapter.getCount() < page_size) {
+        if (mGameListAdapter.getCount() <pageSize) {
             mGameListAdapter.stopMore();
         }
         if (mGameListAdapter.getCount() == 0) {
@@ -173,7 +173,7 @@ public class GameCommonFragment extends BaseFragment implements getGameListContr
                                 if (gameListEntity.getHtml() != null) {
                                     mGameListAdapter.addAll(gameListEntity.getHtml());
                                 }
-                                if (mGameListAdapter.getCount() < page_size) {
+                                if (mGameListAdapter.getCount() < pageSize) {
                                     mGameListAdapter.stopMore();
                                 }
                                 if (mGameListAdapter.getCount() == 0) {
