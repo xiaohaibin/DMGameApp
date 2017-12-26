@@ -45,8 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         return null;
     }
 
-    ;
-
     protected void onInitData2Remote() {
         if (getLogicClazz() != null) {
             mPresenter = getLogicImpl();

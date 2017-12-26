@@ -76,6 +76,8 @@ public class LoginActivity extends BaseActivity implements LoginImpl.loginView {
             case R.id.btn_register://注册
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
+            default:
+                break;
         }
     }
 
