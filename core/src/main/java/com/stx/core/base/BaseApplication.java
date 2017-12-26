@@ -7,6 +7,9 @@ import com.stx.core.BuildConfig;
 import com.stx.core.log.LogLevel;
 import com.stx.core.log.Logger;
 
+/**
+ * @author Mr.xiao
+ */
 public class BaseApplication extends Application {
 
     private static BaseApplication ourInstance = new BaseApplication();

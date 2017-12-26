@@ -9,7 +9,8 @@ import com.stx.core.utils.ScreenUtil;
 
 
 /**
- * Author:jxnk25
+ *
+ * @author Mr.xiao
  * <p>
  * CrateTime:2016-12-07 18:21
  * <p>

@@ -123,7 +123,7 @@ public class ForumCommonFragment extends BaseFragment implements getForumListCon
             mForumListAdapter.clear();
         }
         mForumListAdapter.addAll(listData);
-        if (mForumListAdapter.getCount() < page_size) {
+        if (mForumListAdapter.getCount() < pageSize) {
             mForumListAdapter.stopMore();
         }
         if (mForumListAdapter.getCount() == 0) {
@@ -187,7 +187,7 @@ public class ForumCommonFragment extends BaseFragment implements getForumListCon
                                             mForumListAdapter.clear();
                                         }
                                         mForumListAdapter.addAll(dataList);
-                                        if (mForumListAdapter.getCount() < page_size) {
+                                        if (mForumListAdapter.getCount() < pageSize) {
                                             mForumListAdapter.stopMore();
                                         }
                                         if (mForumListAdapter.getCount() == 0) {

@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
+import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
 
 /**
@@ -32,7 +33,7 @@ public class DmgApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        ButterKnife.setDebug(BuildConfig.DEBUG);
         //初始化Toast
         ToastManager.instance.init(this);
         //用户数据初始化

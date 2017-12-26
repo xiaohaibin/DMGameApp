@@ -25,8 +25,15 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
 
-    protected int currentpage = 1;//当前页码
-    protected int page_size = 20;//页面数据量
+    /**
+     * 当前页码
+     */
+    protected int currentpage = 1;
+
+    /**
+     * 页面数据量
+     */
+    protected int pageSize = 20;
 
     protected BasePresenter mPresenter;
 
@@ -54,8 +61,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         StatusBarUtil.setColor(this, getResources().getColor(R.color.common_main));
         if (getLayoutResource() != 0) {
             setContentView(getLayoutResource());
+            ButterKnife.bind(this);
         }
-        ButterKnife.bind(this);
         this.onInitialization(savedInstanceState);
         this.onInitData2Remote();
     }

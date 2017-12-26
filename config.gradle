@@ -1,0 +1,6 @@
+ext.appConfig = [
+        keyAlias     : '3dmgame',
+        keyPassWord  : 'xhbxysy9862377',
+        storeFile    : '../key/3dmgame.jks',
+        storePassWord: 'xhbxysy9862377',
+]
