@@ -33,7 +33,6 @@ public class DmgApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        ButterKnife.setDebug(BuildConfig.DEBUG);
         //初始化Toast
         ToastManager.instance.init(this);
         //用户数据初始化

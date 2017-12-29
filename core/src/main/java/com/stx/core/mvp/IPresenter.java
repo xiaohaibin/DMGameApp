@@ -9,6 +9,8 @@ package com.stx.core.mvp;
  */
 
 public interface IPresenter {
-    void start();
-    void destory();
+
+    void onStart();
+
+    void onDestroy();
 }
