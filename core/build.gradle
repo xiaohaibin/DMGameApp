@@ -9,6 +9,11 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -31,7 +36,6 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.2'
     //butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //圆角图片
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
     //多状态视图
