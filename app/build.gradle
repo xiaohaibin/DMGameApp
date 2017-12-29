@@ -4,7 +4,6 @@ apply from: "$rootDir/config.gradle"
 android {
     compileSdkVersion 25
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
@@ -22,6 +21,11 @@ android {
                 JPUSH_APPKEY : "1d606486b7fd03d82a683ecd", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
 
     }
 

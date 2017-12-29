@@ -9,9 +9,6 @@ package com.stx.core.mvp;
  */
 
 public interface IPresenter {
-    void onCreate();
-
     void start();
-
     void destory();
 }
