@@ -8,11 +8,19 @@ package com.stx.core.mvp;
  * Describe：
  */
 
-public class BasePresenter<T extends BaseView> implements Presenter<T>{
-    private T mView;
+public class BasePresenter<V extends IView,M extends IModel> implements IPresenter<V> {
+
+    protected static final String TAG="BasePresenter";
+    protected V mView;
+    protected M mModel;
 
     @Override
-    public void attachView(T mvpView) {
+    public void onStart() {
+
+    }
+
+    @Override
+    public void attachView(V mvpView) {
         this.mView = mvpView;
     }
 
@@ -21,12 +29,17 @@ public class BasePresenter<T extends BaseView> implements Presenter<T>{
         this.mView = null;
     }
 
+    @Override
     public boolean isViewBind() {
         return mView != null;
     }
 
-    public T getView() {
+    public V getView() {
         return mView;
+    }
+
+    public M getModel(){
+        return mModel;
     }
 
 }

@@ -4,9 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.stx.core.BuildConfig;
-import com.stx.core.di.component.AppComponent;
-import com.stx.core.di.component.DaggerAppComponent;
-import com.stx.core.di.moudle.AppMoudle;
 import com.stx.core.log.LogLevel;
 import com.stx.core.log.Logger;
 
@@ -16,7 +13,6 @@ import com.stx.core.log.Logger;
 public class BaseApplication extends Application {
 
     private static BaseApplication ourInstance;
-    private static AppComponent sAppComponent = null;
 
     public static BaseApplication getInstance() {
         return ourInstance;
@@ -26,11 +22,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ourInstance = this;
-        if (sAppComponent == null) {
-            DaggerAppComponent.builder()
-                    .appMoudle(new AppMoudle(this))
-                    .build();
-        }
         Logger.init(getPackageName())
                 .methodCount(3)
                 .hideThreadInfo()
@@ -38,7 +29,4 @@ public class BaseApplication extends Application {
 
     }
 
-    public AppComponent getAppComponent() {
-        return sAppComponent;
-    }
 }

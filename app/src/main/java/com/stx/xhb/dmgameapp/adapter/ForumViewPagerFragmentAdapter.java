@@ -3,9 +3,9 @@ package com.stx.xhb.dmgameapp.adapter;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.stx.core.base.BaseFragment;
+import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
-import com.stx.xhb.dmgameapp.ui.fragment.ForumCommonFragment;
+import com.stx.xhb.dmgameapp.mvp.view.fragment.ForumCommonFragment;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ForumViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public BaseFragment getItem(int position) {
+    public BaseMvpFragment getItem(int position) {
         ForumChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
         return ForumCommonFragment.newInstance(entity.getFid());
     }

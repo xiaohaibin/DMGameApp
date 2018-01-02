@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ForumEntity;
-import com.stx.xhb.dmgameapp.ui.activity.ForumListActivity;
+import com.stx.xhb.dmgameapp.mvp.view.activity.ForumListActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,11 +1,11 @@
 package com.stx.core.mvp;
 
 /**
- * Author: Mr.xiao on 2017/12/26
- *
- * @mail:xhb_199409@163.com
- * @github:https://github.com/xiaohaibin
- * @describe:
+ * Author：xiaohaibin
+ * Time：2017/9/12
+ * Emil：xhb_199409@163.com
+ * Github：https://github.com/xiaohaibin/
+ * Describe：
  */
 
 public interface IView {

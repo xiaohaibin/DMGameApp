@@ -3,9 +3,9 @@ package com.stx.xhb.dmgameapp.adapter;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.stx.core.base.BaseFragment;
+import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
-import com.stx.xhb.dmgameapp.ui.fragment.GameCommonFragment;
+import com.stx.xhb.dmgameapp.mvp.view.fragment.GameCommonFragment;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class GameViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public BaseFragment getItem(int position) {
+    public BaseMvpFragment getItem(int position) {
         GameChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
         return GameCommonFragment.newInstance(entity.getAppid());
     }

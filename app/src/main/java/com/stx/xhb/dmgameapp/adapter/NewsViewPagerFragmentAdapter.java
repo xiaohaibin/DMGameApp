@@ -3,10 +3,10 @@ package com.stx.xhb.dmgameapp.adapter;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.stx.core.base.BaseFragment;
+import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
-import com.stx.xhb.dmgameapp.ui.fragment.NewsCommonFragment;
-import com.stx.xhb.dmgameapp.ui.fragment.VideoFragment;
+import com.stx.xhb.dmgameapp.mvp.view.fragment.NewsCommonFragment;
+import com.stx.xhb.dmgameapp.mvp.view.fragment.VideoFragment;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class NewsViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public BaseFragment getItem(int position) {
+    public BaseMvpFragment getItem(int position) {
         NewsChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
         if ("2".equals(entity.getAppid())) {
             return VideoFragment.newInstance();

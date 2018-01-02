@@ -1,16 +1,15 @@
 package com.stx.core.mvp;
 
 /**
- * Author: Mr.xiao on 2017/12/26
- *
- * @mail:xhb_199409@163.com
- * @github:https://github.com/xiaohaibin
- * @describe:
+ * Author：xiaohaibin
+ * Time：2017/9/12
+ * Emil：xhb_199409@163.com
+ * Github：https://github.com/xiaohaibin/
+ * Describe：
  */
-
-public interface IPresenter {
-
+public interface IPresenter<V extends IView> {
+    void attachView(V mvpView);
     void onStart();
-
-    void onDestroy();
+    void detachView();
+    boolean isViewBind();
 }

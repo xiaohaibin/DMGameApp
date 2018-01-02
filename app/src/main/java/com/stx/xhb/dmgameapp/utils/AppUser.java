@@ -20,7 +20,7 @@ public class AppUser {
     private static UserInfoEntity sUserInfoEntity;
 
     public static void init(){
-        String userInfo = SPUtils.getString(DmgApplication.getInstance().getContext(), "userInfo", "");
+        String userInfo = SPUtils.getString(DmgApplication.getInstance().getApplicationContext(), "userInfo", "");
         if (!TextUtils.isEmpty(userInfo)) {
             sUserInfoEntity = GsonUtil.newGson().fromJson(userInfo, UserInfoEntity.class);
         }
@@ -54,7 +54,7 @@ public class AppUser {
      */
     public static void setUserInfo(UserInfoEntity userInfoEntity) {
         AppUser.sUserInfoEntity = userInfoEntity;
-        SPUtils.putString(DmgApplication.getInstance().getContext(), "userInfo", GsonUtil.newGson().toJson(userInfoEntity));
+        SPUtils.putString(DmgApplication.getInstance().getApplicationContext(), "userInfo", GsonUtil.newGson().toJson(userInfoEntity));
     }
 
     /**
