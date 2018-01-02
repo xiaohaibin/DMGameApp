@@ -22,6 +22,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
 
+/**
+ * @author Mr.xiao
+ */
 public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatActivity implements IView {
 
     /**

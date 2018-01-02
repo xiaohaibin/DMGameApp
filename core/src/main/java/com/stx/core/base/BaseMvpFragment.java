@@ -15,6 +15,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
 
+/**
+ * @author Mr.xiao
+ */
 public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
     /**
      * 是否可见
@@ -53,8 +56,8 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
 
     protected void onInitPresenter() {
-            mPresenter = onLoadPresenter();
-        if (mPresenter!=null) {
+        mPresenter = onLoadPresenter();
+        if (mPresenter != null) {
             mPresenter.attachView(this);
         }
     }
