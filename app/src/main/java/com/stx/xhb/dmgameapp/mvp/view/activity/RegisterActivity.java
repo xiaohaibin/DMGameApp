@@ -53,7 +53,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @OnClick(R.id.btn_register)
     public void onViewClicked() {
-        ((RegisterPresenter) mPresenter).register(mEdAccount.getText().toString(), mEdPwd.getText().toString(), mEdSurePwd.getText().toString(), mEdSureEmail.getText().toString());
+        mPresenter.register(mEdAccount.getText().toString(), mEdPwd.getText().toString(), mEdSurePwd.getText().toString(), mEdSureEmail.getText().toString());
     }
 
     @Override

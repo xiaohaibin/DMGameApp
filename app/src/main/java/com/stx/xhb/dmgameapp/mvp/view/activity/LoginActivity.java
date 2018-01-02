@@ -72,7 +72,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 showQuestionList();
                 break;
             case R.id.btn_login://登录
-                ((LoginPresenter) mPresenter).login(mEdAccount.getText().toString(), mEdPwd.getText().toString(), String.valueOf(questionsId), mEdAnswer.getText().toString());
+                mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString(), String.valueOf(questionsId), mEdAnswer.getText().toString());
                 break;
             case R.id.btn_register://注册
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
