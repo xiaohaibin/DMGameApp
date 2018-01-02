@@ -11,10 +11,10 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
 import com.stx.xhb.dmgameapp.entity.VideoListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getVideoListPresenter;
+import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;

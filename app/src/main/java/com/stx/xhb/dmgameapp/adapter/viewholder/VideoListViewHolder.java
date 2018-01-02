@@ -14,13 +14,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/19
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * @Author：xiaohaibin
+ * @Time：2017/9/19
+ * @Emil：xhb_199409@163.com
+ * @Github：https://github.com/xiaohaibin/
+ * @Describe：
  */
-
 public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBean> {
 
     @Bind(R.id.iv_video_img)
@@ -47,7 +46,7 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBea
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(), data.getVideourl(),data.getDescription(),data.getVideopic());
+                WebDetailsActivity.start(getContext(), data.getVideourl(), data.getDescription(), data.getVideopic());
             }
         });
     }

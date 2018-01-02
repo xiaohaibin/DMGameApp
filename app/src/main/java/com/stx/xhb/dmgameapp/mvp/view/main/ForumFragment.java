@@ -11,10 +11,10 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getForumChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getForumChannelPresenter;
+import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

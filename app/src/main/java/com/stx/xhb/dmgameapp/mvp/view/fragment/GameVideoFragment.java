@@ -8,10 +8,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
 import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getGameVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getGameVideoListPresenter;
+import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
 

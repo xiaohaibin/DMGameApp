@@ -24,6 +24,8 @@ import butterknife.OnClick;
 
 /**
  * 页面详情
+ *
+ * @author Mr.xiao
  */
 public class WebDetailsActivity extends BaseAppActitity {
 
@@ -36,8 +38,8 @@ public class WebDetailsActivity extends BaseAppActitity {
     @Bind(R.id.web_go_top)
     ImageView mWebGoTop;
     private String url = "";
-    private String content="";
-    private String imgUrl="";
+    private String content = "";
+    private String imgUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class WebDetailsActivity extends BaseAppActitity {
         settings.setLoadWithOverviewMode(true);
         //隐藏缩放控件
         settings.setDisplayZoomControls(false);
-//        解决HTTPS协议下出现的mixed content问题
+        //解决HTTPS协议下出现的mixed content问题
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -102,10 +104,10 @@ public class WebDetailsActivity extends BaseAppActitity {
             if (bundle.containsKey("url")) {
                 url = bundle.getString("url");
             }
-            if (bundle.containsKey("content")){
+            if (bundle.containsKey("content")) {
                 content = bundle.getString("content");
             }
-            if (bundle.containsKey("imageUrl")){
+            if (bundle.containsKey("imageUrl")) {
                 imgUrl = bundle.getString("imageUrl");
             }
         }
@@ -135,7 +137,7 @@ public class WebDetailsActivity extends BaseAppActitity {
         return true;
     }
 
-    public static void start(Context context, String url,String content,String imageUrl) {
+    public static void start(Context context, String url, String content, String imageUrl) {
         Bundle bundle = new Bundle();
         Intent intent = new Intent(context, WebDetailsActivity.class);
         bundle.putString("url", url);
@@ -148,6 +150,6 @@ public class WebDetailsActivity extends BaseAppActitity {
     //点击分享
     @OnClick(R.id.article_share)
     public void onClick() {
-        ShareDialog.share(getSupportFragmentManager(),webView.getTitle(), url, content,imgUrl);
+        ShareDialog.share(getSupportFragmentManager(), webView.getTitle(), url, content, imgUrl);
     }
 }

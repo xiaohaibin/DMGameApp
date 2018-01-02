@@ -5,11 +5,7 @@ import android.widget.Toast;
 import com.stx.xhb.dmgameapp.DmgApplication;
 
 /**
- * Author:jxnk25
- * <p>
- * CrateTime:2016-12-16 9:27
- * <p>
- * Description:Toast工具
+ * @author Mr.xiao
  */
 public class ToastUtil {
 

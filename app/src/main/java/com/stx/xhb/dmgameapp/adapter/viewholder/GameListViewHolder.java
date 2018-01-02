@@ -14,14 +14,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/20
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * @author Mr.xiao
+ * @time 2017/9/20
+ * @Emil：xhb_199409@163.com
+ * @Github：https://github.com/xiaohaibin/
+ * @Describe：
  */
 
-public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity>{
+public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity> {
     @Bind(R.id.tv_game_title)
     TextView mTvGameTitle;
     @Bind(R.id.tv_game_details)
@@ -31,23 +31,23 @@ public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity
 
     public GameListViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this,itemView);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void setData(final GameListEntity.HtmlEntity data) {
         super.setData(data);
         Glide.with(getContext()).load(data.getLitpic()).placeholder(R.drawable.icon_gamed_efault).error(R.drawable.icon_gamed_efault).into(mIvGameImg);
-       mTvGameTitle.setText(data.getTitle());
-       mTvGameDetails.setText("官方名称："+data.getGame_trans_name()+"\n"
-                                +"游戏名称："+data.getTid()+"\n"
-                                +"发售日期："+data.getRelease_date()+"\n"
-                                +"游戏平台："+data.getTerrace()+"\n"
-                                +"发行商家："+data.getRelease_company());
+        mTvGameTitle.setText(data.getTitle());
+        mTvGameDetails.setText("官方名称：" + data.getGame_trans_name() + "\n"
+                + "游戏名称：" + data.getTid() + "\n"
+                + "发售日期：" + data.getRelease_date() + "\n"
+                + "游戏平台：" + data.getTerrace() + "\n"
+                + "发行商家：" + data.getRelease_company());
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameDetailsActivity.start(getContext(),data.getId(),data.getLitpic(),data.getTitle(),mTvGameDetails.getText().toString());
+                GameDetailsActivity.start(getContext(), data.getId(), data.getLitpic(), data.getTitle(), mTvGameDetails.getText().toString());
             }
         });
     }

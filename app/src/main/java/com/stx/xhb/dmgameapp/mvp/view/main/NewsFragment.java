@@ -11,10 +11,10 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getNewsChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getNewsChannelPresenter;
+import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

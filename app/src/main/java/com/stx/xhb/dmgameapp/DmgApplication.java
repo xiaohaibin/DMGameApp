@@ -21,11 +21,12 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by xhb on 2016/1/19.
+ *
+ * @author xhb
+ * @date 2016/1/19
  * 程序主入口，当程序启动的时候，会调用这个方法
  */
 public class DmgApplication extends BaseApplication {

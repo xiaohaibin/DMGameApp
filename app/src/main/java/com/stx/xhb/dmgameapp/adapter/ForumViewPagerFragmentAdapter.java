@@ -10,8 +10,7 @@ import com.stx.xhb.dmgameapp.mvp.view.fragment.ForumCommonFragment;
 import java.util.List;
 
 /**
- * Author: Mr.xiao on 2017/3/5
- *
+ * @author: Mr.xiao on 2017/3/5
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
  * @describe: 论坛ViewPager适配器

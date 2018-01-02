@@ -5,28 +5,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
-import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getNewsListPresenter;
+import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
-import okhttp3.Call;
-import okhttp3.Request;
 
 /**
  * 通用的Fragment

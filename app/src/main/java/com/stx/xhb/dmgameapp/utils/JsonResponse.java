@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Created by jxnk25 on 2017-09-21
+ * @author Mr.xiao
  */
 public class JsonResponse extends JsonParser {
 

@@ -18,7 +18,7 @@ import com.umeng.socialize.utils.Log;
 /**
  * 启动页
  */
-public class SplashActivity extends AppCompatActivity implements SplashADListener{
+public class SplashActivity extends AppCompatActivity implements SplashADListener {
 
     @Override
     protected void onPause() {
@@ -38,8 +38,9 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_spalsh);
         LinearLayout llAd = (LinearLayout) findViewById(R.id.ll_ad);
-        SplashAD splashAD = new SplashAD(this, llAd,Constants.APPID, Constants.SplashPosID, this,3000);
+        SplashAD splashAD = new SplashAD(this, llAd, Constants.APPID, Constants.SplashPosID, this, 3000);
     }
+
     @Override
     public void onADDismissed() {
         jumpToMain();
@@ -83,10 +84,16 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
         Log.i("3DMGAME", "SplashADClicked");
     }
 
-    //防止用户返回键退出APP
+    /**
+     * 防止用户返回键退出APP
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
             return true;
         }
         return super.onKeyDown(keyCode, event);

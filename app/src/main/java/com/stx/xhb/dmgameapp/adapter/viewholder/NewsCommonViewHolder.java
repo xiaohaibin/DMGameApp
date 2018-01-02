@@ -16,11 +16,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/18
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * @author：xiaohaibin
+ * @time：2017/9/18
+ * @emil：xhb_199409@163.com
+ * @Github：https://github.com/xiaohaibin/
+ * @Describe：
  */
 
 public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelEntity.HtmlEntity> {
@@ -30,7 +30,8 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
     TextView mDate;
     @Bind(R.id.iv)
     ImageView mIv;
-    private String imgUrl="";
+    private String imgUrl = "";
+
     public NewsCommonViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -44,14 +45,14 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
         if (litpic != null && !litpic.isEmpty()) {
             List<String> stringList = litpic.get(0);
             if (stringList != null && !stringList.isEmpty()) {
-                imgUrl=stringList.get(0);
+                imgUrl = stringList.get(0);
                 Glide.with(getContext()).load(stringList.get(0)).into(mIv);
             }
         }
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(), data.getArcurl(),data.getDescription(),imgUrl);
+                WebDetailsActivity.start(getContext(), data.getArcurl(), data.getDescription(), imgUrl);
             }
         });
     }

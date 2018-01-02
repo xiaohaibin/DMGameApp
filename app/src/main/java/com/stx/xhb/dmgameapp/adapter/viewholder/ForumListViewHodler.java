@@ -14,11 +14,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/21
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * @author Mr.xiao
+ *         Time：2017/9/21
+ *         Emil：xhb_199409@163.com
+ *         Github：https://github.com/xiaohaibin/
+ *         Describe：
  */
 
 public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
@@ -47,7 +47,7 @@ public class ForumListViewHodler extends BaseViewHolder<ForumEntity> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ForumListActivity.start(getContext(),data.getFid(),data.getName());
+                ForumListActivity.start(getContext(), data.getFid(), data.getName());
             }
         });
     }

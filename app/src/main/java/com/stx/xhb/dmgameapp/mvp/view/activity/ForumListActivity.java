@@ -12,13 +12,10 @@ import android.support.v7.widget.Toolbar;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpActivity;
-import com.stx.core.mvp.IPresenter;
-import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.ForumDetailsListAdapter;
-import com.stx.xhb.dmgameapp.entity.ForumListEntity;
+import com.stx.xhb.dmgameapp.R;import com.stx.xhb.dmgameapp.entity.ForumListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getForumDetailsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getForumDetailsListPresenter;
-import com.stx.xhb.dmgameapp.mvp.presenter.getForumListPresenter;
+import com.stx.xhb.dmgameapp.adapter.ForumDetailsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

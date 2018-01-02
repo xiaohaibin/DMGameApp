@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide;
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.mvp.IPresenter;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.GameDetailsCommonFragment;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.GameVideoFragment;
+import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,12 +12,11 @@ import com.stx.xhb.dmgameapp.entity.ForumListEntity;
 
 
 /**
- * Author : jxnk25
- * Time: 2017/11/1 0001
- * Email:xhb_199409@163.com
- * Email:xhb_199409@163.com
- * Github:https://github.com/xiaohaibin/
- * Drscribe:
+ * @author Mr.xiao
+ * @time: 2017/11/1 0001
+ * @email:xhb_199409@163.com
+ * @Github:https://github.com/xiaohaibin/
+ * @Drscribe:
  */
 
 public class ForumDetailsListAdapter extends RecyclerArrayAdapter<ForumListEntity.HtmlBean> {

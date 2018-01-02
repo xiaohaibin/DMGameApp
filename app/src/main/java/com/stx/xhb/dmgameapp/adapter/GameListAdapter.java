@@ -11,16 +11,17 @@ import com.stx.xhb.dmgameapp.adapter.viewholder.GameListViewHolder;
 import com.stx.xhb.dmgameapp.entity.GameListEntity;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/20
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * @author：xiaohaibin
+ * @time：2017/9/20
+ * @emil：xhb_199409@163.com
+ * @Github：https://github.com/xiaohaibin/
+ * @Describe：
  */
 
 public class GameListAdapter extends RecyclerArrayAdapter<GameListEntity.HtmlEntity> {
 
     private LayoutInflater mLayoutInflater;
+
     public GameListAdapter(Context context) {
         super(context);
         mLayoutInflater = LayoutInflater.from(context);

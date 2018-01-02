@@ -4,7 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- *  Created by jxnk25 on 2017-09-21
+ * @author Mr.xiao
+ * @time on 2017-09-21
  */
 public class JsonParser {
 
@@ -22,7 +23,7 @@ public class JsonParser {
             return "";
         }
         String value = jsonObject.optString(key);
-        if (value.equalsIgnoreCase("null")) {
+        if ("null".equalsIgnoreCase(value)) {
             return "";
         }
         return value;

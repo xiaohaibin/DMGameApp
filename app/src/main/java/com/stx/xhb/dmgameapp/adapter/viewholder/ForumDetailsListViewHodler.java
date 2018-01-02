@@ -17,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Author : jxnk25
+ * @author Mr.xiao
  * Time: 2017/11/1 0001
  * Email:xhb_199409@163.com
  * Email:xhb_199409@163.com

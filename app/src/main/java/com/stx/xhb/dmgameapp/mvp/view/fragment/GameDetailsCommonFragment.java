@@ -3,33 +3,23 @@ package com.stx.xhb.dmgameapp.mvp.view.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
-import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
-import com.stx.xhb.dmgameapp.entity.GameNewsListEntity;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
 import com.stx.xhb.dmgameapp.mvp.contract.getGameDetailsCommonContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.getGameDetailsCommonPresenter;
+import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
 import butterknife.Bind;
-import okhttp3.Call;
-import okhttp3.Request;
 
 /**
  * Author : jxnk25
