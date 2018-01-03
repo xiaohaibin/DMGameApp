@@ -12,8 +12,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getForumChannelContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getForumChannelPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetForumChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -24,7 +24,7 @@ import butterknife.Bind;
 /**
  * 论坛的Fragment
  */
-public class ForumFragment extends BaseMvpFragment<getForumChannelPresenter> implements getForumChannelContract.getChannelListView {
+public class ForumFragment extends BaseMvpFragment<GetForumChannelPresenter> implements GetForumChannelContract.getChannelListView {
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -51,7 +51,7 @@ public class ForumFragment extends BaseMvpFragment<getForumChannelPresenter> imp
 
     @Override
     protected void lazyLoad() {
-        ((getForumChannelPresenter) mPresenter).getChannelList();
+        ((GetForumChannelPresenter) mPresenter).getChannelList();
     }
 
     private void initView() {
@@ -111,7 +111,7 @@ public class ForumFragment extends BaseMvpFragment<getForumChannelPresenter> imp
     }
 
     @Override
-    protected getForumChannelPresenter onLoadPresenter() {
-        return new getForumChannelPresenter();
+    protected GetForumChannelPresenter onLoadPresenter() {
+        return new GetForumChannelPresenter();
     }
 }

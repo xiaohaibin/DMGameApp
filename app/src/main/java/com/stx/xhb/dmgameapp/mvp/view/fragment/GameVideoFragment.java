@@ -9,8 +9,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getGameVideoContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameVideoListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameVideoContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetGameVideoListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
@@ -25,7 +25,7 @@ import butterknife.Bind;
  * @describe: 游戏详情视频
  */
 
-public class GameVideoFragment extends BaseMvpFragment<getGameVideoListPresenter> implements getGameVideoContract.getVideoListView, BaseQuickAdapter.RequestLoadMoreListener {
+public class GameVideoFragment extends BaseMvpFragment<GetGameVideoListPresenter> implements GetGameVideoContract.getVideoListView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     RecyclerView mRecyclerView;
@@ -86,7 +86,7 @@ public class GameVideoFragment extends BaseMvpFragment<getGameVideoListPresenter
             if (videoListEntity.getHtml().isEmpty()) {
                 gameVideoListAdapter.setEmptyView(R.layout.view_empty);
             }
-            if (videoListEntity.getHtml().size()<pageSize) {
+            if (videoListEntity.getHtml().size() < pageSize) {
                 gameVideoListAdapter.loadMoreEnd(true);
             } else {
                 gameVideoListAdapter.loadMoreEnd(false);
@@ -103,7 +103,7 @@ public class GameVideoFragment extends BaseMvpFragment<getGameVideoListPresenter
     @Override
     protected void lazyLoad() {
         currentpage = 1;
-         mPresenter.getVideoList(gameId, gameKey, "3", currentpage);
+        mPresenter.getVideoList(gameId, gameKey, "3", currentpage);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class GameVideoFragment extends BaseMvpFragment<getGameVideoListPresenter
     }
 
     @Override
-    protected getGameVideoListPresenter onLoadPresenter() {
-        return new getGameVideoListPresenter();
+    protected GetGameVideoListPresenter onLoadPresenter() {
+        return new GetGameVideoListPresenter();
     }
 }

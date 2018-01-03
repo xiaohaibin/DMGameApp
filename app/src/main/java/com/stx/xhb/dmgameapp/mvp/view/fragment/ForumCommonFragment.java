@@ -12,8 +12,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.ForumEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getForumListContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getForumListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetForumListContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetForumListPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -29,7 +29,7 @@ import butterknife.Bind;
  * Describe：
  */
 
-public class ForumCommonFragment extends BaseMvpFragment<getForumListPresenter> implements getForumListContract.getForumListView, SwipeRefreshLayout.OnRefreshListener {
+public class ForumCommonFragment extends BaseMvpFragment<GetForumListPresenter> implements GetForumListContract.getForumListView, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
@@ -125,7 +125,7 @@ public class ForumCommonFragment extends BaseMvpFragment<getForumListPresenter> 
     }
 
     @Override
-    protected getForumListPresenter onLoadPresenter() {
-        return new getForumListPresenter();
+    protected GetForumListPresenter onLoadPresenter() {
+        return new GetForumListPresenter();
     }
 }

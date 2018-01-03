@@ -3,7 +3,6 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameDetailsCommonPresenter;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * Github:https://github.com/xiaohaibin/
  * Drscribe:
  */
-public interface getGameDetailsCommonContract {
+public interface GetGameDetailsCommonContract {
 
     interface getGameDetailsCommonModel extends IModel {
 

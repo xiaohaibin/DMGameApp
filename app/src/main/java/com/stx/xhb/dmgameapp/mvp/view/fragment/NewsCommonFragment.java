@@ -12,8 +12,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getNewsListContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getNewsListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -22,7 +22,7 @@ import butterknife.Bind;
 /**
  * 通用的Fragment
  */
-public class NewsCommonFragment extends BaseMvpFragment<getNewsListPresenter> implements getNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> implements GetNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
@@ -43,7 +43,6 @@ public class NewsCommonFragment extends BaseMvpFragment<getNewsListPresenter> im
         if (bundle != null) {
             if (bundle.containsKey("id")) {
                 mAppId = bundle.getString("id");
-                Log.i("===>mAppId", mAppId);
             }
         }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -85,12 +84,13 @@ public class NewsCommonFragment extends BaseMvpFragment<getNewsListPresenter> im
                 mNewsCommonAdapter.clear();
                 if ("1".equals(mAppId) && listEntity.getBanner() != null) {
                     mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
+                    ToastUtil.show("已是最新数据");
                 }
             }
             if (listEntity.getChannel() != null) {
                 mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
             }
-            if (mNewsCommonAdapter.getCount() <pageSize) {
+            if (mNewsCommonAdapter.getCount() < pageSize) {
                 mNewsCommonAdapter.stopMore();
             }
             if (mNewsCommonAdapter.getCount() == 0) {
@@ -108,13 +108,13 @@ public class NewsCommonFragment extends BaseMvpFragment<getNewsListPresenter> im
     @Override
     public void onRefresh() {
         currentpage = 1;
-       mPresenter.getNewsList(mAppId, currentpage);
+        mPresenter.getNewsList(mAppId, currentpage);
     }
 
     @Override
     public void onLoadMore() {
         currentpage++;
-         mPresenter.getNewsList(mAppId, currentpage);
+        mPresenter.getNewsList(mAppId, currentpage);
     }
 
     @Override
@@ -126,13 +126,13 @@ public class NewsCommonFragment extends BaseMvpFragment<getNewsListPresenter> im
 
     @Override
     public void hideLoading() {
-        if (currentpage==1) {
+        if (currentpage == 1) {
             mRecyclerView.setRefreshing(false);
         }
     }
 
     @Override
-    protected getNewsListPresenter onLoadPresenter() {
-        return new getNewsListPresenter();
+    protected GetNewsListPresenter onLoadPresenter() {
+        return new GetNewsListPresenter();
     }
 }

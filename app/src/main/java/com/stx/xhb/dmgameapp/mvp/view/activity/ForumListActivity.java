@@ -13,8 +13,8 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.xhb.dmgameapp.R;import com.stx.xhb.dmgameapp.entity.ForumListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getForumDetailsListContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getForumDetailsListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetForumDetailsListContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetForumDetailsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumDetailsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -30,7 +30,7 @@ import butterknife.Bind;
  * Describe：论坛列表
  */
 
-public class ForumListActivity extends BaseMvpActivity<getForumDetailsListPresenter> implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener, getForumDetailsListContract.getForumListDataView {
+public class ForumListActivity extends BaseMvpActivity<GetForumDetailsListPresenter> implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener, GetForumDetailsListContract.getForumListDataView {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -135,7 +135,7 @@ public class ForumListActivity extends BaseMvpActivity<getForumDetailsListPresen
     }
 
     @Override
-    protected getForumDetailsListPresenter onLoadPresenter() {
-        return new getForumDetailsListPresenter();
+    protected GetForumDetailsListPresenter onLoadPresenter() {
+        return new GetForumDetailsListPresenter();
     }
 }

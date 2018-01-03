@@ -3,7 +3,6 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.getNewsListPresenter;
 
 /**
  * Author：xiaohaibin
@@ -12,13 +11,11 @@ import com.stx.xhb.dmgameapp.mvp.presenter.getNewsListPresenter;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public interface getNewsListContract {
-
+public interface GetNewsListContract {
 
     interface getNewsListModel extends IModel {
         void getNewsList(String appId, int page);
     }
-
 
     interface getNewListView extends IView {
 

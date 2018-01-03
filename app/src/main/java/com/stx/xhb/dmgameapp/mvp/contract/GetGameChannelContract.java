@@ -2,8 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.getForumChannelPresenter;
+import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
 
 import java.util.List;
 
@@ -14,15 +13,15 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public interface getForumChannelContract {
+public interface GetGameChannelContract {
 
-    interface getChanelModel extends IModel {
+    interface getGameChannelModel extends IModel{
         void getChannelList();
     }
 
     interface getChannelListView extends IView {
 
-        void getChannelSuccess(List<ForumChannelListEntity.HtmlEntity> channelList);
+        void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
 

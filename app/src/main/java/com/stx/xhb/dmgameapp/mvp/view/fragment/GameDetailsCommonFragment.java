@@ -11,8 +11,8 @@ import com.stx.core.utils.ScreenUtil;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getGameDetailsCommonContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameDetailsCommonPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetGameDetailsCommonPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
@@ -30,7 +30,7 @@ import butterknife.Bind;
  * Drscribe:游戏资讯
  */
 
-public class GameDetailsCommonFragment extends BaseMvpFragment<getGameDetailsCommonPresenter> implements getGameDetailsCommonContract.getGameDetailsDataView, BaseQuickAdapter.RequestLoadMoreListener {
+public class GameDetailsCommonFragment extends BaseMvpFragment<GetGameDetailsCommonPresenter> implements GetGameDetailsCommonContract.getGameDetailsDataView, BaseQuickAdapter.RequestLoadMoreListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     RecyclerView mRecyclerView;
@@ -89,14 +89,16 @@ public class GameDetailsCommonFragment extends BaseMvpFragment<getGameDetailsCom
 
     private void getListData() {
         switch (type) {
-            case "1"://新闻
+            //新闻
+            case "1":
                 mPresenter.getGameNewsListData("1", id, key, currentpage);
                 break;
-            case "2"://攻略
+            //攻略
+            case "2":
                 mPresenter.getGameToolsListData("2", id, key, currentpage);
                 break;
             default:
-                 mPresenter.getGameNewsListData("1", id, key, currentpage);
+                mPresenter.getGameNewsListData("1", id, key, currentpage);
                 break;
         }
     }
@@ -175,7 +177,7 @@ public class GameDetailsCommonFragment extends BaseMvpFragment<getGameDetailsCom
     }
 
     @Override
-    protected getGameDetailsCommonPresenter onLoadPresenter() {
-        return new getGameDetailsCommonPresenter();
+    protected GetGameDetailsCommonPresenter onLoadPresenter() {
+        return new GetGameDetailsCommonPresenter();
     }
 }

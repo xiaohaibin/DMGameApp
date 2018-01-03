@@ -6,8 +6,9 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getNewsChannelContract;
+import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
+import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameVideoContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -15,18 +16,20 @@ import okhttp3.Call;
 import okhttp3.Request;
 
 /**
- * Author：xiaohaibin
- * Time：2017/9/17
- * Emil：xhb_199409@163.com
- * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Author: Mr.xiao on 2017/9/18
+ *
+ * @mail:xhb_199409@163.com
+ * @github:https://github.com/xiaohaibin
+ * @describe:
  */
 
-public class getNewsChannelPresenter extends BasePresenter<getNewsChannelContract.getChannelListView,getNewsChannelContract.getNewsChannelModel> implements getNewsChannelContract.getNewsChannelModel {
+public class GetGameVideoListPresenter extends BasePresenter<GetGameVideoContract.getVideoListView,GetGameVideoContract.getGameVideoModel> implements GetGameVideoContract.getGameVideoModel {
+
     @Override
-    public void getChannelList() {
-        OkHttpUtils.get()
-                .url(API.GET_NEWS_CHANNEL)
+    public void getVideoList(String id,String key,String type,int page) {
+        OkHttpUtils.postString()
+                .content(GsonUtil.newGson().toJson(new GameDetailsContent(page,id,key,type)))
+                .url(API.GET_GAME_DETAILS)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -36,20 +39,18 @@ public class getNewsChannelPresenter extends BasePresenter<getNewsChannelContrac
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        getView().getChanelFailed(e.getMessage());
+                        getView().getVideoListFailed(e.getMessage());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsChannelListEntity.class);
-                            if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumChannelListEntity.getHtml() != null) {
-                                    getView().getChannelSuccess(forumChannelListEntity.getHtml());
-                                }
+                            GameVideoEntity videoListEntity = GsonUtil.newGson().fromJson(response, GameVideoEntity.class);
+                            if (videoListEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                getView().getVideoListSuccess(videoListEntity);
                             } else {
                                 getView().hideLoading();
-                                getView().getChanelFailed(TextUtils.isEmpty(forumChannelListEntity.getMsg())?"服务器请求失败，请重试":forumChannelListEntity.getMsg());
+                                getView().getVideoListFailed(videoListEntity.getMsg());
                             }
                         }
                     }

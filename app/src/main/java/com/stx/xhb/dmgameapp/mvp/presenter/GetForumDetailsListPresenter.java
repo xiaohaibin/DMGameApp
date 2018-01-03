@@ -7,7 +7,7 @@ import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.ForumListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getForumDetailsListContract;
+import com.stx.xhb.dmgameapp.mvp.contract.GetForumDetailsListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Drscribe:
  */
 
-public class getForumDetailsListPresenter extends BasePresenter<getForumDetailsListContract.getForumListDataView,getForumDetailsListContract.getForumListModel> implements getForumDetailsListContract.getForumListModel{
+public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsListContract.getForumListDataView,GetForumDetailsListContract.getForumListModel> implements GetForumDetailsListContract.getForumListModel{
     @Override
     public void getForumListData(String fid,int page) {
         OkHttpUtils

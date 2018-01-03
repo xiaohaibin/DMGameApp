@@ -3,7 +3,6 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
 import com.stx.xhb.dmgameapp.entity.GameListEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameListPresenter;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public interface getGameListContract {
+public interface GetGameListContract {
 
     interface getGameListModel extends IModel {
         void getGameListData(String appId, int page);

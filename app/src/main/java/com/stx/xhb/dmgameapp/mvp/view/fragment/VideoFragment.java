@@ -12,8 +12,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.VideoListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getVideoContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getVideoListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetVideoContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetVideoListPresenter;
 import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -27,7 +27,7 @@ import butterknife.Bind;
  * @describe: 首页视频
  */
 
-public class VideoFragment extends BaseMvpFragment<getVideoListPresenter> implements getVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class VideoFragment extends BaseMvpFragment<GetVideoListPresenter> implements GetVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
@@ -123,7 +123,7 @@ public class VideoFragment extends BaseMvpFragment<getVideoListPresenter> implem
     }
 
     @Override
-    protected getVideoListPresenter onLoadPresenter() {
-        return new getVideoListPresenter();
+    protected GetVideoListPresenter onLoadPresenter() {
+        return new GetVideoListPresenter();
     }
 }

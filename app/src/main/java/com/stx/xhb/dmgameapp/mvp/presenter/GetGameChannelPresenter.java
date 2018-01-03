@@ -1,15 +1,13 @@
 package com.stx.xhb.dmgameapp.mvp.presenter;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getNewsListContract;
+import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -24,13 +22,12 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class getNewsListPresenter extends BasePresenter<getNewsListContract.getNewListView,getNewsListContract.getNewsListModel> implements getNewsListContract.getNewsListModel {
+public class GetGameChannelPresenter extends BasePresenter<GetGameChannelContract.getChannelListView,GetGameChannelContract.getGameChannelModel> implements GetGameChannelContract.getGameChannelModel {
+
     @Override
-    public void getNewsList(String appId, int page) {
-        Log.i("===dsds",appId+"====");
-        OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsContentEntity(appId, page)))
-                .url(API.NEWS_CHANNEL_DATA)
+    public void getChannelList() {
+        OkHttpUtils.get()
+                .url(API.GET_GAME_CHANNEL)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -40,18 +37,20 @@ public class getNewsListPresenter extends BasePresenter<getNewsListContract.getN
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        getView().getNewListFailed(e.getMessage());
+                        getView().getChanelFailed(e.getMessage());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, NewsListEntity.class);
-                            if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().getNewListSuccess(newsListEntity);
+                            GameChannelListEntity gameChannelListEntity = GsonUtil.newGson().fromJson(response, GameChannelListEntity.class);
+                            if (gameChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
+                                if (gameChannelListEntity.getHtml() != null) {
+                                    getView().getChannelSuccess(gameChannelListEntity.getHtml());
+                                }
                             } else {
                                 getView().hideLoading();
-                                getView().getNewListFailed(TextUtils.isEmpty(newsListEntity.getMsg()) ? "服务器请求失败，请重试" : newsListEntity.getMsg());
+                                getView().getChanelFailed(TextUtils.isEmpty(gameChannelListEntity.getMsg()) ? "服务器请求失败，请重试" : gameChannelListEntity.getMsg());
                             }
                         }
                     }

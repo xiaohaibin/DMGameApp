@@ -12,8 +12,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getGameChannelContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameChannelPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetGameChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -24,7 +24,7 @@ import butterknife.Bind;
 /**
  * 视频的Fragment
  */
-public class GameFragment extends BaseMvpFragment<getGameChannelPresenter> implements getGameChannelContract.getChannelListView {
+public class GameFragment extends BaseMvpFragment<GetGameChannelPresenter> implements GetGameChannelContract.getChannelListView {
 
 
     @Bind(R.id.title)
@@ -52,7 +52,7 @@ public class GameFragment extends BaseMvpFragment<getGameChannelPresenter> imple
 
     @Override
     protected void lazyLoad() {
-        ((getGameChannelPresenter) mPresenter).getChannelList();
+        ((GetGameChannelPresenter) mPresenter).getChannelList();
     }
 
     //获取控件
@@ -115,7 +115,7 @@ public class GameFragment extends BaseMvpFragment<getGameChannelPresenter> imple
     }
 
     @Override
-    protected getGameChannelPresenter onLoadPresenter() {
-        return new getGameChannelPresenter();
+    protected GetGameChannelPresenter onLoadPresenter() {
+        return new GetGameChannelPresenter();
     }
 }

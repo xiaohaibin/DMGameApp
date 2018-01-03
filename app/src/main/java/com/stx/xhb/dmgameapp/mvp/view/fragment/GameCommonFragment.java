@@ -11,8 +11,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getGameListContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getGameListPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetGameListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -28,7 +28,7 @@ import butterknife.Bind;
  * Describe：
  */
 
-public class GameCommonFragment extends BaseMvpFragment<getGameListPresenter> implements getGameListContract.getGameListDataView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> implements GetGameListContract.getGameListDataView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
@@ -130,7 +130,7 @@ public class GameCommonFragment extends BaseMvpFragment<getGameListPresenter> im
     }
 
     @Override
-    protected getGameListPresenter onLoadPresenter() {
-        return new getGameListPresenter();
+    protected GetGameListPresenter onLoadPresenter() {
+        return new GetGameListPresenter();
     }
 }

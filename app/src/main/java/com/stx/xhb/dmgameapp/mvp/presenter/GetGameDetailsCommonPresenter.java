@@ -8,7 +8,7 @@ import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
 import com.stx.xhb.dmgameapp.entity.GameNewsListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getGameDetailsCommonContract;
+import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Drscribe:
  */
 
-public class getGameDetailsCommonPresenter extends BasePresenter<getGameDetailsCommonContract.getGameDetailsDataView,getGameDetailsCommonContract.getGameDetailsCommonModel> implements getGameDetailsCommonContract.getGameDetailsCommonModel{
+public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsCommonContract.getGameDetailsDataView,GetGameDetailsCommonContract.getGameDetailsCommonModel> implements GetGameDetailsCommonContract.getGameDetailsCommonModel{
     @Override
     public void getGameNewsListData(String type, String id, String key, int page) {
         OkHttpUtils.postString()

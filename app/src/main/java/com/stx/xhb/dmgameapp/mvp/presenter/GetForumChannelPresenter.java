@@ -8,7 +8,7 @@ import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.CommonContentEntity;
 import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getForumChannelContract;
+import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class getForumChannelPresenter extends BasePresenter<getForumChannelContract.getChannelListView,getForumChannelContract.getChanelModel> implements getForumChannelContract.getChanelModel {
+public class GetForumChannelPresenter extends BasePresenter<GetForumChannelContract.getChannelListView,GetForumChannelContract.getChanelModel> implements GetForumChannelContract.getChanelModel {
 
     @Override
     public void getChannelList() {

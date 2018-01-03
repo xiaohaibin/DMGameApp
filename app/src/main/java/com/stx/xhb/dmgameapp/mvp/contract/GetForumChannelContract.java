@@ -2,29 +2,26 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.getNewsChannelPresenter;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
 
 import java.util.List;
 
 /**
  * Author：xiaohaibin
- * Time：2017/9/17
+ * Time：2017/9/18
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public interface getNewsChannelContract {
+public interface GetForumChannelContract {
 
-
-    interface getNewsChannelModel extends IModel {
+    interface getChanelModel extends IModel {
         void getChannelList();
     }
 
-
     interface getChannelListView extends IView {
 
-        void getChannelSuccess(List<NewsChannelListEntity.HtmlEntity> channelList);
+        void getChannelSuccess(List<ForumChannelListEntity.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
 

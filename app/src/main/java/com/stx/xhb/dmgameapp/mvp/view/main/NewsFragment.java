@@ -12,8 +12,8 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
-import com.stx.xhb.dmgameapp.mvp.contract.getNewsChannelContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.getNewsChannelPresenter;
+import com.stx.xhb.dmgameapp.mvp.contract.GetNewsChannelContract;
+import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -24,7 +24,7 @@ import butterknife.Bind;
 /**
  * 文章的Fragment
  */
-public class NewsFragment extends BaseMvpFragment<getNewsChannelPresenter> implements getNewsChannelContract.getChannelListView {
+public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> implements GetNewsChannelContract.getChannelListView {
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -110,7 +110,7 @@ public class NewsFragment extends BaseMvpFragment<getNewsChannelPresenter> imple
     }
 
     @Override
-    protected getNewsChannelPresenter onLoadPresenter() {
-        return new getNewsChannelPresenter();
+    protected GetNewsChannelPresenter onLoadPresenter() {
+        return new GetNewsChannelPresenter();
     }
 }
