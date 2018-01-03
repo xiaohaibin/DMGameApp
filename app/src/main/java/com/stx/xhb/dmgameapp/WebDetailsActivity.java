@@ -41,11 +41,14 @@ public class WebDetailsActivity extends BaseAppActitity {
     private String content = "";
     private String imgUrl = "";
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web_details);
-        ButterKnife.bind(this);
+    protected int getLayoutResource() {
+        return R.layout.activity_web_details;
+    }
+
+    @Override
+    protected void onInitialization(Bundle bundle) {
         initToolBar(mToolbar, "详情");
         init();
         initWeb();

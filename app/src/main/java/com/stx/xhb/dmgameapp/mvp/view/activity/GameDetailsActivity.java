@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.mvp.IPresenter;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.GameDetailsCommonFragment;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.GameVideoFragment;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
@@ -27,7 +28,7 @@ import butterknife.Bind;
  * 游戏详情
  * 新闻  type 1    攻略   2   视频  3
  */
-public class GameDetailsActivity extends BaseMvpActivity {
+public class GameDetailsActivity extends BaseAppActitity {
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -90,10 +91,5 @@ public class GameDetailsActivity extends BaseMvpActivity {
         viewPager.setOffscreenPageLimit(fragemnts.size());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    protected IPresenter onLoadPresenter() {
-        return null;
     }
 }

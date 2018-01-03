@@ -33,12 +33,14 @@ public class SettingActivity extends BaseAppActitity {
     @Bind(R.id.tv_update)
     TextView mTvVersion;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-        setSatusBar();
-        ButterKnife.bind(this);
+    protected int getLayoutResource() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
+    protected void onInitialization(Bundle bundle) {
         initView();
     }
 

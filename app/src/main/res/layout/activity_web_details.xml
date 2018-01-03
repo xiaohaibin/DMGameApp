@@ -20,9 +20,10 @@
             android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <WebView
             android:id="@+id/web_webview"
@@ -30,12 +31,6 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
 
-        <ProgressBar
-            android:id="@+id/web_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/web_go_top"
@@ -46,6 +41,13 @@
             android:scaleType="fitCenter"
             android:src="@mipmap/v300_icon_top" />
 
-    </FrameLayout>
+        <ProgressBar
+            android:id="@+id/web_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.mvp.IPresenter;
+import com.stx.xhb.dmgameapp.R;
 
 /**
  * Author：xiaohaibin
@@ -18,7 +19,7 @@ public class VideoDetailsActivity extends BaseMvpActivity {
 
     @Override
     protected int getLayoutResource() {
-        return 0;
+        return R.layout.activity_video_detail;
     }
 
     @Override

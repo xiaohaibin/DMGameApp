@@ -28,11 +28,12 @@ public class AboutActivity extends BaseAppActitity {
     TextView version;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        setSatusBar();
-        ButterKnife.bind(this);
+    protected int getLayoutResource() {
+        return R.layout.activity_about;
+    }
+
+    @Override
+    protected void onInitialization(Bundle bundle) {
         initView();
     }
 
