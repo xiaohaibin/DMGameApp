@@ -17,7 +17,7 @@
 
     <application
         android:name=".DmgApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo"
@@ -168,8 +168,6 @@
             android:exported="false" />
 
         <!-- 腾讯广点通配置 -->
-
-        <activity android:name=".mvp.video.mvp.ui.activity.testActivity"></activity>
     </application>
 
 </manifest>
