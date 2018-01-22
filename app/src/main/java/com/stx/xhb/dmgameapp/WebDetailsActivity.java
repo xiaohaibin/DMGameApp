@@ -76,7 +76,6 @@ public class WebDetailsActivity extends BaseAppActitity {
                     }
                     progressBar.setProgress(newProgress);
                 }
-                super.onProgressChanged(view, newProgress);
             }
         });
         settings.setDefaultTextEncodingName("utf-8");
@@ -154,5 +153,19 @@ public class WebDetailsActivity extends BaseAppActitity {
     @OnClick(R.id.article_share)
     public void onClick() {
         ShareDialog.share(getSupportFragmentManager(), webView.getTitle(), url, content, imgUrl);
+    }
+
+    ///////////////////////////////////解决webView耗电的问题///////////////////////////
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        webView.pauseTimers();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        webView.resumeTimers();
     }
 }
