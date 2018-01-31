@@ -47,12 +47,14 @@ public class AboutActivity extends BaseAppActitity {
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.btn_csdn://博客
+            //博客
+            case R.id.btn_csdn:
                 Uri uri = Uri.parse("http://www.jianshu.com/u/42aed90cf5af");
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
-            case R.id.btn_home://github
+            //github
+            case R.id.btn_home:
                 Uri github = Uri.parse("https://github.com/xiaohaibin/DMGameApp");
                 intent = new Intent(Intent.ACTION_VIEW, github);
                 startActivity(intent);
@@ -76,6 +78,6 @@ public class AboutActivity extends BaseAppActitity {
 
     @OnClick(R.id.article_share)
     public void onClick() {
-        ShareDialog.share(getSupportFragmentManager(),"快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用!", "http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp", "快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用","");
+        ShareDialog.share(getSupportFragmentManager(),"快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用!", "https://www.coolapk.com/apk/com.stx.xhb.dmgameapp", "快来使用游戏资讯app，掌握最新游戏资讯,看美图！推荐你也来使用","");
     }
 }

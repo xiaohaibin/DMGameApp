@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/about_bg"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/about_bg"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary">
+
         <ImageButton
             android:id="@+id/article_share"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="right"
             android:layout_marginRight="15dp"
-            android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
-            android:background="@null"/>
+            android:background="@null"
+            android:src="@drawable/abc_ic_menu_share_mtrl_alpha" />
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
@@ -35,7 +36,7 @@
             android:layout_marginTop="189dp"
             android:text="游戏资讯"
             android:textColor="@color/colorWhite"
-            android:textSize="35sp"/>
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/version"
@@ -46,7 +47,7 @@
             android:layout_marginTop="10dp"
             android:text="版本号"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_csdn"
@@ -61,7 +62,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_btn_commit_red"
             android:text="简书"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_home"
@@ -75,7 +76,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/shape_btn_commit_red"
             android:text="项目主页"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
     </RelativeLayout>
 
 </LinearLayout>
