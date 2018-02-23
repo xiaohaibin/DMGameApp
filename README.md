@@ -15,9 +15,8 @@
   
 ### APK下载地址
   
-  [豌豆荚下载地址](http://www.wandoujia.com/apps/com.stx.xhb.dmgameapp)
-  [腾讯应用宝下载地址](http://android.myapp.com/myapp/detail.htm?apkName=com.stx.xhb.dmgameapp)
-    
+  [酷安网下载地址](https://www.coolapk.com/apk/com.stx.xhb.dmgameapp)
+  
 ### 技术要点  
   
   整体架构采用了MVP的架构模式
