@@ -81,7 +81,7 @@
 
         <!-- 视频详情 -->
         <activity
-            android:name=".mvp.view.activity.VideoDetailsActivity"
+            android:name=".mvp.view.fragment.VideoDetailsFragment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

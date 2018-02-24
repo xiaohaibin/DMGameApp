@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.mvp.view.activity;
+package com.stx.xhb.dmgameapp.mvp.view.fragment;
 
 import android.os.Bundle;
 
@@ -14,12 +14,12 @@ import com.stx.xhb.dmgameapp.R;
  * Describe：视频详情
  */
 
-public class VideoDetailsActivity extends BaseMvpActivity {
+public class VideoDetailsFragment extends BaseMvpActivity {
 
 
     @Override
     protected int getLayoutResource() {
-        return R.layout.activity_video_detail;
+        return R.layout.fragment_video_detail;
     }
 
     @Override
