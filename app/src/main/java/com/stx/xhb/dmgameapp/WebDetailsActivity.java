@@ -71,10 +71,12 @@ public class WebDetailsActivity extends BaseAppActitity {
                     progressBar.setVisibility(View.GONE);
 
                 } else {
-                    if (progressBar.getVisibility() == View.GONE) {
-                        progressBar.setVisibility(View.VISIBLE);
+                    if (progressBar != null) {
+                        if (progressBar.getVisibility() == View.GONE) {
+                            progressBar.setVisibility(View.VISIBLE);
+                        }
+                        progressBar.setProgress(newProgress);
                     }
-                    progressBar.setProgress(newProgress);
                 }
             }
         });
