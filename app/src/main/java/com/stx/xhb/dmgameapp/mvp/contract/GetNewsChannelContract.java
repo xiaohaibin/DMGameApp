@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsChannelListBean;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface GetNewsChannelContract {
 
     interface getChannelListView extends IView {
 
-        void getChannelSuccess(List<NewsChannelListEntity.HtmlEntity> channelList);
+        void getChannelSuccess(List<NewsChannelListBean.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
 

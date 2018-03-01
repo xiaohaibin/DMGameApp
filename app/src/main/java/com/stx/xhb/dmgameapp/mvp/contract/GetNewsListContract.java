@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 
 /**
  * Author：xiaohaibin
@@ -19,7 +19,7 @@ public interface GetNewsListContract {
 
     interface getNewListView extends IView {
 
-        void getNewListSuccess(NewsListEntity listEntity);
+        void getNewListSuccess(NewsListBean listEntity);
 
         void getNewListFailed(String msg);
 

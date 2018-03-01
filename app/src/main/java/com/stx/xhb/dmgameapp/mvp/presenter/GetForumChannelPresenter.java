@@ -6,8 +6,8 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.CommonContentEntity;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.CommonContentBean;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,7 +28,7 @@ public class GetForumChannelPresenter extends BasePresenter<GetForumChannelContr
     @Override
     public void getChannelList() {
         OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new CommonContentEntity("groups")))
+                .content(GsonUtil.newGson().toJson(new CommonContentBean("groups")))
                 .url(API.USER_API)
                 .build()
                 .execute(new StringCallback() {
@@ -45,14 +45,14 @@ public class GetForumChannelPresenter extends BasePresenter<GetForumChannelContr
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            ForumChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, ForumChannelListEntity.class);
-                            if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumChannelListEntity.getHtml() != null) {
-                                    getView().getChannelSuccess(forumChannelListEntity.getHtml());
+                            ForumChannelListBean forumChannelListBean = GsonUtil.newGson().fromJson(response, ForumChannelListBean.class);
+                            if (forumChannelListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                if (forumChannelListBean.getHtml() != null) {
+                                    getView().getChannelSuccess(forumChannelListBean.getHtml());
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getChanelFailed(TextUtils.isEmpty(forumChannelListEntity.getMsg()) ? "服务器请求失败，请重试" : forumChannelListEntity.getMsg());
+                                getView().getChanelFailed(TextUtils.isEmpty(forumChannelListBean.getMsg()) ? "服务器请求失败，请重试" : forumChannelListBean.getMsg());
                             }
                         }
                     }

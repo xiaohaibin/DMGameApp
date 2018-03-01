@@ -10,13 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stx.core.base.BaseMvpActivity;
-import com.stx.core.mvp.IPresenter;
 import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.MainActivity;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.LoginContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.LoginPresenter;
 import com.stx.xhb.dmgameapp.utils.AppUser;
@@ -93,7 +92,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
-    public void loginSuccess(UserInfoEntity infoEntity) {
+    public void loginSuccess(UserInfoBean infoEntity) {
         AppUser.login(infoEntity);
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();

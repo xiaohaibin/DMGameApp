@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ import java.util.List;
  * Describe：
  */
 
-public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.ChannelEntity.HtmlEntity> {
+public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListBean.ChannelEntity.HtmlEntity> {
 
-    private List<NewsListEntity.BannerEntity.HtmlEntity> mAdList;
+    private List<NewsListBean.BannerEntity.HtmlEntity> mAdList;
     private LayoutInflater mLayoutInflater;
 
     public NewsCommonAdapter(Context context) {
@@ -32,7 +32,7 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListEntity.Chann
         mLayoutInflater = LayoutInflater.from(context);
     }
 
-    public void setAdList(List<NewsListEntity.BannerEntity.HtmlEntity> adList) {
+    public void setAdList(List<NewsListBean.BannerEntity.HtmlEntity> adList) {
         this.mAdList = adList;
         if (mAdList != null && mAdList.size() > 0 && getHeaderCount() == 0) {
             addHeader(new ItemView() {

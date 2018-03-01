@@ -1,14 +1,13 @@
 package com.stx.xhb.dmgameapp.mvp.presenter;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsContentBean;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,9 +26,8 @@ import okhttp3.Request;
 public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getNewListView,GetNewsListContract.getNewsListModel> implements GetNewsListContract.getNewsListModel {
     @Override
     public void getNewsList(String appId, int page) {
-        Log.i("===dsds",appId+"====");
         OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsContentEntity(appId, page)))
+                .content(GsonUtil.newGson().toJson(new NewsContentBean(appId, page)))
                 .url(API.NEWS_CHANNEL_DATA)
                 .build()
                 .execute(new StringCallback() {
@@ -46,12 +44,12 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, NewsListEntity.class);
-                            if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().getNewListSuccess(newsListEntity);
+                            NewsListBean newsListBean = GsonUtil.newGson().fromJson(response, NewsListBean.class);
+                            if (newsListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getView().getNewListSuccess(newsListBean);
                             } else {
                                 getView().hideLoading();
-                                getView().getNewListFailed(TextUtils.isEmpty(newsListEntity.getMsg()) ? "服务器请求失败，请重试" : newsListEntity.getMsg());
+                                getView().getNewListFailed(TextUtils.isEmpty(newsListBean.getMsg()) ? "服务器请求失败，请重试" : newsListBean.getMsg());
                             }
                         }
                     }

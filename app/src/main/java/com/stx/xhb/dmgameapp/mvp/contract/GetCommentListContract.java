@@ -11,7 +11,7 @@ import com.stx.core.mvp.IView;
  * @describe:
  */
 
-public interface getCommentListContract {
+public interface GetCommentListContract {
 
         interface Model extends IModel{
 

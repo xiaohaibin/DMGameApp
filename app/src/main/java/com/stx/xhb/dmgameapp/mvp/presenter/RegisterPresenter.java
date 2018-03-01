@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.RegisterContract;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -62,12 +62,12 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.registerVi
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
-                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
+                            UserInfoBean userInfoBean = GsonUtil.newGson().fromJson(response, UserInfoBean.class);
+                            if (userInfoBean.getCode() == Constants.SERVER_SUCCESS) {
                                 toLogin(username,passwd,"0","");
                             } else {
                                 getView().hideLoading();
-                                getView().registerFailed(userInfoEntity.getMsg());
+                                getView().registerFailed(userInfoBean.getMsg());
                             }
                         }
                     }
@@ -90,19 +90,19 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.registerVi
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
-                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getUserInfo(userInfoEntity);
+                            UserInfoBean userInfoBean = GsonUtil.newGson().fromJson(response, UserInfoBean.class);
+                            if (userInfoBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getUserInfo(userInfoBean);
                             } else {
                                 getView().hideLoading();
-                                getView().registerFailed(userInfoEntity.getMsg());
+                                getView().registerFailed(userInfoBean.getMsg());
                             }
                         }
                     }
                 });
     }
 
-    private void getUserInfo(UserInfoEntity infoEntity) {
+    private void getUserInfo(UserInfoBean infoEntity) {
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new LoginPresenter.getUserInfoContentEntity("userinfo", infoEntity.getUid())))
                 .url(API.USER_API)
@@ -116,11 +116,11 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.registerVi
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
-                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().registerSuccess(userInfoEntity);
+                            UserInfoBean userInfoBean = GsonUtil.newGson().fromJson(response, UserInfoBean.class);
+                            if (userInfoBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getView().registerSuccess(userInfoBean);
                             } else {
-                                getView().registerFailed(userInfoEntity.getMsg());
+                                getView().registerFailed(userInfoBean.getMsg());
                             }
                         }
                     }

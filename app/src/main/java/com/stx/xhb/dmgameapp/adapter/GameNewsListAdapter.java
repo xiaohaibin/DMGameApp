@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * Drscribe:
  */
 
-public class GameNewsListAdapter extends BaseQuickAdapter<NewsListEntity.ChannelEntity.HtmlEntity,BaseViewHolder> {
+public class GameNewsListAdapter extends BaseQuickAdapter<NewsListBean.ChannelEntity.HtmlEntity,BaseViewHolder> {
 
     private Context mContext;
     private String imgUrl="";
@@ -32,7 +32,7 @@ public class GameNewsListAdapter extends BaseQuickAdapter<NewsListEntity.Channel
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final NewsListEntity.ChannelEntity.HtmlEntity data) {
+    protected void convert(BaseViewHolder helper, final NewsListBean.ChannelEntity.HtmlEntity data) {
         helper.setText(R.id.title,data.getTitle());
         helper.setText(R.id.date,data.getSenddate());
         ImageView imageView=helper.getView(R.id.iv);

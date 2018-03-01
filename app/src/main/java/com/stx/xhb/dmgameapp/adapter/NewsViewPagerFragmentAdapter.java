@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.NewsCommonFragment;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.VideoFragment;
 
@@ -18,16 +18,16 @@ import java.util.List;
  * @describe: 资讯ViewPager适配器
  */
 public class NewsViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<NewsChannelListEntity.HtmlEntity> mNewsTagList;
+    private List<NewsChannelListBean.HtmlEntity> mNewsTagList;
 
-    public NewsViewPagerFragmentAdapter(FragmentManager fm, List<NewsChannelListEntity.HtmlEntity> newsTagList) {
+    public NewsViewPagerFragmentAdapter(FragmentManager fm, List<NewsChannelListBean.HtmlEntity> newsTagList) {
         super(fm);
         this.mNewsTagList = newsTagList;
     }
 
     @Override
     public BaseMvpFragment getItem(int position) {
-        NewsChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
+        NewsChannelListBean.HtmlEntity entity = mNewsTagList.get(position);
         if ("2".equals(entity.getAppid())) {
             return VideoFragment.newInstance();
         } else {

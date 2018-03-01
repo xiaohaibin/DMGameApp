@@ -10,7 +10,7 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameDetailsCommonPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
@@ -127,7 +127,7 @@ public class GameDetailsCommonFragment extends BaseMvpFragment<GetGameDetailsCom
     }
 
     @Override
-    public void getGameNewsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list) {
+    public void getGameNewsListDataSuccess(List<NewsListBean.ChannelEntity.HtmlEntity> list) {
         if (list != null) {
             if (currentpage == 1) {
                 gameNewsListAdapter.setNewData(list);
@@ -147,7 +147,7 @@ public class GameDetailsCommonFragment extends BaseMvpFragment<GetGameDetailsCom
     }
 
     @Override
-    public void getGameToolsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list) {
+    public void getGameToolsListDataSuccess(List<NewsListBean.ChannelEntity.HtmlEntity> list) {
         if (list != null) {
             if (currentpage == 1) {
                 gameNewsListAdapter.setNewData(list);

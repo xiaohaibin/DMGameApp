@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface GetForumChannelContract {
 
     interface getChannelListView extends IView {
 
-        void getChannelSuccess(List<ForumChannelListEntity.HtmlEntity> channelList);
+        void getChannelSuccess(List<ForumChannelListBean.HtmlEntity> channelList);
 
         void getChanelFailed(String msg);
 

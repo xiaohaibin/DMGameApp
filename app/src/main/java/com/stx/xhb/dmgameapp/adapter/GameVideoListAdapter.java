@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 
 /**
  * Author : jxnk25
@@ -20,7 +20,7 @@ import com.stx.xhb.dmgameapp.entity.VideoListEntity;
  * Drscribe:
  */
 
-public class GameVideoListAdapter extends BaseQuickAdapter<VideoListEntity.VideoBean, BaseViewHolder> {
+public class GameVideoListAdapter extends BaseQuickAdapter<VideoListBean.VideoBean, BaseViewHolder> {
     private Context context;
 
     public GameVideoListAdapter(Context context) {
@@ -29,7 +29,7 @@ public class GameVideoListAdapter extends BaseQuickAdapter<VideoListEntity.Video
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, final VideoListEntity.VideoBean data) {
+    protected void convert(BaseViewHolder helper, final VideoListBean.VideoBean data) {
         helper.setText(R.id.tv_video_title, data.getTitle());
         helper.setText(R.id.tv_video_time, data.getSenddate());
         helper.setText(R.id.tv_play_count, data.getClick() + "次播放");

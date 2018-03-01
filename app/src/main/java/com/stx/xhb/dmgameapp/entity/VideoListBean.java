@@ -12,7 +12,7 @@ import java.util.List;
  * @describe:
  */
 
-public class VideoListEntity extends BaseEntity {
+public class VideoListBean extends BaseEntity {
 
 
     /**

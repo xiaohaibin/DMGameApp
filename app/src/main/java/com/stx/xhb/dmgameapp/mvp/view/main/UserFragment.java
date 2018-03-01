@@ -15,7 +15,7 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.mvp.IPresenter;
 import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.view.activity.AboutActivity;
 import com.stx.xhb.dmgameapp.mvp.view.activity.LoginActivity;
 import com.stx.xhb.dmgameapp.mvp.view.activity.SettingActivity;
@@ -110,14 +110,14 @@ public class UserFragment extends BaseMvpFragment {
             mLlLoginInfo.setVisibility(View.VISIBLE);
             mLlNoLogin.setVisibility(View.GONE);
             mBtnLoginOut.setVisibility(View.VISIBLE);
-            UserInfoEntity userInfoEntity = AppUser.getUserInfoEntity();
-            if (userInfoEntity.getHtml() != null) {
-                mTvAccount.setText(userInfoEntity.getHtml().getUsername());
-                mTvInfo.setText("等级：" + userInfoEntity.getHtml().getGrouptitle() + "\n"
-                        + "积分：" + userInfoEntity.getHtml().getCredits() + "\n"
-                        + "帖子：" + userInfoEntity.getHtml().getPosts());
+            UserInfoBean userInfoBean = AppUser.getUserInfoBean();
+            if (userInfoBean.getHtml() != null) {
+                mTvAccount.setText(userInfoBean.getHtml().getUsername());
+                mTvInfo.setText("等级：" + userInfoBean.getHtml().getGrouptitle() + "\n"
+                        + "积分：" + userInfoBean.getHtml().getCredits() + "\n"
+                        + "帖子：" + userInfoBean.getHtml().getPosts());
             }
-            Glide.with(getContext()).load(userInfoEntity.getHtml().getAuthimg()).into(mIvUserImg);
+            Glide.with(getContext()).load(userInfoBean.getHtml().getAuthimg()).into(mIvUserImg);
         } else {
             mLlNoLogin.setVisibility(View.VISIBLE);
             mLlLoginInfo.setVisibility(View.GONE);

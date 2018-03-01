@@ -5,13 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
@@ -78,7 +77,7 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     }
 
     @Override
-    public void getNewListSuccess(NewsListEntity listEntity) {
+    public void getNewListSuccess(NewsListBean listEntity) {
         if (listEntity != null) {
             if (currentpage == 1) {
                 mNewsCommonAdapter.clear();

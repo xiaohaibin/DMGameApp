@@ -7,7 +7,7 @@ import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
-import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
+import com.stx.xhb.dmgameapp.entity.GameVideoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameVideoContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -45,7 +45,7 @@ public class GetGameVideoListPresenter extends BasePresenter<GetGameVideoContrac
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            GameVideoEntity videoListEntity = GsonUtil.newGson().fromJson(response, GameVideoEntity.class);
+                            GameVideoBean videoListEntity = GsonUtil.newGson().fromJson(response, GameVideoBean.class);
                             if (videoListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 getView().getVideoListSuccess(videoListEntity);
                             } else {

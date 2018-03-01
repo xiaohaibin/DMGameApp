@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:left_button_image="@drawable/icon_img_return"
+        app:right_button_image="@drawable/icon_click_refresh"
+        app:title_background="@color/colorPrimary"
+        app:title_textColor="@color/colorWhite"
+        app:title_textSize="16sp" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:id="@+id/ll_comment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+</LinearLayout>

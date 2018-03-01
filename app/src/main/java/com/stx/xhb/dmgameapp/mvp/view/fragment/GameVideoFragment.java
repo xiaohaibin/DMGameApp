@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameVideoEntity;
+import com.stx.xhb.dmgameapp.entity.GameVideoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameVideoListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
@@ -76,7 +76,7 @@ public class GameVideoFragment extends BaseMvpFragment<GetGameVideoListPresenter
 
 
     @Override
-    public void getVideoListSuccess(GameVideoEntity videoListEntity) {
+    public void getVideoListSuccess(GameVideoBean videoListEntity) {
         if (videoListEntity != null) {
             if (currentpage == 1) {
                 gameVideoListAdapter.setNewData(videoListEntity.getHtml());

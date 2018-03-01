@@ -9,7 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.entity.ForumListEntity;
+import com.stx.xhb.dmgameapp.entity.ForumListBean;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Drscribe:
  */
 
-public class ForumDetailsListViewHodler extends BaseViewHolder<ForumListEntity.HtmlBean> {
+public class ForumDetailsListViewHodler extends BaseViewHolder<ForumListBean.HtmlBean> {
     @Bind(R.id.title)
     TextView mTitle;
     @Bind(R.id.date)
@@ -44,7 +44,7 @@ public class ForumDetailsListViewHodler extends BaseViewHolder<ForumListEntity.H
     }
 
     @Override
-    public void setData(final ForumListEntity.HtmlBean data) {
+    public void setData(final ForumListBean.HtmlBean data) {
         mTitle.setText(data.getSubject());
         tvAuthor.setText(data.getAuthor());
         mDate.setText(data.getDateline());

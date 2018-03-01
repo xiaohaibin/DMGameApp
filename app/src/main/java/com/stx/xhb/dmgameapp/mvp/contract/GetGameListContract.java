@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
+import com.stx.xhb.dmgameapp.entity.GameListBean;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface GetGameListContract {
 
     interface getGameListDataView extends IView {
 
-        void getGameListDataSuccess(List<GameListEntity.HtmlEntity> listEntity);
+        void getGameListDataSuccess(List<GameListBean.HtmlEntity> listEntity);
 
         void getGameListDataFailed(String msg);
 

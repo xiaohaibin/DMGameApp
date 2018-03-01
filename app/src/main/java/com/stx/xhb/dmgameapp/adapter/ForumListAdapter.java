@@ -8,7 +8,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.ForumListViewHodler;
-import com.stx.xhb.dmgameapp.entity.ForumEntity;
+import com.stx.xhb.dmgameapp.entity.ForumBean;
 
 /**
  * Author：xiaohaibin
@@ -18,7 +18,7 @@ import com.stx.xhb.dmgameapp.entity.ForumEntity;
  * Describe：
  */
 
-public class ForumListAdapter extends RecyclerArrayAdapter<ForumEntity> {
+public class ForumListAdapter extends RecyclerArrayAdapter<ForumBean> {
 
     private final LayoutInflater mLayoutInflater;
 

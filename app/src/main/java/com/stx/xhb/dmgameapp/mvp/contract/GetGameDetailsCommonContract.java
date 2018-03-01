@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
 
 import java.util.List;
 
@@ -25,11 +25,11 @@ public interface GetGameDetailsCommonContract {
 
     interface getGameDetailsDataView extends IView {
 
-        void getGameNewsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list);
+        void getGameNewsListDataSuccess(List<NewsListBean.ChannelEntity.HtmlEntity> list);
 
         void getGameNewsListFailed(String msg);
 
-        void getGameToolsListDataSuccess(List<NewsListEntity.ChannelEntity.HtmlEntity> list);
+        void getGameToolsListDataSuccess(List<NewsListBean.ChannelEntity.HtmlEntity> list);
 
         void getGameToolsListFailed(String msg);
 

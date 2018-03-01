@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.GameCommonFragment;
 
 import java.util.List;
@@ -17,16 +17,16 @@ import java.util.List;
  * @describe: 游戏ViewPager适配器
  */
 public class GameViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<GameChannelListEntity.HtmlEntity> mNewsTagList;
+    private List<GameChannelListBean.HtmlEntity> mNewsTagList;
 
-    public GameViewPagerFragmentAdapter(FragmentManager fm, List<GameChannelListEntity.HtmlEntity> newsTagList) {
+    public GameViewPagerFragmentAdapter(FragmentManager fm, List<GameChannelListBean.HtmlEntity> newsTagList) {
         super(fm);
         this.mNewsTagList = newsTagList;
     }
 
     @Override
     public BaseMvpFragment getItem(int position) {
-        GameChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
+        GameChannelListBean.HtmlEntity entity = mNewsTagList.get(position);
         return GameCommonFragment.newInstance(entity.getAppid());
     }
 

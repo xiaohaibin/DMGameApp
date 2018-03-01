@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
@@ -66,7 +66,7 @@ public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> imple
     }
 
     //设置适配器
-    private void setAdapter(List<NewsChannelListEntity.HtmlEntity> channelList) {
+    private void setAdapter(List<NewsChannelListBean.HtmlEntity> channelList) {
         //实例化适配器
         NewsViewPagerFragmentAdapter adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         //设置适配器
@@ -78,7 +78,7 @@ public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> imple
     }
 
     @Override
-    public void getChannelSuccess(List<NewsChannelListEntity.HtmlEntity> channelList) {
+    public void getChannelSuccess(List<NewsChannelListBean.HtmlEntity> channelList) {
         if (multiplestatusview!=null){
             multiplestatusview.showContent();
         }

@@ -12,13 +12,7 @@ import java.util.List;
  * Describe：
  */
 
-public class GameChannelListEntity extends BaseEntity{
-
-    /**
-     * code : 1
-     * channels_version : 1.0
-     * html : [{"appid":"1","title":"热门"},{"appid":"3","title":"排行"},{"appid":"2","title":"最新"},{"appid":"4","title":"发售表"},{"appid":"5","title":"我关注的"}]
-     */
+public class GameChannelListBean extends BaseEntity{
 
     private String channels_version;
     private List<HtmlEntity> html;
@@ -33,10 +27,6 @@ public class GameChannelListEntity extends BaseEntity{
     }
 
     public static class HtmlEntity {
-        /**
-         * appid : 1
-         * title : 热门
-         */
 
         private String appid;
         private String title;

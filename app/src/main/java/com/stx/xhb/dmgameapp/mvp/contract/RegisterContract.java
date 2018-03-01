@@ -2,8 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
-import com.stx.xhb.dmgameapp.mvp.presenter.RegisterPresenter;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 
 /**
  * Author：xiaohaibin
@@ -20,7 +19,7 @@ public interface RegisterContract {
 
     interface registerView extends IView {
 
-        void registerSuccess(UserInfoEntity infoEntity);
+        void registerSuccess(UserInfoBean infoEntity);
 
         void registerFailed(String msg);
 

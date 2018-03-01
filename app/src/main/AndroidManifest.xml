@@ -129,7 +129,7 @@
         <!-- 友盟key -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="56de5a6567e58e3e5e000a25"></meta-data>
+            android:value="56de5a6567e58e3e5e000a25"/>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${CHANNEL}" />
@@ -161,7 +161,7 @@
 
         <activity
             android:name="com.qq.e.ads.ADActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
 
         <service
             android:name="com.qq.e.comm.DownloadService"

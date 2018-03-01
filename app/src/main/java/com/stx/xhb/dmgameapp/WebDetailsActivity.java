@@ -67,16 +67,16 @@ public class WebDetailsActivity extends BaseAppActitity {
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
+                if (progressBar == null) {
+                    return;
+                }
                 if (newProgress == 100) {
                     progressBar.setVisibility(View.GONE);
-
                 } else {
-                    if (progressBar != null) {
-                        if (progressBar.getVisibility() == View.GONE) {
-                            progressBar.setVisibility(View.VISIBLE);
-                        }
-                        progressBar.setProgress(newProgress);
+                    if (progressBar.getVisibility() == View.GONE) {
+                        progressBar.setVisibility(View.VISIBLE);
                     }
+                    progressBar.setProgress(newProgress);
                 }
             }
         });

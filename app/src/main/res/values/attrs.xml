@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--************ CustomTitleBar ***********-->
+    <declare-styleable name="CustomTitlebar">
+        <attr name="title_background" format="color"/>
+        <attr name="left_button_image" format="reference"/>
+        <attr name="left_button_text" format="string"/>
+        <attr name="left_button_textColor" format="color"/>
+        <attr name="left_button_textSize" format="dimension"/>
+        <attr name="title_text" format="string"/>
+        <attr name="title_textColor" format="color"/>
+        <attr name="title_textSize" format="dimension"/>
+        <attr name="right_button_image" format="reference"/>
+        <attr name="right_button_text" format="string"/>
+        <attr name="right_button_textColor" format="color"/>
+        <attr name="right_button_textSize" format="dimension"/>
+        <attr name="show_line" format="boolean"/>
+    </declare-styleable>
+</resources>

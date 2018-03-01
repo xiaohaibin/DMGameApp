@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.ForumEntity;
+import com.stx.xhb.dmgameapp.entity.ForumBean;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface GetForumListContract {
 
     interface getForumListView extends IView {
 
-        void getForumListDataSuccess(List<ForumEntity> listData);
+        void getForumListDataSuccess(List<ForumBean> listData);
 
         void getForumListDataFailed(String msg);
 

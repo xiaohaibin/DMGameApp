@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;
@@ -67,7 +67,7 @@ public class GameFragment extends BaseMvpFragment<GetGameChannelPresenter> imple
     }
 
     //设置适配器
-    private void setAdapter(List<GameChannelListEntity.HtmlEntity> channelList) {
+    private void setAdapter(List<GameChannelListBean.HtmlEntity> channelList) {
         GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         mVideoViewpager.setAdapter(adapter);
         mVideoViewpager.setOffscreenPageLimit(channelList.size());
@@ -78,7 +78,7 @@ public class GameFragment extends BaseMvpFragment<GetGameChannelPresenter> imple
 
 
     @Override
-    public void getChannelSuccess(List<GameChannelListEntity.HtmlEntity> channelList) {
+    public void getChannelSuccess(List<GameChannelListBean.HtmlEntity> channelList) {
         if (multiplestatusview != null) {
             multiplestatusview.showContent();
         }

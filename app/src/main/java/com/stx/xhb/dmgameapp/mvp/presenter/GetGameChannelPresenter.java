@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.GameChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -43,14 +43,14 @@ public class GetGameChannelPresenter extends BasePresenter<GetGameChannelContrac
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            GameChannelListEntity gameChannelListEntity = GsonUtil.newGson().fromJson(response, GameChannelListEntity.class);
-                            if (gameChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (gameChannelListEntity.getHtml() != null) {
-                                    getView().getChannelSuccess(gameChannelListEntity.getHtml());
+                            GameChannelListBean gameChannelListBean = GsonUtil.newGson().fromJson(response, GameChannelListBean.class);
+                            if (gameChannelListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                if (gameChannelListBean.getHtml() != null) {
+                                    getView().getChannelSuccess(gameChannelListBean.getHtml());
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getChanelFailed(TextUtils.isEmpty(gameChannelListEntity.getMsg()) ? "服务器请求失败，请重试" : gameChannelListEntity.getMsg());
+                                getView().getChanelFailed(TextUtils.isEmpty(gameChannelListBean.getMsg()) ? "服务器请求失败，请重试" : gameChannelListBean.getMsg());
                             }
                         }
                     }

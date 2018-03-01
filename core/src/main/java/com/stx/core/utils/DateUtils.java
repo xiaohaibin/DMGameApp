@@ -20,4 +20,15 @@ public class DateUtils {
         String strtime = sdf.format(new Date((time * 1000L)));
         return strtime;
     }
+
+    public static String dateFromat(long timeMills) {
+        //拿到上面的time你会发现比真正的时间少了八个小时，解决的办法把JAVA默认的时区改为东八区.
+        System.setProperty("user.timezone", "Asia/Shanghai");
+        TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
+        TimeZone.setDefault(tz);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strtime = sdf.format(new Date((timeMills)));
+        return strtime;
+    }
+
 }

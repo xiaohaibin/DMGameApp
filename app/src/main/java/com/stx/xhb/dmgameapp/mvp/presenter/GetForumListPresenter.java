@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.entity.ForumEntity;
+import com.stx.xhb.dmgameapp.entity.ForumBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumListContract;
 import com.stx.xhb.dmgameapp.utils.JsonResponse;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -53,20 +53,20 @@ public class GetForumListPresenter extends BasePresenter<GetForumListContract.ge
                             try {
                                 JsonResponse jsonResponse = new JsonResponse(new JSONObject(response));
                                 if (jsonResponse.isSuccess()) {
-                                    List<ForumEntity> dataList = new ArrayList<>();
+                                    List<ForumBean> dataList = new ArrayList<>();
                                     JSONArray array = jsonResponse.getDataList();
                                     JSONObject object = jsonResponse.getObject();
                                     if (array != null && object != null) {
                                         for (int i = 0; i < array.length(); i++) {
-                                            ForumEntity forumEntity = new ForumEntity();
+                                            ForumBean forumBean = new ForumBean();
                                             JSONObject jsonObject = object.getJSONObject(array.getString(i));
-                                            forumEntity.setFid(jsonObject.getString("fid"));
-                                            forumEntity.setName(jsonObject.getString("name"));
-                                            forumEntity.setTodayposts(jsonObject.getString("todayposts"));
-                                            forumEntity.setRank(jsonObject.getString("rank"));
-                                            forumEntity.setType(jsonObject.getString("type"));
-                                            forumEntity.setIcon(jsonObject.getString("icon"));
-                                            dataList.add(forumEntity);
+                                            forumBean.setFid(jsonObject.getString("fid"));
+                                            forumBean.setName(jsonObject.getString("name"));
+                                            forumBean.setTodayposts(jsonObject.getString("todayposts"));
+                                            forumBean.setRank(jsonObject.getString("rank"));
+                                            forumBean.setType(jsonObject.getString("type"));
+                                            forumBean.setIcon(jsonObject.getString("icon"));
+                                            dataList.add(forumBean);
                                         }
                                         getView().getForumListDataSuccess(dataList);
                                     } else {

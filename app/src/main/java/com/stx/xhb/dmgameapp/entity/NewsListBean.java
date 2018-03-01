@@ -9,10 +9,10 @@ import java.util.List;
  * Time：2017/9/9
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：资讯列表实体类
  */
 
-public class NewsListEntity extends BaseEntity{
+public class NewsListBean extends BaseEntity{
 
     /**
      * code : 1

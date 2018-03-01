@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
+import com.stx.xhb.dmgameapp.entity.GameListBean;
 import com.stx.xhb.dmgameapp.mvp.view.activity.GameDetailsActivity;
 
 import butterknife.Bind;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * @Describe：
  */
 
-public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity> {
+public class GameListViewHolder extends BaseViewHolder<GameListBean.HtmlEntity> {
     @Bind(R.id.tv_game_title)
     TextView mTvGameTitle;
     @Bind(R.id.tv_game_details)
@@ -35,7 +35,7 @@ public class GameListViewHolder extends BaseViewHolder<GameListEntity.HtmlEntity
     }
 
     @Override
-    public void setData(final GameListEntity.HtmlEntity data) {
+    public void setData(final GameListBean.HtmlEntity data) {
         super.setData(data);
         Glide.with(getContext()).load(data.getLitpic()).placeholder(R.drawable.icon_gamed_efault).error(R.drawable.icon_gamed_efault).into(mIvGameImg);
         mTvGameTitle.setText(data.getTitle());

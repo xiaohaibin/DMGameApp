@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.mvp.view.activity.NewsDetailsActivity;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class NewsAdViewHolder {
         mBanner = (XBanner) itemView.findViewById(R.id.xbanner);
     }
 
-    public void setData(final List<NewsListEntity.BannerEntity.HtmlEntity> bannerList) {
+    public void setData(final List<NewsListBean.BannerEntity.HtmlEntity> bannerList) {
         List<String> tips = new ArrayList<String>();
         for (int i = 0; i < bannerList.size(); i++) {
             tips.add(bannerList.get(i).getTitle());
@@ -52,7 +52,9 @@ public class NewsAdViewHolder {
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
-                WebDetailsActivity.start(mContext, bannerList.get(position).getArcurl(), bannerList.get(position).getDescription(),bannerList.get(position).getLitpic());
+                NewsListBean.BannerEntity.HtmlEntity htmlEntity = bannerList.get(position);
+                NewsDetailsActivity.start(mContext,htmlEntity.getArcurl(),htmlEntity.getId(),htmlEntity.getTitle());
+//                WebDetailsActivity.start(mContext, htmlEntity.getArcurl(), htmlEntity.getDescription(), htmlEntity.getLitpic());
             }
         });
     }

@@ -6,8 +6,8 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsContentBean;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -28,7 +28,7 @@ public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVid
     @Override
     public void getVideoList(int page) {
         OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsContentEntity("2", page)))
+                .content(GsonUtil.newGson().toJson(new NewsContentBean("2", page)))
                 .url(API.NEWS_CHANNEL_DATA)
                 .build()
                 .execute(new StringCallback() {
@@ -45,12 +45,12 @@ public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVid
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            VideoListEntity videoListEntity = GsonUtil.newGson().fromJson(response, VideoListEntity.class);
-                            if (videoListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().getVideoListSuccess(videoListEntity);
+                            VideoListBean videoListBean = GsonUtil.newGson().fromJson(response, VideoListBean.class);
+                            if (videoListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getView().getVideoListSuccess(videoListBean);
                             } else {
                                 getView().hideLoading();
-                                getView().getVideoListFailed(videoListEntity.getMsg());
+                                getView().getVideoListFailed(videoListBean.getMsg());
                             }
                         }
                     }

@@ -7,7 +7,7 @@ import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.GameDetailsContent;
-import com.stx.xhb.dmgameapp.entity.GameNewsListEntity;
+import com.stx.xhb.dmgameapp.entity.GameNewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -44,7 +44,7 @@ public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsC
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            GameNewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListEntity.class);
+                            GameNewsListBean newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListBean.class);
                             if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 getView().getGameNewsListDataSuccess(newsListEntity.getHtml());
                             } else {
@@ -81,7 +81,7 @@ public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsC
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            GameNewsListEntity newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListEntity.class);
+                            GameNewsListBean newsListEntity = GsonUtil.newGson().fromJson(response, GameNewsListBean.class);
                             if (newsListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 getView().getGameToolsListDataSuccess(newsListEntity.getHtml());
                             } else {

@@ -6,8 +6,8 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
-import com.stx.xhb.dmgameapp.entity.NewsContentEntity;
+import com.stx.xhb.dmgameapp.entity.GameListBean;
+import com.stx.xhb.dmgameapp.entity.NewsContentBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,7 +27,7 @@ public class GetGameListPresenter extends BasePresenter<GetGameListContract.getG
     @Override
     public void getGameListData(String appId, int page) {
         OkHttpUtils.postString()
-                  .content(GsonUtil.newGson().toJson(new NewsContentEntity(appId,page)))
+                  .content(GsonUtil.newGson().toJson(new NewsContentBean(appId,page)))
                   .url(API.GET_GAME_CHANNEL_DATA)
                   .build()
                   .execute(new StringCallback() {
@@ -44,12 +44,12 @@ public class GetGameListPresenter extends BasePresenter<GetGameListContract.getG
                       @Override
                       public void onResponse(String response, int id) {
                            if (!TextUtils.isEmpty(response)){
-                               GameListEntity gameListEntity = GsonUtil.newGson().fromJson(response, GameListEntity.class);
-                               if (gameListEntity.getCode()== Constants.SERVER_SUCCESS){
-                                   getView().getGameListDataSuccess(gameListEntity.getHtml());
+                               GameListBean gameListBean = GsonUtil.newGson().fromJson(response, GameListBean.class);
+                               if (gameListBean.getCode()== Constants.SERVER_SUCCESS){
+                                   getView().getGameListDataSuccess(gameListBean.getHtml());
                                }else {
                                    getView().hideLoading();
-                                   getView().getGameListDataFailed(gameListEntity.getMsg());
+                                   getView().getGameListDataFailed(gameListBean.getMsg());
                                }
                            }
                       }

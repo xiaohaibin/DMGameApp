@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -42,7 +42,7 @@ public class GetNewsChannelPresenter extends BasePresenter<GetNewsChannelContrac
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsChannelListEntity forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsChannelListEntity.class);
+                            NewsChannelListBean forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsChannelListBean.class);
                             if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 if (forumChannelListEntity.getHtml() != null) {
                                     getView().getChannelSuccess(forumChannelListEntity.getHtml());

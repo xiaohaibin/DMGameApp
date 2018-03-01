@@ -8,16 +8,7 @@ package com.stx.xhb.dmgameapp.entity;
  * Describe：论坛实体类
  */
 
-public class ForumEntity {
-
-    /**
-     * fid : 1330
-     * name : 《模拟人生4》
-     * todayposts : 500
-     * rank : 5
-     * icon : http://att.3dmgame.com/att/common/fe/common_1330_icon.gif
-     * type : forum
-     */
+public class ForumBean {
 
     private String fid="";
     private String name="";

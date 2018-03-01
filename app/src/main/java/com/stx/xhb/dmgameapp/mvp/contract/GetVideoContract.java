@@ -2,7 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 
 /**
  * Author: Mr.xiao on 2017/9/18
@@ -19,7 +19,7 @@ public interface GetVideoContract {
 
     interface getVideoListView extends IView {
 
-        void getVideoListSuccess(VideoListEntity videoListEntity);
+        void getVideoListSuccess(VideoListBean videoListBean);
 
         void getVideoListFailed(String msg);
 

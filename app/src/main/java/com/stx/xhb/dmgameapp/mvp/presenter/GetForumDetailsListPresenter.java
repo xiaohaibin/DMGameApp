@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.ForumListEntity;
+import com.stx.xhb.dmgameapp.entity.ForumListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumDetailsListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -45,14 +45,14 @@ public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsL
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            ForumListEntity forumListEntity = GsonUtil.newGson().fromJson(response, ForumListEntity.class);
-                            if (forumListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumListEntity.getHtml() != null) {
-                                    getView().getForumListDataSuccess(forumListEntity.getHtml());
+                            ForumListBean forumListBean = GsonUtil.newGson().fromJson(response, ForumListBean.class);
+                            if (forumListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                if (forumListBean.getHtml() != null) {
+                                    getView().getForumListDataSuccess(forumListBean.getHtml());
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getForumListDataFailed(TextUtils.isEmpty(forumListEntity.getMsg()) ? "服务器请求失败，请重试" : forumListEntity.getMsg());
+                                getView().getForumListDataFailed(TextUtils.isEmpty(forumListBean.getMsg()) ? "服务器请求失败，请重试" : forumListBean.getMsg());
                             }
                         }
                     }

@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.stx.core.base.BaseMvpActivity;
-import com.stx.core.mvp.IPresenter;
 import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.MainActivity;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.RegisterContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.RegisterPresenter;
 import com.stx.xhb.dmgameapp.utils.AppUser;
@@ -57,7 +56,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     }
 
     @Override
-    public void registerSuccess(UserInfoEntity infoEntity) {
+    public void registerSuccess(UserInfoBean infoEntity) {
         AppUser.login(infoEntity);
         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
         finish();

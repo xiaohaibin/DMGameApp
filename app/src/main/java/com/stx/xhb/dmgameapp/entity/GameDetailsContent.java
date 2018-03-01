@@ -11,13 +11,6 @@ package com.stx.xhb.dmgameapp.entity;
 
 public class GameDetailsContent {
 
-    /**
-     * page : 1
-     * id : 3604471
-     * key : 恶灵附身2
-     * type : 3
-     */
-
     private int page;
     private String id;
     private String key;

@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
+import com.stx.xhb.dmgameapp.entity.GameListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameListAdapter;
@@ -83,7 +83,7 @@ public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> im
     }
 
     @Override
-    public void getGameListDataSuccess(List<GameListEntity.HtmlEntity> listEntity) {
+    public void getGameListDataSuccess(List<GameListBean.HtmlEntity> listEntity) {
         if (currentpage == 1) {
             mGameListAdapter.clear();
         }

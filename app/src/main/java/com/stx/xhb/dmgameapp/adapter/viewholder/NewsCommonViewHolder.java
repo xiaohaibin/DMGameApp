@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.NewsListEntity;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.mvp.view.activity.NewsDetailsActivity;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * @Describe：
  */
 
-public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelEntity.HtmlEntity> {
+public class NewsCommonViewHolder extends BaseViewHolder<NewsListBean.ChannelEntity.HtmlEntity> {
     @Bind(R.id.title)
     TextView mTitle;
     @Bind(R.id.date)
@@ -38,7 +39,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
     }
 
     @Override
-    public void setData(final NewsListEntity.ChannelEntity.HtmlEntity data) {
+    public void setData(final NewsListBean.ChannelEntity.HtmlEntity data) {
         mTitle.setText(data.getTitle());
         mDate.setText(data.getSenddate());
         List<List<String>> litpic = data.getLitpic();
@@ -52,7 +53,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListEntity.ChannelE
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(), data.getArcurl(), data.getDescription(), imgUrl);
+                NewsDetailsActivity.start(getContext(),data.getArcurl(),data.getId(),data.getTitle());
             }
         });
     }

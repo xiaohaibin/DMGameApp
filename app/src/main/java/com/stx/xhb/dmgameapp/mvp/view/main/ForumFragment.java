@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetForumChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
@@ -67,7 +67,7 @@ public class ForumFragment extends BaseMvpFragment<GetForumChannelPresenter> imp
     }
 
     //设置适配器
-    private void setAdapter(List<ForumChannelListEntity.HtmlEntity> channelList) {
+    private void setAdapter(List<ForumChannelListBean.HtmlEntity> channelList) {
         //实例化适配器
         ForumViewPagerFragmentAdapter adapter = new ForumViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
         //设置适配器
@@ -79,7 +79,7 @@ public class ForumFragment extends BaseMvpFragment<GetForumChannelPresenter> imp
     }
 
     @Override
-    public void getChannelSuccess(List<ForumChannelListEntity.HtmlEntity> channelList) {
+    public void getChannelSuccess(List<ForumChannelListBean.HtmlEntity> channelList) {
         if (multiplestatusview != null) {
             multiplestatusview.showContent();
         }

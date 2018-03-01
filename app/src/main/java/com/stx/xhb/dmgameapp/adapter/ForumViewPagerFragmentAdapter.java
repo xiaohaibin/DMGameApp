@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListEntity;
+import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.ForumCommonFragment;
 
 import java.util.List;
@@ -16,16 +16,16 @@ import java.util.List;
  * @describe: 论坛ViewPager适配器
  */
 public class ForumViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<ForumChannelListEntity.HtmlEntity> mNewsTagList;
+    private List<ForumChannelListBean.HtmlEntity> mNewsTagList;
 
-    public ForumViewPagerFragmentAdapter(FragmentManager fm, List<ForumChannelListEntity.HtmlEntity> newsTagList) {
+    public ForumViewPagerFragmentAdapter(FragmentManager fm, List<ForumChannelListBean.HtmlEntity> newsTagList) {
         super(fm);
         this.mNewsTagList = newsTagList;
     }
 
     @Override
     public BaseMvpFragment getItem(int position) {
-        ForumChannelListEntity.HtmlEntity entity = mNewsTagList.get(position);
+        ForumChannelListBean.HtmlEntity entity = mNewsTagList.get(position);
         return ForumCommonFragment.newInstance(entity.getFid());
     }
 

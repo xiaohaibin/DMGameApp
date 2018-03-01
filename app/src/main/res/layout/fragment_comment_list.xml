@@ -4,9 +4,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:title_text="全部评论"
+        app:left_button_image="@drawable/icon_img_return"
+        app:title_background="@color/colorPrimary" />
+
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/rv_comment_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/divider"
+        android:layout_height="0.5dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_comment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
 </LinearLayout>

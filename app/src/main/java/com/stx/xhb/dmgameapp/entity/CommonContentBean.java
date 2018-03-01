@@ -8,7 +8,7 @@ package com.stx.xhb.dmgameapp.entity;
  * Describe：
  */
 
-public class CommonContentEntity {
+public class CommonContentBean {
 
     /**
      * module : groups
@@ -16,7 +16,7 @@ public class CommonContentEntity {
 
     private String module;
 
-    public CommonContentEntity(String module) {
+    public CommonContentBean(String module) {
         this.module = module;
     }
 }

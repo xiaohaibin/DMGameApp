@@ -14,6 +14,8 @@ public class API {
      * 请求：POST
      * 参数：appid：1   2为视频
      *       page  1   页码
+     *       key
+     *       id
      */
     public static final String NEWS_CHANNEL_DATA="http://m.3dmgame.com/y3wap/ajaxappchannel.php";
 
@@ -57,4 +59,9 @@ public class API {
      * web论坛链接
      */
     public static final String GET_3DM_WEB_FORUM="http://bbs.3dmgame.com/forum.php?mod=viewthread&tid=%s&page=1&mobile=3dmapp";
+
+    /**
+     * 获取评论列表
+     */
+    public static final String GET_COMMENT_LIST="http://changyan.sohu.com/api/2/topic/load?client_id=cy2x2lUJoEMz&depth=2&page_size=20&topic_source_id=%s&topic_url=20&sub_size=20&hot_size=0&order_by=floor";
 }

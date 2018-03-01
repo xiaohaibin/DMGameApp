@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.LoginContract;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -62,19 +62,19 @@ public class LoginPresenter extends BasePresenter<LoginContract.loginView,LoginC
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
-                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getUserInfo(userInfoEntity);
+                            UserInfoBean userInfoBean = GsonUtil.newGson().fromJson(response, UserInfoBean.class);
+                            if (userInfoBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getUserInfo(userInfoBean);
                             } else {
                                 getView().hideLoading();
-                                getView().loginFailed(userInfoEntity.getMsg());
+                                getView().loginFailed(userInfoBean.getMsg());
                             }
                         }
                     }
                 });
     }
 
-    public void getUserInfo(UserInfoEntity infoEntity) {
+    public void getUserInfo(UserInfoBean infoEntity) {
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new getUserInfoContentEntity("userinfo", infoEntity.getUid())))
                 .url(API.USER_API)
@@ -88,11 +88,11 @@ public class LoginPresenter extends BasePresenter<LoginContract.loginView,LoginC
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            UserInfoEntity userInfoEntity = GsonUtil.newGson().fromJson(response, UserInfoEntity.class);
-                            if (userInfoEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().loginSuccess(userInfoEntity);
+                            UserInfoBean userInfoBean = GsonUtil.newGson().fromJson(response, UserInfoBean.class);
+                            if (userInfoBean.getCode() == Constants.SERVER_SUCCESS) {
+                                getView().loginSuccess(userInfoBean);
                             } else {
-                                getView().loginFailed(userInfoEntity.getMsg());
+                                getView().loginFailed(userInfoBean.getMsg());
                             }
                         }
 

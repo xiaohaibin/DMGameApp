@@ -12,7 +12,7 @@ import java.util.List;
  * Describe：
  */
 
-public class ForumChannelListEntity extends BaseEntity{
+public class ForumChannelListBean extends BaseEntity{
 
     /**
      * code : 1

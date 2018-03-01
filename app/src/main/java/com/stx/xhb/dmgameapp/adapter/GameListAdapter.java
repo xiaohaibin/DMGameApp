@@ -8,7 +8,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.GameListViewHolder;
-import com.stx.xhb.dmgameapp.entity.GameListEntity;
+import com.stx.xhb.dmgameapp.entity.GameListBean;
 
 /**
  * @author：xiaohaibin
@@ -18,7 +18,7 @@ import com.stx.xhb.dmgameapp.entity.GameListEntity;
  * @Describe：
  */
 
-public class GameListAdapter extends RecyclerArrayAdapter<GameListEntity.HtmlEntity> {
+public class GameListAdapter extends RecyclerArrayAdapter<GameListBean.HtmlEntity> {
 
     private LayoutInflater mLayoutInflater;
 

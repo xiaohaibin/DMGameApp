@@ -10,7 +10,7 @@ import com.stx.xhb.dmgameapp.base.BaseEntity;
  * Describe：
  */
 
-public class UserInfoEntity extends BaseEntity{
+public class UserInfoBean extends BaseEntity{
 
     /**
      * code : 1

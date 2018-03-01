@@ -7,11 +7,11 @@ package com.stx.xhb.dmgameapp.entity;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public class NewsContentEntity {
+public class NewsContentBean {
     private String appid;
     private int page;
 
-    public NewsContentEntity(String appid, int page) {
+    public NewsContentBean(String appid, int page) {
         this.appid = appid;
         this.page = page;
     }

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * @Github：https://github.com/xiaohaibin/
  * @Describe：
  */
-public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBean> {
+public class VideoListViewHolder extends BaseViewHolder<VideoListBean.VideoBean> {
 
     @Bind(R.id.iv_video_img)
     ImageView mIvVideoImg;
@@ -37,7 +37,7 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListEntity.VideoBea
     }
 
     @Override
-    public void setData(final VideoListEntity.VideoBean data) {
+    public void setData(final VideoListBean.VideoBean data) {
         super.setData(data);
         mTvVideoTitle.setText(data.getTitle());
         mTvVideoTime.setText(data.getSenddate());

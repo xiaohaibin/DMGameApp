@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetVideoListPresenter;
 import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
@@ -70,12 +70,12 @@ public class VideoFragment extends BaseMvpFragment<GetVideoListPresenter> implem
 
 
     @Override
-    public void getVideoListSuccess(VideoListEntity videoListEntity) {
-        if (videoListEntity != null) {
+    public void getVideoListSuccess(VideoListBean videoListBean) {
+        if (videoListBean != null) {
             if (currentpage == 1) {
                 mVideoListAdapter.clear();
             }
-            mVideoListAdapter.addAll(videoListEntity.getVideo());
+            mVideoListAdapter.addAll(videoListBean.getVideo());
             if (mVideoListAdapter.getCount() < pageSize) {
                 mVideoListAdapter.stopMore();
             }

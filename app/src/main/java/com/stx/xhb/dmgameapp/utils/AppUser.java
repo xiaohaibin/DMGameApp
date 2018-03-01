@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.SPUtils;
 import com.stx.xhb.dmgameapp.DmgApplication;
-import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
+import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 
 /**
  * Author：xiaohaibin
@@ -17,51 +17,51 @@ import com.stx.xhb.dmgameapp.entity.UserInfoEntity;
 
 public class AppUser {
 
-    private static UserInfoEntity sUserInfoEntity;
+    private static UserInfoBean sUserInfoBean;
 
     public static void init(){
         String userInfo = SPUtils.getString(DmgApplication.getInstance().getApplicationContext(), "userInfo", "");
         if (!TextUtils.isEmpty(userInfo)) {
-            sUserInfoEntity = GsonUtil.newGson().fromJson(userInfo, UserInfoEntity.class);
+            sUserInfoBean = GsonUtil.newGson().fromJson(userInfo, UserInfoBean.class);
         }
     }
 
-    public static UserInfoEntity getUserInfoEntity() {
-        if (sUserInfoEntity == null) {
-            return GsonUtil.newGson().fromJson("{}", UserInfoEntity.class);
+    public static UserInfoBean getUserInfoBean() {
+        if (sUserInfoBean == null) {
+            return GsonUtil.newGson().fromJson("{}", UserInfoBean.class);
         }
-        return sUserInfoEntity;
+        return sUserInfoBean;
     }
 
     public static boolean isLogin() {
-        return sUserInfoEntity != null;
+        return sUserInfoBean != null;
     }
 
 
     /**
      * 登录成功时调用
      *
-     * @param userInfoEntity
+     * @param userInfoBean
      */
-    public static void login(UserInfoEntity userInfoEntity) {
-        setUserInfo(userInfoEntity);
+    public static void login(UserInfoBean userInfoBean) {
+        setUserInfo(userInfoBean);
     }
 
     /**
      * 刷新用户信息时调用
      *
-     * @param userInfoEntity
+     * @param userInfoBean
      */
-    public static void setUserInfo(UserInfoEntity userInfoEntity) {
-        AppUser.sUserInfoEntity = userInfoEntity;
-        SPUtils.putString(DmgApplication.getInstance().getApplicationContext(), "userInfo", GsonUtil.newGson().toJson(userInfoEntity));
+    public static void setUserInfo(UserInfoBean userInfoBean) {
+        AppUser.sUserInfoBean = userInfoBean;
+        SPUtils.putString(DmgApplication.getInstance().getApplicationContext(), "userInfo", GsonUtil.newGson().toJson(userInfoBean));
     }
 
     /**
      * 注销时调用
      */
     public static void logout() {
-        sUserInfoEntity = null;
+        sUserInfoBean = null;
     }
 
 }

@@ -8,7 +8,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.VideoListViewHolder;
-import com.stx.xhb.dmgameapp.entity.VideoListEntity;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
 
 /**
  * Author：xiaohaibin
@@ -18,7 +18,7 @@ import com.stx.xhb.dmgameapp.entity.VideoListEntity;
  * Describe：视频列表适配器
  */
 
-public class VideoListAdapter extends RecyclerArrayAdapter<VideoListEntity.VideoBean> {
+public class VideoListAdapter extends RecyclerArrayAdapter<VideoListBean.VideoBean> {
 
     private LayoutInflater mLayoutInflater;
 
