@@ -8,5 +8,4 @@ keystore.properties
 app/app-tencent-release.apk
 app/app-wandoujia-release.apk
 app/build/
-key/
-app/src/main/java/com/stx/xhb/dmgameapp/entity/ForumListContentEntity.java
+key/3dmgame.jks
