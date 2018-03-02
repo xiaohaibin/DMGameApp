@@ -60,11 +60,6 @@ public class VideoListBean extends BaseEntity {
         private String changyan_id;
         private String description;
         private String lmfl;
-        private String typeid;
-
-        public String getTypeid() {
-            return typeid;
-        }
 
         public String getId() {
             return id;

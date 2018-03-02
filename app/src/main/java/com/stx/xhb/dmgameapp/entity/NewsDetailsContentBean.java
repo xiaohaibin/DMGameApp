@@ -9,10 +9,10 @@ package com.stx.xhb.dmgameapp.entity;
  */
 public class NewsDetailsContentBean {
 
-    private String page;
-    private String id;
-    private String key;
-    private String appid;
+    private String page="";
+    private String id="";
+    private String key="";
+    private String appid="";
 
     public NewsDetailsContentBean(String page, String id, String key, String appid) {
         this.page = page;

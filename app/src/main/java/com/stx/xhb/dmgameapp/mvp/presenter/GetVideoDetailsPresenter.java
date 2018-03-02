@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.mvp.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
@@ -8,8 +9,8 @@ import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.entity.NewsDetailsContentBean;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
-import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.mvp.contract.GetVideoDetailsContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -18,19 +19,18 @@ import okhttp3.Request;
 
 /**
  * @author: xiaohaibin.
- * @time: 2018/2/27
+ * @time: 2018/3/2
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe:
+ * @describe: 获取视频详情
  */
 
-public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View, GetNewsDetailsContract.Model> implements GetNewsDetailsContract.Model {
-
+public class GetVideoDetailsPresenter extends BasePresenter<GetVideoDetailsContract.View,GetVideoDetailsContract.Model> implements GetVideoDetailsContract.Model{
 
     @Override
-    public void getNewsDetailsData(String id, String key) {
+    public void getVideoDetailsData(String id, String key) {
         OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsDetailsContentBean("1", id, key, "1")))
+                .content(GsonUtil.newGson().toJson(new NewsDetailsContentBean("1", id, key, "2")))
                 .url(API.NEWS_CHANNEL_DATA)
                 .build()
                 .execute(new StringCallback() {
@@ -41,23 +41,23 @@ public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContrac
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        getView().getNewsDetailsDataFailed();
+                        getView().getVideoDetailsDataFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsListBean forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsListBean.class);
-                            if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumChannelListEntity.getChannel() != null) {
-                                    getView().setNewsDetailsData(forumChannelListEntity.getChannel().getHtml());
+                            VideoListBean videoListBean = GsonUtil.newGson().fromJson(response, VideoListBean.class);
+                            if (videoListBean.getCode() == Constants.SERVER_SUCCESS) {
+                                if (videoListBean.getVideo() != null) {
+                                    getView().setVideoDetailsData(videoListBean.getVideo());
                                 }else {
                                     getView().hideLoading();
-                                    getView().getNewsDetailsDataFailed();
+                                    getView().getVideoDetailsDataFailed();
                                 }
                             } else {
                                 getView().hideLoading();
-                                getView().getNewsDetailsDataFailed();
+                                getView().getVideoDetailsDataFailed();
                             }
                         }
                     }
@@ -72,7 +72,7 @@ public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContrac
     @Override
     public void getCommentListData(String id) {
         OkHttpUtils.get()
-                .url(String.format(API.GET_COMMENT_LIST, "news_"+id))
+                .url(String.format(API.GET_COMMENT_LIST, id))
                 .build()
                 .execute(new StringCallback() {
                     @Override

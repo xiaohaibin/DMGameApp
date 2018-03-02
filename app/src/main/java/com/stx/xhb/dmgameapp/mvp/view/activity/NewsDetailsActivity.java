@@ -13,6 +13,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.CommentListFragment;
 import com.stx.xhb.dmgameapp.mvp.view.fragment.NewsDetailsFragment;
+import com.stx.xhb.dmgameapp.mvp.view.fragment.VideoDetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,17 +36,22 @@ public class NewsDetailsActivity extends BaseMvpActivity {
     private String mKey;
     private String mAppId;
     private String mUrl;
+    private String mImgUrl;
+    private boolean mIsVideo;
+    private String mChangyanId;
 
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_news_detail;
     }
 
-    public static void start(Context context, String url, String id, String key) {
+    public static void start(Context context, String url, String id, String key, String imgUrl, boolean isVideo) {
         Bundle bundle = new Bundle();
-        bundle.putString("url",url);
+        bundle.putString("url", url);
         bundle.putString("id", id);
         bundle.putString("key", key);
+        bundle.putString("imgUrl", imgUrl);
+        bundle.putBoolean("isVideo", isVideo);
         Intent intent = new Intent(context, NewsDetailsActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -55,19 +61,32 @@ public class NewsDetailsActivity extends BaseMvpActivity {
     protected void onInitialization(Bundle bundle) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if (extras.containsKey("id")){
+            if (extras.containsKey("id")) {
                 mId = extras.getString("id");
             }
-            if (extras.containsKey("key")){
+            if (extras.containsKey("changyanId")) {
+                mChangyanId = extras.getString("changyanId");
+            }
+            if (extras.containsKey("key")) {
                 mKey = extras.getString("key");
             }
-            if (extras.containsKey("url")){
+            if (extras.containsKey("url")) {
                 mUrl = extras.getString("url");
+            }
+            if (extras.containsKey("imgUrl")) {
+                mImgUrl = extras.getString("imgUrl");
+            }
+            if (extras.containsKey("isVideo")) {
+                mIsVideo = extras.getBoolean("isVideo", false);
             }
         }
         List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(NewsDetailsFragment.newInstance(mUrl,mId, mKey));
-        fragmentList.add(CommentListFragment.newInstance());
+        if (mIsVideo) {
+            fragmentList.add(VideoDetailsFragment.newInstance(mUrl, mId, mKey, mImgUrl));
+        } else {
+            fragmentList.add(NewsDetailsFragment.newInstance(mUrl, mId, mKey, mImgUrl));
+        }
+        fragmentList.add(CommentListFragment.newInstance(mId));
         vpContainer.setAdapter(new MainFragmentPageAdapter(getSupportFragmentManager(), fragmentList));
     }
 

@@ -2,6 +2,11 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
+import com.stx.xhb.dmgameapp.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.entity.VideoListBean;
+
+import java.util.List;
 
 /**
  * @author: xiaohaibin.
@@ -13,13 +18,26 @@ import com.stx.core.mvp.IView;
 
 public interface GetVideoDetailsContract {
 
-    interface Model extends IModel {
+    interface View extends IView {
 
-        void getVideoDetails();
+        void setVideoDetailsData(List<VideoListBean.VideoBean> listEntity);
 
+        void setCommentListData(CommentListBean commentListData);
+
+        void getVideoDetailsDataFailed();
+
+        void getCommentListDataFailed();
+
+        void showLoading();
+
+        void hideLoading();
     }
 
-    interface View extends IView {
+    interface Model extends IModel {
+
+        void getVideoDetailsData(String id, String key);
+
+        void getCommentListData(String id);
 
     }
 }

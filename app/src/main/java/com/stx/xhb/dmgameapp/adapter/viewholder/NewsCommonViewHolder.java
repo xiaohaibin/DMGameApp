@@ -53,7 +53,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListBean.ChannelEnt
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsDetailsActivity.start(getContext(),data.getArcurl(),data.getId(),data.getTitle());
+                NewsDetailsActivity.start(getContext(),data.getArcurl(),data.getId(),data.getTitle(),imgUrl,false);
             }
         });
     }

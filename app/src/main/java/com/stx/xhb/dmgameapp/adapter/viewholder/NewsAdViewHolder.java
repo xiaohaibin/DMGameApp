@@ -53,8 +53,7 @@ public class NewsAdViewHolder {
             @Override
             public void onItemClick(XBanner banner, int position) {
                 NewsListBean.BannerEntity.HtmlEntity htmlEntity = bannerList.get(position);
-                NewsDetailsActivity.start(mContext,htmlEntity.getArcurl(),htmlEntity.getId(),htmlEntity.getTitle());
-//                WebDetailsActivity.start(mContext, htmlEntity.getArcurl(), htmlEntity.getDescription(), htmlEntity.getLitpic());
+                NewsDetailsActivity.start(mContext,htmlEntity.getArcurl(),htmlEntity.getId(),htmlEntity.getTitle(),htmlEntity.getLitpic(),false);
             }
         });
     }

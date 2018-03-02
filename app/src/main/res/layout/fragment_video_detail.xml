@@ -4,21 +4,71 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:left_button_image="@drawable/icon_img_return"
+        app:title_background="@color/colorPrimary"
+        app:title_textColor="@color/colorWhite"
+        app:title_textSize="16sp" />
+
+    <WebView
+        android:id="@+id/web_video"
+        android:layout_width="match_parent"
+        android:layout_height="260dp" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="48dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <WebView
-            android:id="@+id/web_video"
-            android:layout_width="match_parent"
-            android:layout_height="260dp" />
+        <TextView
+            android:id="@+id/btn_comment"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:textSize="10sp"
+            android:gravity="center_vertical"
+            android:text="说点什么..."
+            android:background="@drawable/shape_edit_comment" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tv_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="9sp"
+            android:gravity="center_horizontal"
+            android:text="0"
+            android:background="@drawable/show_comment" />
+
+        <ImageView
+            android:id="@+id/btn_share"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:padding="15dp"
+            android:background="@drawable/selector_trans_divider"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/click_share" />
 
     </LinearLayout>
 

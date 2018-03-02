@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
+import com.stx.xhb.dmgameapp.entity.CommentListBean;
 
 /**
  * @author: xiaohaibin.
@@ -14,10 +15,17 @@ import com.stx.core.mvp.IView;
 public interface GetCommentListContract {
 
         interface Model extends IModel{
-
+                void getCommentListData(String id);
         }
 
         interface View extends IView{
 
+                void setCommentListData(CommentListBean commentListData);
+
+                void getCommentListDataFailed();
+
+                void showLoading();
+
+                void hideLoading();
         }
 }

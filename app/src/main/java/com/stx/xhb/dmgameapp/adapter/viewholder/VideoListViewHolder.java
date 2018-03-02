@@ -9,6 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.mvp.view.activity.NewsDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,7 +47,7 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListBean.VideoBean>
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(), data.getVideourl(), data.getDescription(), data.getVideopic());
+                NewsDetailsActivity.start(getContext(),data.getVideourl(),data.getId(),data.getTitle(),data.getVideopic(),true);
             }
         });
     }

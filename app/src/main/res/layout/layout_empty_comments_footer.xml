@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:text="暂无评论，快来抢沙发吧~"
+    android:textSize="12sp"
+    android:layout_height="50dp"/>
