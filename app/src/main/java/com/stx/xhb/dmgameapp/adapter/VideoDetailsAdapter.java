@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommentViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.VideoListViewHolder;
@@ -34,7 +36,6 @@ import java.util.List;
 public class VideoDetailsAdapter extends RecyclerArrayAdapter<CommentsBean>{
 
     private List<VideoListBean.VideoBean> mVideoBeanList;
-    private String mUrl;
     private LayoutInflater mLayoutInflater;
     public VideoDetailsAdapter(Context context) {
         super(context);
@@ -55,9 +56,10 @@ public class VideoDetailsAdapter extends RecyclerArrayAdapter<CommentsBean>{
                 @Override
                 public View onCreateView(ViewGroup parent) {
                     EasyRecyclerView recyclerView = new EasyRecyclerView(getContext());
+                    recyclerView.setRefreshing(false);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.getRecyclerView().setNestedScrollingEnabled(false);
-                    VideoListAdapter adapter = new VideoListAdapter(getContext());
+                    VideoDetailsListAdapter adapter = new VideoDetailsListAdapter(getContext());
                     adapter.addAll(mVideoBeanList);
                     recyclerView.setAdapter(adapter);
                     return recyclerView;

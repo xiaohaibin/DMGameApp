@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,12 +166,16 @@ public class VideoDetailsFragment extends BaseMvpFragment<GetVideoDetailsPresent
 
     @Override
     public void showLoading() {
-
+        if (currentpage == 1) {
+            mRvList.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        if (currentpage == 1) {
+            mRvList.setRefreshing(false);
+        }
     }
 
     @Override
@@ -180,8 +185,10 @@ public class VideoDetailsFragment extends BaseMvpFragment<GetVideoDetailsPresent
 
     @Override
     public void onRefresh() {
-        mPresenter.getVideoDetailsData(mId, mKey);
-        mPresenter.getCommentListData(mId);
+        mVideoDetailsAdapter.clear();
+        mVideoDetailsAdapter.removeAllHeader();
+        mVideoDetailsAdapter.removeAllFooter();
+        lazyLoad();
     }
 
 
