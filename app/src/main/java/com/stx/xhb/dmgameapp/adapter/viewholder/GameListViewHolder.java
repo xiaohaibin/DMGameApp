@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.GameListBean;
-import com.stx.xhb.dmgameapp.mvp.view.activity.GameDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.GameDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

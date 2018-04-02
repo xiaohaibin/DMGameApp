@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsListBean;
-import com.stx.xhb.dmgameapp.mvp.view.activity.NewsDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;

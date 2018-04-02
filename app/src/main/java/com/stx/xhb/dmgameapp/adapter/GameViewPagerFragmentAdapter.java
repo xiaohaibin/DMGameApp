@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
-import com.stx.xhb.dmgameapp.mvp.view.fragment.GameCommonFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameCommonFragment;
 
 import java.util.List;
 
