@@ -25,6 +25,9 @@ import okhttp3.Request;
 public class GetNewsChannelPresenter extends BasePresenter<GetNewsChannelContract.getChannelListView,GetNewsChannelContract.getNewsChannelModel> implements GetNewsChannelContract.getNewsChannelModel {
     @Override
     public void getChannelList() {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.get()
                 .url(API.GET_NEWS_CHANNEL)
                 .build()

@@ -26,6 +26,9 @@ import okhttp3.Request;
 public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsListContract.getForumListDataView,GetForumDetailsListContract.getForumListModel> implements GetForumDetailsListContract.getForumListModel{
     @Override
     public void getForumListData(String fid,int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils
                 .postString()
                 .content(GsonUtil.newGson().toJson(new ForumListContent(fid,page,"forumdisplay")))

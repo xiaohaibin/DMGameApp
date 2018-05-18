@@ -27,6 +27,9 @@ public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVid
 
     @Override
     public void getVideoList(int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new NewsContentBean("2", page)))
                 .url(API.NEWS_CHANNEL_DATA)

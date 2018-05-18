@@ -31,17 +31,21 @@ public class GetCommentListPresenter extends BasePresenter<GetCommentListContrac
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(Request request, int id) {
-                        getView().showLoading();
+                        if (getView()!=null) {
+                            getView().showLoading();
+                        }
                     }
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        getView().getCommentListDataFailed();
+                        if (getView()!=null) {
+                            getView().getCommentListDataFailed();
+                        }
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        if (!TextUtils.isEmpty(response)) {
+                        if (getView()!=null&&!TextUtils.isEmpty(response)) {
                             CommentListBean commentListBean = GsonUtil.newGson().fromJson(response, CommentListBean.class);
                             if (commentListBean.getComments() != null && !commentListBean.getComments().isEmpty()) {
                                 getView().setCommentListData(commentListBean);
@@ -54,7 +58,9 @@ public class GetCommentListPresenter extends BasePresenter<GetCommentListContrac
 
                     @Override
                     public void onAfter(int id) {
-                        getView().hideLoading();
+                        if (getView()!=null) {
+                            getView().hideLoading();
+                        }
                     }
                 });
     }

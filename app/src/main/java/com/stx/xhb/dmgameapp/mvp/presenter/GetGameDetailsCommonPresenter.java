@@ -26,6 +26,9 @@ import okhttp3.Request;
 public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsCommonContract.getGameDetailsDataView,GetGameDetailsCommonContract.getGameDetailsCommonModel> implements GetGameDetailsCommonContract.getGameDetailsCommonModel{
     @Override
     public void getGameNewsListData(String type, String id, String key, int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new GameDetailsContent(page,id,key,type)))
                 .url(API.GET_GAME_DETAILS)

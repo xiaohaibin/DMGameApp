@@ -27,6 +27,9 @@ public class GetForumChannelPresenter extends BasePresenter<GetForumChannelContr
 
     @Override
     public void getChannelList() {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new CommonContentBean("groups")))
                 .url(API.USER_API)

@@ -27,6 +27,9 @@ public class GetGameVideoListPresenter extends BasePresenter<GetGameVideoContrac
 
     @Override
     public void getVideoList(String id,String key,String type,int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new GameDetailsContent(page,id,key,type)))
                 .url(API.GET_GAME_DETAILS)

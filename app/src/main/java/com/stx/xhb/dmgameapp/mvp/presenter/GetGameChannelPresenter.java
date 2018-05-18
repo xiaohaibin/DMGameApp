@@ -26,6 +26,9 @@ public class GetGameChannelPresenter extends BasePresenter<GetGameChannelContrac
 
     @Override
     public void getChannelList() {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.get()
                 .url(API.GET_GAME_CHANNEL)
                 .build()

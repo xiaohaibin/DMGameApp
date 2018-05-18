@@ -26,6 +26,9 @@ import okhttp3.Request;
 public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getNewListView,GetNewsListContract.getNewsListModel> implements GetNewsListContract.getNewsListModel {
     @Override
     public void getNewsList(String appId, int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new NewsContentBean(appId, page)))
                 .url(API.NEWS_CHANNEL_DATA)

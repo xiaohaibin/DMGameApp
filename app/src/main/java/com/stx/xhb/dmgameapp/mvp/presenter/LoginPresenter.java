@@ -39,6 +39,9 @@ public class LoginPresenter extends BasePresenter<LoginContract.loginView,LoginC
             ToastUtil.show("请填写问题答案");
             return;
         }
+        if (getView()==null){
+            return;
+        }
         toLogin(username, pwd, questionid, answer);
     }
 

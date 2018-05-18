@@ -43,6 +43,9 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.registerVi
             ToastUtil.show("请填写邮箱");
             return;
         }
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new RegisterContentEntity("userregister", email, username, passwd, ckpasswd)))
                 .url(API.USER_API)

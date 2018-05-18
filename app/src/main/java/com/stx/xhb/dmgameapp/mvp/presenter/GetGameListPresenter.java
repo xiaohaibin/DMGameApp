@@ -26,6 +26,9 @@ import okhttp3.Request;
 public class GetGameListPresenter extends BasePresenter<GetGameListContract.getGameListDataView,GetGameListContract.getGameListModel> implements GetGameListContract.getGameListModel{
     @Override
     public void getGameListData(String appId, int page) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                   .content(GsonUtil.newGson().toJson(new NewsContentBean(appId,page)))
                   .url(API.GET_GAME_CHANNEL_DATA)

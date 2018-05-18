@@ -26,9 +26,11 @@ import okhttp3.Request;
 
 public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View, GetNewsDetailsContract.Model> implements GetNewsDetailsContract.Model {
 
-
     @Override
     public void getNewsDetailsData(String id, String key) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new NewsDetailsContentBean("1", id, key, "1")))
                 .url(API.NEWS_CHANNEL_DATA)

@@ -29,6 +29,9 @@ public class GetVideoDetailsPresenter extends BasePresenter<GetVideoDetailsContr
 
     @Override
     public void getVideoDetailsData(String id, String key) {
+        if (getView()==null){
+            return;
+        }
         OkHttpUtils.postString()
                 .content(GsonUtil.newGson().toJson(new NewsDetailsContentBean("1", id, key, "2")))
                 .url(API.NEWS_CHANNEL_DATA)
