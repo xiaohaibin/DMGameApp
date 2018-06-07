@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.qq.e.ads.nativ.NativeADDataRef;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.NewsListBean;
@@ -15,6 +17,8 @@ import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
+
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -81,6 +85,7 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
         if (listEntity != null) {
             if (currentpage == 1) {
                 mNewsCommonAdapter.clear();
+                mNewsCommonAdapter.removeAllHeader();
                 if ("1".equals(mAppId) && listEntity.getBanner() != null) {
                     mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
                     ToastUtil.show("已是最新数据");
@@ -108,6 +113,7 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     public void onRefresh() {
         currentpage = 1;
         mPresenter.getNewsList(mAppId, currentpage);
+        mPresenter.loadAD(getActivity());
     }
 
     @Override
@@ -128,6 +134,11 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
         if (currentpage == 1) {
             mRecyclerView.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void getADData(NativeExpressADView nativeADDataRef) {
+        mNewsCommonAdapter.addTecentAd(nativeADDataRef);
     }
 
     @Override

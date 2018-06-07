@@ -5,7 +5,7 @@ package com.stx.xhb.dmgameapp.config;
  * Time：2017/9/16
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：Constants
  */
 
 public class Constants {

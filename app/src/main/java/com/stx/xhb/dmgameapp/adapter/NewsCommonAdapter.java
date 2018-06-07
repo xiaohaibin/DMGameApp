@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
@@ -37,7 +38,6 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListBean.Channel
         if (mAdList != null && mAdList.size() > 0 && getHeaderCount() == 0) {
             addHeader(new ItemView() {
                 NewsAdViewHolder viewHolder;
-
                 @Override
                 public View onCreateView(ViewGroup parent) {
                     View view = mLayoutInflater.inflate(R.layout.layout_ad_head, parent, false);
@@ -53,6 +53,22 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListBean.Channel
                 }
             });
         }
+    }
+
+    public void addTecentAd(final NativeExpressADView nativeExpressADView) {
+        ItemView itemView = new ItemView() {
+
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                nativeExpressADView.render();
+                return nativeExpressADView;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+            }
+        };
+        addHeader(itemView);
     }
 
     @Override

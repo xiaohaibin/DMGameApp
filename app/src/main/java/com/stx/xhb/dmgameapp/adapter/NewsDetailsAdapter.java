@@ -50,7 +50,6 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
     public void setWebData(String url) {
         this.mUrl = url;
         if (!TextUtils.isEmpty(url)) {
-
             addHeader(new ItemView() {
                 @Override
                 public View onCreateView(ViewGroup parent) {

@@ -93,10 +93,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME) {
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+        return keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_HOME || super.onKeyDown(keyCode, event);
     }
 
     @Override
