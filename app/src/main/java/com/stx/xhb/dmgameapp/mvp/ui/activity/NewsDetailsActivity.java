@@ -33,11 +33,9 @@ public class NewsDetailsActivity extends BaseMvpActivity {
     ViewPager vpContainer;
     private String mId;
     private String mKey;
-    private String mAppId;
     private String mUrl;
     private String mImgUrl;
     private boolean mIsVideo;
-    private String mChangyanId;
 
     @Override
     protected int getLayoutResource() {
@@ -64,7 +62,7 @@ public class NewsDetailsActivity extends BaseMvpActivity {
                 mId = extras.getString("id");
             }
             if (extras.containsKey("changyanId")) {
-                mChangyanId = extras.getString("changyanId");
+                String changyanId = extras.getString("changyanId");
             }
             if (extras.containsKey("key")) {
                 mKey = extras.getString("key");

@@ -13,7 +13,6 @@ import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
-import com.stx.xhb.dmgameapp.MainActivity;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.LoginContract;

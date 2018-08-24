@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.WebDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.entity.VideoListBean;
 
 /**

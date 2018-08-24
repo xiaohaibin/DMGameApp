@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp;
+package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jaeger.library.StatusBarUtil;
+import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.main.ForumFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.main.GameFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.main.NewsFragment;

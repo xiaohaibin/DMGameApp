@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stx.core.base.BaseApplication;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.MainActivity;
 import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;

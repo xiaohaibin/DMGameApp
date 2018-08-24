@@ -26,13 +26,13 @@
 
         <!-- 主页面 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".mvp.ui.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <!-- 启动页 -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".mvp.ui.activity.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -91,7 +91,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".WebDetailsActivity"
+            android:name=".mvp.ui.activity.WebDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

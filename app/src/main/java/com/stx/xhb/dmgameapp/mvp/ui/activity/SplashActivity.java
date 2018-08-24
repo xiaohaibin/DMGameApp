@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp;
+package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
+import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.utils.Log;

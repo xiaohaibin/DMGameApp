@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp;
+package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,11 +15,11 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
