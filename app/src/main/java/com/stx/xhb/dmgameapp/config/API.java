@@ -97,52 +97,69 @@ public class API {
 
     /**
      * 热点
+     * 方式：POST
+     * 参数：
      * {"pagesize":10,"page":1,"time":1535076178701,"sign":"d2fa5047f53cccd99ade57edeaf10ca5"}
      */
-    public static final String POST_NEW_HOT_NEWS_PAGE = "https://my.3dmgame.com/app/hotnewspage";
+    public static final String NEW_HOT_NEWS_PAGE = "https://my.3dmgame.com/app/hotnewspage";
 
     /**
      * 新闻
+     * 方式：POST
+     * 参数：
      * {"pagesize":10,"page":1,"time":1535078255062,"sign":"9a19c5a6c3d10cc270ebabb17a98d3d2"}
      */
-    public static final String POST_NEWS = "https://my.3dmgame.com/app/newspage";
+    public static final String NEWS = "https://my.3dmgame.com/app/newspage";
 
     /**
+     *
      * 原创
+     * 方式:POST
+     * 参数：
      * {"pagesize":10,"page":1,"time":1535078302502,"sign":"e572532c81e762d22f5def0ed0009df6"}
      */
-    public static final String POST_ORIGINAL_PAGE = "https://my.3dmgame.com/app/originalpage";
+    public static final String ORIGINAL_PAGE = "https://my.3dmgame.com/app/originalpage";
 
 
     /**
      * 视频
+     * 方式：POST
+     * 参数：
      * {"pagesize":10,"page":1,"time":1535078362384,"sign":"c6ca3dc80679dfcd9e1e1fd16a9cc7eb"}
      */
-    public static final String POST_VIDEO_PAGE="https://my.3dmgame.com/app/videopage";
+    public static final String VIDEO_PAGE="https://my.3dmgame.com/app/videopage";
 
     /**
      * 娱乐
+     * 方式：POST
+     * 参数：
      * {"pagesize":10,"page":1,"time":1535078425411,"sign":"4fd861bc19dd96f6d44c166a96c8486d"}
      */
-    public static final String POST_AMUSE_PAGE="https://my.3dmgame.com/app/amusepage";
+    public static final String AMUSE_PAGE="https://my.3dmgame.com/app/amusepage";
 
 
     /**
      * 新闻相关内容
-     *   {"arcurl":"https:\/\/www.3dmgame.com\/news\/201808\/3743832.html","pagesize":3,"time":1535078536940,"sign":"36fa74931c8b019dfeb79e57ade25ce0"}
+     * 方式：POST
+     * 参数：
+     *{"arcurl":"https:\/\/www.3dmgame.com\/news\/201808\/3743832.html","pagesize":3,"time":1535078536940,"sign":"36fa74931c8b019dfeb79e57ade25ce0"}
      */
-    public static final String POST_NEWS_ABOUT="https://my.3dmgame.com/app/newsabout";
+    public static final String NEWS_ABOUT="https://my.3dmgame.com/app/newsabout";
 
 
     /**
      * 获取最新评论
+     * 方式:post
+     * 参数
      * {"uid":9749488,"arcurl":"https:\/\/www.3dmgame.com\/news\/201808\/3743832.html","c_sid":0,"pagesize":5,"page":1,"time":1535078536959,"sign":"ea2208d6606e5e88f5c395206d1b0640"}
      */
-    public static final String POST_GET_HOT_COMMENT="https://my.3dmgame.com/app/gethotcomment";
+    public static final String GET_HOT_COMMENT="https://my.3dmgame.com/app/gethotcomment";
 
 
     /**
      * 热门游戏
+     * 方式:post
+     * 参数：
      * {"time":1535078924859,"sign":"67cf6e8b2d267be306625a2e44094ebc"}
      */
     public static final String GET_HOT_GAME="https://my.3dmgame.com/app/hotgame";
