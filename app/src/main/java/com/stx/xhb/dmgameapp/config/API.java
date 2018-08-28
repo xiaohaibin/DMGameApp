@@ -93,6 +93,8 @@ public class API {
 
     /////////////////////////////////////新API//////////////////////////////////////////////////////////////
 
+    public static final String IP="https://my.3dmgame.com/app/";
+
     /**
      * 热点
      * 方式：POST

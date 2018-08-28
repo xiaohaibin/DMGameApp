@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.qq.e.ads.nativ.NativeADDataRef;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
@@ -18,12 +17,11 @@ import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
-import java.util.List;
-
 import butterknife.Bind;
 
 /**
- * 通用的Fragment
+ * 热点
+ * @author Mr.xiao
  */
 public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> implements GetNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -33,21 +31,11 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     private NewsCommonAdapter mNewsCommonAdapter;
 
     public static NewsCommonFragment newInstance(String typeId) {
-        Bundle args = new Bundle();
-        NewsCommonFragment fragment = new NewsCommonFragment();
-        args.putString("id", typeId);
-        fragment.setArguments(args);
-        return fragment;
+        return new NewsCommonFragment();
     }
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            if (bundle.containsKey("id")) {
-                mAppId = bundle.getString("id");
-            }
-        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
