@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 /**
  * Author : jxnk25

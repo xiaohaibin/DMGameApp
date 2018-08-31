@@ -11,7 +11,7 @@ import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 
 import java.util.List;
 

@@ -3,16 +3,12 @@ package com.stx.xhb.dmgameapp.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.VideoDetailsItemViewHolder;
-import com.stx.xhb.dmgameapp.entity.VideoListBean;
-
-import butterknife.Bind;
+import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 /**
  * Author：xiaohaibin

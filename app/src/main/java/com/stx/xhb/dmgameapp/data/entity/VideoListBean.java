@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 import com.stx.xhb.dmgameapp.base.BaseEntity;
 
@@ -40,10 +40,6 @@ public class VideoListBean extends BaseEntity {
         return totalrow;
     }
 
-    public void setTotalrow(int totalrow) {
-        this.totalrow = totalrow;
-    }
-
     public List<VideoBean> getVideo() {
         return video;
     }
@@ -57,7 +53,6 @@ public class VideoListBean extends BaseEntity {
         private String senddate;
         private String videopic;
         private String videourl;
-        private String changyan_id;
         private String description;
         private String lmfl;
 
@@ -81,48 +76,16 @@ public class VideoListBean extends BaseEntity {
             return click;
         }
 
-        public void setClick(String click) {
-            this.click = click;
-        }
-
-        public String getFeedback() {
-            return feedback;
-        }
-
-        public void setFeedback(String feedback) {
-            this.feedback = feedback;
-        }
-
         public String getSenddate() {
             return senddate;
-        }
-
-        public void setSenddate(String senddate) {
-            this.senddate = senddate;
         }
 
         public String getVideopic() {
             return videopic;
         }
 
-        public void setVideopic(String videopic) {
-            this.videopic = videopic;
-        }
-
         public String getVideourl() {
             return videourl;
-        }
-
-        public void setVideourl(String videourl) {
-            this.videourl = videourl;
-        }
-
-        public String getChangyan_id() {
-            return changyan_id;
-        }
-
-        public void setChangyan_id(String changyan_id) {
-            this.changyan_id = changyan_id;
         }
 
         public String getDescription() {
@@ -133,12 +96,5 @@ public class VideoListBean extends BaseEntity {
             this.description = description;
         }
 
-        public String getLmfl() {
-            return lmfl;
-        }
-
-        public void setLmfl(String lmfl) {
-            this.lmfl = lmfl;
-        }
     }
 }

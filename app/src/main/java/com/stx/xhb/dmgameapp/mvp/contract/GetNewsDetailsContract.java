@@ -2,8 +2,8 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.entity.CommentListBean;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 
 import java.util.List;
 

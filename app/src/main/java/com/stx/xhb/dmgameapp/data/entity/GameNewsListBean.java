@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 import com.stx.xhb.dmgameapp.base.BaseEntity;
 

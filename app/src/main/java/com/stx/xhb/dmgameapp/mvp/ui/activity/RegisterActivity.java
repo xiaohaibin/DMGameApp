@@ -9,7 +9,7 @@ import com.stx.core.widget.ClearEditText;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.RegisterContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.RegisterPresenter;
 import com.stx.xhb.dmgameapp.utils.AppUser;

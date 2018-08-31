@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.ForumBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetForumListPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumListAdapter;

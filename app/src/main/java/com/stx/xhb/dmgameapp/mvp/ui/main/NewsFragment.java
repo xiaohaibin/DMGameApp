@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsChannelListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;

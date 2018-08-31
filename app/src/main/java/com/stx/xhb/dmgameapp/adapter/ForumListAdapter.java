@@ -8,7 +8,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.ForumListViewHodler;
-import com.stx.xhb.dmgameapp.entity.ForumBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumBean;
 
 /**
  * Author：xiaohaibin

@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.ForumListBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumDetailsListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;

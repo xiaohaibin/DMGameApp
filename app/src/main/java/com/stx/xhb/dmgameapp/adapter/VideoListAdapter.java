@@ -8,7 +8,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.VideoListViewHolder;
-import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 /**
  * Author：xiaohaibin

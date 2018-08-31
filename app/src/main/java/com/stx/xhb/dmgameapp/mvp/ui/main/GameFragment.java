@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;

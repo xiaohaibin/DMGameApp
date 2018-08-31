@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 /**
  * @author: xiaohaibin.
@@ -40,55 +40,8 @@ public class ReplyPassportBean {
     private String profile_url;
     private String user_id;
 
-    public boolean isExpired() {
-        return expired;
-    }
-
-    public int getFee() {
-        return fee;
-    }
-
-    public int getFollowers_count() {
-        return followers_count;
-    }
-
     public String getFrom() {
         return from;
     }
 
-    public boolean isGrant() {
-        return grant;
-    }
-
-    public String getImg_url() {
-        return img_url;
-    }
-
-    public boolean isIs_official() {
-        return is_official;
-    }
-
-    public boolean isIs_shared() {
-        return is_shared;
-    }
-
-    public String getIsv_refer_id() {
-        return isv_refer_id;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public int getPlatform_id() {
-        return platform_id;
-    }
-
-    public String getProfile_url() {
-        return profile_url;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
 }

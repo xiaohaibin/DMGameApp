@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 
 import java.util.List;

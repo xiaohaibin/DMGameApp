@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 import com.stx.xhb.dmgameapp.base.BaseEntity;
 
@@ -87,36 +87,16 @@ public class NewsListBean extends BaseEntity{
             private String changyan_id;
 
 
-            public void setArcurl(String arcurl) {
-                this.arcurl = arcurl;
-            }
-
             public void setTitle(String title) {
                 this.title = title;
-            }
-
-            public void setLitpic(String litpic) {
-                this.litpic = litpic;
             }
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setSenddate(String senddate) {
-                this.senddate = senddate;
-            }
-
             public void setDescription(String description) {
                 this.description = description;
-            }
-
-            public void setLmfl(String lmfl) {
-                this.lmfl = lmfl;
-            }
-
-            public void setChangyan_id(String changyan_id) {
-                this.changyan_id = changyan_id;
             }
 
             public String getArcurl() {
@@ -164,14 +144,6 @@ public class NewsListBean extends BaseEntity{
         private int totalrow;
         private List<HtmlEntity> html;
 
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public void setTotalrow(int totalrow) {
-            this.totalrow = totalrow;
-        }
-
         public void setHtml(List<HtmlEntity> html) {
             this.html = html;
         }
@@ -215,48 +187,17 @@ public class NewsListBean extends BaseEntity{
             private int arttype;
             private List<List<String>> litpic;
 
-            public void setTypeid(String typeid) {
-                this.typeid = typeid;
-            }
-
-            public void setArcurl(String arcurl) {
-                this.arcurl = arcurl;
-            }
 
             public void setTitle(String title) {
                 this.title = title;
-            }
-
-            public void setSenddate(String senddate) {
-                this.senddate = senddate;
-            }
-
-            public void setFeedback(String feedback) {
-                this.feedback = feedback;
             }
 
             public void setId(String id) {
                 this.id = id;
             }
 
-            public void setChangyan_id(String changyan_id) {
-                this.changyan_id = changyan_id;
-            }
-
             public void setDescription(String description) {
                 this.description = description;
-            }
-
-            public void setLmfl(String lmfl) {
-                this.lmfl = lmfl;
-            }
-
-            public void setArttype(int arttype) {
-                this.arttype = arttype;
-            }
-
-            public void setLitpic(List<List<String>> litpic) {
-                this.litpic = litpic;
             }
 
             public String getTypeid() {

@@ -14,7 +14,7 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.CommentListAdapter;
-import com.stx.xhb.dmgameapp.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetCommentListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetCommentListPresenter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;

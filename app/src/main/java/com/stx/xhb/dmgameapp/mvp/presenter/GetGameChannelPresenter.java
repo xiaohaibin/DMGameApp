@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.GameChannelListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;

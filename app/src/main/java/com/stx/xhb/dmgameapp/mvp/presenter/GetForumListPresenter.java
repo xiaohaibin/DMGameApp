@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.entity.ForumBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumListContract;
 import com.stx.xhb.dmgameapp.utils.JsonResponse;
 import com.zhy.http.okhttp.OkHttpUtils;

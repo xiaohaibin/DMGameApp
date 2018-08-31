@@ -10,7 +10,7 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameDetailsCommonPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;

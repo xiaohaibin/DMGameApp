@@ -11,7 +11,7 @@ import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetForumChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;

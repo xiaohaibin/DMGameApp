@@ -1,27 +1,18 @@
 package com.stx.xhb.dmgameapp.adapter;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommentViewHolder;
-import com.stx.xhb.dmgameapp.adapter.viewholder.VideoListViewHolder;
 import com.stx.xhb.dmgameapp.entity.CommentsBean;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
-import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 import java.util.List;
 

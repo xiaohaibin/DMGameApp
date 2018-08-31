@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;

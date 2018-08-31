@@ -9,7 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.entity.ForumListBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumListBean;
 
 import java.util.List;
 

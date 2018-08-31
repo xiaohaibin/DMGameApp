@@ -4,7 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.entity.ForumChannelListBean;
+import com.stx.xhb.dmgameapp.data.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.ForumCommonFragment;
 
 import java.util.List;

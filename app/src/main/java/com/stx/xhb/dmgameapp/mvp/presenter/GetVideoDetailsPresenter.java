@@ -1,15 +1,14 @@
 package com.stx.xhb.dmgameapp.mvp.presenter;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.CommentListBean;
-import com.stx.xhb.dmgameapp.entity.NewsDetailsContentBean;
-import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsDetailsContentBean;
+import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoDetailsContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;

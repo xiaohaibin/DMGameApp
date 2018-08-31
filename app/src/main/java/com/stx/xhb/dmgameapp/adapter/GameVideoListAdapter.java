@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
-import com.stx.xhb.dmgameapp.entity.VideoListBean;
+import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 /**
  * Author : jxnk25

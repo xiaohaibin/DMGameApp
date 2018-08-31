@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.stx.core.utils.GsonUtil;
 import com.stx.core.utils.SPUtils;
 import com.stx.xhb.dmgameapp.DmgApplication;
-import com.stx.xhb.dmgameapp.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 
 /**
  * Author：xiaohaibin

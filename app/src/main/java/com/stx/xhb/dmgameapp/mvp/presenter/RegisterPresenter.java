@@ -6,7 +6,7 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
-import com.stx.xhb.dmgameapp.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.RegisterContract;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.zhy.http.okhttp.OkHttpUtils;

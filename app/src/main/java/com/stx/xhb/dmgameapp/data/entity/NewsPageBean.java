@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.entity;
+package com.stx.xhb.dmgameapp.data.entity;
 
 import com.stx.xhb.dmgameapp.base.BaseEntity;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @time: 2018/8/24
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe: 资讯热门
+ * @describe: 资讯
  */
 public class NewsPageBean extends BaseEntity{
 

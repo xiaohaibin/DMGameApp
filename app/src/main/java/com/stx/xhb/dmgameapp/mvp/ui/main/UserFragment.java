@@ -15,7 +15,7 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.mvp.IPresenter;
 import com.stx.core.widget.LabelIndicatorView;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.AboutActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.LoginActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.SettingActivity;

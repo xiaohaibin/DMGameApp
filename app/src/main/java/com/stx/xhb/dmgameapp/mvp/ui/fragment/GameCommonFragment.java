@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameListAdapter;
