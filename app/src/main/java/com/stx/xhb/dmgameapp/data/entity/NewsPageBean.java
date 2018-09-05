@@ -73,7 +73,7 @@ public class NewsPageBean extends BaseEntity{
             private int showtype;
             private int click;
             private int total_ct;
-            private int pubdate_at;
+            private long pubdate_at;
             private String webviewurl;
             private UserBean user;
             private String type;
@@ -106,7 +106,7 @@ public class NewsPageBean extends BaseEntity{
                 return total_ct;
             }
 
-            public int getPubdate_at() {
+            public long getPubdate_at() {
                 return pubdate_at;
             }
 

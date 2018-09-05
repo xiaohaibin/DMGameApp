@@ -17,6 +17,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.NewsDetailsAdapter;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsDetailsPresenter;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
@@ -116,7 +117,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     }
 
     @Override
-    public void setNewsDetailsData(List<NewsListBean.ChannelEntity.HtmlEntity> listEntity) {
+    public void setNewsDetailsData(List<NewsPageBean.DataBean.ListBean> listEntity) {
         mNewsDetailsAdapter.addNewList(listEntity);
         mNewsDetailsAdapter.addCommentListLabel();
     }

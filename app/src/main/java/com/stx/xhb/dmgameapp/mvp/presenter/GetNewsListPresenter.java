@@ -2,17 +2,21 @@ package com.stx.xhb.dmgameapp.mvp.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.qq.e.ads.nativ.ADSize;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.comm.util.AdError;
 import com.stx.core.mvp.BasePresenter;
+import com.stx.core.utils.DateUtils;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
+import com.stx.xhb.dmgameapp.data.entity.NewsContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsContentBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -36,13 +40,14 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
     private NativeExpressADView nativeExpressADView;
 
     @Override
-    public void getNewsList(String appId, int page) {
+    public void getNewsList(int page) {
         if (getView() == null) {
             return;
         }
+        Log.i("====>sdsd",GsonUtil.newGson().toJson(new NewsContent(1, System.currentTimeMillis())));
         OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsContentBean(appId, page)))
-                .url(API.NEWS_CHANNEL_DATA)
+                .content(" {\"pagesize\":10,\"page\":1,\"time\":1535076178701,\"sign\":\"d2fa5047f53cccd99ade57edeaf10ca5\"}")
+                .url(API.NEW_HOT_NEWS_PAGE)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -58,9 +63,9 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
                     @Override
                     public void onResponse(String response, int id) {
                         if (!TextUtils.isEmpty(response)) {
-                            NewsListBean newsListBean = GsonUtil.newGson().fromJson(response, NewsListBean.class);
+                            NewsPageBean newsListBean = GsonUtil.newGson().fromJson(response, NewsPageBean.class);
                             if (newsListBean.getCode() == Constants.SERVER_SUCCESS) {
-                                getView().getNewListSuccess(newsListBean);
+                                getView().getNewListSuccess(newsListBean.getData());
                             } else {
                                 getView().hideLoading();
                                 getView().getNewListFailed(TextUtils.isEmpty(newsListBean.getMsg()) ? "服务器请求失败，请重试" : newsListBean.getMsg());

@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -37,7 +38,7 @@ public class NewsAdViewHolder {
         mBanner = (XBanner) itemView.findViewById(R.id.xbanner);
     }
 
-    public void setData(final List<NewsListBean.BannerEntity.HtmlEntity> bannerList) {
+    public void setData(final List<NewsPageBean.DataBean.SlidesBean> bannerList) {
         List<String> tips = new ArrayList<String>();
         for (int i = 0; i < bannerList.size(); i++) {
             tips.add(bannerList.get(i).getTitle());
@@ -52,8 +53,8 @@ public class NewsAdViewHolder {
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
             public void onItemClick(XBanner banner, int position) {
-                NewsListBean.BannerEntity.HtmlEntity htmlEntity = bannerList.get(position);
-                NewsDetailsActivity.start(mContext,htmlEntity.getArcurl(),htmlEntity.getId(),htmlEntity.getTitle(),htmlEntity.getLitpic(),false);
+                NewsPageBean.DataBean.SlidesBean slidesBean = bannerList.get(position);
+                NewsDetailsActivity.start(mContext,slidesBean.getArcurl(),String.valueOf(slidesBean.getAid()),slidesBean.getTitle(),slidesBean.getWebviewurl(),false);
             }
         });
     }

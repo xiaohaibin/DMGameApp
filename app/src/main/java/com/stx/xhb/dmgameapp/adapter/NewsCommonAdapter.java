@@ -12,6 +12,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 import java.util.List;
 
@@ -23,9 +24,9 @@ import java.util.List;
  * Describe：
  */
 
-public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListBean.ChannelEntity.HtmlEntity> {
+public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.DataBean.ListBean> {
 
-    private List<NewsListBean.BannerEntity.HtmlEntity> mAdList;
+    private List<NewsPageBean.DataBean.SlidesBean> mAdList;
     private LayoutInflater mLayoutInflater;
 
     public NewsCommonAdapter(Context context) {
@@ -33,7 +34,7 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsListBean.Channel
         mLayoutInflater = LayoutInflater.from(context);
     }
 
-    public void setAdList(List<NewsListBean.BannerEntity.HtmlEntity> adList) {
+    public void setAdList(List<NewsPageBean.DataBean.SlidesBean> adList) {
         this.mAdList = adList;
         if (mAdList != null && mAdList.size() > 0 && getHeaderCount() == 0) {
             addHeader(new ItemView() {

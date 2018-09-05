@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.SubCommentListAdapter;
-import com.stx.xhb.dmgameapp.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;

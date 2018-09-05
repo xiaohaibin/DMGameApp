@@ -12,6 +12,7 @@ import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
@@ -27,10 +28,9 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
-    private String mAppId = "0";
     private NewsCommonAdapter mNewsCommonAdapter;
 
-    public static NewsCommonFragment newInstance(String typeId) {
+    public static NewsCommonFragment newInstance() {
         return new NewsCommonFragment();
     }
 
@@ -69,18 +69,18 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     }
 
     @Override
-    public void getNewListSuccess(NewsListBean listEntity) {
+    public void getNewListSuccess(NewsPageBean.DataBean listEntity) {
         if (listEntity != null) {
             if (currentpage == 1) {
                 mNewsCommonAdapter.clear();
                 mNewsCommonAdapter.removeAllHeader();
-                if ("1".equals(mAppId) && listEntity.getBanner() != null) {
-                    mNewsCommonAdapter.setAdList(listEntity.getBanner().getHtml());
+                if (listEntity.getSlides() != null) {
+                    mNewsCommonAdapter.setAdList(listEntity.getSlides());
                     ToastUtil.show("已是最新数据");
                 }
             }
-            if (listEntity.getChannel() != null) {
-                mNewsCommonAdapter.addAll(listEntity.getChannel().getHtml());
+            if (listEntity.getList() != null) {
+                mNewsCommonAdapter.addAll(listEntity.getList());
             }
             if (mNewsCommonAdapter.getCount() < pageSize) {
                 mNewsCommonAdapter.stopMore();
@@ -100,14 +100,14 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     @Override
     public void onRefresh() {
         currentpage = 1;
-        mPresenter.getNewsList(mAppId, currentpage);
+        mPresenter.getNewsList(currentpage);
         mPresenter.loadAD(getActivity());
     }
 
     @Override
     public void onLoadMore() {
         currentpage++;
-        mPresenter.getNewsList(mAppId, currentpage);
+        mPresenter.getNewsList(currentpage);
     }
 
     @Override

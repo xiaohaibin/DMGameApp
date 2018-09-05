@@ -8,4 +8,5 @@ package com.stx.xhb.dmgameapp.data.remote;
  * @describe:
  */
 public interface DataSource {
+
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

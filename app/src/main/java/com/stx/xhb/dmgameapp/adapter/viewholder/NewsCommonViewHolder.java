@@ -6,8 +6,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 
 import java.util.List;
@@ -23,7 +25,7 @@ import butterknife.ButterKnife;
  * @Describe：
  */
 
-public class NewsCommonViewHolder extends BaseViewHolder<NewsListBean.ChannelEntity.HtmlEntity> {
+public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.DataBean.ListBean> {
     @Bind(R.id.title)
     TextView mTitle;
     @Bind(R.id.date)
@@ -38,21 +40,14 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsListBean.ChannelEnt
     }
 
     @Override
-    public void setData(final NewsListBean.ChannelEntity.HtmlEntity data) {
+    public void setData(final NewsPageBean.DataBean.ListBean data) {
         mTitle.setText(data.getTitle());
-        mDate.setText(data.getSenddate());
-        List<List<String>> litpic = data.getLitpic();
-        if (litpic != null && !litpic.isEmpty()) {
-            List<String> stringList = litpic.get(0);
-            if (stringList != null && !stringList.isEmpty()) {
-                imgUrl = stringList.get(0);
-                Glide.with(getContext()).load(stringList.get(0)).into(mIv);
-            }
-        }
+        mDate.setText(DateUtils.dateFromat(data.getPubdate_at()));
+        Glide.with(getContext()).load(data.getLitpic()).into(mIv);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsDetailsActivity.start(getContext(),data.getArcurl(),data.getId(),data.getTitle(),imgUrl,false);
+                NewsDetailsActivity.start(getContext(), data.getArcurl(), String.valueOf(data.getAid()), data.getTitle(), imgUrl, false);
             }
         });
     }

@@ -52,7 +52,7 @@ public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContrac
                             NewsListBean forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsListBean.class);
                             if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
                                 if (forumChannelListEntity.getChannel() != null) {
-                                    getView().setNewsDetailsData(forumChannelListEntity.getChannel().getHtml());
+//                                    getView().setNewsDetailsData(forumChannelListEntity.getChannel().getHtml());
                                 }else {
                                     getView().hideLoading();
                                     getView().getNewsDetailsDataFailed();

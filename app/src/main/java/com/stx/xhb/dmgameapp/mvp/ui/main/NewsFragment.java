@@ -3,12 +3,14 @@ package com.stx.xhb.dmgameapp.mvp.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
 import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseMvpFragment;
+import com.stx.core.mvp.IPresenter;
 import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsChannelListBean;
@@ -24,7 +26,7 @@ import butterknife.Bind;
 /**
  * 文章的Fragment
  */
-public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> implements GetNewsChannelContract.getChannelListView {
+public class NewsFragment extends BaseMvpFragment{
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -32,8 +34,7 @@ public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> imple
     TabLayout mTabLayout;
     @Bind(R.id.article_viewpager)
     ViewPager articleViewpager;
-    @Bind(R.id.multiplestatusview)
-    MultipleStatusView multiplestatusview;
+    private List<BaseMvpFragment> mFragmentList;
 
     public static NewsFragment newInstance() {
         return new NewsFragment();
@@ -52,65 +53,22 @@ public class NewsFragment extends BaseMvpFragment<GetNewsChannelPresenter> imple
     //获取控件
     private void initView() {
         mTitle.setText("资讯");
-        multiplestatusview.setOnRetryClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    lazyLoad();
-            }
-        });
-    }
-
-    @Override
-    protected void lazyLoad() {
-        mPresenter.getChannelList();
     }
 
     //设置适配器
-    private void setAdapter(List<NewsChannelListBean.HtmlEntity> channelList) {
+    private void setAdapter() {
         //实例化适配器
-        NewsViewPagerFragmentAdapter adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), channelList);
+        NewsViewPagerFragmentAdapter adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), mFragmentList);
         //设置适配器
         articleViewpager.setAdapter(adapter);
-        articleViewpager.setOffscreenPageLimit(channelList.size());
+        articleViewpager.setOffscreenPageLimit(mFragmentList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTabLayout.setupWithViewPager(articleViewpager);
     }
 
     @Override
-    public void getChannelSuccess(List<NewsChannelListBean.HtmlEntity> channelList) {
-        if (multiplestatusview!=null){
-            multiplestatusview.showContent();
-        }
-        setAdapter(channelList);
-    }
-
-    @Override
-    public void getChanelFailed(String msg) {
-        ToastUtil.show(msg);
-        if (multiplestatusview != null) {
-            multiplestatusview.showError();
-        }
-    }
-
-    @Override
-    public void showLoading() {
-        if (multiplestatusview != null) {
-            multiplestatusview.showLoading();
-        }
-    }
-
-    @Override
-    public void hideLoading() {
-        if (multiplestatusview != null) {
-            if (!NetUtils.isNetConnected(getActivity())) {
-                multiplestatusview.showNoNetwork();
-            }
-        }
-    }
-
-    @Override
-    protected GetNewsChannelPresenter onLoadPresenter() {
-        return new GetNewsChannelPresenter();
+    protected IPresenter onLoadPresenter() {
+        return null;
     }
 }

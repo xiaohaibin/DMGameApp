@@ -6,6 +6,7 @@ import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 /**
  * Author：xiaohaibin
@@ -17,14 +18,14 @@ import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 public interface GetNewsListContract {
 
     interface getNewsListModel extends IModel {
-        void getNewsList(String appId, int page);
+        void getNewsList(int page);
 
         void loadAD(Context context);
     }
 
     interface getNewListView extends IView {
 
-        void getNewListSuccess(NewsListBean listEntity);
+        void getNewListSuccess(NewsPageBean.DataBean data);
 
         void getADData(NativeExpressADView nativeADDataRef);
 

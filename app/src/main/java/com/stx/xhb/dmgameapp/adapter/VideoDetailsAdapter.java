@@ -11,7 +11,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommentViewHolder;
-import com.stx.xhb.dmgameapp.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 import java.util.List;
