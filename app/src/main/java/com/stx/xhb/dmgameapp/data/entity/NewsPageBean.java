@@ -19,10 +19,7 @@ public class NewsPageBean extends BaseEntity{
      * msg : 成功
      */
 
-    private int code;
     private DataBean data;
-    private String msg;
-
 
     public DataBean getData() {
         return data;
