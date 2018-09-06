@@ -19,15 +19,11 @@ public interface GetNewsListContract {
 
     interface getNewsListModel extends IModel {
         void getNewsList(int page);
-
-        void loadAD(Context context);
     }
 
     interface getNewListView extends IView {
 
         void getNewListSuccess(NewsPageBean.DataBean data);
-
-        void getADData(NativeExpressADView nativeADDataRef);
 
         void getNewListFailed(String msg);
 

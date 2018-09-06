@@ -1,5 +1,11 @@
 package com.stx.xhb.dmgameapp.data;
 
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.tencent.connect.UserInfo;
+
+import rx.Subscriber;
+import rx.Subscription;
+
 /**
  * @author: xiaohaibin.
  * @time: 2018/8/31
@@ -19,5 +25,11 @@ public interface TasksDataSource {
      * 释放资源
      */
     void release();
+
+    /**
+     * 加载热点新闻
+     * @param currentPage
+     */
+    Subscription getHowNews(int currentPage, final LoadTaskCallback<NewsPageBean> callback);
 
 }

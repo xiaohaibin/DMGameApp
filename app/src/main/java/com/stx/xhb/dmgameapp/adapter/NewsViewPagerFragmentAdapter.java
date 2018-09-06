@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class NewsViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     private List<BaseMvpFragment> mFragmentList;
-
+    private String[] TITLE=new String[]{"热点","新闻","原创","视频","娱乐"};
     public NewsViewPagerFragmentAdapter(FragmentManager fm, List<BaseMvpFragment> mFragmentList) {
         super(fm);
         this.mFragmentList = mFragmentList;
@@ -32,6 +32,11 @@ public class NewsViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return mFragmentList.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return TITLE[position % TITLE.length];
     }
 
     @Override

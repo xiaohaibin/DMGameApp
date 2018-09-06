@@ -58,6 +58,7 @@ public class DmgApplication extends BaseApplication {
         MultiDex.install(this);
     }
 
+
     public enum ToastManager {
 
         instance;
@@ -106,7 +107,7 @@ public class DmgApplication extends BaseApplication {
          * 不设置会默认所有activity都可以显示弹窗;
          */
         Beta.canShowUpgradeActs.add(MainActivity.class);
-        Bugly.init(getApplicationContext(), "1105172050", false);
+        Bugly.init(getApplicationContext(), "1105172050", BuildConfig.DEBUG);
     }
 
 }

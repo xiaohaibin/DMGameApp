@@ -1,13 +1,14 @@
 package com.stx.xhb.dmgameapp.http;
 
+import com.stx.xhb.dmgameapp.base.BaseEntity;
+
 /**
- * Author: Mr.xiao on 2017/3/15
- *
+ * @author: Mr.xiao on 2017/3/15
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
  * @describe: 网络请求的实体基类
  */
-public class HttpResult<T> extends BaseEntity {
+public class HttpResult<T> extends BaseResponse {
 
     public int code;
 

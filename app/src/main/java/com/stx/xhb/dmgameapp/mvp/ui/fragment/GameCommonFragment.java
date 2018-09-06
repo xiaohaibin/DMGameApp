@@ -11,6 +11,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.HotGameBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameListPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameListAdapter;
@@ -33,14 +34,9 @@ public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> im
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private GameListAdapter mGameListAdapter;
-    private String mAppId = "0";
 
-    public static GameCommonFragment newInstance(String typeId) {
-        Bundle args = new Bundle();
-        GameCommonFragment fragment = new GameCommonFragment();
-        args.putString("id", typeId);
-        fragment.setArguments(args);
-        return fragment;
+    public static GameCommonFragment newInstance() {
+        return new GameCommonFragment();
     }
 
     @Override
@@ -50,13 +46,6 @@ public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> im
 
     @Override
     protected void onInitView(Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            if (bundle.containsKey("id")) {
-                mAppId = bundle.getString("id");
-                Log.i("===>mAppId", mAppId);
-            }
-        }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
@@ -83,12 +72,12 @@ public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> im
     }
 
     @Override
-    public void getGameListDataSuccess(List<GameListBean.HtmlEntity> listEntity) {
+    public void getGameListDataSuccess(HotGameBean.DataBean dataBean) {
         if (currentpage == 1) {
             mGameListAdapter.clear();
         }
-        if (listEntity != null) {
-            mGameListAdapter.addAll(listEntity);
+        if (dataBean.getHotgame()!=null) {
+//            mGameListAdapter.addAll(listEntity);
         }
         if (mGameListAdapter.getCount() < pageSize) {
             mGameListAdapter.stopMore();
@@ -120,13 +109,13 @@ public class GameCommonFragment extends BaseMvpFragment<GetGameListPresenter> im
     @Override
     public void onRefresh() {
         currentpage = 1;
-        mPresenter.getGameListData(mAppId, currentpage);
+        mPresenter.getGameListData(currentpage);
     }
 
     @Override
     public void onLoadMore() {
         currentpage++;
-        mPresenter.getGameListData(mAppId, currentpage);
+        mPresenter.getGameListData(currentpage);
     }
 
     @Override

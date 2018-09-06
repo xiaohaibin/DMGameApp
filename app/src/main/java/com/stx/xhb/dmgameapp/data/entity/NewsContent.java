@@ -17,12 +17,13 @@ public class NewsContent {
      */
 
     private int pagesize=10;
-    private int page;
+    private int page=1;
     private long time;
-    private String sign="d2fa5047f53cccd99ade57edeaf10ca5";
+    private String sign="";
 
-    public NewsContent(int page, long time) {
+    public NewsContent(int page,long time,String sign) {
+        this.time=time;
+        this.sign=sign;
         this.page = page;
-        this.time = time;
     }
 }

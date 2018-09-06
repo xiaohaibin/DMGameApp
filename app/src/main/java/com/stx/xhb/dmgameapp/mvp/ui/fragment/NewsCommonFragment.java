@@ -66,6 +66,10 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     @Override
     public void getNewListFailed(String msg) {
         ToastUtil.show(msg);
+        if (currentpage == 1){
+            mRecyclerView.setRefreshing(true);
+        }
+        mNewsCommonAdapter.pauseMore();
     }
 
     @Override
@@ -101,7 +105,6 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     public void onRefresh() {
         currentpage = 1;
         mPresenter.getNewsList(currentpage);
-        mPresenter.loadAD(getActivity());
     }
 
     @Override
@@ -122,11 +125,6 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
         if (currentpage == 1) {
             mRecyclerView.setRefreshing(false);
         }
-    }
-
-    @Override
-    public void getADData(NativeExpressADView nativeADDataRef) {
-        mNewsCommonAdapter.addTecentAd(nativeADDataRef);
     }
 
     @Override

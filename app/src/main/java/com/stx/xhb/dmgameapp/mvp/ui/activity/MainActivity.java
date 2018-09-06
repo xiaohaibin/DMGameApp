@@ -23,12 +23,14 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author xiao.haibin
+ */
 public class MainActivity extends AppCompatActivity {
     private ViewPager mainViewpager;
     private List<Fragment> fragemnts ;
     private RadioGroup rgp;
     private TipsToast tipsToast;
-    //退出时间
     private long exitTime = 0;
 
     @Override
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     //初始化数据
     private void initData() {
         fragemnts = new ArrayList<>();
-        fragemnts.add(NewsCommonFragment.newInstance());
+        fragemnts.add(NewsFragment.newInstance());
         fragemnts.add(GameFragment.newInstance());
         fragemnts.add(ForumFragment.newInstance());
         fragemnts.add(UserFragment.newInstance());

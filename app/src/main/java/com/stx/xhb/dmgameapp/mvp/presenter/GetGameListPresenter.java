@@ -4,9 +4,12 @@ import android.text.TextUtils;
 
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
+import com.stx.core.utils.StringUtils;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.HotGameBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsContentBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -25,13 +28,15 @@ import okhttp3.Request;
 
 public class GetGameListPresenter extends BasePresenter<GetGameListContract.getGameListDataView,GetGameListContract.getGameListModel> implements GetGameListContract.getGameListModel{
     @Override
-    public void getGameListData(String appId, int page) {
+    public void getGameListData(int page) {
         if (getView()==null){
             return;
         }
+        long time = System.currentTimeMillis();
+        String str = StringUtils.getMD5("10" + page + time);
         OkHttpUtils.postString()
-                  .content(GsonUtil.newGson().toJson(new NewsContentBean(appId,page)))
-                  .url(API.GET_GAME_CHANNEL_DATA)
+                  .content(GsonUtil.newGson().toJson(new NewsContent(page,time,str)))
+                  .url(API.GET_HOT_GAME)
                   .build()
                   .execute(new StringCallback() {
                       @Override
@@ -47,9 +52,9 @@ public class GetGameListPresenter extends BasePresenter<GetGameListContract.getG
                       @Override
                       public void onResponse(String response, int id) {
                            if (!TextUtils.isEmpty(response)){
-                               GameListBean gameListBean = GsonUtil.newGson().fromJson(response, GameListBean.class);
+                               HotGameBean gameListBean = GsonUtil.newGson().fromJson(response,HotGameBean.class);
                                if (gameListBean.getCode()== Constants.SERVER_SUCCESS){
-                                   getView().getGameListDataSuccess(gameListBean.getHtml());
+                                   getView().getGameListDataSuccess(gameListBean.getData());
                                }else {
                                    getView().hideLoading();
                                    getView().getGameListDataFailed(gameListBean.getMsg());

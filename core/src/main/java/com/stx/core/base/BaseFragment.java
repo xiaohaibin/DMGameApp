@@ -9,58 +9,39 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.stx.core.log.Logger;
-import com.stx.core.mvp.IPresenter;
-import com.stx.core.mvp.IView;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import butterknife.ButterKnife;
 
 /**
- * @author Mr.xiao
+ * @author: xiaohaibin.
+ * @time: 2018/9/6
+ * @mail:xhb_199409@163.com
+ * @github:https://github.com/xiaohaibin
+ * @describe:
  */
-public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment implements IView {
-    /**
-     * 是否可见
-     */
+public abstract class BaseFragment extends Fragment {
+    /** 是否可见 */
     protected boolean isViable = false;
 
-    /**
-     * 标志位，标志Fragment已经初始化完成
-     */
+    /** 标志位，标志Fragment已经初始化完成 */
     protected boolean isPrepared = false;
 
-    /**
-     * 标记已加载完成，保证懒加载只能加载一次
-     */
+    /** 标记已加载完成，保证懒加载只能加载一次 */
     protected boolean hasLoaded = false;
 
-    /**
-     * 当前页码
-     */
+    /** 当前页码 */
     protected int currentpage = 1;
 
-    /**
-     * 页面数据量
-     */
+    /** 页面数据量 */
     protected int pageSize = 10;
-
-    protected P mPresenter;
     protected View rootView;
     protected Context mContext = null;
-
-    protected abstract P onLoadPresenter();
 
     protected abstract int getLayoutResource();
 
     protected abstract void onInitView(Bundle savedInstanceState);
 
-
-    protected void onInitPresenter() {
-        mPresenter = onLoadPresenter();
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
-    }
 
     @Nullable
     @Override
@@ -85,7 +66,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        onInitPresenter();
         if (!isPrepared && getUserVisibleHint()) {
             onFragmentVisibleChange(true);
             isViable = true;
@@ -93,21 +73,10 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     }
 
     @Override
-    public void onStart() {
-        if (mPresenter != null && !mPresenter.isViewBind()) {
-            mPresenter.onStart();
-        }
-        super.onStart();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
         OkHttpUtils.getInstance().cancelTag(this);
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
     }
 
     @Override
@@ -119,7 +88,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
     /**
      * 在这里实现Fragment数据的缓加载.
-     *
      * @param isVisibleToUser
      */
     @Override
@@ -169,7 +137,6 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
 
     /**
      * 当前fragment可见状态发生变化时会回调该方法
-     *
      * @param isVisible
      */
     protected void onFragmentVisibleChange(boolean isVisible) {
@@ -179,10 +146,5 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
             onInVisible();
         }
     }
-
-    public P getPresenter() {
-        return mPresenter;
-    }
-
 
 }

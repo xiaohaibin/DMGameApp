@@ -109,14 +109,6 @@ public class CommentsBean {
         return reply_passport;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
     public int getSupport_count() {
         return support_count;
     }

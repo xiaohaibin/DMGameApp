@@ -23,7 +23,6 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-
 public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.DataBean.ListBean> {
 
     private List<NewsPageBean.DataBean.SlidesBean> mAdList;
@@ -54,22 +53,6 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.DataBea
                 }
             });
         }
-    }
-
-    public void addTecentAd(final NativeExpressADView nativeExpressADView) {
-        ItemView itemView = new ItemView() {
-
-            @Override
-            public View onCreateView(ViewGroup parent) {
-                nativeExpressADView.render();
-                return nativeExpressADView;
-            }
-
-            @Override
-            public void onBindView(View headerView) {
-            }
-        };
-        addHeader(itemView);
     }
 
     @Override

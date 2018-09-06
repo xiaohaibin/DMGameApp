@@ -4,8 +4,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.data.entity.GameChannelListBean;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameCommonFragment;
 
 import java.util.List;
 
@@ -17,27 +15,27 @@ import java.util.List;
  * @describe: 游戏ViewPager适配器
  */
 public class GameViewPagerFragmentAdapter extends FragmentStatePagerAdapter {
-    private List<GameChannelListBean.HtmlEntity> mNewsTagList;
+    private List<BaseMvpFragment> mFragmentList;
+    private String[] TITLE={"热门","发售","汉化","排行","分类"};
 
-    public GameViewPagerFragmentAdapter(FragmentManager fm, List<GameChannelListBean.HtmlEntity> newsTagList) {
+    public GameViewPagerFragmentAdapter(FragmentManager fm, List<BaseMvpFragment> fragmentList) {
         super(fm);
-        this.mNewsTagList = newsTagList;
+        this.mFragmentList = fragmentList;
     }
 
     @Override
     public BaseMvpFragment getItem(int position) {
-        GameChannelListBean.HtmlEntity entity = mNewsTagList.get(position);
-        return GameCommonFragment.newInstance(entity.getAppid());
+        return mFragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return mNewsTagList.size();
+        return mFragmentList.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mNewsTagList.get(position % mNewsTagList.size()).getTitle();
+        return TITLE[position % TITLE.length];
     }
 
     @Override

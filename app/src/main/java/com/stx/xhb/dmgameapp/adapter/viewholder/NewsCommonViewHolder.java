@@ -32,6 +32,8 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.DataBean.L
     TextView mDate;
     @Bind(R.id.iv)
     ImageView mIv;
+    @Bind(R.id.author)
+    TextView tvAuthor;
     private String imgUrl = "";
 
     public NewsCommonViewHolder(View itemView) {
@@ -42,7 +44,8 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.DataBean.L
     @Override
     public void setData(final NewsPageBean.DataBean.ListBean data) {
         mTitle.setText(data.getTitle());
-        mDate.setText(DateUtils.dateFromat(data.getPubdate_at()));
+        tvAuthor.setText(data.getUser().getNickname());
+        mDate.setText(DateUtils.getFriendlyTime(data.getPubdate_at()+"000"));
         Glide.with(getContext()).load(data.getLitpic()).into(mIv);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

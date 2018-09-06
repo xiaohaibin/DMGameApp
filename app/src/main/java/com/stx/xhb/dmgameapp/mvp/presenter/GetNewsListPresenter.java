@@ -8,9 +8,11 @@ import com.qq.e.ads.nativ.ADSize;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.comm.util.AdError;
+import com.qq.e.comm.util.StringUtil;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.DateUtils;
 import com.stx.core.utils.GsonUtil;
+import com.stx.core.utils.StringUtils;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.data.entity.NewsContent;
@@ -36,17 +38,15 @@ import okhttp3.Request;
 
 public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getNewListView, GetNewsListContract.getNewsListModel> implements GetNewsListContract.getNewsListModel {
 
-    private NativeExpressAD contentAD;
-    private NativeExpressADView nativeExpressADView;
-
     @Override
     public void getNewsList(int page) {
         if (getView() == null) {
             return;
         }
-        Log.i("====>sdsd",GsonUtil.newGson().toJson(new NewsContent(1, System.currentTimeMillis())));
+        long time = System.currentTimeMillis();
+        String str = StringUtils.getMD5("10" + page + time);
         OkHttpUtils.postString()
-                .content(" {\"pagesize\":10,\"page\":1,\"time\":1535076178701,\"sign\":\"d2fa5047f53cccd99ade57edeaf10ca5\"}")
+                .content(GsonUtil.newGson().toJson(new NewsContent(page,time,str)))
                 .url(API.NEW_HOT_NEWS_PAGE)
                 .build()
                 .execute(new StringCallback() {
@@ -78,69 +78,5 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
                         getView().hideLoading();
                     }
                 });
-    }
-
-    @Override
-    public void loadAD(Context context) {
-        if (contentAD == null) {
-            contentAD = new NativeExpressAD(context, new ADSize(ADSize.FULL_WIDTH, ADSize.AUTO_HEIGHT), Constants.APPID, Constants.NativePosID, new NativeExpressAD.NativeExpressADListener() {
-                @Override
-                public void onNoAD(AdError adError) {
-
-                }
-
-                @Override
-                public void onADLoaded(List<NativeExpressADView> list) {
-                    if (nativeExpressADView != null) {
-                        nativeExpressADView.destroy();
-                    }
-                    if (getView() != null && !list.isEmpty()) {
-                        nativeExpressADView = list.get(0);
-                    }
-                    getView().getADData(nativeExpressADView);
-                }
-
-                @Override
-                public void onRenderFail(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADExposure(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADClicked(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADClosed(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADLeftApplication(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADOpenOverlay(NativeExpressADView nativeExpressADView) {
-
-                }
-
-                @Override
-                public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {
-
-                }
-            });
-        }
-        contentAD.loadAD(1);
     }
 }
