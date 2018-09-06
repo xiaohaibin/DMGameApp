@@ -23,7 +23,7 @@ import okhttp3.Request;
  * @describe:
  */
 
-public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVideoListView,GetVideoContract.getVideoModel> implements GetVideoContract.getVideoModel {
+public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVideoListView> implements GetVideoContract.getVideoModel {
 
     @Override
     public void getVideoList(int page) {

@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 import java.util.List;
@@ -23,9 +21,9 @@ import java.util.List;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.DataBean.ListBean> {
+public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.ListBean> {
 
-    private List<NewsPageBean.DataBean.SlidesBean> mAdList;
+    private List<NewsPageBean.SlidesBean> mAdList;
     private LayoutInflater mLayoutInflater;
 
     public NewsCommonAdapter(Context context) {
@@ -33,7 +31,7 @@ public class NewsCommonAdapter extends RecyclerArrayAdapter<NewsPageBean.DataBea
         mLayoutInflater = LayoutInflater.from(context);
     }
 
-    public void setAdList(List<NewsPageBean.DataBean.SlidesBean> adList) {
+    public void setAdList(List<NewsPageBean.SlidesBean> adList) {
         this.mAdList = adList;
         if (mAdList != null && mAdList.size() > 0 && getHeaderCount() == 0) {
             addHeader(new ItemView() {

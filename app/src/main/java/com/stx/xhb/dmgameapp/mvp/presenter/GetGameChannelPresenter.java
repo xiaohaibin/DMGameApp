@@ -22,7 +22,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class GetGameChannelPresenter extends BasePresenter<GetGameChannelContract.getChannelListView,GetGameChannelContract.getGameChannelModel> implements GetGameChannelContract.getGameChannelModel {
+public class GetGameChannelPresenter extends BasePresenter<GetGameChannelContract.getChannelListView> implements GetGameChannelContract.getGameChannelModel {
 
     @Override
     public void getChannelList() {

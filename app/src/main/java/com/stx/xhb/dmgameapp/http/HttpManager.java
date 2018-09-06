@@ -95,7 +95,6 @@ public class HttpManager {
     private static final long DEFAULT_TIMEOUT = 5;
 
     private OkHttpClient getOkHttpClient() {
-        final long currentTimeMillis = System.currentTimeMillis();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
         //定制OkHttp

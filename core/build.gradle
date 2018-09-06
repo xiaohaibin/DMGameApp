@@ -49,4 +49,12 @@ dependencies {
     //bugly
     api 'com.tencent.bugly:crashreport_upgrade:latest.release'
     api 'com.tencent.bugly:nativecrashreport:latest.release'
+    //基于Rxjava+Retrofit封装的网络请求框架
+    api 'io.reactivex:rxandroid:1.2.0'
+    api 'io.reactivex:rxjava:1.2.0'
+    api 'com.squareup.retrofit2:retrofit:2.2.0'
+    api 'com.squareup.retrofit2:converter-gson:2.1.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    api 'com.google.code.gson:gson:2.8.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 }

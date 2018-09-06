@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class RegisterPresenter extends BasePresenter<RegisterContract.registerView,RegisterContract.registerModel> implements RegisterContract.registerModel {
+public class RegisterPresenter extends BasePresenter<RegisterContract.registerView> implements RegisterContract.registerModel {
 
     @Override
     public void register(final String username, final String passwd, String ckpasswd, String email) {

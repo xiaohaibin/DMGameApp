@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Drscribe:
  */
 
-public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsCommonContract.getGameDetailsDataView,GetGameDetailsCommonContract.getGameDetailsCommonModel> implements GetGameDetailsCommonContract.getGameDetailsCommonModel{
+public class GetGameDetailsCommonPresenter extends BasePresenter<GetGameDetailsCommonContract.getGameDetailsDataView> implements GetGameDetailsCommonContract.getGameDetailsCommonModel{
     @Override
     public void getGameNewsListData(String type, String id, String key, int page) {
         if (getView()==null){

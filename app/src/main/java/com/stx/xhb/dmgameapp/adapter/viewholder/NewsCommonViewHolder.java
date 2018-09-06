@@ -8,11 +8,8 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +22,7 @@ import butterknife.ButterKnife;
  * @Describe：
  */
 
-public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.DataBean.ListBean> {
+public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.ListBean> {
     @Bind(R.id.title)
     TextView mTitle;
     @Bind(R.id.date)
@@ -42,7 +39,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.DataBean.L
     }
 
     @Override
-    public void setData(final NewsPageBean.DataBean.ListBean data) {
+    public void setData(final NewsPageBean.ListBean data) {
         mTitle.setText(data.getTitle());
         tvAuthor.setText(data.getUser().getNickname());
         mDate.setText(DateUtils.getFriendlyTime(data.getPubdate_at()+"000"));

@@ -3,6 +3,9 @@ package com.stx.xhb.dmgameapp.config;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -15,8 +18,20 @@ import rx.Observable;
  */
 public interface ApiService {
 
+
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("hotnewspage")
-    Observable<HttpResult<NewsPageBean>> getHotNews();
+    Observable<HttpResult<NewsPageBean>> getHotNews(@Body RequestBody body);
+
+
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("newspage")
+    Observable<HttpResult<NewsPageBean>> getNews(@Body RequestBody body);
+
+
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("originalpage")
+    Observable<HttpResult<NewsPageBean>> getOriginalPage(@Body RequestBody body);
 
 
 }

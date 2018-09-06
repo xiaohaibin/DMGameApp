@@ -22,7 +22,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class GetNewsChannelPresenter extends BasePresenter<GetNewsChannelContract.getChannelListView,GetNewsChannelContract.getNewsChannelModel> implements GetNewsChannelContract.getNewsChannelModel {
+public class GetNewsChannelPresenter extends BasePresenter<GetNewsChannelContract.getChannelListView> implements GetNewsChannelContract.getNewsChannelModel {
     @Override
     public void getChannelList() {
         if (getView()==null){

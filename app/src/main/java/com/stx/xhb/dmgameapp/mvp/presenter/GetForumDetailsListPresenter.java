@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Drscribe:
  */
 
-public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsListContract.getForumListDataView,GetForumDetailsListContract.getForumListModel> implements GetForumDetailsListContract.getForumListModel{
+public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsListContract.getForumListDataView> implements GetForumDetailsListContract.getForumListModel{
     @Override
     public void getForumListData(String fid,int page) {
         if (getView()==null){

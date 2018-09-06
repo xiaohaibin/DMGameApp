@@ -1,7 +1,7 @@
 package com.stx.xhb.dmgameapp.data;
 
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
-import com.tencent.connect.UserInfo;
+import com.stx.xhb.dmgameapp.http.HttpResult;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -15,12 +15,6 @@ import rx.Subscription;
  */
 public interface TasksDataSource {
 
-    interface LoadTaskCallback<T> {
-        void onTaskLoaded(T data);
-
-        void onDataNotAvailable(String msg);
-    }
-
     /**
      * 释放资源
      */
@@ -28,8 +22,9 @@ public interface TasksDataSource {
 
     /**
      * 加载热点新闻
+     *
      * @param currentPage
      */
-    Subscription getHowNews(int currentPage, final LoadTaskCallback<NewsPageBean> callback);
+    Subscription getHowNews(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
 
 }

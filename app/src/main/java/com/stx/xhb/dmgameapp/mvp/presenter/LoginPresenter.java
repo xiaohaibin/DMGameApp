@@ -23,7 +23,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class LoginPresenter extends BasePresenter<LoginContract.loginView,LoginContract.loginModel> implements LoginContract.loginModel {
+public class LoginPresenter extends BasePresenter<LoginContract.loginView> implements LoginContract.loginModel {
 
     @Override
     public void login(String username, String pwd, String questionid, String answer) {

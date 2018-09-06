@@ -17,7 +17,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommentViewHolder;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 import java.util.List;
@@ -33,7 +32,7 @@ import java.util.List;
 public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
 
     private String mUrl;
-    private List<NewsPageBean.DataBean.ListBean> mDataList;
+    private List<NewsPageBean.ListBean> mDataList;
     private LayoutInflater mLayoutInflater;
 
     public NewsDetailsAdapter(Context context) {
@@ -84,7 +83,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
     }
 
 
-    public void addNewList(List<NewsPageBean.DataBean.ListBean> dataList) {
+    public void addNewList(List<NewsPageBean.ListBean> dataList) {
         this.mDataList = dataList;
         if (mDataList != null && !mDataList.isEmpty()) {
             addHeader(new ItemView() {

@@ -24,7 +24,7 @@ import okhttp3.Request;
  * @describe: 获取视频详情
  */
 
-public class GetVideoDetailsPresenter extends BasePresenter<GetVideoDetailsContract.View,GetVideoDetailsContract.Model> implements GetVideoDetailsContract.Model{
+public class GetVideoDetailsPresenter extends BasePresenter<GetVideoDetailsContract.View> implements GetVideoDetailsContract.Model{
 
     @Override
     public void getVideoDetailsData(String id, String key) {

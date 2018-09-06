@@ -21,7 +21,7 @@ import okhttp3.Request;
  * @describe:
  */
 
-public class GetCommentListPresenter extends BasePresenter<GetCommentListContract.View,GetCommentListContract.Model> implements GetCommentListContract.Model{
+public class GetCommentListPresenter extends BasePresenter<GetCommentListContract.View> implements GetCommentListContract.Model{
 
     @Override
     public void getCommentListData(String id) {

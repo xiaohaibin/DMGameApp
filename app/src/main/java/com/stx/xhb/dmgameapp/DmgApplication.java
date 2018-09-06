@@ -38,7 +38,6 @@ public class DmgApplication extends BaseApplication {
         ToastManager.instance.init(this);
         //用户数据初始化
         AppUser.init();
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new LoggerInterceptor("==3dm==", BuildConfig.DEBUG))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)

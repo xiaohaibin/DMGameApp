@@ -2,6 +2,7 @@ package com.stx.core.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -48,8 +49,10 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     protected View rootView;
     protected Context mContext = null;
 
+    @NonNull
     protected abstract P onLoadPresenter();
 
+    @NonNull
     protected abstract int getLayoutResource();
 
     protected abstract void onInitView(Bundle savedInstanceState);
@@ -65,7 +68,7 @@ public abstract class BaseMvpFragment<P extends IPresenter> extends Fragment imp
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (getLayoutResource() != 0) {
+        if (getLayoutResource() != -1) {
             rootView = inflater.inflate(getLayoutResource(), null);
         } else {
             rootView = super.onCreateView(inflater, container, savedInstanceState);

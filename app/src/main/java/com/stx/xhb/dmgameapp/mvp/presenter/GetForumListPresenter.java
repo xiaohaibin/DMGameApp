@@ -29,7 +29,7 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class GetForumListPresenter extends BasePresenter<GetForumListContract.getForumListView,GetForumListContract.getForumListModel> implements GetForumListContract.getForumListModel {
+public class GetForumListPresenter extends BasePresenter<GetForumListContract.getForumListView> implements GetForumListContract.getForumListModel {
     @Override
     public void getForumListData(String fid) {
         if (getView()==null){

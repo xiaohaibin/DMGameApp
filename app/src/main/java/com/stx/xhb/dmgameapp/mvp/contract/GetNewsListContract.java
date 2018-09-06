@@ -1,11 +1,7 @@
 package com.stx.xhb.dmgameapp.mvp.contract;
 
-import android.content.Context;
-
-import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 /**
@@ -23,7 +19,7 @@ public interface GetNewsListContract {
 
     interface getNewListView extends IView {
 
-        void getNewListSuccess(NewsPageBean.DataBean data);
+        void getNewListSuccess(NewsPageBean data);
 
         void getNewListFailed(String msg);
 

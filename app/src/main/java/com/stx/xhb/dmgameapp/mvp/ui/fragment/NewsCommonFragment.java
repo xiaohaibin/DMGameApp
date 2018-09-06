@@ -8,14 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.qq.e.ads.nativ.NativeExpressADView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsListPresenter;
-import com.stx.xhb.dmgameapp.adapter.NewsCommonAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
@@ -73,7 +71,7 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
     }
 
     @Override
-    public void getNewListSuccess(NewsPageBean.DataBean listEntity) {
+    public void getNewListSuccess(NewsPageBean listEntity) {
         if (listEntity != null) {
             if (currentpage == 1) {
                 mNewsCommonAdapter.clear();

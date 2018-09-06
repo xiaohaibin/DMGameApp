@@ -24,7 +24,7 @@ import okhttp3.Request;
  * @describe:
  */
 
-public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View, GetNewsDetailsContract.Model> implements GetNewsDetailsContract.Model {
+public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View> implements GetNewsDetailsContract.Model {
 
     @Override
     public void getNewsDetailsData(String id, String key) {
