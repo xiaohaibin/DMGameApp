@@ -2,19 +2,19 @@ apply plugin: 'com.android.application'
 apply from: "$rootDir/config.gradle"
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
-        targetSdkVersion 21
-        versionCode 13
-        versionName "3.2"
+        targetSdkVersion 27
+        versionCode 14
+        versionName "3.3"
         multiDexEnabled true
         flavorDimensions "DimenA"
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'mips', 'mips64'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME: "com.stx.xhb.dmgameapp",
@@ -47,7 +47,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false //是否混淆
+            minifyEnabled false //是否混淆+
 //            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

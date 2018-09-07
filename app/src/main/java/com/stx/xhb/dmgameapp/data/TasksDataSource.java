@@ -22,45 +22,28 @@ public interface TasksDataSource {
 
     /**
      * 加载热点新闻
-     *
-     * @param currentPage
      */
     Subscription getHowNews(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
 
-
     /**
      * 加载新闻
-     *
-     * @param currentPage
      */
     Subscription getNews(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
 
-
     /**
      * 原创
-     *
-     * @param currentPage
      */
     Subscription getOriginalPage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
 
-
     /**
      * 原创
-     *
-     * @param currentPage
      */
     Subscription getVideoPage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
 
-
     /**
      * 原创
-     *
-     * @param currentPage
      */
     Subscription getAmusePage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
-
-
-
 
 
 }

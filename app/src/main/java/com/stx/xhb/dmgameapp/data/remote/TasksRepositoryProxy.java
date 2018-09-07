@@ -1,7 +1,7 @@
 package com.stx.xhb.dmgameapp.data.remote;
 
 import com.stx.xhb.dmgameapp.config.ApiService;
-import com.stx.xhb.dmgameapp.data.RequestBodyHelper;
+import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
 import com.stx.xhb.dmgameapp.data.entity.NewsContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;

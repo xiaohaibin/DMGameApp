@@ -36,10 +36,6 @@ public class VideoListBean extends BaseEntity {
 
     private List<VideoBean> video;
 
-    public int getTotalrow() {
-        return totalrow;
-    }
-
     public List<VideoBean> getVideo() {
         return video;
     }

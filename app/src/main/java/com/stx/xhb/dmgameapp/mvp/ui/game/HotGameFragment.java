@@ -2,10 +2,17 @@ package com.stx.xhb.dmgameapp.mvp.ui.game;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.mvp.IPresenter;
 import com.stx.xhb.dmgameapp.R;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author: xiaohaibin.
@@ -16,11 +23,8 @@ import com.stx.xhb.dmgameapp.R;
  */
 public class HotGameFragment extends BaseMvpFragment {
 
-    @NonNull
-    @Override
-    protected IPresenter onLoadPresenter() {
-        return null;
-    }
+    @Bind(R.id.id_stickynavlayout_innerscrollview)
+    EasyRecyclerView mRecyclerView;
 
     @NonNull
     @Override
@@ -31,5 +35,11 @@ public class HotGameFragment extends BaseMvpFragment {
     @Override
     protected void onInitView(Bundle savedInstanceState) {
 
+    }
+
+    @NonNull
+    @Override
+    protected IPresenter onLoadPresenter() {
+        return null;
     }
 }
