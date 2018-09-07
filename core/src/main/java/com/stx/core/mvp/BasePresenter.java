@@ -10,10 +10,35 @@ import rx.subscriptions.CompositeSubscription;
  * Github：https://github.com/xiaohaibin/
  * Describe：
  */
-
 public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     private CompositeSubscription mCompositeSubscription;
+
+    protected V mView;
+
+    @Override
+    public void onStart() {
+    }
+
+    @Override
+    public void attachView(V mvpView) {
+        this.mView = mvpView;
+    }
+
+    @Override
+    public void detachView() {
+        this.mView = null;
+        unSubsription();
+    }
+
+    @Override
+    public boolean isViewBind() {
+        return mView != null;
+    }
+
+    public V getView() {
+        return mView;
+    }
 
     public CompositeSubscription getCompositeSubscription() {
         if (this.mCompositeSubscription == null) {
@@ -35,34 +60,6 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
         if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
-    }
-
-
-    protected V mView;
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void attachView(V mvpView) {
-        this.mView = mvpView;
-    }
-
-    @Override
-    public void detachView() {
-        this.mView = null;
-        unSubsription();
-    }
-
-    @Override
-    public boolean isViewBind() {
-        return mView != null;
-    }
-
-    public V getView() {
-        return mView;
     }
 
 

@@ -3,23 +3,18 @@ package com.stx.xhb.dmgameapp.mvp.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.TextView;
 
-import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.core.mvp.IPresenter;
-import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.NewsChannelListBean;
-import com.stx.xhb.dmgameapp.mvp.contract.GetNewsChannelContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.NewsCommonFragment;
-import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.stx.xhb.dmgameapp.mvp.ui.news.FunsFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.news.NewsFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.news.OriginalFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.news.VideoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +24,7 @@ import butterknife.Bind;
 /**
  * 文章的Fragment
  */
-public class NewsFragment extends BaseFragment{
+public class InfoFragment extends BaseFragment{
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -38,8 +33,8 @@ public class NewsFragment extends BaseFragment{
     @Bind(R.id.article_viewpager)
     ViewPager articleViewpager;
     private List<BaseMvpFragment> mFragmentList;
-    public static NewsFragment newInstance() {
-        return new NewsFragment();
+    public static InfoFragment newInstance() {
+        return new InfoFragment();
     }
 
     @Override
@@ -61,11 +56,11 @@ public class NewsFragment extends BaseFragment{
     //设置适配器
     private void setAdapter() {
         mFragmentList=new ArrayList<>();
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(NewsFragment.newInstance());
+        mFragmentList.add(OriginalFragment.newInstance());
+        mFragmentList.add(VideoFragment.newInstance());
+        mFragmentList.add(FunsFragment.newInstance());
         //实例化适配器
         NewsViewPagerFragmentAdapter adapter = new NewsViewPagerFragmentAdapter(getChildFragmentManager(), mFragmentList);
         //设置适配器

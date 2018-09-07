@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 
 /**
@@ -19,7 +20,7 @@ public interface GetVideoContract {
 
     interface getVideoListView extends IView {
 
-        void getVideoListSuccess(VideoListBean videoListBean);
+        void getVideoListSuccess(NewsPageBean videoListBean);
 
         void getVideoListFailed(String msg);
 

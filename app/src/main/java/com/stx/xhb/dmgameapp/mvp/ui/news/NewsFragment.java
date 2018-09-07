@@ -1,8 +1,9 @@
-package com.stx.xhb.dmgameapp.mvp.ui.fragment;
+package com.stx.xhb.dmgameapp.mvp.ui.news;
 
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -19,17 +20,17 @@ import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import butterknife.Bind;
 
 /**
- * 热点
+ * 新闻
  * @author Mr.xiao
  */
-public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> implements GetNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class NewsFragment extends BaseMvpFragment<GetNewsListPresenter> implements GetNewsListContract.getNewListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
     EasyRecyclerView mRecyclerView;
     private NewsCommonAdapter mNewsCommonAdapter;
 
-    public static NewsCommonFragment newInstance() {
-        return new NewsCommonFragment();
+    public static NewsFragment newInstance() {
+        return new NewsFragment();
     }
 
     @Override
@@ -125,6 +126,7 @@ public class NewsCommonFragment extends BaseMvpFragment<GetNewsListPresenter> im
         }
     }
 
+    @NonNull
     @Override
     protected GetNewsListPresenter onLoadPresenter() {
         return new GetNewsListPresenter();

@@ -4,20 +4,13 @@ package com.stx.xhb.dmgameapp.mvp.ui.main;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.TextView;
 
-import com.classic.common.MultipleStatusView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.core.utils.NetUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.GameChannelListBean;
-import com.stx.xhb.dmgameapp.mvp.contract.GetGameChannelContract;
-import com.stx.xhb.dmgameapp.mvp.presenter.GetGameChannelPresenter;
 import com.stx.xhb.dmgameapp.adapter.GameViewPagerFragmentAdapter;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.NewsCommonFragment;
-import com.stx.xhb.dmgameapp.utils.ToastUtil;
+import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +59,11 @@ public class GameFragment extends BaseFragment{
     //设置适配器
     private void setAdapter() {
         mFragmentList=new ArrayList<>();
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
-        mFragmentList.add(NewsCommonFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(HotNewsFragment.newInstance());
         GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(),mFragmentList);
         mVideoViewpager.setAdapter(adapter);
         mVideoViewpager.setOffscreenPageLimit(mFragmentList.size());

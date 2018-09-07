@@ -14,7 +14,14 @@ import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 public interface GetNewsListContract {
 
     interface getNewsListModel extends IModel {
-        void getNewsList(int page);
+
+        void getHotNewsList(int currentPage);
+
+        void getNewsList(int currentPage);
+
+        void getOriginalPage(int currentPage);
+
+        void getAmusePage(int currentPage);
     }
 
     interface getNewListView extends IView {

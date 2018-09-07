@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.mvp.ui.fragment;
+package com.stx.xhb.dmgameapp.mvp.ui.news;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetVideoListPresenter;
@@ -21,12 +22,10 @@ import butterknife.Bind;
 
 /**
  * Author: Mr.xiao on 2017/9/18
- *
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe: 首页视频
+ * @describe: 视频
  */
-
 public class VideoFragment extends BaseMvpFragment<GetVideoListPresenter> implements GetVideoContract.getVideoListView, RecyclerArrayAdapter.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.id_stickynavlayout_innerscrollview)
@@ -70,12 +69,12 @@ public class VideoFragment extends BaseMvpFragment<GetVideoListPresenter> implem
 
 
     @Override
-    public void getVideoListSuccess(VideoListBean videoListBean) {
+    public void getVideoListSuccess(NewsPageBean videoListBean) {
         if (videoListBean != null) {
             if (currentpage == 1) {
                 mVideoListAdapter.clear();
             }
-            mVideoListAdapter.addAll(videoListBean.getVideo());
+            mVideoListAdapter.addAll(videoListBean.getList());
             if (mVideoListAdapter.getCount() < pageSize) {
                 mVideoListAdapter.stopMore();
             }

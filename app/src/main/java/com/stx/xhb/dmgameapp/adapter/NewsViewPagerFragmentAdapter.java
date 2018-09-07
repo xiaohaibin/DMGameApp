@@ -1,12 +1,9 @@
 package com.stx.xhb.dmgameapp.adapter;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stx.core.base.BaseMvpFragment;
-import com.stx.xhb.dmgameapp.data.entity.NewsChannelListBean;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.NewsCommonFragment;
 
 import java.util.List;
 

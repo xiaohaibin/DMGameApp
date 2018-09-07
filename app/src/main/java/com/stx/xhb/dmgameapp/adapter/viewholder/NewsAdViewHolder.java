@@ -11,6 +11,7 @@ import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class NewsAdViewHolder {
             @Override
             public void onItemClick(XBanner banner, int position) {
                 NewsPageBean.SlidesBean slidesBean = bannerList.get(position);
-                NewsDetailsActivity.start(mContext,slidesBean.getArcurl(),String.valueOf(slidesBean.getAid()),slidesBean.getTitle(),slidesBean.getWebviewurl(),false);
+                WebDetailsActivity.start(mContext,slidesBean.getWebviewurl(),slidesBean.getTitle(),slidesBean.getLitpic());
             }
         });
     }

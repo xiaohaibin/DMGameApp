@@ -6,9 +6,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,7 +23,7 @@ import butterknife.ButterKnife;
  * @Github：https://github.com/xiaohaibin/
  * @Describe：
  */
-public class VideoListViewHolder extends BaseViewHolder<VideoListBean.VideoBean> {
+public class VideoListViewHolder extends BaseViewHolder<NewsPageBean.ListBean> {
 
     @Bind(R.id.iv_video_img)
     ImageView mIvVideoImg;
@@ -37,16 +40,16 @@ public class VideoListViewHolder extends BaseViewHolder<VideoListBean.VideoBean>
     }
 
     @Override
-    public void setData(final VideoListBean.VideoBean data) {
+    public void setData(final NewsPageBean.ListBean data) {
         super.setData(data);
         mTvVideoTitle.setText(data.getTitle());
-        mTvVideoTime.setText(data.getSenddate());
-        mTvPlayCount.setText(data.getClick() + "次播放");
-        Glide.with(getContext()).load(data.getVideopic()).into(mIvVideoImg);
+        mTvVideoTime.setText(DateUtils.getFriendlyTime(data.getPubdate_at()+"000"));
+        mTvPlayCount.setText(String.valueOf(data.getClick() + "次播放"));
+        Glide.with(getContext()).load(data.getLitpic()).into(mIvVideoImg);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsDetailsActivity.start(getContext(),data.getVideourl(),data.getId(),data.getTitle(),data.getVideopic(),true);
+                WebDetailsActivity.start(getContext(),data.getWebviewurl(),data.getTitle(),data.getLitpic());
             }
         });
     }

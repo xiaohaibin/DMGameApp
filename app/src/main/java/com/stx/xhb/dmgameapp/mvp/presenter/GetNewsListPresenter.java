@@ -15,9 +15,8 @@ import rx.Subscription;
  * Time：2017/9/18
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：热点新闻
  */
-
 public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getNewListView> implements GetNewsListContract.getNewsListModel {
 
     @Override
@@ -25,7 +24,7 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         if (getView() == null) {
             return;
         }
-        Subscription subscription = TasksRepositoryProxy.getInstance().getHowNews(page, new HttpResultSubscriber<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getNews(page, new HttpResultSubscriber<NewsPageBean>() {
             @Override
             public void onSuccess(NewsPageBean newsPageBean) {
                 getView().getNewListSuccess(newsPageBean);
@@ -44,6 +43,79 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         addSubscription(subscription);
     }
 
+
+    @Override
+    public void getHotNewsList(int currentPage) {
+        if (getView() == null) {
+            return;
+        }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getHowNews(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+            @Override
+            public void onSuccess(NewsPageBean newsPageBean) {
+                getView().getNewListSuccess(newsPageBean);
+            }
+
+            @Override
+            public void onError(String msg, int code) {
+                getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
+            }
+
+            @Override
+            public void onFinished() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
+    }
+
+    @Override
+    public void getOriginalPage(int currentPage) {
+        if (getView() == null) {
+            return;
+        }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getOriginalPage(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+            @Override
+            public void onSuccess(NewsPageBean newsPageBean) {
+                getView().getNewListSuccess(newsPageBean);
+            }
+
+            @Override
+            public void onError(String msg, int code) {
+                getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
+            }
+
+            @Override
+            public void onFinished() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
+    }
+
+
+    @Override
+    public void getAmusePage(int currentPage) {
+        if (getView() == null) {
+            return;
+        }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getAmusePage(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+            @Override
+            public void onSuccess(NewsPageBean newsPageBean) {
+                getView().getNewListSuccess(newsPageBean);
+            }
+
+            @Override
+            public void onError(String msg, int code) {
+                getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
+            }
+
+            @Override
+            public void onFinished() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
+    }
 
     @Override
     public void detachView() {

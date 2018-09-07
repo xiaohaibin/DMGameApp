@@ -10,6 +10,7 @@ import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,7 +48,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.ListBean> 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsDetailsActivity.start(getContext(), data.getArcurl(), String.valueOf(data.getAid()), data.getTitle(), imgUrl, false);
+                WebDetailsActivity.start(getContext(),data.getWebviewurl(),data.getTitle(),data.getLitpic());
             }
         });
     }

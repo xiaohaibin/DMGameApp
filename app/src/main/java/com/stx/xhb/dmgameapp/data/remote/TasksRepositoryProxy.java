@@ -37,19 +37,47 @@ public class TasksRepositoryProxy implements TasksDataSource {
         return INSTANCE;
     }
 
-    private static void destroyInstance() {
-        INSTANCE = null;
-    }
-
     @Override
     public void release() {
-        destroyInstance();
+        INSTANCE = null;
     }
 
     @Override
     public Subscription getHowNews(int currentPage, Subscriber<? super HttpResult<NewsPageBean>> subscriber) {
         return HttpManager.getInstance().createService(ApiService.class)
                 .getHotNews(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public Subscription getNews(int currentPage, Subscriber<? super HttpResult<NewsPageBean>> subscriber) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getNews(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public Subscription getOriginalPage(int currentPage, Subscriber<? super HttpResult<NewsPageBean>> subscriber) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getOriginalPage(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public Subscription getVideoPage(int currentPage, Subscriber<? super HttpResult<NewsPageBean>> subscriber) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getVideoPage(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
+                .subscribe(subscriber);
+    }
+
+    @Override
+    public Subscription getAmusePage(int currentPage, Subscriber<? super HttpResult<NewsPageBean>> subscriber) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getAmusePage(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
                 .compose(TransformUtils.<HttpResult<NewsPageBean>>defaultSchedulers())
                 .subscribe(subscriber);
     }
