@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.jaeger.library.StatusBarUtil;
+import com.stx.core.utils.AppManager;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.main.ForumFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.main.GameFragment;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
         setContentView(R.layout.activity_main);
         StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary));
         initView();
@@ -119,7 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 showTips(R.drawable.tips_smile, "再按一次退出程序");
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
+               AppManager.getAppManager().finishAllActivity();
+               finish();
             }
             return true;
         }
@@ -132,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         MobclickAgent.onPause(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
+    }
 
     /**
      * 自定义toast
@@ -151,11 +159,5 @@ public class MainActivity extends AppCompatActivity {
         tipsToast.show();
         tipsToast.setIcon(iconResId);
         tipsToast.setText(tips);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-        //此处解决有时候出现getActivity（）出现null的情况
     }
 }

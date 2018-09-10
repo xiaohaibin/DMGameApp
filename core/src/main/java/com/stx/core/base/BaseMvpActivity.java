@@ -17,6 +17,7 @@ import com.stx.core.R;
 import com.stx.core.log.Logger;
 import com.stx.core.mvp.IPresenter;
 import com.stx.core.mvp.IView;
+import com.stx.core.utils.AppManager;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -59,6 +60,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         Logger.d("name (%s.java:0)", getClass().getSimpleName());
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.common_main));
+        AppManager.getAppManager().addActivity(this);
         if (getLayoutResource() != 0) {
             setContentView(getLayoutResource());
             ButterKnife.bind(this);
@@ -80,6 +82,7 @@ public abstract class BaseMvpActivity<P extends IPresenter> extends AppCompatAct
         super.onDestroy();
         ButterKnife.unbind(this);
         OkHttpUtils.getInstance().cancelTag(this);
+        AppManager.getAppManager().finishActivity(this);
         if (mPresenter != null) {
             mPresenter.detachView();
         }

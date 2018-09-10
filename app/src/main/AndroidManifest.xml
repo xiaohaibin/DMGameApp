@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.stx.xhb.dmgameapp">
 
     <!-- 用户权限 -->
@@ -25,13 +24,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <!-- 主页面 -->
-        <activity
-            android:name=".mvp.ui.activity.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <!-- 启动页 -->
         <activity
             android:name=".mvp.ui.activity.SplashActivity"
             android:launchMode="singleTop"
@@ -43,6 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 主页面 -->
+        <activity
+            android:name=".mvp.ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
 
         <!-- 设置页面 -->
         <activity
