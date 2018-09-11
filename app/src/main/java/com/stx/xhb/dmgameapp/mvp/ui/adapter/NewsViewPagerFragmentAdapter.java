@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;

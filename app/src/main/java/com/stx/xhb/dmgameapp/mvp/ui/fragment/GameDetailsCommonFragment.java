@@ -13,7 +13,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameDetailsCommonContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameDetailsCommonPresenter;
-import com.stx.xhb.dmgameapp.adapter.GameNewsListAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameNewsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
 

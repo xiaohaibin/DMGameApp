@@ -11,7 +11,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.GameVideoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameVideoListPresenter;
-import com.stx.xhb.dmgameapp.adapter.GameVideoListAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameVideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.CustomLoadMoreView;
 

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter.viewholder;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.SubCommentListAdapter;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.SubCommentListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;

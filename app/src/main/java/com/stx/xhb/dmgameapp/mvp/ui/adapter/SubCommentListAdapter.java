@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

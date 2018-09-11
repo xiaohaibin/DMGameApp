@@ -14,7 +14,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.ForumChannelListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumChannelContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetForumChannelPresenter;
-import com.stx.xhb.dmgameapp.adapter.ForumViewPagerFragmentAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.ForumViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

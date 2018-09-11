@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter;
 
 import android.content.Context;
 import android.os.Build;
@@ -15,9 +15,9 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommentViewHolder;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsCommentViewHolder;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,28 +7,28 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.viewholder.ForumListViewHodler;
-import com.stx.xhb.dmgameapp.data.entity.ForumBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.VideoListViewHolder;
 
 /**
  * Author：xiaohaibin
- * Time：2017/9/21
+ * Time：2017/9/19
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：视频列表适配器
  */
 
-public class ForumListAdapter extends RecyclerArrayAdapter<ForumBean> {
+public class VideoListAdapter extends RecyclerArrayAdapter<NewsPageBean.ListBean> {
 
-    private final LayoutInflater mLayoutInflater;
+    private LayoutInflater mLayoutInflater;
 
-    public ForumListAdapter(Context context) {
+    public VideoListAdapter(Context context) {
         super(context);
         mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ForumListViewHodler(mLayoutInflater.inflate(R.layout.list_item_forum, parent, false));
+        return new VideoListViewHolder(mLayoutInflater.inflate(R.layout.list_item_video, parent, false));
     }
 }

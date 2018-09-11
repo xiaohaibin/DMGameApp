@@ -3,9 +3,9 @@ package com.stx.xhb.dmgameapp.mvp.presenter;
 import android.text.TextUtils;
 
 import com.stx.core.mvp.BasePresenter;
+import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
-import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsListContract;
 
 import rx.Subscription;
@@ -24,19 +24,19 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         if (getView() == null) {
             return;
         }
-        Subscription subscription = TasksRepositoryProxy.getInstance().getNews(page, new HttpResultSubscriber<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getNews(page, new LoadTaskCallback<NewsPageBean>() {
             @Override
-            public void onSuccess(NewsPageBean newsPageBean) {
-                getView().getNewListSuccess(newsPageBean);
+            public void onTaskLoaded(NewsPageBean data) {
+                getView().getNewListSuccess(data);
             }
 
             @Override
-            public void onError(String msg, int code) {
+            public void onDataNotAvailable(String msg) {
                 getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
             }
 
             @Override
-            public void onFinished() {
+            public void onCompleted() {
                 getView().hideLoading();
             }
         });
@@ -49,19 +49,25 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         if (getView() == null) {
             return;
         }
-        Subscription subscription = TasksRepositoryProxy.getInstance().getHowNews(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getHowNews(currentPage, new LoadTaskCallback<NewsPageBean>() {
+
             @Override
-            public void onSuccess(NewsPageBean newsPageBean) {
-                getView().getNewListSuccess(newsPageBean);
+            public void onStart() {
+                getView().showLoading();
             }
 
             @Override
-            public void onError(String msg, int code) {
+            public void onTaskLoaded(NewsPageBean data) {
+                getView().getNewListSuccess(data);
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
                 getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
             }
 
             @Override
-            public void onFinished() {
+            public void onCompleted() {
                 getView().hideLoading();
             }
         });
@@ -73,19 +79,24 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         if (getView() == null) {
             return;
         }
-        Subscription subscription = TasksRepositoryProxy.getInstance().getOriginalPage(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getOriginalPage(currentPage, new LoadTaskCallback<NewsPageBean>() {
             @Override
-            public void onSuccess(NewsPageBean newsPageBean) {
-                getView().getNewListSuccess(newsPageBean);
+            public void onStart() {
+                getView().showLoading();
             }
 
             @Override
-            public void onError(String msg, int code) {
+            public void onTaskLoaded(NewsPageBean data) {
+                getView().getNewListSuccess(data);
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
                 getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
             }
 
             @Override
-            public void onFinished() {
+            public void onCompleted() {
                 getView().hideLoading();
             }
         });
@@ -98,19 +109,25 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         if (getView() == null) {
             return;
         }
-        Subscription subscription = TasksRepositoryProxy.getInstance().getAmusePage(currentPage, new HttpResultSubscriber<NewsPageBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getAmusePage(currentPage,new LoadTaskCallback<NewsPageBean>() {
+
             @Override
-            public void onSuccess(NewsPageBean newsPageBean) {
-                getView().getNewListSuccess(newsPageBean);
+            public void onStart() {
+                getView().showLoading();
             }
 
             @Override
-            public void onError(String msg, int code) {
+            public void onTaskLoaded(NewsPageBean data) {
+                getView().getNewListSuccess(data);
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
                 getView().getNewListFailed(TextUtils.isEmpty(msg) ? "服务器请求失败，请重试" : msg);
             }
 
             @Override
-            public void onFinished() {
+            public void onCompleted() {
                 getView().hideLoading();
             }
         });

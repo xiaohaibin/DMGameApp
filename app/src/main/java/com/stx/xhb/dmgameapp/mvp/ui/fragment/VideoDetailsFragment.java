@@ -17,11 +17,11 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.VideoDetailsAdapter;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoDetailsContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetVideoDetailsPresenter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.VideoDetailsAdapter;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar;
 

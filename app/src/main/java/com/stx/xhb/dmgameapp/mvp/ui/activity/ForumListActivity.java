@@ -15,7 +15,7 @@ import com.stx.core.base.BaseMvpActivity;
 import com.stx.xhb.dmgameapp.R;import com.stx.xhb.dmgameapp.data.entity.ForumListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetForumDetailsListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetForumDetailsListPresenter;
-import com.stx.xhb.dmgameapp.adapter.ForumDetailsListAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.ForumDetailsListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

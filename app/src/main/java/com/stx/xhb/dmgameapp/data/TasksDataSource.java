@@ -1,9 +1,8 @@
 package com.stx.xhb.dmgameapp.data;
 
+import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
-import com.stx.xhb.dmgameapp.http.HttpResult;
 
-import rx.Subscriber;
 import rx.Subscription;
 
 /**
@@ -15,6 +14,7 @@ import rx.Subscription;
  */
 public interface TasksDataSource {
 
+
     /**
      * 释放资源
      */
@@ -23,27 +23,27 @@ public interface TasksDataSource {
     /**
      * 加载热点新闻
      */
-    Subscription getHowNews(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
+    Subscription getHowNews(int currentPage, LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 加载新闻
      */
-    Subscription getNews(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
+    Subscription getNews(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getOriginalPage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
+    Subscription getOriginalPage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getVideoPage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
+    Subscription getVideoPage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getAmusePage(int currentPage, final Subscriber<? super HttpResult<NewsPageBean>> subscriber);
+    Subscription getAmusePage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
 
 
 }

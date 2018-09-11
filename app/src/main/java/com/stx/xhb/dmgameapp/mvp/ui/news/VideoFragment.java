@@ -12,10 +12,9 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
-import com.stx.xhb.dmgameapp.data.entity.VideoListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetVideoContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetVideoListPresenter;
-import com.stx.xhb.dmgameapp.adapter.VideoListAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.VideoListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;

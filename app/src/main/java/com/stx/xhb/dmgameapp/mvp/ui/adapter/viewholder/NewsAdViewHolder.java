@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter.viewholder;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
 import android.content.Context;
 import android.view.View;

@@ -4,17 +4,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.HotGameBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetGameListPresenter;
-import com.stx.xhb.dmgameapp.adapter.GameListAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.adapter;
+package com.stx.xhb.dmgameapp.mvp.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.viewholder.NewsAdViewHolder;
-import com.stx.xhb.dmgameapp.adapter.viewholder.NewsCommonViewHolder;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsAdViewHolder;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsCommonViewHolder;
 
 import java.util.List;
 

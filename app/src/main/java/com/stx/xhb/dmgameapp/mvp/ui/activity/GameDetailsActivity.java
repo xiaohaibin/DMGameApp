@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.base.BaseAppActitity;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameDetailsCommonFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameVideoFragment;
-import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

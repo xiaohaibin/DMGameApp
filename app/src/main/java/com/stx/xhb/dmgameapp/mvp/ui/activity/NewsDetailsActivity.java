@@ -9,7 +9,7 @@ import android.support.v4.view.ViewPager;
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.mvp.IPresenter;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.MainFragmentPageAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.MainFragmentPageAdapter;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.CommentListFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.NewsDetailsFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.fragment.VideoDetailsFragment;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.adapter.NewsViewPagerFragmentAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.NewsViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.mvp.ui.news.FunsFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.news.NewsFragment;
