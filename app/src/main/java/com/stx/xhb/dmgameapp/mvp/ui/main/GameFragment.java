@@ -10,7 +10,10 @@ import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameViewPagerFragmentAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.game.ChinesizeFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.game.GameRankFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.game.HotGameFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.game.SaleFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
 
 import java.util.ArrayList;
@@ -61,9 +64,9 @@ public class GameFragment extends BaseFragment{
     private void setAdapter() {
         mFragmentList=new ArrayList<>();
         mFragmentList.add(HotGameFragment.newInstance());
-        mFragmentList.add(HotNewsFragment.newInstance());
-        mFragmentList.add(HotNewsFragment.newInstance());
-        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(SaleFragment.newInstance());
+        mFragmentList.add(ChinesizeFragment.newInstance());
+        mFragmentList.add(GameRankFragment.newInstance());
         mFragmentList.add(HotNewsFragment.newInstance());
         GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(),mFragmentList);
         mVideoViewpager.setAdapter(adapter);

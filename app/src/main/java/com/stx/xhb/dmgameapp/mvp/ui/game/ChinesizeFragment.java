@@ -18,19 +18,19 @@ import butterknife.OnClick;
  * @time: 2018/9/7
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
- * @describe: 发售
+ * @describe: 汉化
  */
-public class SaleFragment extends BaseMvpFragment {
+public class ChinesizeFragment extends BaseMvpFragment {
 
     @Bind(R.id.tv_first)
-    TextView mTvSale;
+    TextView mTvFirst;
     @Bind(R.id.tv_second)
-    TextView mTvUnSale;
+    TextView mTvSecond;
     @Bind(R.id.rv_list)
     EasyRecyclerView mRvList;
 
-    public static SaleFragment newInstance() {
-        return new SaleFragment();
+    public static ChinesizeFragment newInstance() {
+        return new ChinesizeFragment();
     }
 
     @NonNull
