@@ -74,6 +74,7 @@ public class HotGameFragment extends BaseMvpFragment<GetGameListPresenter> imple
     @Override
     public void getGameListDataSuccess(GameListBean dataBean) {
         mGameListAdapter.clear();
+        mGameListAdapter.removeAllHeader();
         if (dataBean.getSlides() != null ) {
             mGameListAdapter.setAdList(dataBean.getSlides());
         }
