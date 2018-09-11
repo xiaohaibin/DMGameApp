@@ -2,6 +2,8 @@ package com.stx.xhb.dmgameapp.data.remote;
 
 import com.stx.xhb.dmgameapp.config.ApiService;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
+import com.stx.xhb.dmgameapp.data.entity.GameContent;
+import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
@@ -11,6 +13,7 @@ import com.stx.xhb.dmgameapp.http.HttpManager;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 import com.stx.xhb.dmgameapp.http.TransformUtils;
 
+import okhttp3.RequestBody;
 import rx.Subscription;
 
 /**
@@ -170,6 +173,34 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(NewsPageBean newsPageBean) {
                         callback.onTaskLoaded(newsPageBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getHotGame(final LoadTaskCallback<GameListBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getHotGame(RequestBodyHelper.creatRequestBody(new GameContent()))
+                .compose(TransformUtils.<HttpResult<GameListBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<GameListBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(GameListBean gameListBean) {
+                        callback.onTaskLoaded(gameListBean);
                     }
 
                     @Override

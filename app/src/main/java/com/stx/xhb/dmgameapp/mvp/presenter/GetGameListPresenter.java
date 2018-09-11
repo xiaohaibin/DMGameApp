@@ -6,8 +6,11 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
+import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
+import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.HotGameBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsContent;
+import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetGameListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -23,44 +26,32 @@ import okhttp3.Request;
  * Describe：
  */
 
-public class GetGameListPresenter extends BasePresenter<GetGameListContract.getGameListDataView> implements GetGameListContract.getGameListModel{
+public class GetGameListPresenter extends BasePresenter<GetGameListContract.getGameListDataView> implements GetGameListContract.getGameListModel {
     @Override
-    public void getGameListData(int page) {
-        if (getView()==null){
+    public void getGameListData() {
+        if (getView() == null) {
             return;
         }
-        OkHttpUtils.postString()
-                  .content(GsonUtil.newGson().toJson(new NewsContent(page)))
-                  .url(API.GET_HOT_GAME)
-                  .build()
-                  .execute(new StringCallback() {
-                      @Override
-                      public void onBefore(Request request, int id) {
-                          getView().showLoading();
-                      }
+        TasksRepositoryProxy.getInstance().getHotGame(new LoadTaskCallback<GameListBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
 
-                      @Override
-                      public void onError(Call call, Exception e, int id) {
-                          getView().getGameListDataFailed(e.getMessage());
-                      }
+            @Override
+            public void onTaskLoaded(GameListBean data) {
+                getView().getGameListDataSuccess(data);
+            }
 
-                      @Override
-                      public void onResponse(String response, int id) {
-                           if (!TextUtils.isEmpty(response)){
-                               HotGameBean gameListBean = GsonUtil.newGson().fromJson(response,HotGameBean.class);
-                               if (gameListBean.getCode()== Constants.SERVER_SUCCESS){
-                                   getView().getGameListDataSuccess(gameListBean.getData());
-                               }else {
-                                   getView().hideLoading();
-                                   getView().getGameListDataFailed(gameListBean.getMsg());
-                               }
-                           }
-                      }
+            @Override
+            public void onDataNotAvailable(String msg) {
+                getView().getGameListDataFailed(msg);
+            }
 
-                      @Override
-                      public void onAfter(int id) {
-                          getView().hideLoading();
-                      }
-                  });
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
     }
 }

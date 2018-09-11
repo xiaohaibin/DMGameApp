@@ -41,7 +41,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-
         <!-- 设置页面 -->
         <activity
             android:name=".mvp.ui.activity.SettingActivity"
@@ -87,9 +86,7 @@
             android:name=".mvp.ui.activity.WebDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <!-- 友盟相关配置 -->
-
 
         <!-- 微信 -->
         <activity

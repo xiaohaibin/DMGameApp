@@ -17,13 +17,13 @@ import java.util.List;
 public interface GetGameListContract {
 
     interface getGameListModel extends IModel {
-        void getGameListData(int page);
+        void getGameListData();
     }
 
 
     interface getGameListDataView extends IView {
 
-        void getGameListDataSuccess(HotGameBean.DataBean dataBean);
+        void getGameListDataSuccess(GameListBean dataBean);
 
         void getGameListDataFailed(String msg);
 

@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.data;
 
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
+import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 import rx.Subscription;
@@ -44,6 +45,12 @@ public interface TasksDataSource {
      * 原创
      */
     Subscription getAmusePage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
+
+
+    /**
+     * 热门游戏
+     */
+    Subscription getHotGame(LoadTaskCallback<GameListBean> callback);
 
 
 }

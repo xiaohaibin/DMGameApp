@@ -10,6 +10,7 @@ import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameViewPagerFragmentAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.game.HotGameFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class GameFragment extends BaseFragment{
     //设置适配器
     private void setAdapter() {
         mFragmentList=new ArrayList<>();
-        mFragmentList.add(HotNewsFragment.newInstance());
+        mFragmentList.add(HotGameFragment.newInstance());
         mFragmentList.add(HotNewsFragment.newInstance());
         mFragmentList.add(HotNewsFragment.newInstance());
         mFragmentList.add(HotNewsFragment.newInstance());

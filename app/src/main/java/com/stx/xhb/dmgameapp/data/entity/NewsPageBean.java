@@ -141,6 +141,16 @@ public class NewsPageBean {
         private String title;
         private int showtype;
         private String webviewurl;
+        private String system;
+        private float score;
+
+        public String getSystem() {
+            return system;
+        }
+
+        public float getScore() {
+            return score;
+        }
 
         public int getAid() {
             return aid;

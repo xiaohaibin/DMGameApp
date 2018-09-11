@@ -1,7 +1,5 @@
 package com.stx.xhb.dmgameapp.data.entity;
 
-import com.stx.xhb.dmgameapp.base.BaseEntity;
-
 import java.util.List;
 
 /**
@@ -9,79 +7,35 @@ import java.util.List;
  * Time：2017/9/20
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：游戏列表
  */
 
-public class GameListBean extends BaseEntity{
+public class GameListBean{
 
-    private int totalrow;
-    private List<HtmlEntity> html;
 
-    public int getTotalrow() {
-        return totalrow;
+    private List<GameBean> newgame;
+    private List<GameBean> expectgame;
+    private List<GameBean> classicgame;
+    private List<GameBean> hotgame;
+    private List<NewsPageBean.SlidesBean> slides;
+
+    public List<GameBean> getNewgame() {
+        return newgame;
     }
 
-    public List<HtmlEntity> getHtml() {
-        return html;
+    public List<GameBean> getExpectgame() {
+        return expectgame;
     }
 
-    public static class HtmlEntity {
+    public List<GameBean> getClassicgame() {
+        return classicgame;
+    }
 
-        private String id;
-        private String title;
-        private String litpic;
-        private String game_trans_name;
-        private String tid;
-        private String release_date;
-        private String terrace;
-        private String release_company;
-        private String changyan_id;
-        private String description;
-        private String lmfl;
+    public List<GameBean> getHotgame() {
+        return hotgame;
+    }
 
-
-        public String getId() {
-            return id;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getLitpic() {
-            return litpic;
-        }
-
-        public String getGame_trans_name() {
-            return game_trans_name;
-        }
-
-        public String getTid() {
-            return tid;
-        }
-
-        public String getRelease_date() {
-            return release_date;
-        }
-
-        public String getTerrace() {
-            return terrace;
-        }
-
-        public String getRelease_company() {
-            return release_company;
-        }
-
-        public String getChangyan_id() {
-            return changyan_id;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public String getLmfl() {
-            return lmfl;
-        }
+    public List<NewsPageBean.SlidesBean> getSlides() {
+        return slides;
     }
 }

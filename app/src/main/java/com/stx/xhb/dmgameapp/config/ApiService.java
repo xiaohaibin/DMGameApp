@@ -1,5 +1,6 @@
 package com.stx.xhb.dmgameapp.config;
 
+import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 
@@ -97,7 +98,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("hotgame")
-    Observable<HttpResult<NewsPageBean>> getHotGame(@Body RequestBody body);
+    Observable<HttpResult<GameListBean>> getHotGame(@Body RequestBody body);
 
     /**
      * 游戏已发售
