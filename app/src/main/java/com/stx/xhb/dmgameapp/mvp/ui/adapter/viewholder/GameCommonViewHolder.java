@@ -1,6 +1,5 @@
 package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
@@ -14,9 +13,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
-import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 
 import java.util.List;
 
