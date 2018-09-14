@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
  * @Github：https://github.com/xiaohaibin/
  * @Describe：
  */
-
 public class VideoDetailsItemViewHolder extends BaseViewHolder<VideoListBean.VideoBean> {
 
     @Bind(R.id.title)

@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.config;
 
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 
 import okhttp3.RequestBody;
@@ -108,7 +109,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("gamesale")
-    Observable<HttpResult<NewsPageBean>> getGameSale(@Body RequestBody body);
+    Observable<HttpResult<SaleGameBean>> getGameSale(@Body RequestBody body);
 
     /**
      * 游戏未发售
@@ -118,7 +119,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("gameunsale")
-    Observable<HttpResult<NewsPageBean>> getGameUnSale(@Body RequestBody body);
+    Observable<HttpResult<SaleGameBean>> getGameUnSale(@Body RequestBody body);
 
     /**
      * 游戏详情

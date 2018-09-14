@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.data;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 
 import rx.Subscription;
 
@@ -51,6 +52,16 @@ public interface TasksDataSource {
      * 热门游戏
      */
     Subscription getHotGame(LoadTaskCallback<GameListBean> callback);
+
+    /**
+     * 已售游戏
+     */
+    Subscription getSaleGame(int currentPage,  LoadTaskCallback<SaleGameBean> callback);
+
+    /**
+     * 未发售游戏
+     */
+    Subscription getUnSaleGame(int currentPage,  LoadTaskCallback<SaleGameBean> callback);
 
 
 }

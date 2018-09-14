@@ -29,6 +29,6 @@ public class GameAdapter extends RecyclerArrayAdapter<GameBean> {
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new GameViewHolder(mLayoutInflater.inflate(R.layout.item_game, null));
+        return new GameViewHolder(mLayoutInflater.inflate(R.layout.list_item_game, null));
     }
 }

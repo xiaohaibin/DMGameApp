@@ -4,6 +4,7 @@ import com.stx.xhb.dmgameapp.config.ApiService;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.GameContent;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
@@ -201,6 +202,62 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(GameListBean gameListBean) {
                         callback.onTaskLoaded(gameListBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getSaleGame(int currentPage, final LoadTaskCallback<SaleGameBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getGameSale(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<SaleGameBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<SaleGameBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(SaleGameBean saleGameBean) {
+                        callback.onTaskLoaded(saleGameBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getUnSaleGame(int currentPage, final LoadTaskCallback<SaleGameBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getGameUnSale(RequestBodyHelper.creatRequestBody(new NewsContent(currentPage)))
+                .compose(TransformUtils.<HttpResult<SaleGameBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<SaleGameBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(SaleGameBean saleGameBean) {
+                        callback.onTaskLoaded(saleGameBean);
                     }
 
                     @Override

@@ -68,7 +68,7 @@ public class GameListAdapter extends RecyclerArrayAdapter{
 
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    View view = mLayoutInflater.inflate(R.layout.item_hot_game_list, parent, false);
+                    View view = mLayoutInflater.inflate(R.layout.list_item_hot_game_list, parent, false);
                     viewHolder = new GameListViewHolder(view, getContext(),"最新大作");
                     return view;
                 }
@@ -92,7 +92,7 @@ public class GameListAdapter extends RecyclerArrayAdapter{
 
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    View view = mLayoutInflater.inflate(R.layout.item_hot_game_list, parent, false);
+                    View view = mLayoutInflater.inflate(R.layout.list_item_hot_game_list, parent, false);
                     viewHolder = new GameListViewHolder(view, getContext(),"最期待游戏");
                     return view;
                 }
@@ -115,7 +115,7 @@ public class GameListAdapter extends RecyclerArrayAdapter{
 
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    View view = mLayoutInflater.inflate(R.layout.item_hot_game_list, parent, false);
+                    View view = mLayoutInflater.inflate(R.layout.list_item_hot_game_list, parent, false);
                     viewHolder = new GameListViewHolder(view, getContext(),"经典大作");
                     return view;
                 }
@@ -139,7 +139,7 @@ public class GameListAdapter extends RecyclerArrayAdapter{
 
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    View view = mLayoutInflater.inflate(R.layout.item_hot_game_list, parent, false);
+                    View view = mLayoutInflater.inflate(R.layout.list_item_hot_game_list, parent, false);
                     viewHolder = new GameListViewHolder(view, getContext(),"热门游戏");
                     return view;
                 }
