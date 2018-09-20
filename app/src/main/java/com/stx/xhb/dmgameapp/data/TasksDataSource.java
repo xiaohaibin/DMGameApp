@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.data;
 
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 
@@ -62,6 +63,16 @@ public interface TasksDataSource {
      * 未发售游戏
      */
     Subscription getUnSaleGame(int currentPage,  LoadTaskCallback<SaleGameBean> callback);
+
+    /**
+     * 汉化游戏
+     */
+    Subscription getChinesizeGame(int currentPage,  int order,LoadTaskCallback<SaleGameBean> callback);
+
+    /**
+     * 汉化游戏
+     */
+    Subscription getRankGame(int currentPage,  String uid,LoadTaskCallback<GameRankBean> callback);
 
 
 }

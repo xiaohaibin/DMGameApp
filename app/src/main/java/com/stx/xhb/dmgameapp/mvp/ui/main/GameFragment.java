@@ -11,10 +11,10 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.GameViewPagerFragmentAdapter;
 import com.stx.xhb.dmgameapp.mvp.ui.game.ChinesizeFragment;
+import com.stx.xhb.dmgameapp.mvp.ui.game.CategoryFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.game.GameRankFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.game.HotGameFragment;
 import com.stx.xhb.dmgameapp.mvp.ui.game.SaleFragment;
-import com.stx.xhb.dmgameapp.mvp.ui.news.HotNewsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,6 @@ public class GameFragment extends BaseFragment{
     TabLayout mTabLayout;
     @Bind(R.id.video_viewpager)
     ViewPager mVideoViewpager;
-    private List<BaseMvpFragment> mFragmentList;
 
 
     public static GameFragment newInstance() {
@@ -62,15 +61,15 @@ public class GameFragment extends BaseFragment{
 
     //设置适配器
     private void setAdapter() {
-        mFragmentList=new ArrayList<>();
-        mFragmentList.add(HotGameFragment.newInstance());
-        mFragmentList.add(SaleFragment.newInstance());
-        mFragmentList.add(ChinesizeFragment.newInstance());
-        mFragmentList.add(GameRankFragment.newInstance());
-        mFragmentList.add(HotNewsFragment.newInstance());
-        GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(),mFragmentList);
+        List<BaseMvpFragment> fragmentList = new ArrayList<>();
+        fragmentList.add(HotGameFragment.newInstance());
+        fragmentList.add(SaleFragment.newInstance());
+        fragmentList.add(ChinesizeFragment.newInstance());
+        fragmentList.add(GameRankFragment.newInstance());
+        fragmentList.add(CategoryFragment.newInstance());
+        GameViewPagerFragmentAdapter adapter = new GameViewPagerFragmentAdapter(getChildFragmentManager(), fragmentList);
         mVideoViewpager.setAdapter(adapter);
-        mVideoViewpager.setOffscreenPageLimit(mFragmentList.size());
+        mVideoViewpager.setOffscreenPageLimit(fragmentList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mVideoViewpager);

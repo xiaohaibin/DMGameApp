@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:gravity="center"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
 
     <ImageView
@@ -19,11 +19,11 @@
         android:id="@+id/tv_game_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:gravity="center"
-        android:text="标题"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="标题"
         android:textColor="@color/color_535353"
         android:textSize="12dp" />
 
@@ -35,6 +35,33 @@
         android:maxLines="2"
         android:text="2018-09-07"
         android:textColor="@color/color_535353"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_score"
+            android:src="@drawable/clipdrawable" />
+
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="0.0"
+            android:textColor="@color/colorBackground"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

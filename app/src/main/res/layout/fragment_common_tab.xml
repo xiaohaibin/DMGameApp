@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="20dp">
 
         <TextView
             android:id="@+id/tv_first"
@@ -21,8 +21,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="已发售"
-            android:textColor="@color/color_888888"
-            android:textSize="14dp" />
+            android:textColor="@color/colorBackground"
+            android:textSize="12dp" />
 
         <View
             android:layout_width="1px"
@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="未发售"
             android:textColor="@color/color_888888"
-            android:textSize="14dp" />
+            android:textSize="12dp" />
 
     </LinearLayout>
 

@@ -2,8 +2,11 @@ package com.stx.xhb.dmgameapp.data.remote;
 
 import com.stx.xhb.dmgameapp.config.ApiService;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
+import com.stx.xhb.dmgameapp.data.entity.GameClassifyContent;
 import com.stx.xhb.dmgameapp.data.entity.GameContent;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
+import com.stx.xhb.dmgameapp.data.entity.GameRankContent;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
@@ -258,6 +261,63 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(SaleGameBean saleGameBean) {
                         callback.onTaskLoaded(saleGameBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+
+    @Override
+    public Subscription getChinesizeGame(int currentPage, int order, final LoadTaskCallback<SaleGameBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getGameChinese(RequestBodyHelper.creatRequestBody(new GameClassifyContent(currentPage,order)))
+                .compose(TransformUtils.<HttpResult<SaleGameBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<SaleGameBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(SaleGameBean saleGameBean) {
+                        callback.onTaskLoaded(saleGameBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getRankGame(int currentPage, String uid, final LoadTaskCallback<GameRankBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getGameRank(RequestBodyHelper.creatRequestBody(new GameRankContent(currentPage,uid)))
+                .compose(TransformUtils.<HttpResult<GameRankBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<GameRankBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(GameRankBean gameRankBean) {
+                        callback.onTaskLoaded(gameRankBean);
                     }
 
                     @Override

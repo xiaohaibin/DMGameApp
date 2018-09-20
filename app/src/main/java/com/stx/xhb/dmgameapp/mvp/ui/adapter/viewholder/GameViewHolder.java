@@ -1,7 +1,10 @@
 package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
+import android.graphics.drawable.ClipDrawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +33,12 @@ public class GameViewHolder extends BaseViewHolder<GameBean> {
     TextView mTvGameTitle;
     @Bind(R.id.tv_game_time)
     TextView mTvGameTime;
+    @Bind(R.id.iv_level)
+    ImageView mIvLevel;
+    @Bind(R.id.tv_level)
+    TextView tvLevel;
+    @Bind(R.id.ll_level)
+    LinearLayout mLlLevel;
 
     public GameViewHolder(View itemView) {
         super(itemView);
@@ -40,6 +49,15 @@ public class GameViewHolder extends BaseViewHolder<GameBean> {
     public void setData(final GameBean data) {
         Glide.with(mIvGameImg.getContext()).load(data.getLitpic()).into(mIvGameImg);
         mTvGameTitle.setText(data.getTitle());
-        mTvGameTime.setText(DateUtils.dateFromat(data.getPubdate_at()));
+        if (data.getPubdate_at() != 0) {
+            mLlLevel.setVisibility(View.GONE);
+            mTvGameTime.setVisibility(View.VISIBLE);
+            mTvGameTime.setText(DateUtils.dateFromat(data.getPubdate_at()));
+        } else {
+            mTvGameTime.setVisibility(View.GONE);
+            mLlLevel.setVisibility(View.VISIBLE);
+            ((ClipDrawable) mIvLevel.getDrawable()).setLevel((int) (data.getScore() * 1000.0d));
+            tvLevel.setText(String.valueOf(data.getScore()));
+        }
     }
 }

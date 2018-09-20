@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.mvp.ui.game;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -39,6 +40,8 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
     @Bind(R.id.rv_list)
     EasyRecyclerView mRecyclerView;
     private GameCommonAdapter mGameCommonAdapter;
+    private GameCommonAdapter mUnSaleGameAdapter;
+    private boolean selectSale = true;
 
     public static SaleFragment newInstance() {
         return new SaleFragment();
@@ -61,7 +64,8 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
-        mRecyclerView.addItemDecoration(new DividerDecoration(R.color.divider,1));
+        mRecyclerView.addItemDecoration(new DividerDecoration(R.color.divider, 1));
+        //初始化已售游戏列表适配器
         mGameCommonAdapter = new GameCommonAdapter(getActivity());
         mGameCommonAdapter.setMore(R.layout.view_more, this);
         mGameCommonAdapter.setNoMore(R.layout.view_nomore);
@@ -77,6 +81,21 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
             }
         });
         mRecyclerView.setAdapter(mGameCommonAdapter);
+        //初始化未售游戏列表适配器
+        mUnSaleGameAdapter = new GameCommonAdapter(getActivity());
+        mUnSaleGameAdapter.setMore(R.layout.view_more, this);
+        mUnSaleGameAdapter.setNoMore(R.layout.view_nomore);
+        mUnSaleGameAdapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
+            @Override
+            public void onErrorShow() {
+                mUnSaleGameAdapter.resumeMore();
+            }
+
+            @Override
+            public void onErrorClick() {
+                mUnSaleGameAdapter.resumeMore();
+            }
+        });
     }
 
     @Override
@@ -91,8 +110,12 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_first:
+                setCheckButton(true);
+                mRecyclerView.setAdapter(mGameCommonAdapter);
                 break;
             case R.id.tv_second:
+                setCheckButton(false);
+                mRecyclerView.setAdapter(mUnSaleGameAdapter);
                 break;
             default:
                 break;
@@ -119,16 +142,33 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
 
     @Override
     public void getUnSaleList(SaleGameBean saleGameBean) {
-
+        if (saleGameBean != null) {
+            if (currentpage == 1) {
+                mUnSaleGameAdapter.clear();
+            }
+            if (saleGameBean.getList() != null) {
+                mUnSaleGameAdapter.addAll(saleGameBean.getList());
+            }
+            if (mUnSaleGameAdapter.getCount() < pageSize) {
+                mUnSaleGameAdapter.stopMore();
+            }
+            if (mUnSaleGameAdapter.getCount() == 0) {
+                mRecyclerView.showEmpty();
+            }
+        }
     }
 
     @Override
     public void getFailed(String msg) {
         ToastUtil.show(msg);
-        if (currentpage == 1){
-            mRecyclerView.setRefreshing(true);
+        if (currentpage == 1) {
+            mRecyclerView.setRefreshing(false);
         }
-        mGameCommonAdapter.pauseMore();
+        if (selectSale) {
+            mGameCommonAdapter.pauseMore();
+        } else {
+            mUnSaleGameAdapter.pauseMore();
+        }
     }
 
     @Override
@@ -144,12 +184,32 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
     @Override
     public void onRefresh() {
         currentpage = 1;
-        mPresenter.getSaleList(currentpage);
+        if (selectSale) {
+            mPresenter.getSaleList(currentpage);
+        } else {
+            mPresenter.getUnSaleList(currentpage);
+        }
     }
 
     @Override
     public void onLoadMore() {
         currentpage++;
-        mPresenter.getSaleList(currentpage);
+        if (selectSale) {
+            mPresenter.getSaleList(currentpage);
+        } else {
+            mPresenter.getUnSaleList(currentpage);
+        }
+    }
+
+    private void setCheckButton(boolean isFirst) {
+        selectSale = isFirst;
+        if (isFirst) {
+            mTvSale.setTextColor(getResources().getColor(R.color.colorBackground));
+            mTvUnSale.setTextColor(getResources().getColor(R.color.color_888888));
+        } else {
+            mTvUnSale.setTextColor(getResources().getColor(R.color.colorBackground));
+            mTvSale.setTextColor(getResources().getColor(R.color.color_888888));
+        }
+        onRefresh();
     }
 }

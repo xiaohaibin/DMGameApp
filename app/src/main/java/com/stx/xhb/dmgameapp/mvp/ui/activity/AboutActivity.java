@@ -19,7 +19,7 @@ import butterknife.OnClick;
 /**
  * 关于界面
  */
-public class AboutActivity extends BaseAppActitity {
+public class  AboutActivity extends BaseAppActitity {
 
     @Bind(R.id.toolbar)
     Toolbar aboutToolbar;

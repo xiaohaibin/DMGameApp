@@ -23,6 +23,11 @@ public class GameBean {
     private String litpic;
     private int pubdate_at;
     private int showtype;
+    private double score;
+
+    public double getScore() {
+        return score;
+    }
 
     public String getAid() {
         return aid;

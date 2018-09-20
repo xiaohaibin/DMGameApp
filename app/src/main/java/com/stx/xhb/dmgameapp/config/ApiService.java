@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.config;
 
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
+import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
@@ -158,7 +159,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("gamechine")
-    Observable<HttpResult<NewsPageBean>> getGameChinese(@Body RequestBody body);
+    Observable<HttpResult<SaleGameBean>> getGameChinese(@Body RequestBody body);
 
 
     /**
@@ -169,7 +170,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("gamerank")
-    Observable<HttpResult<NewsPageBean>> getGameRank(@Body RequestBody body);
+    Observable<HttpResult<GameRankBean>> getGameRank(@Body RequestBody body);
 
 
 
