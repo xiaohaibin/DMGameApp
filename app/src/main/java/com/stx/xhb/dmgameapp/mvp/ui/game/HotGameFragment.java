@@ -47,7 +47,7 @@ public class HotGameFragment extends BaseMvpFragment<GetGameListPresenter> imple
     @Override
     protected void onInitView(Bundle savedInstanceState) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(),R.color.divider),2));
+        mRecyclerView.addItemDecoration(new DividerDecoration(ContextCompat.getColor(getActivity(), R.color.divider), 2));
         mRecyclerView.setRefreshingColor(Color.rgb(255, 99, 71), Color.rgb(255, 99, 71), Color.rgb(255, 99, 71));
         mRecyclerView.setRefreshListener(this);
         mGameListAdapter = new GameListAdapter(getActivity());
@@ -75,16 +75,16 @@ public class HotGameFragment extends BaseMvpFragment<GetGameListPresenter> imple
     public void getGameListDataSuccess(GameListBean dataBean) {
         mGameListAdapter.clear();
         mGameListAdapter.removeAllHeader();
-        if (dataBean.getSlides() != null ) {
+        if (dataBean.getSlides() != null) {
             mGameListAdapter.setAdList(dataBean.getSlides());
         }
-        if (dataBean.getNewgame() != null ) {
+        if (dataBean.getNewgame() != null) {
             mGameListAdapter.setNewGameList(dataBean.getNewgame());
         }
         if (dataBean.getExpectgame() != null) {
             mGameListAdapter.setMostExpected(dataBean.getExpectgame());
         }
-        if (dataBean.getClassicgame()!=null){
+        if (dataBean.getClassicgame() != null) {
             mGameListAdapter.setClassicGame(dataBean.getClassicgame());
         }
         if (dataBean.getHotgame() != null) {
@@ -100,7 +100,9 @@ public class HotGameFragment extends BaseMvpFragment<GetGameListPresenter> imple
 
     @Override
     public void showLoading() {
-        mRecyclerView.setRefreshing(true);
+        if (currentpage == 1) {
+            mRecyclerView.setRefreshing(true);
+        }
     }
 
     @Override

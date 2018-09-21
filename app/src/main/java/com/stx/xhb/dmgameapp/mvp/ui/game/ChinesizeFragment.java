@@ -174,9 +174,6 @@ public class ChinesizeFragment extends BaseMvpFragment<GetChinesizeListPresenter
     @Override
     public void getFailed(String msg) {
         ToastUtil.show(msg);
-        if (currentpage == 1) {
-            mRvList.setRefreshing(false);
-        }
         if (selectFirst) {
             mNewCommonAdapter.pauseMore();
         } else {
@@ -186,12 +183,14 @@ public class ChinesizeFragment extends BaseMvpFragment<GetChinesizeListPresenter
 
     @Override
     public void showLoading() {
-
+        if (currentpage == 1) {
+            mRvList.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        mRvList.setRefreshing(false);
     }
 
     private void setCheckButton(boolean isFirst) {

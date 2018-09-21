@@ -14,8 +14,6 @@ import com.bumptech.glide.Glide;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.base.BaseAppActitity;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.MainFragmentPageAdapter;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameDetailsCommonFragment;
-import com.stx.xhb.dmgameapp.mvp.ui.fragment.GameVideoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,9 +80,6 @@ public class GameDetailsActivity extends BaseAppActitity {
                 tvGameDetails.setText(gameDetails);
             }
         }
-        fragemnts.add(GameDetailsCommonFragment.newInstance("1", gameId, gameName));
-        fragemnts.add(GameDetailsCommonFragment.newInstance("2", gameId, gameName));
-        fragemnts.add(GameVideoFragment.newInstance(gameId, gameName));
         MainFragmentPageAdapter adapter = new MainFragmentPageAdapter(getSupportFragmentManager(), fragemnts, titleList);
         viewPager.setOffscreenPageLimit(fragemnts.size());
         viewPager.setAdapter(adapter);

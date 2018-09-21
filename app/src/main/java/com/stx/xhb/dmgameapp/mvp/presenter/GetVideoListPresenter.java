@@ -40,8 +40,6 @@ public class GetVideoListPresenter extends BasePresenter<GetVideoContract.getVid
                 getView().hideLoading();
             }
         });
-
-
         addSubscription(subscription);
     }
 }

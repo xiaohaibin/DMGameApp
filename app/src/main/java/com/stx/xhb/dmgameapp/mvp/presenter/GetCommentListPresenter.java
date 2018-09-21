@@ -25,43 +25,6 @@ public class GetCommentListPresenter extends BasePresenter<GetCommentListContrac
 
     @Override
     public void getCommentListData(String id) {
-        OkHttpUtils.get()
-                .url(String.format(API.GET_COMMENT_LIST, "news_" + id))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onBefore(Request request, int id) {
-                        if (getView()!=null) {
-                            getView().showLoading();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        if (getView()!=null) {
-                            getView().getCommentListDataFailed();
-                        }
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if (getView()!=null&&!TextUtils.isEmpty(response)) {
-                            CommentListBean commentListBean = GsonUtil.newGson().fromJson(response, CommentListBean.class);
-                            if (commentListBean.getComments() != null && !commentListBean.getComments().isEmpty()) {
-                                getView().setCommentListData(commentListBean);
-                            } else {
-                                getView().hideLoading();
-                                getView().getCommentListDataFailed();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onAfter(int id) {
-                        if (getView()!=null) {
-                            getView().hideLoading();
-                        }
-                    }
-                });
+        // TODO: 2018/9/21 获取评论列表
     }
 }

@@ -97,20 +97,19 @@ public class GameRankFragment extends BaseMvpFragment<GetRankGamePresenter> impl
     @Override
     public void getFailed(String msg) {
         ToastUtil.show(msg);
-        if (currentpage == 1) {
-            mRvList.setRefreshing(false);
-        }
         mGameCommonAdapter.pauseMore();
     }
 
     @Override
     public void showLoading() {
-
+        if (currentpage == 1) {
+            mRvList.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        mRvList.setRefreshing(false);
     }
 
     @Override

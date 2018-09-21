@@ -6,6 +6,8 @@ import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetChinesizeListContract;
 
+import rx.Subscription;
+
 /**
  * @author: xiaohaibin.
  * @time: 2018/9/20
@@ -19,12 +21,17 @@ public class GetChinesizeListPresenter extends BasePresenter<GetChinesizeListCon
         if (getView()==null){
             return;
         }
-        TasksRepositoryProxy.getInstance().getChinesizeGame(currentPage, order,new LoadTaskCallback<SaleGameBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getChinesizeGame(currentPage, order, new LoadTaskCallback<SaleGameBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
             @Override
             public void onTaskLoaded(SaleGameBean data) {
-                if (order==1) {
+                if (order == 1) {
                     getView().getNewGame(data);
-                }else {
+                } else {
                     getView().getHotGame(data);
                 }
             }
@@ -33,6 +40,12 @@ public class GetChinesizeListPresenter extends BasePresenter<GetChinesizeListCon
             public void onDataNotAvailable(String msg) {
                 getView().getFailed(msg);
             }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
         });
+        addSubscription(subscription);
     }
 }

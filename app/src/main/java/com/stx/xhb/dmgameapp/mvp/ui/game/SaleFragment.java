@@ -161,9 +161,6 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
     @Override
     public void getFailed(String msg) {
         ToastUtil.show(msg);
-        if (currentpage == 1) {
-            mRecyclerView.setRefreshing(false);
-        }
         if (selectSale) {
             mGameCommonAdapter.pauseMore();
         } else {
@@ -173,12 +170,14 @@ public class SaleFragment extends BaseMvpFragment<GetSaleListPresenter> implemen
 
     @Override
     public void showLoading() {
-
+        if (currentpage == 1) {
+            mRecyclerView.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        mRecyclerView.setRefreshing(false);
     }
 
     @Override

@@ -26,6 +26,11 @@ public class GetNewsListPresenter extends BasePresenter<GetNewsListContract.getN
         }
         Subscription subscription = TasksRepositoryProxy.getInstance().getNews(page, new LoadTaskCallback<NewsPageBean>() {
             @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
+            @Override
             public void onTaskLoaded(NewsPageBean data) {
                 getView().getNewListSuccess(data);
             }

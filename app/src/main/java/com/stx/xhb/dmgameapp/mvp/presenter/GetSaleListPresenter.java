@@ -32,6 +32,16 @@ public class GetSaleListPresenter extends BasePresenter<GetSaleListContract.View
             public void onDataNotAvailable(String msg) {
                 getView().getFailed(msg);
             }
+
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
         });
 
         addSubscription(saleGame);
@@ -39,7 +49,7 @@ public class GetSaleListPresenter extends BasePresenter<GetSaleListContract.View
 
     @Override
     public void getUnSaleList(int currentPage) {
-        TasksRepositoryProxy.getInstance().getUnSaleGame(currentPage, new LoadTaskCallback<SaleGameBean>() {
+        Subscription unSaleGame = TasksRepositoryProxy.getInstance().getUnSaleGame(currentPage, new LoadTaskCallback<SaleGameBean>() {
             @Override
             public void onTaskLoaded(SaleGameBean data) {
                 getView().getUnSaleList(data);
@@ -49,6 +59,17 @@ public class GetSaleListPresenter extends BasePresenter<GetSaleListContract.View
             public void onDataNotAvailable(String msg) {
                 getView().getFailed(msg);
             }
+
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
         });
+        addSubscription(unSaleGame);
     }
 }

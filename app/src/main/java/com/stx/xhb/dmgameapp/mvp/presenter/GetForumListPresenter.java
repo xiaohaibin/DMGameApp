@@ -96,12 +96,6 @@ public class GetForumListPresenter extends BasePresenter<GetForumListContract.ge
 
 
     public static class ForumContentEntity {
-
-        /**
-         * fid : 441
-         * module : forums
-         */
-
         private String fid;
         private String module;
 

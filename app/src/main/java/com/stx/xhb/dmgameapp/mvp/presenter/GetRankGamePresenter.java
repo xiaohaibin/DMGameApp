@@ -6,6 +6,8 @@ import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetRankGameContract;
 
+import rx.Subscription;
+
 /**
  * @author: xiaohaibin.
  * @time: 2018/9/20
@@ -19,7 +21,12 @@ public class GetRankGamePresenter extends BasePresenter<GetRankGameContract.View
         if (getView()==null){
             return;
         }
-        TasksRepositoryProxy.getInstance().getRankGame(currentpage, uid, new LoadTaskCallback<GameRankBean>() {
+        Subscription subscription = TasksRepositoryProxy.getInstance().getRankGame(currentpage, uid, new LoadTaskCallback<GameRankBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
             @Override
             public void onTaskLoaded(GameRankBean data) {
                 getView().getDataSuccess(data);
@@ -29,6 +36,12 @@ public class GetRankGamePresenter extends BasePresenter<GetRankGameContract.View
             public void onDataNotAvailable(String msg) {
                 getView().getFailed(msg);
             }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
         });
+        addSubscription(subscription);
     }
 }
