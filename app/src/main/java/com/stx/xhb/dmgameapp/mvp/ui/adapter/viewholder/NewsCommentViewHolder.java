@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.SubCommentListAdapter;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * @describe:
  */
 
-public class NewsCommentViewHolder extends BaseViewHolder<CommentsBean> {
+public class NewsCommentViewHolder extends BaseViewHolder<CommentListBean.ListBean> {
 
     @Bind(R.id.iv_user_img)
     ImageView mIvUserImg;
@@ -48,23 +48,23 @@ public class NewsCommentViewHolder extends BaseViewHolder<CommentsBean> {
     }
 
     @Override
-    public void setData(CommentsBean data) {
-        Glide.with(getContext()).load(data.getPassport().getImg_url()).placeholder(R.drawable.default_image).into(mIvUserImg);
-        mTvNickName.setText(data.getPassport().getNickname());
+    public void setData(CommentListBean.ListBean data) {
+        Glide.with(getContext()).load(data.getUser().getAvatarstr()).placeholder(R.drawable.default_image).into(mIvUserImg);
+        mTvNickName.setText(data.getUser().getNickname());
         mTvCommentContent.setText(data.getContent());
-        mTvCommentTime.setText(DateUtils.dateFromat(data.getCreate_time()));
-        mTvClickGood.setText(String.valueOf(data.getSupport_count()));
+        mTvCommentTime.setText(DateUtils.getDefaultTime(data.getPubdate_at()));
+        mTvClickGood.setText(String.valueOf(data.getGoodcount()));
         mBtnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ToastUtil.show("回复");
             }
         });
-        if (data.getComments() != null && !data.getComments().isEmpty()) {
+        if (data.getReplies() != null && !data.getReplies().isEmpty()) {
             mRvSubComment.setVisibility(View.VISIBLE);
             mRvSubComment.setLayoutManager(new LinearLayoutManager(getContext()));
             mRvSubComment.setNestedScrollingEnabled(false);
-            mRvSubComment.setAdapter(new SubCommentListAdapter(data.getComments()));
+            mRvSubComment.setAdapter(new SubCommentListAdapter(data.getReplies()));
         } else {
             mRvSubComment.setVisibility(View.GONE);
         }

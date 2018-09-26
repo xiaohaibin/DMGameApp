@@ -1,15 +1,16 @@
-package com.stx.xhb.dmgameapp.data.entity;
+package com.stx.xhb.dmgameapp.data.body;
 
 import com.stx.core.utils.StringUtils;
 
 /**
  * @author: xiaohaibin.
- * @time: 2018/9/20
+ * @time: 2018/9/5
  * @mail:xhb_199409@163.com
  * @github:https://github.com/xiaohaibin
  * @describe:
  */
-public class GameClassifyContent {
+public class NewsContent {
+
     /**
      * pagesize : 10
      * page : 1
@@ -21,12 +22,10 @@ public class GameClassifyContent {
     private int page = 1;
     private long time;
     private String sign = "";
-    private int order;
 
-    public GameClassifyContent(int currentPage, int order) {
+    public NewsContent(int currentPage) {
         this.time = System.currentTimeMillis();
-        this.sign = StringUtils.getMD5(String.valueOf(pagesize) + currentPage + order + time);
+        this.sign = StringUtils.getMD5(String.valueOf(pagesize) + currentPage + time);
         this.page = currentPage;
-        this.order = order;
     }
 }

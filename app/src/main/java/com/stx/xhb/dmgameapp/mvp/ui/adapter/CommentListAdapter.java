@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsCommentViewHolder;
 
@@ -18,7 +19,7 @@ import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsCommentViewHolder;
  * @describe: 评论列表实体类
  */
 
-public class CommentListAdapter extends RecyclerArrayAdapter<CommentsBean> {
+public class CommentListAdapter extends RecyclerArrayAdapter<CommentListBean.ListBean> {
 
     private LayoutInflater mLayoutInflater;
 

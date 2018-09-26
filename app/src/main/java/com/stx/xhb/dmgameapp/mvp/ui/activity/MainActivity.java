@@ -27,6 +27,7 @@ import java.util.List;
  * @author xiao.haibin
  */
 public class MainActivity extends AppCompatActivity {
+
     private ViewPager mainViewpager;
     private List<Fragment> fragemnts ;
     private RadioGroup rgp;

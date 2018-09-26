@@ -2,6 +2,7 @@ package com.stx.xhb.dmgameapp.mvp.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,15 +16,13 @@ import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
-import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsDetailsPresenter;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.NewsDetailsAdapter;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -44,17 +43,18 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     EasyRecyclerView rvList;
     @Bind(R.id.tv_comment_count)
     TextView tvCommentCount;
-    private String mId;
     private String mKey;
     private String mUrl;
     private String mImg;
+    private int uid=0;
     private NewsDetailsAdapter mNewsDetailsAdapter;
+    private String mAccurl;
 
-    public static NewsDetailsFragment newInstance(String url, String id,String key, String img) {
+    public static NewsDetailsFragment newInstance(String webUrl,String accurl,String key, String img) {
         Bundle args = new Bundle();
         NewsDetailsFragment fragment = new NewsDetailsFragment();
-        args.putString("url", url);
-        args.putString("id", id);
+        args.putString("webUrl", webUrl);
+        args.putString("accurl", accurl);
         args.putString("key", key);
         args.putString("img", img);
         fragment.setArguments(args);
@@ -62,6 +62,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     }
 
 
+    @NonNull
     @Override
     protected GetNewsDetailsPresenter onLoadPresenter() {
         return new GetNewsDetailsPresenter();
@@ -77,15 +78,15 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
         initView();
         Bundle arguments = getArguments();
         if (arguments != null) {
-            if (arguments.containsKey("id")) {
-                mId = arguments.getString("id");
-            }
             if (arguments.containsKey("key")) {
                 mKey = arguments.getString("key");
                 mTitlebar.setTilte(mKey);
             }
-            if (arguments.containsKey("url")) {
-                mUrl = arguments.getString("url");
+            if (arguments.containsKey("webUrl")) {
+                mUrl = arguments.getString("webUrl");
+            }
+            if (arguments.containsKey("accurl")){
+                mAccurl = arguments.getString("accurl");
             }
             if (arguments.containsKey("img")) {
                 mImg = arguments.getString("img");
@@ -111,35 +112,35 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     @Override
     protected void lazyLoad() {
         mNewsDetailsAdapter.setWebData(mUrl);
-        mPresenter.getNewsDetailsData(mId, mKey);
-        mPresenter.getCommentListData(mId);
+        mPresenter.getNewsDetailsData(mAccurl);
+        mPresenter.getCommentListData(1,mAccurl,uid);
     }
 
     @Override
-    public void setNewsDetailsData(List<NewsPageBean.ListBean> listEntity) {
-        mNewsDetailsAdapter.addNewList(listEntity);
+    public void setNewsDetailsData(NewsAboutBean newsAboutBean) {
+        mNewsDetailsAdapter.addNewList(newsAboutBean.getList());
         mNewsDetailsAdapter.addCommentListLabel();
+    }
+
+    @Override
+    public void getNewsDetailsDataFailed(String msg) {
+        mNewsDetailsAdapter.addCommentListLabel();
+    }
+
+    @Override
+    public void getCommentListDataFailed(String msg) {
+        mNewsDetailsAdapter.addEmptyCommentFooter();
     }
 
     @Override
     public void setCommentListData(CommentListBean commentListData) {
-        if (commentListData.getComments().size() > 100) {
+        if (commentListData.getTotal() > 100) {
             tvCommentCount.setText("99+");
         } else {
-            tvCommentCount.setText(String.valueOf(commentListData.getComments().size()));
+            tvCommentCount.setText(String.valueOf(commentListData.getTotal()));
         }
-        mNewsDetailsAdapter.addAll(commentListData.getComments());
+        mNewsDetailsAdapter.addAll(commentListData.getList());
         mNewsDetailsAdapter.addMoreCommentFooter();
-    }
-
-    @Override
-    public void getNewsDetailsDataFailed() {
-        mNewsDetailsAdapter.addCommentListLabel();
-    }
-
-    @Override
-    public void getCommentListDataFailed() {
-        mNewsDetailsAdapter.addEmptyCommentFooter();
     }
 
     @Override

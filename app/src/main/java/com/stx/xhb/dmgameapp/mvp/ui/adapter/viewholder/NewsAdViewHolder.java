@@ -54,7 +54,7 @@ public class NewsAdViewHolder {
             @Override
             public void onItemClick(XBanner banner, int position) {
                 NewsPageBean.SlidesBean slidesBean = bannerList.get(position);
-                WebDetailsActivity.start(mContext,slidesBean.getWebviewurl(),slidesBean.getTitle(),slidesBean.getLitpic());
+                NewsDetailsActivity.start(mContext,slidesBean.getWebviewurl(),slidesBean.getArcurl(),slidesBean.getTitle(),slidesBean.getLitpic());
             }
         });
     }

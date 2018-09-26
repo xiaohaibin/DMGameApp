@@ -1,7 +1,5 @@
 package com.stx.xhb.dmgameapp.data.entity;
 
-import java.util.List;
-
 /**
  * @author: xiaohaibin.
  * @time: 2018/3/1
@@ -12,116 +10,173 @@ import java.util.List;
 
 public class CommentsBean {
 
-    private String comment_id;
-    private String content;
-    private long create_time;
-    private boolean elite;
-    private int floor_count;
-    private String from;
-    private boolean hide;
-    private boolean hide_floor;
-    private boolean highlight;
-    private String ip;
-    private String ip_location;
-    private String metadata;
-    private int oppose_count;
-    private PassportBean passport;
-    private boolean quick;
-    private int reply_count;
-    private String reply_id;
-    private ReplyPassportBean reply_passport;
-    private int score;
-    private int status;
-    private int support_count;
-    private boolean top;
-    private String user_id;
-    private List<CommentsBean> comments;
+    /**
+     * id : 45495
+     * position : 72
+     * goodcount : 1
+     * badcount : 0
+     * pubdate_at : 1537786327
+     * time : 09-24 18:52
+     * content : 居然没人求33-3
+     * user : {"uid":801395,"nickname":"体臭天王","avatarstr":"https://my.3dmgame.com/uploads/images/avatar/20180306/1520317609_864490.jpg","gender":1,"regionstr":"广西梧州市","title":"初出茅庐","title_level":0}
+     * praise : 0
+     */
 
-    public String getComment_id() {
-        return comment_id;
+    private int id;
+    private int position;
+    private int goodcount;
+    private int badcount;
+    private int pubdate_at;
+    private String time;
+    private String content;
+    private UserBean user;
+    private int praise;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getGoodcount() {
+        return goodcount;
+    }
+
+    public void setGoodcount(int goodcount) {
+        this.goodcount = goodcount;
+    }
+
+    public int getBadcount() {
+        return badcount;
+    }
+
+    public void setBadcount(int badcount) {
+        this.badcount = badcount;
+    }
+
+    public int getPubdate_at() {
+        return pubdate_at;
+    }
+
+    public void setPubdate_at(int pubdate_at) {
+        this.pubdate_at = pubdate_at;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getContent() {
         return content;
     }
 
-    public long getCreate_time() {
-        return create_time;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public boolean isElite() {
-        return elite;
+    public UserBean getUser() {
+        return user;
     }
 
-    public int getFloor_count() {
-        return floor_count;
+    public void setUser(UserBean user) {
+        this.user = user;
     }
 
-    public String getFrom() {
-        return from;
+    public int getPraise() {
+        return praise;
     }
 
-    public boolean isHide() {
-        return hide;
+    public void setPraise(int praise) {
+        this.praise = praise;
     }
 
-    public boolean isHide_floor() {
-        return hide_floor;
-    }
+    public static class UserBean {
+        /**
+         * uid : 801395
+         * nickname : 体臭天王
+         * avatarstr : https://my.3dmgame.com/uploads/images/avatar/20180306/1520317609_864490.jpg
+         * gender : 1
+         * regionstr : 广西梧州市
+         * title : 初出茅庐
+         * title_level : 0
+         */
 
-    public boolean isHighlight() {
-        return highlight;
-    }
+        private int uid;
+        private String nickname;
+        private String avatarstr;
+        private int gender;
+        private String regionstr;
+        private String title;
+        private int title_level;
 
-    public String getIp() {
-        return ip;
-    }
+        public int getUid() {
+            return uid;
+        }
 
-    public String getIp_location() {
-        return ip_location;
-    }
+        public void setUid(int uid) {
+            this.uid = uid;
+        }
 
-    public String getMetadata() {
-        return metadata;
-    }
+        public String getNickname() {
+            return nickname;
+        }
 
-    public int getOppose_count() {
-        return oppose_count;
-    }
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
 
-    public PassportBean getPassport() {
-        return passport;
-    }
+        public String getAvatarstr() {
+            return avatarstr;
+        }
 
-    public boolean isQuick() {
-        return quick;
-    }
+        public void setAvatarstr(String avatarstr) {
+            this.avatarstr = avatarstr;
+        }
 
-    public int getReply_count() {
-        return reply_count;
-    }
+        public int getGender() {
+            return gender;
+        }
 
-    public String getReply_id() {
-        return reply_id;
-    }
+        public void setGender(int gender) {
+            this.gender = gender;
+        }
 
-    public ReplyPassportBean getReply_passport() {
-        return reply_passport;
-    }
+        public String getRegionstr() {
+            return regionstr;
+        }
 
-    public int getSupport_count() {
-        return support_count;
-    }
+        public void setRegionstr(String regionstr) {
+            this.regionstr = regionstr;
+        }
 
-    public boolean isTop() {
-        return top;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getUser_id() {
-        return user_id;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public List<CommentsBean> getComments() {
-        return comments;
+        public int getTitle_level() {
+            return title_level;
+        }
+
+        public void setTitle_level(int title_level) {
+            this.title_level = title_level;
+        }
     }
 }

@@ -1,23 +1,28 @@
 package com.stx.xhb.dmgameapp.data.remote;
 
+import android.util.Log;
+
 import com.stx.xhb.dmgameapp.config.ApiService;
+import com.stx.xhb.dmgameapp.data.body.GetHotCommentContent;
+import com.stx.xhb.dmgameapp.data.body.NewsAboutContent;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
-import com.stx.xhb.dmgameapp.data.entity.GameClassifyContent;
-import com.stx.xhb.dmgameapp.data.entity.GameContent;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.body.GameClassifyContent;
+import com.stx.xhb.dmgameapp.data.body.GameContent;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
-import com.stx.xhb.dmgameapp.data.entity.GameRankContent;
+import com.stx.xhb.dmgameapp.data.body.GameRankContent;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
-import com.stx.xhb.dmgameapp.data.entity.NewsContent;
+import com.stx.xhb.dmgameapp.data.body.NewsContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.http.HttpManager;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 import com.stx.xhb.dmgameapp.http.TransformUtils;
 
-import okhttp3.RequestBody;
 import rx.Subscription;
 
 /**
@@ -279,7 +284,7 @@ public class TasksRepositoryProxy implements TasksDataSource {
     @Override
     public Subscription getChinesizeGame(int currentPage, int order, final LoadTaskCallback<SaleGameBean> callback) {
         return HttpManager.getInstance().createService(ApiService.class)
-                .getGameChinese(RequestBodyHelper.creatRequestBody(new GameClassifyContent(currentPage,order)))
+                .getGameChinese(RequestBodyHelper.creatRequestBody(new GameClassifyContent(currentPage, order)))
                 .compose(TransformUtils.<HttpResult<SaleGameBean>>defaultSchedulers())
                 .subscribe(new HttpResultSubscriber<SaleGameBean>() {
                     @Override
@@ -307,7 +312,7 @@ public class TasksRepositoryProxy implements TasksDataSource {
     @Override
     public Subscription getRankGame(int currentPage, String uid, final LoadTaskCallback<GameRankBean> callback) {
         return HttpManager.getInstance().createService(ApiService.class)
-                .getGameRank(RequestBodyHelper.creatRequestBody(new GameRankContent(currentPage,uid)))
+                .getGameRank(RequestBodyHelper.creatRequestBody(new GameRankContent(currentPage, uid)))
                 .compose(TransformUtils.<HttpResult<GameRankBean>>defaultSchedulers())
                 .subscribe(new HttpResultSubscriber<GameRankBean>() {
                     @Override
@@ -318,6 +323,92 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(GameRankBean gameRankBean) {
                         callback.onTaskLoaded(gameRankBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getNewsAbout(String url,final LoadTaskCallback<NewsAboutBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getNewsAbout(RequestBodyHelper.creatRequestBody(new NewsAboutContent(url)))
+                .compose(TransformUtils.<HttpResult<NewsAboutBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<NewsAboutBean>() {
+
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(NewsAboutBean newsAboutBean) {
+                        callback.onTaskLoaded(newsAboutBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getHotComment(int currentPage, String arcurl, int uid, final LoadTaskCallback<CommentListBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getHotComment(RequestBodyHelper.creatRequestBody(new GetHotCommentContent(currentPage, arcurl, uid)))
+                .compose(TransformUtils.<HttpResult<CommentListBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<CommentListBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(CommentListBean commentListBean) {
+                        callback.onTaskLoaded(commentListBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+
+    @Override
+    public Subscription getComment(int currentPage, String arcurl, int uid, final LoadTaskCallback<CommentListBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .getComment(RequestBodyHelper.creatRequestBody(new GetHotCommentContent(currentPage, arcurl, uid)))
+                .compose(TransformUtils.<HttpResult<CommentListBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<CommentListBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(CommentListBean commentListBean) {
+                        callback.onTaskLoaded(commentListBean);
                     }
 
                     @Override

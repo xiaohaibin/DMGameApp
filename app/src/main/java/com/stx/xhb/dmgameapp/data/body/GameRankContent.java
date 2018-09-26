@@ -1,4 +1,4 @@
-package com.stx.xhb.dmgameapp.data.entity;
+package com.stx.xhb.dmgameapp.data.body;
 
 import com.stx.core.utils.StringUtils;
 

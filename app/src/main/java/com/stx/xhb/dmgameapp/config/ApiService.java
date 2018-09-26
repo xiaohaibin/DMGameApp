@@ -1,7 +1,9 @@
 package com.stx.xhb.dmgameapp.config;
 
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
@@ -80,7 +82,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("newsabout")
-    Observable<HttpResult<NewsPageBean>> getNewsDetails(@Body RequestBody body);
+    Observable<HttpResult<NewsAboutBean>> getNewsAbout(@Body RequestBody body);
 
     /**
      * 获取最新评论
@@ -90,7 +92,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("gethotcomment")
-    Observable<HttpResult<NewsPageBean>> getHotComment(@Body RequestBody body);
+    Observable<HttpResult<CommentListBean>> getHotComment(@Body RequestBody body);
 
     /**
      * 热门游戏
@@ -149,7 +151,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("getcomment")
-    Observable<HttpResult<NewsPageBean>> getGameComment(@Body RequestBody body);
+    Observable<HttpResult<CommentListBean>> getComment(@Body RequestBody body);
 
     /**
      * 汉化游戏

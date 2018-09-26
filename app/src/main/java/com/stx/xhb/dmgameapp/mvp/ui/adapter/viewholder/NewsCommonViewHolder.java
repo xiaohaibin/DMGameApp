@@ -32,7 +32,6 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.ListBean> 
     ImageView mIv;
     @Bind(R.id.author)
     TextView tvAuthor;
-    private String imgUrl = "";
 
     public NewsCommonViewHolder(View itemView) {
         super(itemView);
@@ -48,7 +47,7 @@ public class NewsCommonViewHolder extends BaseViewHolder<NewsPageBean.ListBean> 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WebDetailsActivity.start(getContext(),data.getWebviewurl(),data.getTitle(),data.getLitpic());
+                NewsDetailsActivity.start(getContext(),data.getWebviewurl(),data.getArcurl(),data.getTitle(),data.getLitpic());
             }
         });
     }

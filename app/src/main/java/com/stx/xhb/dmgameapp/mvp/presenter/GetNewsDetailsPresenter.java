@@ -6,15 +6,19 @@ import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.config.Constants;
+import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsDetailsContentBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
+import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
 import okhttp3.Request;
+import rx.Subscription;
 
 /**
  * @author: xiaohaibin.
@@ -27,83 +31,61 @@ import okhttp3.Request;
 public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View> implements GetNewsDetailsContract.Model {
 
     @Override
-    public void getNewsDetailsData(String id, String key) {
-        if (getView()==null){
+    public void getNewsDetailsData(String url) {
+        if (getView() == null) {
             return;
         }
-        OkHttpUtils.postString()
-                .content(GsonUtil.newGson().toJson(new NewsDetailsContentBean("1", id, key, "1")))
-                .url(API.NEWS_CHANNEL_DATA)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onBefore(Request request, int id) {
-                        getView().showLoading();
-                    }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getNewsAbout(url, new LoadTaskCallback<NewsAboutBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
 
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        getView().getNewsDetailsDataFailed();
-                    }
+            @Override
+            public void onTaskLoaded(NewsAboutBean data) {
+                getView().setNewsDetailsData(data);
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if (!TextUtils.isEmpty(response)) {
-                            NewsListBean forumChannelListEntity = GsonUtil.newGson().fromJson(response, NewsListBean.class);
-                            if (forumChannelListEntity.getCode() == Constants.SERVER_SUCCESS) {
-                                if (forumChannelListEntity.getChannel() != null) {
-//                                    getView().setNewsDetailsData(forumChannelListEntity.getChannel().getHtml());
-                                }else {
-                                    getView().hideLoading();
-                                    getView().getNewsDetailsDataFailed();
-                                }
-                            } else {
-                                getView().hideLoading();
-                                getView().getNewsDetailsDataFailed();
-                            }
-                        }
-                    }
+            @Override
+            public void onDataNotAvailable(String msg) {
+                getView().getNewsDetailsDataFailed(msg);
+            }
 
-                    @Override
-                    public void onAfter(int id) {
-                        getView().hideLoading();
-                    }
-                });
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
     }
 
     @Override
-    public void getCommentListData(String id) {
-        OkHttpUtils.get()
-                .url(String.format(API.GET_COMMENT_LIST, "news_"+id))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onBefore(Request request, int id) {
-                        getView().showLoading();
-                    }
+    public void getCommentListData(int currentPage, String arcurl, int uid) {
+        if (getView() == null) {
+            return;
+        }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getHotComment(currentPage, arcurl, uid, new LoadTaskCallback<CommentListBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
 
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        getView().getCommentListDataFailed();
-                    }
+            @Override
+            public void onTaskLoaded(CommentListBean data) {
+                getView().setCommentListData(data);
+            }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if (!TextUtils.isEmpty(response)) {
-                            CommentListBean commentListBean = GsonUtil.newGson().fromJson(response, CommentListBean.class);
-                            if (commentListBean.getComments() != null && !commentListBean.getComments().isEmpty()) {
-                                getView().setCommentListData(commentListBean);
-                            } else {
-                                getView().hideLoading();
-                                getView().getCommentListDataFailed();
-                            }
-                        }
-                    }
+            @Override
+            public void onDataNotAvailable(String msg) {
+                getView().getCommentListDataFailed(msg);
+            }
 
-                    @Override
-                    public void onAfter(int id) {
-                        getView().hideLoading();
-                    }
-                });
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
+
     }
 }

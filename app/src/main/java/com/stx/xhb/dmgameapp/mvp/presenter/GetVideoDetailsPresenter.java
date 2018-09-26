@@ -73,37 +73,6 @@ public class GetVideoDetailsPresenter extends BasePresenter<GetVideoDetailsContr
 
     @Override
     public void getCommentListData(String id) {
-        OkHttpUtils.get()
-                .url(String.format(API.GET_COMMENT_LIST, id))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onBefore(Request request, int id) {
-                        getView().showLoading();
-                    }
 
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        getView().getCommentListDataFailed();
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        if (!TextUtils.isEmpty(response)) {
-                            CommentListBean commentListBean = GsonUtil.newGson().fromJson(response, CommentListBean.class);
-                            if (commentListBean.getComments() != null && !commentListBean.getComments().isEmpty()) {
-                                getView().setCommentListData(commentListBean);
-                            } else {
-                                getView().hideLoading();
-                                getView().getCommentListDataFailed();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onAfter(int id) {
-                        getView().hideLoading();
-                    }
-                });
     }
 }

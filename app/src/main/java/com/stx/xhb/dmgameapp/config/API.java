@@ -24,23 +24,6 @@ public class API {
      */
     public static final String USER_API = "http://bbs.3dmgame.com/api/3dmapp/index.php";
     /**
-     * 获取文章频道列表
-     * 方式：GET
-     */
-    public static final String GET_NEWS_CHANNEL = "http://m.3dmgame.com/y3wap/ajaxappchannels.php";
-
-    /**
-     * 获取游戏频道列表
-     * 方式：GET
-     */
-    public static final String GET_GAME_CHANNEL = "http://m.3dmgame.com/y3wap/appgamechannels.php";
-
-    /**
-     * 获取游戏详情
-     * 方式：post
-     * 参数：{"appid":"1","page":"1","id":"3505044","key":"南方公园：完整破碎","type":"1"}
-     */
-    public static final String GET_GAME_DETAILS = "http://m.3dmgame.com/y3wap/appgamesmsearch.php";
 
     /**
      * web论坛链接

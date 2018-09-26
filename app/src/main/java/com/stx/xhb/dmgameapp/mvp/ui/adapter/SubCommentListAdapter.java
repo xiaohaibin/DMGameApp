@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
@@ -39,7 +40,7 @@ public class SubCommentListAdapter extends RecyclerView.Adapter<SubCommentListAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CommentsBean commentsBean = mCommentsBeanList.get(position);
-        holder.mTvNickName.setText(commentsBean.getPassport().getNickname());
+        holder.mTvNickName.setText(commentsBean.getUser().getNickname());
         holder.mTvCommentContent.setText(commentsBean.getContent());
         holder.mBtnComment.setOnClickListener(new View.OnClickListener() {
             @Override

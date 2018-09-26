@@ -34,6 +34,14 @@ public class DateUtils {
         return getFriendlyTime(paramString, DEFAULT_DATE_FORMAT);
     }
 
+    public static String getDefaultTime(long timeMills){
+        System.setProperty("user.timezone", "Asia/Shanghai");
+        TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
+        TimeZone.setDefault(tz);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return sdf.format(new Date((timeMills*1000L)));
+    }
+
     public static String getFriendlyTime(String paramString, SimpleDateFormat paramSimpleDateFormat)
     {
         if ((paramString != null) && (!paramString.equals("null")) && (!paramString.equals("")))

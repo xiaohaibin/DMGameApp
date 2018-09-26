@@ -15,7 +15,9 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.CommentsBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsCommentViewHolder;
 
@@ -29,10 +31,10 @@ import java.util.List;
  * @describe:
  */
 
-public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
+public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.ListBean> {
 
     private String mUrl;
-    private List<NewsPageBean.ListBean> mDataList;
+    private List<NewsAboutBean.ListBean> mDataList;
     private LayoutInflater mLayoutInflater;
 
     public NewsDetailsAdapter(Context context) {
@@ -83,7 +85,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
     }
 
 
-    public void addNewList(List<NewsPageBean.ListBean> dataList) {
+    public void addNewList(List<NewsAboutBean.ListBean> dataList) {
         this.mDataList = dataList;
         if (mDataList != null && !mDataList.isEmpty()) {
             addHeader(new ItemView() {
@@ -93,7 +95,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentsBean> {
                     EasyRecyclerView recyclerView = new EasyRecyclerView(getContext());
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.getRecyclerView().setNestedScrollingEnabled(false);
-                    NewsCommonAdapter adapter = new NewsCommonAdapter(getContext());
+                    NewsAboutAdapter adapter = new NewsAboutAdapter(getContext());
                     adapter.addAll(mDataList);
                     recyclerView.setAdapter(adapter);
                     return recyclerView;

@@ -45,7 +45,7 @@ public class VideoDetailsItemViewHolder extends BaseViewHolder<VideoListBean.Vid
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewsDetailsActivity.start(getContext(),data.getVideourl(),data.getId(),data.getTitle(),data.getVideopic(),true);
+//                NewsDetailsActivity.start(getContext(),data.getVideourl(),data.getTitle(),data.getVideopic());
             }
         });
     }

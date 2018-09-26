@@ -1,8 +1,10 @@
 package com.stx.xhb.dmgameapp.data;
 
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
+import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 
@@ -74,5 +76,20 @@ public interface TasksDataSource {
      */
     Subscription getRankGame(int currentPage,  String uid,LoadTaskCallback<GameRankBean> callback);
 
+    /**
+     * 相关新闻
+     */
+    Subscription getNewsAbout(String url,LoadTaskCallback<NewsAboutBean> callback);
+
+    /**
+     * 获取热门评论
+     */
+    Subscription getHotComment(int currentPage,String arcurl,int uid,LoadTaskCallback<CommentListBean> callback);
+
+
+    /**
+     * 获取所有评论
+     */
+    Subscription getComment(int currentPage,String arcurl,int uid,LoadTaskCallback<CommentListBean> callback);
 
 }

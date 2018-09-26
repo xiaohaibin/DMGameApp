@@ -3,6 +3,7 @@ package com.stx.xhb.dmgameapp.mvp.contract;
 import com.stx.core.mvp.IModel;
 import com.stx.core.mvp.IView;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 
 import java.util.List;
@@ -19,13 +20,13 @@ public interface GetNewsDetailsContract {
 
     interface View extends IView {
 
-        void setNewsDetailsData(List<NewsPageBean.ListBean> listEntity);
+        void setNewsDetailsData(NewsAboutBean newsAboutBean);
 
         void setCommentListData(CommentListBean commentListData);
 
-        void getNewsDetailsDataFailed();
+        void getNewsDetailsDataFailed(String msg);
 
-        void getCommentListDataFailed();
+        void getCommentListDataFailed(String msg);
 
         void showLoading();
 
@@ -34,9 +35,9 @@ public interface GetNewsDetailsContract {
 
     interface Model extends IModel {
 
-        void getNewsDetailsData(String id, String key);
+        void getNewsDetailsData(String url);
 
-        void getCommentListData(String id);
+        void getCommentListData(int currentPage, String arcurl, int uid);
 
     }
 }

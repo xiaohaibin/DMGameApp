@@ -1,8 +1,10 @@
 package com.stx.xhb.dmgameapp.utils;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.stx.core.utils.GsonUtil;
+import com.stx.xhb.dmgameapp.data.body.NewsAboutContent;
 
 import okhttp3.RequestBody;
 

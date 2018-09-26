@@ -5,13 +5,16 @@ import android.text.TextUtils;
 import com.stx.core.mvp.BasePresenter;
 import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
+import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetCommentListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import okhttp3.Call;
 import okhttp3.Request;
+import rx.Subscription;
 
 /**
  * @author: xiaohaibin.
@@ -24,7 +27,31 @@ import okhttp3.Request;
 public class GetCommentListPresenter extends BasePresenter<GetCommentListContract.View> implements GetCommentListContract.Model{
 
     @Override
-    public void getCommentListData(String id) {
-        // TODO: 2018/9/21 获取评论列表
+    public void getCommentListData(int currentPage, String arcurl, int uid) {
+        if (getView() == null) {
+            return;
+        }
+        Subscription subscription = TasksRepositoryProxy.getInstance().getComment(currentPage, arcurl, uid, new LoadTaskCallback<CommentListBean>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
+            @Override
+            public void onTaskLoaded(CommentListBean data) {
+                getView().setCommentListData(data);
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
+                getView().getCommentListDataFailed();
+            }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
+        addSubscription(subscription);
     }
 }
