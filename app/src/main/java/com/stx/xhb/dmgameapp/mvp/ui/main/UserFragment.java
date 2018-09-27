@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.siyamed.shapeimageview.mask.PorterShapeImageView;
+import com.stx.core.base.BaseFragment;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.mvp.IPresenter;
 import com.stx.core.widget.LabelIndicatorView;
@@ -28,7 +29,7 @@ import butterknife.OnClick;
 /**
  * 个人中心Fragment
  */
-public class UserFragment extends BaseMvpFragment {
+public class UserFragment extends BaseFragment {
 
     @Bind(R.id.iv_user_img)
     PorterShapeImageView mIvUserImg;
@@ -54,6 +55,7 @@ public class UserFragment extends BaseMvpFragment {
     public static UserFragment newInstance() {
         return new UserFragment();
     }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.fragment_personal;
@@ -70,7 +72,7 @@ public class UserFragment extends BaseMvpFragment {
         showUserInfo();
     }
 
-    @OnClick({R.id.ll_no_login, R.id.tv_collect, R.id.tv_message, R.id.btn_setting, R.id.btn_about, R.id.btn_login_out})
+    @OnClick({R.id.ll_no_login, R.id.tv_collect, R.id.tv_message, R.id.btn_setting, R.id.btn_about, R.id.btn_login_out, R.id.tv_history})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_no_login://登录
@@ -100,6 +102,8 @@ public class UserFragment extends BaseMvpFragment {
                         }).setMessage("确定要退出登录？").create();
                 dialog.show();
                 break;
+            case R.id.tv_history://记录
+                break;
             default:
                 break;
         }
@@ -123,10 +127,5 @@ public class UserFragment extends BaseMvpFragment {
             mLlLoginInfo.setVisibility(View.GONE);
             mBtnLoginOut.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    protected IPresenter onLoadPresenter() {
-        return null;
     }
 }

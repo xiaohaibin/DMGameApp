@@ -7,6 +7,7 @@ import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 
 import rx.Subscription;
 
@@ -91,5 +92,11 @@ public interface TasksDataSource {
      * 获取所有评论
      */
     Subscription getComment(int currentPage,String arcurl,int uid,LoadTaskCallback<CommentListBean> callback);
+
+
+    /**
+     * 获取所有评论
+     */
+    Subscription getComment(String usrname,String pwd,LoadTaskCallback<UserInfoBean> callback);
 
 }

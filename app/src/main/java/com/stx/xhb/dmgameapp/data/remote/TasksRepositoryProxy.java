@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.stx.xhb.dmgameapp.config.ApiService;
 import com.stx.xhb.dmgameapp.data.body.GetHotCommentContent;
+import com.stx.xhb.dmgameapp.data.body.LoginContent;
 import com.stx.xhb.dmgameapp.data.body.NewsAboutContent;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
@@ -14,6 +15,7 @@ import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.body.GameRankContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
@@ -338,7 +340,7 @@ public class TasksRepositoryProxy implements TasksDataSource {
     }
 
     @Override
-    public Subscription getNewsAbout(String url,final LoadTaskCallback<NewsAboutBean> callback) {
+    public Subscription getNewsAbout(String url, final LoadTaskCallback<NewsAboutBean> callback) {
         return HttpManager.getInstance().createService(ApiService.class)
                 .getNewsAbout(RequestBodyHelper.creatRequestBody(new NewsAboutContent(url)))
                 .compose(TransformUtils.<HttpResult<NewsAboutBean>>defaultSchedulers())
@@ -409,6 +411,34 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(CommentListBean commentListBean) {
                         callback.onTaskLoaded(commentListBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription getComment(String usrname, String pwd, final LoadTaskCallback<UserInfoBean> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .login(RequestBodyHelper.creatRequestBody(new LoginContent(usrname, pwd)))
+                .compose(TransformUtils.<HttpResult<UserInfoBean>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<UserInfoBean>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(UserInfoBean userInfoBean) {
+                        callback.onTaskLoaded(userInfoBean);
                     }
 
                     @Override

@@ -1,23 +1,12 @@
 package com.stx.xhb.dmgameapp.mvp.presenter;
 
-import android.text.TextUtils;
-
 import com.stx.core.mvp.BasePresenter;
-import com.stx.core.utils.GsonUtil;
-import com.stx.xhb.dmgameapp.config.API;
-import com.stx.xhb.dmgameapp.config.Constants;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
-import com.stx.xhb.dmgameapp.data.entity.NewsDetailsContentBean;
-import com.stx.xhb.dmgameapp.data.entity.NewsListBean;
 import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
-import okhttp3.Call;
-import okhttp3.Request;
 import rx.Subscription;
 
 /**
@@ -27,7 +16,6 @@ import rx.Subscription;
  * @github:https://github.com/xiaohaibin
  * @describe:
  */
-
 public class GetNewsDetailsPresenter extends BasePresenter<GetNewsDetailsContract.View> implements GetNewsDetailsContract.Model {
 
     @Override

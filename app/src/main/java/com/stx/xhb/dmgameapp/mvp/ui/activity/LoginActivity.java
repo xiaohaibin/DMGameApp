@@ -1,12 +1,9 @@
 package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stx.core.base.BaseMvpActivity;
@@ -22,8 +19,6 @@ import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-
-import static com.stx.xhb.dmgameapp.R.id.btn_question;
 
 /**
  * Author：xiaohaibin
@@ -41,17 +36,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     ClearEditText mEdAccount;
     @Bind(R.id.ed_pwd)
     HidePwEditText mEdPwd;
-    @Bind(R.id.ed_answer)
-    HidePwEditText mEdAnswer;
-    @Bind(R.id.ll_answer)
-    LinearLayout mLlAnswer;
     @Bind(R.id.btn_login)
     TextView mBtnLogin;
     @Bind(R.id.btn_register)
     TextView mBtnRegister;
-    @Bind(R.id.btn_question)
-    TextView mBtnQuestion;
-    private int questionsId = 0;
 
     @Override
     protected int getLayoutResource() {
@@ -63,17 +51,17 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
         initToolBar(mToolbar, "登录");
     }
 
-    @OnClick({btn_question, R.id.btn_login, R.id.btn_register})
+    @OnClick({R.id.tv_forget, R.id.btn_login, R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case btn_question://选择问题
-                showQuestionList();
+            case R.id.tv_forget://忘记密码
+                RegisterActivity.start(LoginActivity.this,true);
                 break;
             case R.id.btn_login://登录
-                mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString(), String.valueOf(questionsId), mEdAnswer.getText().toString());
+//                mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString(), String.valueOf(questionsId), mEdAnswer.getText().toString());
                 break;
             case R.id.btn_register://注册
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                RegisterActivity.start(LoginActivity.this,false);
                 break;
             default:
                 break;
@@ -100,25 +88,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void loginFailed(String msg) {
         ToastUtil.show(msg);
-    }
-
-    private void showQuestionList() {
-        final String[] items = new String[]{"安全问题未设置", "母亲的名字", "爷爷的名字", "父亲出生的城市", "您其中一位老师的名字", "您个人计算机的型号", "您最喜欢的餐馆的名字", "驾驶证最后四位数字"};
-        AlertDialog dialog = new AlertDialog.Builder(this).setTitle("请选择安全问题")
-                .setSingleChoiceItems(items, questionsId, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mBtnQuestion.setText(items[which]);
-                        questionsId = which;
-                        if (questionsId != 0) {
-                            mLlAnswer.setVisibility(View.VISIBLE);
-                        } else {
-                            mLlAnswer.setVisibility(View.GONE);
-                        }
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
     }
 
     @Override

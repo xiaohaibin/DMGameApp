@@ -6,6 +6,7 @@ import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
+import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 
 import okhttp3.RequestBody;
@@ -318,6 +319,16 @@ public interface ApiService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("allso")
     Observable<HttpResult<NewsPageBean>> serachByKeyWord(@Body RequestBody body);
+
+
+    /**
+     * 用户登录
+     * 方式:POST
+     * 参数:{"username":"jxnk25","passwd":"sfsdsdsd","time":1538039158747,"sign":"be46fce7daef59fcf56b6be5fbb3d60d"}
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("mylogin")
+    Observable<HttpResult<UserInfoBean>> login(@Body RequestBody body);
 
 
 }

@@ -1,11 +1,16 @@
 package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.widget.ClearEditText;
+import com.stx.core.widget.GetCodeButton;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
@@ -16,6 +21,7 @@ import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -23,7 +29,7 @@ import butterknife.OnClick;
  * Time：2017/9/13
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：注册页面
+ * Describe：注册页面/忘记密码
  */
 
 public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.registerView {
@@ -34,10 +40,18 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     ClearEditText mEdAccount;
     @Bind(R.id.ed_pwd)
     HidePwEditText mEdPwd;
-    @Bind(R.id.ed_sure_pwd)
-    HidePwEditText mEdSurePwd;
-    @Bind(R.id.ed_sure_email)
-    HidePwEditText mEdSureEmail;
+    @Bind(R.id.ed_code)
+    EditText mEdCode;
+    @Bind(R.id.tv_get_code)
+    GetCodeButton mTvGetCode;
+    @Bind(R.id.btn_register)
+    TextView mTvRegister;
+
+    public static void start(Context context, boolean isForget) {
+        Intent intent = new Intent(context, RegisterActivity.class);
+        intent.putExtra("isforget", isForget);
+        context.startActivity(intent);
+    }
 
     @Override
     protected int getLayoutResource() {
@@ -46,12 +60,26 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     protected void onInitialization(Bundle bundle) {
-        initToolBar(mToolbar, "注册");
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.hasExtra("isforget")) {
+                boolean isforget = intent.getBooleanExtra("isforget", false);
+                initToolBar(mToolbar, isforget ? "忘记密码" : "注册");
+                mTvRegister.setText(isforget ? "提交" : "注册");
+            }
+        }
     }
 
-    @OnClick(R.id.btn_register)
-    public void onViewClicked() {
-        mPresenter.register(mEdAccount.getText().toString(), mEdPwd.getText().toString(), mEdSurePwd.getText().toString(), mEdSureEmail.getText().toString());
+    @OnClick({R.id.btn_register, R.id.tv_get_code})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_register:
+                break;
+            case R.id.tv_get_code:
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -78,6 +106,6 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     protected RegisterPresenter onLoadPresenter() {
-        return null;
+        return new RegisterPresenter();
     }
 }

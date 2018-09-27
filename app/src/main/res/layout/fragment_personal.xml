@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_height="85dp"
                 android:src="@drawable/default_image"
                 app:siShape="@drawable/shape_rounded_rectangle"
-                app:siSquare="true"/>
+                app:siSquare="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text="jxnk25"
                     android:textColor="@color/colorWhite"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/tv_info"
@@ -49,7 +49,7 @@
                     android:layout_marginTop="10dp"
                     android:text="等级：新手玩家\n积分：2\n帖子：2"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14dp"/>
+                    android:textSize="14dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:layout_marginTop="15dp"
                 android:src="@mipmap/ic_logo"
                 app:siBorderColor="#fcfcfc"
-                app:siBorderWidth="2dp"/>
+                app:siBorderWidth="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_marginTop="20dp"
                 android:text="登录/注册"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -91,19 +91,20 @@
         <TextView
             android:id="@+id/tv_collect"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?selectableItemBackground"
             android:drawableTop="@drawable/user_collect"
-            android:gravity="center"
+            android:drawablePadding="8dp"
+            android:gravity="center|bottom"
             android:padding="4dp"
             android:text="收藏"
-            android:textColor="@color/color_888888"/>
+            android:textColor="@color/color_888888" />
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="@color/divider"/>
+            android:background="@color/divider" />
 
         <TextView
             android:id="@+id/tv_message"
@@ -112,17 +113,35 @@
             android:layout_weight="1"
             android:background="?selectableItemBackground"
             android:drawableTop="@drawable/user_information"
+            android:drawablePadding="8dp"
             android:gravity="center"
             android:padding="4dp"
-            android:text="消息"
-            android:textColor="@color/color_888888"/>
+            android:text="评论"
+            android:textColor="@color/color_888888" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/divider" />
+
+        <TextView
+            android:id="@+id/tv_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:drawableTop="@drawable/icon_history"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="记录"
+            android:textColor="@color/color_888888" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:background="@color/color_f3f3f3"/>
+        android:background="@color/color_f3f3f3" />
 
     <com.stx.core.widget.LabelIndicatorView
         android:id="@+id/btn_setting"
@@ -132,9 +151,9 @@
         android:foreground="?selectableItemBackground"
         android:visibility="visible"
         app:label_Indicator="@drawable/img_cmmon_next"
-        app:label_title="设置"/>
+        app:label_title="设置" />
 
-    <include layout="@layout/layout_divider_panding"/>
+    <include layout="@layout/layout_divider_panding" />
 
     <com.stx.core.widget.LabelIndicatorView
         android:id="@+id/btn_about"
@@ -144,12 +163,12 @@
         android:foreground="?selectableItemBackground"
         android:visibility="visible"
         app:label_Indicator="@drawable/img_cmmon_next"
-        app:label_title="关于"/>
+        app:label_title="关于" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:background="@color/color_f3f3f3"/>
+        android:background="@color/color_f3f3f3" />
 
     <TextView
         android:id="@+id/btn_login_out"
@@ -161,6 +180,6 @@
         android:text="退出登录"
         android:textColor="@color/color_888888"
         android:textSize="15sp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

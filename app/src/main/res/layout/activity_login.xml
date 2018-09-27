@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"/>
+        android:background="?attr/colorPrimary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
             android:background="@null"
             android:drawableLeft="@drawable/user_name"
             android:drawablePadding="10dp"
-            android:hint="用户名（三大妈账号）"
+            android:hint="用户名"
             android:singleLine="true"
-            android:textSize="14dp"/>
+            android:textSize="14dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/divider"/>
+            android:background="@color/divider" />
 
         <com.stx.core.widget.HidePwEditText
             android:id="@+id/ed_pwd"
@@ -44,71 +44,47 @@
             android:hint="密码"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textSize="14dp"/>
+            android:textSize="14dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
 
         <TextView
-            android:id="@+id/btn_question"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:drawableLeft="@drawable/user_safe"
-            android:drawablePadding="10dp"
-            android:drawableRight="@drawable/img_cmmon_next"
-            android:gravity="center_vertical"
-            android:text="安全问题(未设置可以忽略）"
-            android:textSize="14dp"/>
-
-        <LinearLayout
-            android:id="@+id/ll_answer"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_forget"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:text="忘记密码？"
+            android:textColor="@color/color_008cf0"
+            android:textSize="14dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"/>
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="注册"
+            android:textColor="@color/color_008cf0"
+            android:textSize="14dp" />
 
-            <com.stx.core.widget.HidePwEditText
-                android:id="@+id/ed_answer"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@null"
-                android:drawableLeft="@drawable/user_safe"
-                android:drawablePadding="10dp"
-                android:hint="答案"
-                android:textSize="14dp"/>
-
-        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="15dp"
         android:background="@color/colorWhite"
         android:foreground="?selectableItemBackground"
         android:gravity="center"
         android:text="登录"
         android:textColor="@color/color_008cf0"
-        android:textSize="15dp"/>
-
-    <TextView
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/colorWhite"
-        android:foreground="?selectableItemBackground"
-        android:gravity="center"
-        android:text="注册"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15dp"/>
+        android:textSize="15dp" />
 
 </LinearLayout>

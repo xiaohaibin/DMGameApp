@@ -7,41 +7,35 @@ import com.stx.xhb.dmgameapp.base.BaseEntity;
  * Time：2017/9/12
  * Emil：xhb_199409@163.com
  * Github：https://github.com/xiaohaibin/
- * Describe：
+ * Describe：用户信息实体类
  */
 
 public class UserInfoBean extends BaseEntity{
 
-    /**
-     * code : 1
-     * uid : 9749488
-     * username : jxnk25
-     */
-
-    private String uid;
+    private String nickname;
+    private String avatarstr;
+    private int uid;
     private String username;
-    private HtmlEntity html;
-    private String access_token;
-    private String encrypt_sid;
-    private String expires_in;
+    private String mobile;
+    private int integral;
+    private String title;
+    private int title_level;
+    private int level2;
+    private int level3;
+    private int level4;
+    private int up_nick;
+    private int app_login;
+    private String integralmsg;
 
-    public HtmlEntity getHtml() {
-        return html;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getAccess_token() {
-        return access_token;
+    public String getAvatarstr() {
+        return avatarstr;
     }
 
-    public String getEncrypt_sid() {
-        return encrypt_sid;
-    }
-
-    public String getExpires_in() {
-        return expires_in;
-    }
-
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
@@ -49,53 +43,46 @@ public class UserInfoBean extends BaseEntity{
         return username;
     }
 
-    public static class HtmlEntity{
-
-        /**
-         * uid : 9749488
-         * username : jxnk25
-         * credits : 2
-         * grouptitle : 新手玩家
-         * posts : 2
-         * threads : 0
-         * authimg : http://user.3dmgame.com/avatar.php?uid=9749488&size=middle
-         */
-
-        private String uid;
-        private String username;
-        private String credits;
-        private String grouptitle;
-        private String posts;
-        private String threads;
-        private String authimg;
-
-        public String getUid() {
-            return uid;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public String getCredits() {
-            return credits;
-        }
-
-        public String getGrouptitle() {
-            return grouptitle;
-        }
-
-        public String getPosts() {
-            return posts;
-        }
-
-        public String getThreads() {
-            return threads;
-        }
-
-        public String getAuthimg() {
-            return authimg;
-        }
+    public String getMobile() {
+        return mobile;
     }
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getTitle_level() {
+        return title_level;
+    }
+
+    public int getLevel2() {
+        return level2;
+    }
+
+    public int getLevel3() {
+        return level3;
+    }
+
+    public int getLevel4() {
+        return level4;
+    }
+
+
+    public int getUp_nick() {
+        return up_nick;
+    }
+
+    public int getApp_login() {
+        return app_login;
+    }
+
+    public String getIntegralmsg() {
+        return integralmsg;
+    }
+
 }
 

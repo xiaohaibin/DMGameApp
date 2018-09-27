@@ -14,7 +14,7 @@ import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 public interface LoginContract {
 
     interface loginModel extends IModel {
-        void login(String username, String pwd, String questionid, String answer);
+        void login(String username, String pwd);
     }
 
     interface loginView extends IView {
