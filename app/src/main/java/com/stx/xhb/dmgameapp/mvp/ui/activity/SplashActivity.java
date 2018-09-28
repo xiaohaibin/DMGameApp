@@ -2,17 +2,13 @@ package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
-import com.jaeger.library.StatusBarUtil;
+
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
@@ -47,6 +43,13 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
         AppManager.getAppManager().addActivity(this);
         setContentView(R.layout.activity_spalsh);
         mLlAd = findViewById(R.id.ll_ad);
+        loadAd();
+    }
+
+    /**
+     * 加载广告
+     */
+    private void loadAd() {
         SplashAD splashAD = new SplashAD(this, mLlAd, Constants.APPID, Constants.SplashPosID, this, 3000);
     }
 
@@ -101,7 +104,7 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
 
     @Override
     public void onADClicked() {
-        Log.i("3DMGAME", "SplashADClicked");
+        Log.i("dmgame", "SplashADClicked");
     }
 
     /**
@@ -125,5 +128,10 @@ public class SplashActivity extends AppCompatActivity implements SplashADListene
     protected void onDestroy() {
         super.onDestroy();
         AppManager.getAppManager().finishActivity(this);
+    }
+
+    @Override
+    public void onADExposure() {
+
     }
 }
