@@ -10,18 +10,15 @@ import android.widget.TextView;
 
 import com.stx.core.base.BaseMvpActivity;
 import com.stx.core.widget.ClearEditText;
-import com.stx.core.widget.GetCodeButton;
+import com.stx.core.widget.CountDownButton;
 import com.stx.core.widget.HidePwEditText;
 import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
-import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.mvp.contract.RegisterContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.RegisterPresenter;
-import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -42,7 +39,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     @Bind(R.id.ed_code)
     EditText mEdCode;
     @Bind(R.id.tv_get_code)
-    GetCodeButton mTvGetCode;
+    CountDownButton mTvGetCode;
     @Bind(R.id.btn_register)
     TextView mTvRegister;
     private boolean mIsforget;
@@ -113,8 +110,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void sendSmsCodeSuccess(String msg) {
-        mTvGetCode.setText("重新获取");
-        mTvGetCode.disableIn(60);
+        mTvGetCode.start();
         ToastUtil.show(" 已发送短信至手机，请注意查收");
     }
 

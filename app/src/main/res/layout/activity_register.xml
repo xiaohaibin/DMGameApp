@@ -26,6 +26,7 @@
             android:drawableLeft="@drawable/user_name"
             android:drawablePadding="10dp"
             android:hint="手机号"
+            android:maxLength="11"
             android:singleLine="true"
             android:textSize="14dp" />
 
@@ -71,7 +72,7 @@
             android:singleLine="true"
             android:textSize="14dp" />
 
-        <com.stx.core.widget.GetCodeButton
+        <com.stx.core.widget.CountDownButton
             android:id="@+id/tv_get_code"
             android:layout_width="100dp"
             android:layout_height="match_parent"
