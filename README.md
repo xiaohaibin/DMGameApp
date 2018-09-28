@@ -26,7 +26,7 @@
   
  [Butterknife  一键注解](https://github.com/JakeWharton/butterknife)
  
- [Retrofit+Rxjava 网络加载框架](https://github.com/hongyangAndroid/okhttputils)
+ [Retrofit+Rxjava 网络加载框架](https://github.com/square/retrofit)
   
  [Circleimageview 圆角图片处理](https://github.com/hdodenhof/CircleImageView)
   
