@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.mvp.ui.fragment;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -19,10 +20,13 @@ import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsDetailsPresenter;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.NewsDetailsAdapter;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar;
+
+import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -92,6 +96,16 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
                 mImg = arguments.getString("img");
             }
         }
+        mNewsDetailsAdapter.setOnClickMoreCommentListener(new NewsDetailsAdapter.OnClickMoreCommentListener() {
+            @Override
+            public void onClick() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    ((NewsDetailsActivity)Objects.requireNonNull(getActivity())).vpContainer.setCurrentItem(1);
+                }else {
+                    ((NewsDetailsActivity)(getActivity())).vpContainer.setCurrentItem(1);
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -113,18 +127,20 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     protected void lazyLoad() {
         mNewsDetailsAdapter.setWebData(mUrl);
         mPresenter.getNewsDetailsData(mAccurl);
-        mPresenter.getCommentListData(1,mAccurl,uid);
     }
 
     @Override
     public void setNewsDetailsData(NewsAboutBean newsAboutBean) {
-        mNewsDetailsAdapter.addNewList(newsAboutBean.getList());
-        mNewsDetailsAdapter.addCommentListLabel();
+        mPresenter.getCommentListData(1,mAccurl,uid);
+        if (newsAboutBean.getList()!=null&&!newsAboutBean.getList().isEmpty()) {
+            mNewsDetailsAdapter.addListLabel("相关内容");
+            mNewsDetailsAdapter.addNewList(newsAboutBean.getList());
+        }
     }
 
     @Override
     public void getNewsDetailsDataFailed(String msg) {
-        mNewsDetailsAdapter.addCommentListLabel();
+        mPresenter.getCommentListData(1,mAccurl,uid);
     }
 
     @Override
@@ -139,6 +155,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
         } else {
             tvCommentCount.setText(String.valueOf(commentListData.getTotal()));
         }
+        mNewsDetailsAdapter.addListLabel("最新评论");
         mNewsDetailsAdapter.addAll(commentListData.getList());
         mNewsDetailsAdapter.addMoreCommentFooter();
     }

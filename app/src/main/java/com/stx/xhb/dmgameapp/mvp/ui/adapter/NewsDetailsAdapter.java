@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -109,7 +110,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.Lis
         }
     }
 
-    public void addCommentListLabel() {
+    public void addListLabel(final String title) {
         addHeader(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
@@ -118,6 +119,10 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.Lis
 
             @Override
             public void onBindView(View headerView) {
+                if (headerView != null) {
+                    TextView tvTitle = (TextView) headerView.findViewById(R.id.tv_title);
+                    tvTitle.setText(title);
+                }
             }
         });
     }
@@ -145,7 +150,25 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.Lis
 
             @Override
             public void onBindView(View headerView) {
+                headerView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                           if (mOnClickMoreCommentListener!=null){
+                               mOnClickMoreCommentListener.onClick();
+                           }
+                    }
+                });
             }
         });
+    }
+
+    public OnClickMoreCommentListener mOnClickMoreCommentListener;
+
+    public void setOnClickMoreCommentListener(OnClickMoreCommentListener onClickMoreCommentListener) {
+        mOnClickMoreCommentListener = onClickMoreCommentListener;
+    }
+
+    public interface OnClickMoreCommentListener {
+        void onClick();
     }
 }

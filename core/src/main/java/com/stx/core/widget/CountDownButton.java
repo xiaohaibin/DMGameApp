@@ -86,7 +86,7 @@ public class CountDownButton extends TextView {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     setEnabled(false);
-                    setText(String.valueOf(millisUntilFinished / 1000 + "S后重试"));
+                    setText(String.valueOf(millisUntilFinished / 1000 + "秒后重发"));
                 }
 
                 @Override
