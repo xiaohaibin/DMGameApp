@@ -3,9 +3,12 @@ package com.stx.xhb.dmgameapp.data.remote;
 import android.util.Log;
 
 import com.stx.xhb.dmgameapp.config.ApiService;
+import com.stx.xhb.dmgameapp.data.body.FindPwdContent;
 import com.stx.xhb.dmgameapp.data.body.GetHotCommentContent;
 import com.stx.xhb.dmgameapp.data.body.LoginContent;
 import com.stx.xhb.dmgameapp.data.body.NewsAboutContent;
+import com.stx.xhb.dmgameapp.data.body.RegisterContent;
+import com.stx.xhb.dmgameapp.data.body.SendSmsContent;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.body.GameClassifyContent;
@@ -16,6 +19,7 @@ import com.stx.xhb.dmgameapp.data.body.GameRankContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.http.BaseResponse;
 import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 import com.stx.xhb.dmgameapp.data.TasksDataSource;
@@ -426,7 +430,7 @@ public class TasksRepositoryProxy implements TasksDataSource {
     }
 
     @Override
-    public Subscription getComment(String usrname, String pwd, final LoadTaskCallback<UserInfoBean> callback) {
+    public Subscription login(String usrname, String pwd, final LoadTaskCallback<UserInfoBean> callback) {
         return HttpManager.getInstance().createService(ApiService.class)
                 .login(RequestBodyHelper.creatRequestBody(new LoginContent(usrname, pwd)))
                 .compose(TransformUtils.<HttpResult<UserInfoBean>>defaultSchedulers())
@@ -439,6 +443,90 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(UserInfoBean userInfoBean) {
                         callback.onTaskLoaded(userInfoBean);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription register(String mobile, String passwd, String validate, final LoadTaskCallback<String> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .register(RequestBodyHelper.creatRequestBody(new RegisterContent(mobile, passwd, validate)))
+                .compose(TransformUtils.<HttpResult<String>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<String>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(String baseResponse) {
+                        callback.onTaskLoaded(baseResponse);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription sendSms(String mobile, int act, int uid, final LoadTaskCallback<String> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .sendSMS(RequestBodyHelper.creatRequestBody(new SendSmsContent(mobile, act, uid)))
+                .compose(TransformUtils.<HttpResult<String>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<String>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(String baseResponse) {
+                        callback.onTaskLoaded(baseResponse);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription findPwd(String mobile, String validate, String passwd, final LoadTaskCallback<String> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .findPwd(RequestBodyHelper.creatRequestBody(new FindPwdContent(mobile, validate, passwd)))
+                .compose(TransformUtils.<HttpResult<String>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<String>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(String baseResponse) {
+                        callback.onTaskLoaded(baseResponse);
                     }
 
                     @Override

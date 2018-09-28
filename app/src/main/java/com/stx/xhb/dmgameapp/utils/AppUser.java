@@ -19,7 +19,7 @@ public class AppUser {
 
     private static UserInfoBean sUserInfoBean;
 
-    public static void init(){
+    public static void init() {
         String userInfo = SPUtils.getString(DmgApplication.getInstance().getApplicationContext(), "userInfo", "");
         if (!TextUtils.isEmpty(userInfo)) {
             sUserInfoBean = GsonUtil.newGson().fromJson(userInfo, UserInfoBean.class);
@@ -40,7 +40,6 @@ public class AppUser {
 
     /**
      * 登录成功时调用
-     *
      * @param userInfoBean
      */
     public static void login(UserInfoBean userInfoBean) {
@@ -49,7 +48,6 @@ public class AppUser {
 
     /**
      * 刷新用户信息时调用
-     *
      * @param userInfoBean
      */
     public static void setUserInfo(UserInfoBean userInfoBean) {
@@ -62,6 +60,7 @@ public class AppUser {
      */
     public static void logout() {
         sUserInfoBean = null;
+        SPUtils.removeByKey(DmgApplication.getInstance().getApplicationContext(), "userInfo");
     }
 
 }

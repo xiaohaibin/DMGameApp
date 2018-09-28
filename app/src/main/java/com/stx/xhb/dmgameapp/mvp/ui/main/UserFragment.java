@@ -115,13 +115,11 @@ public class UserFragment extends BaseFragment {
             mLlNoLogin.setVisibility(View.GONE);
             mBtnLoginOut.setVisibility(View.VISIBLE);
             UserInfoBean userInfoBean = AppUser.getUserInfoBean();
-            if (userInfoBean.getHtml() != null) {
-                mTvAccount.setText(userInfoBean.getHtml().getUsername());
-                mTvInfo.setText("等级：" + userInfoBean.getHtml().getGrouptitle() + "\n"
-                        + "积分：" + userInfoBean.getHtml().getCredits() + "\n"
-                        + "帖子：" + userInfoBean.getHtml().getPosts());
+            if (userInfoBean != null) {
+                mTvAccount.setText(userInfoBean.getNickname());
+                mTvInfo.setText(String.valueOf("等级：" + userInfoBean.getTitle()));
+                Glide.with(getContext()).load(userInfoBean.getAvatarstr()).into(mIvUserImg);
             }
-            Glide.with(getContext()).load(userInfoBean.getHtml().getAuthimg()).into(mIvUserImg);
         } else {
             mLlNoLogin.setVisibility(View.VISIBLE);
             mLlLoginInfo.setVisibility(View.GONE);

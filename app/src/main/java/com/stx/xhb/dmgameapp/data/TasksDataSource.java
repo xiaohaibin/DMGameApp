@@ -8,6 +8,7 @@ import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.http.BaseResponse;
 
 import rx.Subscription;
 
@@ -95,8 +96,23 @@ public interface TasksDataSource {
 
 
     /**
-     * 获取所有评论
+     * 登录
      */
-    Subscription getComment(String usrname,String pwd,LoadTaskCallback<UserInfoBean> callback);
+    Subscription login(String usrname,String pwd,LoadTaskCallback<UserInfoBean> callback);
+
+    /**
+     * 注册
+     */
+    Subscription register(String mobile, String passwd, String validate,LoadTaskCallback<String> callback);
+
+    /**
+     * 发送验证码
+     */
+    Subscription sendSms(String mobile, int act, int uid,LoadTaskCallback<String> callback);
+
+    /**
+     * 找回密码
+     */
+    Subscription findPwd(String mobile, String validate, String passwd,LoadTaskCallback<String> callback);
 
 }

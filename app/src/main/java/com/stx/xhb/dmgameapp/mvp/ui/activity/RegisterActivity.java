@@ -31,7 +31,6 @@ import butterknife.OnClick;
  * Github：https://github.com/xiaohaibin/
  * Describe：注册页面/忘记密码
  */
-
 public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.registerView {
 
     @Bind(R.id.toolbar)
@@ -46,6 +45,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     GetCodeButton mTvGetCode;
     @Bind(R.id.btn_register)
     TextView mTvRegister;
+    private boolean mIsforget;
 
     public static void start(Context context, boolean isForget) {
         Intent intent = new Intent(context, RegisterActivity.class);
@@ -63,9 +63,9 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
         Intent intent = getIntent();
         if (intent != null) {
             if (intent.hasExtra("isforget")) {
-                boolean isforget = intent.getBooleanExtra("isforget", false);
-                initToolBar(mToolbar, isforget ? "忘记密码" : "注册");
-                mTvRegister.setText(isforget ? "提交" : "注册");
+                mIsforget = intent.getBooleanExtra("isforget", false);
+                initToolBar(mToolbar, mIsforget ? "忘记密码" : "注册");
+                mTvRegister.setText(mIsforget ? "提交" : "注册");
             }
         }
     }
@@ -74,8 +74,18 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_register:
+                if (mIsforget) {
+                    mPresenter.resetPwd(mEdAccount.getText().toString().trim(),mEdPwd.getText().toString().trim(),mEdCode.getText().toString().trim());
+                }else {
+                    mPresenter.register(mEdAccount.getText().toString().trim(),mEdPwd.getText().toString().trim(),mEdCode.getText().toString().trim());
+                }
                 break;
             case R.id.tv_get_code:
+                if (mIsforget) {
+                    mPresenter.sendSms(mEdAccount.getText().toString().trim(),4,0);
+                }else {
+                    mPresenter.sendSms(mEdAccount.getText().toString().trim(),1,0);
+                }
                 break;
             default:
                 break;
@@ -83,10 +93,34 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     }
 
     @Override
-    public void registerSuccess(UserInfoBean infoEntity) {
-        AppUser.login(infoEntity);
-        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+    public void registerSuccess(String msg) {
+        ToastUtil.show(msg);
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         finish();
+    }
+
+    @Override
+    public void resetPwd(String msg) {
+        ToastUtil.show(msg);
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    public void resetPwdFailed(String msg) {
+        ToastUtil.show(msg);
+    }
+
+    @Override
+    public void sendSmsCodeSuccess(String msg) {
+        mTvGetCode.setText("重新获取");
+        mTvGetCode.disableIn(60);
+        ToastUtil.show(" 已发送短信至手机，请注意查收");
+    }
+
+    @Override
+    public void sendSmsCodeFailed(String msg) {
+        ToastUtil.show(msg);
     }
 
     @Override
@@ -96,7 +130,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void showLoading() {
-        DialogMaker.showProgressDialog(this, "正在注册");
+        DialogMaker.showProgressDialog(this, "加载中...");
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
+import com.stx.xhb.dmgameapp.http.BaseResponse;
 import com.stx.xhb.dmgameapp.http.HttpResult;
 
 import okhttp3.RequestBody;
@@ -247,7 +248,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("mysendsms")
-    Observable<HttpResult<NewsPageBean>> sendSMS(@Body RequestBody body);
+    Observable<HttpResult<String>> sendSMS(@Body RequestBody body);
 
     /**
      * 绑定手机号
@@ -257,7 +258,7 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("bindmobilebyuid")
-    Observable<HttpResult<NewsPageBean>> bindPhone(@Body RequestBody body);
+    Observable<HttpResult<BaseResponse>> bindPhone(@Body RequestBody body);
 
     /**
      * 用户评论
@@ -329,6 +330,28 @@ public interface ApiService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("mylogin")
     Observable<HttpResult<UserInfoBean>> login(@Body RequestBody body);
+
+
+
+    /**
+     * 用户注册
+     * 方式:POST
+     * 参数:{"mobile":"13730693919","passwd":"hjjj","validate":"5566","time":1538105744276,"sign":"6166ce9a8f194b1bd8a66dda9ca96a09"}
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("myregister")
+    Observable<HttpResult<String>> register(@Body RequestBody body);
+
+
+    /**
+     * 找回密码
+     * 方式:POST
+     * 参数:{"mobile":"13730693919","passwd":"hjjj","validate":"5566","time":1538105744276,"sign":"6166ce9a8f194b1bd8a66dda9ca96a09"}
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("myregister")
+    Observable<HttpResult<String>> findPwd(@Body RequestBody body);
+
 
 
 }

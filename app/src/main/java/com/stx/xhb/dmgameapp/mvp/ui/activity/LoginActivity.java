@@ -58,7 +58,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 RegisterActivity.start(LoginActivity.this,true);
                 break;
             case R.id.btn_login://登录
-//                mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString(), String.valueOf(questionsId), mEdAnswer.getText().toString());
+                mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString());
                 break;
             case R.id.btn_register://注册
                 RegisterActivity.start(LoginActivity.this,false);

@@ -42,6 +42,8 @@ public abstract class HttpResultSubscriber<T> extends Subscriber<HttpResult<T>> 
             T data = t.getData();
             if (data != null) {
                 onSuccess(data);
+            } else {
+                onSuccess((T) t.getMsg());
             }
         } else {
             throw new ApiException(t.getCode(), t.getMsg());
