@@ -49,7 +49,7 @@ public class SettingActivity extends BaseAppActitity {
         initToolBar(settingToolbar, "设置");
         mTvCache.setText(CacheManager.getTotalCacheSize(this));
 
-        /***** 获取升级信息 *****/
+        /**** 获取升级信息 *****/
         UpgradeInfo upgradeInfo = Beta.getUpgradeInfo();
         if (upgradeInfo == null) {
             mTvVersion.setTextColor(getResources().getColor(R.color.color_888888));

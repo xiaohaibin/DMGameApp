@@ -349,7 +349,7 @@ public interface ApiService {
      * 参数:{"mobile":"13730693919","passwd":"hjjj","validate":"5566","time":1538105744276,"sign":"6166ce9a8f194b1bd8a66dda9ca96a09"}
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
-    @POST("myregister")
+    @POST("myfindpasswd")
     Observable<HttpResult<String>> findPwd(@Body RequestBody body);
 
 

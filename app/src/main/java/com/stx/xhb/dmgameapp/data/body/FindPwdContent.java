@@ -25,6 +25,6 @@ public class FindPwdContent {
         this.passwd = passwd;
         this.checkpasswd = passwd;
         this.time = System.currentTimeMillis();
-        this.sign = StringUtils.getMD5(AppUser.getUserInfoBean().getUid() + validate + passwd + passwd + time);
+        this.sign = StringUtils.getMD5( mobile+validate + passwd + passwd + time);
     }
 }

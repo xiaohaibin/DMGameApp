@@ -69,6 +69,7 @@
             android:drawableLeft="@drawable/user_email"
             android:drawablePadding="6dp"
             android:hint="验证码"
+            android:inputType="number"
             android:singleLine="true"
             android:textSize="14dp" />
 

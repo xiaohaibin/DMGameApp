@@ -67,7 +67,7 @@ public class InfoFragment extends BaseFragment{
         articleViewpager.setAdapter(adapter);
         articleViewpager.setOffscreenPageLimit(mFragmentList.size());
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(articleViewpager);
     }
 }
