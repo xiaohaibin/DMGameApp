@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="140dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_gamed_efault" />
+        android:src="@drawable/icon_game_efault" />
 
     <TextView
         android:id="@+id/tv_game_title"

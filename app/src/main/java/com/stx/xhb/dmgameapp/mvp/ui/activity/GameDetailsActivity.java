@@ -69,7 +69,7 @@ public class GameDetailsActivity extends BaseAppActitity {
             }
             if (extras.containsKey("img")) {
                 String img = extras.getString("img");
-                Glide.with(this).load(img).placeholder(getResources().getDrawable(R.drawable.icon_gamed_efault)).into(ivGameImg);
+                Glide.with(this).load(img).placeholder(getResources().getDrawable(R.drawable.icon_game_efault)).into(ivGameImg);
             }
             if (extras.containsKey("name")) {
                 gameName = extras.getString("name");

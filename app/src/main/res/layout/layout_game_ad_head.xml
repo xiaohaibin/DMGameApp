@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/fl_banner"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_banner"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/icon_news_shape"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:textSize="12dp"
+        android:textColor="@color/colorWhite" />
+
+    <LinearLayout
+        android:id="@+id/ll_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|right"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_score"
+            android:src="@drawable/clipdrawable" />
+
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/colorBackground"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+</FrameLayout>

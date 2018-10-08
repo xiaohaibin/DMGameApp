@@ -10,6 +10,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.GameBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.GameAdViewHolder;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.GameListViewHolder;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder.NewsAdViewHolder;
 
@@ -41,12 +42,12 @@ public class GameListAdapter extends RecyclerArrayAdapter{
         this.mAdList = adList;
         if (mAdList != null && !mAdList.isEmpty()&& getHeaderCount() == 0) {
             addHeader(new ItemView() {
-                NewsAdViewHolder viewHolder;
+                GameAdViewHolder viewHolder;
 
                 @Override
                 public View onCreateView(ViewGroup parent) {
-                    View view = mLayoutInflater.inflate(R.layout.layout_ad_head, parent, false);
-                    viewHolder = new NewsAdViewHolder(view, getContext());
+                    View view = mLayoutInflater.inflate(R.layout.layout_game_ad_head, parent, false);
+                    viewHolder = new GameAdViewHolder(view, getContext());
                     return view;
                 }
 

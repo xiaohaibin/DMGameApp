@@ -151,7 +151,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     @Override
     public void setCommentListData(CommentListBean commentListData) {
         if (commentListData.getTotal() > 100) {
-            tvCommentCount.setText("99+");
+            tvCommentCount.setText(String.valueOf("99+"));
         } else {
             tvCommentCount.setText(String.valueOf(commentListData.getTotal()));
         }
@@ -171,7 +171,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     }
 
 
-    @OnClick({R.id.btn_comment, R.id.btn_share})
+    @OnClick({R.id.btn_comment, R.id.btn_share,R.id.tv_comment_count})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //评论对话框
@@ -183,6 +183,9 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
                 if (!TextUtils.isEmpty(mUrl)) {
                     ShareDialog.share(getFragmentManager(), mKey, mUrl, mKey, mImg);
                 }
+                break;
+            case R.id.tv_comment_count:
+                ((NewsDetailsActivity)(getActivity())).vpContainer.setCurrentItem(1);
                 break;
             default:
                 break;

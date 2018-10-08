@@ -1,7 +1,5 @@
 package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
-import android.graphics.drawable.ClipDrawable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,8 +10,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.stx.core.utils.DateUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.GameBean;
-import com.stx.xhb.dmgameapp.data.entity.GameListBean;
-import com.stx.xhb.dmgameapp.mvp.ui.activity.GameDetailsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,7 +43,7 @@ public class GameViewHolder extends BaseViewHolder<GameBean> {
 
     @Override
     public void setData(final GameBean data) {
-        Glide.with(mIvGameImg.getContext()).load(data.getLitpic()).into(mIvGameImg);
+        Glide.with(mIvGameImg.getContext()).load(data.getLitpic()).placeholder(R.drawable.icon_game_efault).error(R.drawable.icon_game_efault).into(mIvGameImg);
         mTvGameTitle.setText(data.getTitle());
         if (data.getPubdate_at() != 0) {
             mLlLevel.setVisibility(View.GONE);
@@ -56,7 +52,7 @@ public class GameViewHolder extends BaseViewHolder<GameBean> {
         } else {
             mTvGameTime.setVisibility(View.GONE);
             mLlLevel.setVisibility(View.VISIBLE);
-            ((ClipDrawable) mIvLevel.getDrawable()).setLevel((int) (data.getScore() * 1000.0d));
+            mIvLevel.getDrawable().setLevel((int) (data.getScore() * 1000.0d));
             tvLevel.setText(String.valueOf(data.getScore()));
         }
     }

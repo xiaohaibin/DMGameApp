@@ -32,10 +32,10 @@ public class NewsAdViewHolder {
 
     public NewsAdViewHolder(View itemView, Context context) {
         mContext = context;
-        FrameLayout flBanner = (FrameLayout) itemView.findViewById(R.id.fl_banner);
+        FrameLayout flBanner = itemView.findViewById(R.id.fl_banner);
         AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, (int) ((float) ScreenUtil.getScreenWidth(mContext) / 2.0f));
         flBanner.setLayoutParams(layoutParams);
-        mBanner = (XBanner) itemView.findViewById(R.id.xbanner);
+        mBanner = itemView.findViewById(R.id.xbanner);
     }
 
     public void setData(final List<NewsPageBean.SlidesBean> bannerList) {

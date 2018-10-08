@@ -143,6 +143,11 @@ public class NewsPageBean {
         private String webviewurl;
         private String system;
         private float score;
+        private int pubdate_at;
+
+        public int getPubdate_at() {
+            return pubdate_at;
+        }
 
         public String getSystem() {
             return system;
