@@ -1,7 +1,5 @@
 package com.stx.xhb.dmgameapp.http;
 
-import com.stx.xhb.dmgameapp.base.BaseEntity;
-
 import java.io.Serializable;
 
 /**

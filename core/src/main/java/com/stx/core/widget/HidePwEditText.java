@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-
 import com.stx.core.R;
 
 
@@ -59,12 +58,12 @@ public class HidePwEditText extends EditText implements View.OnFocusChangeListen
         hideDrawable = getCompoundDrawables()[2];
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.HidePwEditText);
-            hideImage = typedArray.getResourceId(R.styleable.HidePwEditText_hideDrawable, R.drawable.eye_close3x);
-            showImage = typedArray.getResourceId(R.styleable.HidePwEditText_showDrawable, R.drawable.eye_open3x);
+            hideImage = typedArray.getResourceId(R.styleable.HidePwEditText_hideDrawable, R.drawable.eye_close);
+            showImage = typedArray.getResourceId(R.styleable.HidePwEditText_showDrawable, R.drawable.eye_open);
             typedArray.recycle();
         } else {
-            hideImage = R.drawable.eye_close3x;
-            showImage = R.drawable.eye_open3x;
+            hideImage = R.drawable.eye_close;
+            showImage = R.drawable.eye_open;
         }
         //默认设置隐藏图片
         setHideDrawable(hideImage);
