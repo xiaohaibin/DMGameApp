@@ -61,7 +61,7 @@ public class SettingActivity extends BaseAppActitity {
     }
 
     //点击事件
-    @OnClick({R.id.setting_iv_clearCache, R.id.setting_iv_version, R.id.setting_iv_heart})
+    @OnClick({R.id.setting_iv_clearCache, R.id.setting_iv_version, R.id.setting_iv_heart,R.id.setting_qq})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.setting_iv_clearCache://清理缓存
@@ -82,8 +82,22 @@ public class SettingActivity extends BaseAppActitity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
+            case R.id.setting_qq:
+                joinQQGroup("F9Lc9cp9Cv0JKh1-vnzfcaVrRc9mm-xU");
+                break;
             default:
                 break;
+        }
+    }
+
+    public void joinQQGroup(String key) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            // 未安装手Q或安装的版本不支持
+            ToastUtil.show("未安装QQ或安装的版本不支持");
         }
     }
 

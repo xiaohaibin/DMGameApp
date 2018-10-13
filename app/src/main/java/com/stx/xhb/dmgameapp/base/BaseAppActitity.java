@@ -25,14 +25,12 @@ import butterknife.ButterKnife;
  * @Github：https://github.com/xiaohaibin/
  * @Describe：基类AppCompatActivity
  */
-
 public abstract class BaseAppActitity extends AppCompatActivity {
 
 
     protected abstract int getLayoutResource();
 
     protected abstract void onInitialization(Bundle bundle);
-
 
     protected void initToolBar(Toolbar toolbar, String title) {
         if (toolbar != null) {

@@ -7,7 +7,6 @@ package com.stx.xhb.dmgameapp.base;
  * @Github：https://github.com/xiaohaibin/
  * @Describe：
  */
-
 public class BaseEntity {
 
     private int code = 0;
