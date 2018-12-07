@@ -4,5 +4,9 @@
     <string name="string_view_more">加载更多…</string>
     <string name="string_nomore">--- 没有更多了 ---</string>
     <string name="string_view_empty">暂无数据</string>
+    <string name="string_waring">警告</string>
+    <string name="string_request_permission_tips">需要必要的权限才可以正常使用该功能，您已拒绝获得该权限。 如果需要重新授权，您可以点击“允许”按钮进入系统设置进行授权</string>
+    <string name="string_cancle">取消</string>
+    <string name="string_sure">确定</string>
     <string name="string_share">(分享至游戏资讯，下载链接：https://www.coolapk.com/apk/com.stx.xhb.dmgameapp)</string>
 </resources>

@@ -60,10 +60,12 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
 
     private void init() {
         Bundle bundle = getArguments();
-        title = bundle.getString("title");
-        url = bundle.getString("url");
-        content = bundle.getString("content");
-        imageUrl = bundle.getString("image");
+        if (bundle != null) {
+            title = bundle.getString("title");
+            url = bundle.getString("url");
+            content = bundle.getString("content");
+            imageUrl = bundle.getString("image");
+        }
         channels = new ArrayList<>();
         channels.add(new ShareChannel(R.drawable.icon_wx_friend, "微信"));
         channels.add(new ShareChannel(R.drawable.icon_wx_circle, "朋友圈"));
@@ -162,6 +164,8 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.share_cancel:
                 dismiss();
+                break;
+            default:
                 break;
         }
     }
