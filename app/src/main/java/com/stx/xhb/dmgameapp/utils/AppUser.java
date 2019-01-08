@@ -60,7 +60,7 @@ public class AppUser {
      */
     public static void logout() {
         sUserInfoBean = null;
-        SPUtils.removeByKey(DmgApplication.getInstance().getApplicationContext(), "userInfo");
+        SPUtils.remove(DmgApplication.getInstance().getApplicationContext(), "userInfo");
     }
 
 }

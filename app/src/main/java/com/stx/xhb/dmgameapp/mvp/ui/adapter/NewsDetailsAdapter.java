@@ -128,6 +128,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.Lis
     }
 
     public void addEmptyCommentFooter() {
+        removeAllFooter();
         addFooter(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
@@ -142,6 +143,7 @@ public class NewsDetailsAdapter extends RecyclerArrayAdapter<CommentListBean.Lis
 
 
     public void addMoreCommentFooter() {
+        removeAllFooter();
         addFooter(new ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {

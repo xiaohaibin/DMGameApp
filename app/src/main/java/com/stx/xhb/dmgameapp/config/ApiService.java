@@ -352,6 +352,14 @@ public interface ApiService {
     @POST("myfindpasswd")
     Observable<HttpResult<String>> findPwd(@Body RequestBody body);
 
+    /**
+     * 提交评论
+     * 方式:POST
+     * 参数:{"uid":"9749488","arcurl":"https:\/\/www.3dmgame.com\/news\/201901\/3753128.html","c_sid":0,"content":"bbb","time":1546939794734,"sign":"8073a5065c54514b9e6af8362de781ea"}
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("addcomment")
+    Observable<HttpResult<String>> postComment(@Body RequestBody body);
 
 
 }

@@ -285,4 +285,11 @@ public class API {
      * 参数:{"keyword":"遨游中国","type":1,"pagesize":10,"page":1,"time":1535359357836,"sign":"bf0364b33aa4b9af731a7239f4ffc720"}
      */
     public static final String SERACH_WITH_KEYWORD="https://my.3dmgame.com/app/allso";
+
+    /**
+     * 提交评论
+     * 方式：post
+     * {"uid":"9749488","arcurl":"https:\/\/www.3dmgame.com\/news\/201901\/3753128.html","c_sid":0,"content":"bbb","time":1546939794734,"sign":"8073a5065c54514b9e6af8362de781ea"}
+     */
+    public static final  String POST_COMMENT="https://my.3dmgame.com/app/addcomment";
 }
