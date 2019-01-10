@@ -14,18 +14,26 @@ import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 
 public interface GetCommentListContract {
 
-        interface Model extends IModel{
-                void getCommentListData(int currentPage, String arcurl, int uid);
-        }
+    interface Model extends IModel {
+        void getCommentListData(int currentPage, String arcurl, int uid);
 
-        interface View extends IView{
+        void postComment(String arcurl,String comment, int uid);
 
-                void setCommentListData(CommentListBean commentListData);
+        void replyComment(String uid, int id, String arcurl, String content);
+    }
 
-                void getCommentListDataFailed();
+    interface View extends IView {
 
-                void showLoading();
+        void setCommentListData(CommentListBean commentListData);
 
-                void hideLoading();
-        }
+        void getCommentListDataFailed();
+
+        void postCommentSuccess();
+
+        void postCommentFailed(String msg);
+
+        void showLoading();
+
+        void hideLoading();
+    }
 }

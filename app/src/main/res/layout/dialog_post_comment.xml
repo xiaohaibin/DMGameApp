@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar
-        android:id="@+id/titlebar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:left_button_image="@drawable/icon_img_return"
-        app:title_background="@color/colorPrimary"
-        app:title_text="全部评论"
-        app:title_textColor="@color/colorWhite"
-        app:title_textSize="16sp" />
-
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/rv_comment_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_empty="@layout/view_empty" />
 
     <View
         android:layout_width="match_parent"
@@ -43,8 +24,8 @@
             android:layout_weight="1"
             android:background="@drawable/shape_edit_comment"
             android:gravity="center_vertical"
-            android:padding="8dp"
             android:hint="说点什么..."
+            android:padding="8dp"
             android:textSize="12sp" />
 
         <TextView
@@ -57,5 +38,4 @@
             android:textSize="13sp" />
 
     </LinearLayout>
-
 </LinearLayout>

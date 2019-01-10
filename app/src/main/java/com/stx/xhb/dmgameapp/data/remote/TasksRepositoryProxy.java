@@ -1,33 +1,33 @@
 package com.stx.xhb.dmgameapp.data.remote;
 
-import android.util.Log;
-
 import com.stx.xhb.dmgameapp.config.ApiService;
+import com.stx.xhb.dmgameapp.data.TasksDataSource;
 import com.stx.xhb.dmgameapp.data.body.FindPwdContent;
+import com.stx.xhb.dmgameapp.data.body.GameClassifyContent;
+import com.stx.xhb.dmgameapp.data.body.GameContent;
+import com.stx.xhb.dmgameapp.data.body.GameRankContent;
 import com.stx.xhb.dmgameapp.data.body.GetHotCommentContent;
 import com.stx.xhb.dmgameapp.data.body.LoginContent;
 import com.stx.xhb.dmgameapp.data.body.NewsAboutContent;
+import com.stx.xhb.dmgameapp.data.body.NewsContent;
+import com.stx.xhb.dmgameapp.data.body.PostCommentContent;
 import com.stx.xhb.dmgameapp.data.body.RegisterContent;
+import com.stx.xhb.dmgameapp.data.body.ReplyCommentContent;
 import com.stx.xhb.dmgameapp.data.body.SendSmsContent;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
-import com.stx.xhb.dmgameapp.data.body.GameClassifyContent;
-import com.stx.xhb.dmgameapp.data.body.GameContent;
 import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
-import com.stx.xhb.dmgameapp.data.body.GameRankContent;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
+import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.PostCommentRepsonse;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
-import com.stx.xhb.dmgameapp.http.BaseResponse;
-import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
-import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
-import com.stx.xhb.dmgameapp.data.TasksDataSource;
-import com.stx.xhb.dmgameapp.data.body.NewsContent;
-import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.http.HttpManager;
 import com.stx.xhb.dmgameapp.http.HttpResult;
+import com.stx.xhb.dmgameapp.http.HttpResultSubscriber;
 import com.stx.xhb.dmgameapp.http.TransformUtils;
+import com.stx.xhb.dmgameapp.utils.RequestBodyHelper;
 
 import rx.Subscription;
 
@@ -527,6 +527,62 @@ public class TasksRepositoryProxy implements TasksDataSource {
                     @Override
                     public void onSuccess(String baseResponse) {
                         callback.onTaskLoaded(baseResponse);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription postComment(String accurl, String content, int uid, final LoadTaskCallback<PostCommentRepsonse> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .postComment(RequestBodyHelper.creatRequestBody(new PostCommentContent(String.valueOf(uid), accurl, content)))
+                .compose(TransformUtils.<HttpResult<PostCommentRepsonse>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<PostCommentRepsonse>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(PostCommentRepsonse repsonse) {
+                        callback.onTaskLoaded(repsonse);
+                    }
+
+                    @Override
+                    public void onError(String msg, int code) {
+                        callback.onDataNotAvailable(msg);
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        callback.onCompleted();
+                    }
+                });
+    }
+
+    @Override
+    public Subscription replyComment(String uid, int id, String arcurl, String content, final LoadTaskCallback<PostCommentRepsonse> callback) {
+        return HttpManager.getInstance().createService(ApiService.class)
+                .replyComment(RequestBodyHelper.creatRequestBody(new ReplyCommentContent(String.valueOf(uid), id, arcurl, content)))
+                .compose(TransformUtils.<HttpResult<PostCommentRepsonse>>defaultSchedulers())
+                .subscribe(new HttpResultSubscriber<PostCommentRepsonse>() {
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(PostCommentRepsonse repsonse) {
+                        callback.onTaskLoaded(repsonse);
                     }
 
                     @Override

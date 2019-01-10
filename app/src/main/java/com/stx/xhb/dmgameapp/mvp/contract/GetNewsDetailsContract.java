@@ -28,6 +28,10 @@ public interface GetNewsDetailsContract {
 
         void getCommentListDataFailed(String msg);
 
+        void postCommentSuccess();
+
+        void postCommentFailed(String msg);
+
         void showLoading();
 
         void hideLoading();
@@ -39,5 +43,6 @@ public interface GetNewsDetailsContract {
 
         void getCommentListData(int currentPage, String arcurl, int uid);
 
+        void postComment(String arcurl,String comment, int uid);
     }
 }

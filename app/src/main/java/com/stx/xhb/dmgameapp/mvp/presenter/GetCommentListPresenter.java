@@ -7,6 +7,7 @@ import com.stx.core.utils.GsonUtil;
 import com.stx.xhb.dmgameapp.config.API;
 import com.stx.xhb.dmgameapp.data.callback.LoadTaskCallback;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
+import com.stx.xhb.dmgameapp.data.entity.PostCommentRepsonse;
 import com.stx.xhb.dmgameapp.data.remote.TasksRepositoryProxy;
 import com.stx.xhb.dmgameapp.mvp.contract.GetCommentListContract;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -24,7 +25,7 @@ import rx.Subscription;
  * @describe:
  */
 
-public class GetCommentListPresenter extends BasePresenter<GetCommentListContract.View> implements GetCommentListContract.Model{
+public class GetCommentListPresenter extends BasePresenter<GetCommentListContract.View> implements GetCommentListContract.Model {
 
     @Override
     public void getCommentListData(int currentPage, String arcurl, int uid) {
@@ -53,5 +54,60 @@ public class GetCommentListPresenter extends BasePresenter<GetCommentListContrac
             }
         });
         addSubscription(subscription);
+    }
+
+    @Override
+    public void postComment(String arcurl, String comment, int uid) {
+        if (getView() == null) {
+            return;
+        }
+        TasksRepositoryProxy.getInstance().postComment(arcurl, comment, uid, new LoadTaskCallback<PostCommentRepsonse>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+
+            @Override
+            public void onTaskLoaded(PostCommentRepsonse data) {
+                getView().postCommentSuccess();
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
+                getView().postCommentFailed(msg);
+            }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
+    }
+
+    @Override
+    public void replyComment(String uid, int id, String arcurl, String content) {
+        if (getView()==null){
+            return;
+        }
+        TasksRepositoryProxy.getInstance().replyComment(uid, id, arcurl, content, new LoadTaskCallback<PostCommentRepsonse>() {
+            @Override
+            public void onStart() {
+                getView().showLoading();
+            }
+            @Override
+            public void onTaskLoaded(PostCommentRepsonse data) {
+                   getView().postCommentSuccess();
+            }
+
+            @Override
+            public void onDataNotAvailable(String msg) {
+                   getView().postCommentFailed(msg);
+            }
+
+            @Override
+            public void onCompleted() {
+                getView().hideLoading();
+            }
+        });
     }
 }

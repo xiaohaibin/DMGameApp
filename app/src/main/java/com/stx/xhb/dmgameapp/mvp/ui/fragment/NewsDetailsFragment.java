@@ -13,17 +13,20 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
+import com.stx.core.widget.dialog.DialogMaker;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetNewsDetailsContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetNewsDetailsPresenter;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.LoginActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.NewsDetailsAdapter;
+import com.stx.xhb.dmgameapp.mvp.ui.dialog.PostCommentDilaog;
 import com.stx.xhb.dmgameapp.share.ShareDialog;
+import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar;
 
@@ -51,11 +54,11 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
     private String mKey;
     private String mUrl;
     private String mImg;
-    private int uid=0;
     private NewsDetailsAdapter mNewsDetailsAdapter;
     private String mAccurl;
+    private PostCommentDilaog mPostCommentDilaog;
 
-    public static NewsDetailsFragment newInstance(String webUrl,String accurl,String key, String img) {
+    public static NewsDetailsFragment newInstance(String webUrl, String accurl, String key, String img) {
         Bundle args = new Bundle();
         NewsDetailsFragment fragment = new NewsDetailsFragment();
         args.putString("webUrl", webUrl);
@@ -90,7 +93,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
             if (arguments.containsKey("webUrl")) {
                 mUrl = arguments.getString("webUrl");
             }
-            if (arguments.containsKey("accurl")){
+            if (arguments.containsKey("accurl")) {
                 mAccurl = arguments.getString("accurl");
             }
             if (arguments.containsKey("img")) {
@@ -101,9 +104,9 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
             @Override
             public void onClick() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    ((NewsDetailsActivity)Objects.requireNonNull(getActivity())).vpContainer.setCurrentItem(1);
-                }else {
-                    ((NewsDetailsActivity)(getActivity())).vpContainer.setCurrentItem(1);
+                    ((NewsDetailsActivity) Objects.requireNonNull(getActivity())).vpContainer.setCurrentItem(1);
+                } else {
+                    ((NewsDetailsActivity) (getActivity())).vpContainer.setCurrentItem(1);
                 }
             }
         });
@@ -132,8 +135,8 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
 
     @Override
     public void setNewsDetailsData(NewsAboutBean newsAboutBean) {
-        mPresenter.getCommentListData(1,mAccurl,uid);
-        if (newsAboutBean.getList()!=null&&!newsAboutBean.getList().isEmpty()) {
+        getHotComment();
+        if (newsAboutBean.getList() != null && !newsAboutBean.getList().isEmpty()) {
             mNewsDetailsAdapter.addListLabel("相关内容");
             mNewsDetailsAdapter.addNewList(newsAboutBean.getList());
         }
@@ -141,43 +144,66 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
 
     @Override
     public void getNewsDetailsDataFailed(String msg) {
-        mPresenter.getCommentListData(1,mAccurl,uid);
+        getHotComment();
+    }
+
+    private void getHotComment() {
+        mPresenter.getCommentListData(1, mAccurl, AppUser.isLogin() ? AppUser.getUserInfoBean().getUid() : 0);
     }
 
     @Override
     public void getCommentListDataFailed(String msg) {
+        mNewsDetailsAdapter.addListLabel("最新评论");
         mNewsDetailsAdapter.addEmptyCommentFooter();
     }
 
     @Override
     public void setCommentListData(CommentListBean commentListData) {
+        mNewsDetailsAdapter.addListLabel("最新评论");
+        if (commentListData.getTotal() == 0) {
+            mNewsDetailsAdapter.addEmptyCommentFooter();
+            return;
+        }
         if (commentListData.getTotal() > 100) {
             tvCommentCount.setText(String.valueOf("99+"));
         } else {
             tvCommentCount.setText(String.valueOf(commentListData.getTotal()));
         }
-        mNewsDetailsAdapter.addListLabel("最新评论");
         mNewsDetailsAdapter.addAll(commentListData.getList());
         mNewsDetailsAdapter.addMoreCommentFooter();
     }
 
     @Override
     public void showLoading() {
-
+        DialogMaker.showProgressDialog(getContext(), "请稍候...");
     }
 
     @Override
     public void hideLoading() {
-
+        DialogMaker.dismissProgressDialog();
     }
 
 
-    @OnClick({R.id.btn_comment, R.id.btn_share,R.id.tv_comment_count})
+    @OnClick({R.id.btn_comment, R.id.btn_share, R.id.tv_comment_count})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //评论对话框
             case R.id.btn_comment:
-                ToastUtil.show("评论");
+                if (!AppUser.isLogin()) {
+                    ToastUtil.show("请登录");
+                    LoginActivity.start(getContext());
+                    return;
+                }
+                if (mPostCommentDilaog == null) {
+                    mPostCommentDilaog = PostCommentDilaog.newInstance();
+                }
+                mPostCommentDilaog.show(getFragmentManager(), null);
+                mPostCommentDilaog.setOnPostCommentListener(new PostCommentDilaog.onPostCommentListener() {
+                    @Override
+                    public void onPost(String content) {
+                        mPresenter.postComment(mAccurl, content, AppUser.getUserInfoBean().getUid());
+                    }
+                });
                 break;
             //分享
             case R.id.btn_share:
@@ -186,7 +212,7 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
                 }
                 break;
             case R.id.tv_comment_count:
-                ((NewsDetailsActivity)(getActivity())).vpContainer.setCurrentItem(1);
+                ((NewsDetailsActivity) (getActivity())).vpContainer.setCurrentItem(1);
                 break;
             default:
                 break;
@@ -199,5 +225,19 @@ public class NewsDetailsFragment extends BaseMvpFragment<GetNewsDetailsPresenter
         mNewsDetailsAdapter.removeAllHeader();
         mNewsDetailsAdapter.removeAllFooter();
         lazyLoad();
+    }
+
+    @Override
+    public void postCommentSuccess() {
+        ToastUtil.show("评论成功");
+        if (mPostCommentDilaog != null) {
+            mPostCommentDilaog.dismiss();
+            mPostCommentDilaog.clearContent();
+        }
+    }
+
+    @Override
+    public void postCommentFailed(String msg) {
+        ToastUtil.show(msg);
     }
 }

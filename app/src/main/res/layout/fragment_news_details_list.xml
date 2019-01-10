@@ -40,7 +40,7 @@
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:padding="8dp"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:gravity="center_vertical"
             android:text="说点什么..."
             android:background="@drawable/shape_edit_comment" />

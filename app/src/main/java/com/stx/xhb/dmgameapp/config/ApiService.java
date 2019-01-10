@@ -5,6 +5,7 @@ import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.PostCommentRepsonse;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.http.BaseResponse;
@@ -359,7 +360,16 @@ public interface ApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("addcomment")
-    Observable<HttpResult<String>> postComment(@Body RequestBody body);
+    Observable<HttpResult<PostCommentRepsonse>> postComment(@Body RequestBody body);
+
+    /**
+     * 回复评论
+     * 方式:POST
+     * 参数:{"uid":"9749488","arcurl":"https:\/\/www.3dmgame.com\/news\/201901\/3753128.html","c_sid":0,"content":"bbb","time":1546939794734,"sign":"8073a5065c54514b9e6af8362de781ea"}
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("replycomment")
+    Observable<HttpResult<PostCommentRepsonse>> replyComment(@Body RequestBody body);
 
 
 }

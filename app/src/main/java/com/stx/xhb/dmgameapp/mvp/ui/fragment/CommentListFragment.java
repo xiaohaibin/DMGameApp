@@ -7,23 +7,29 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.stx.core.base.BaseMvpFragment;
 import com.stx.core.utils.ScreenUtil;
+import com.stx.core.utils.SoftKeyBoardUtils;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetCommentListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetCommentListPresenter;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.CommentListAdapter;
+import com.stx.xhb.dmgameapp.utils.AppUser;
 import com.stx.xhb.dmgameapp.utils.ToastUtil;
 import com.stx.xhb.dmgameapp.widget.widget.CustomTitlebar;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -33,14 +39,15 @@ import butterknife.OnClick;
  * @github:https://github.com/xiaohaibin
  * @describe: 评论列表
  */
-public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter> implements SwipeRefreshLayout.OnRefreshListener, GetCommentListContract.View, RecyclerArrayAdapter.OnLoadMoreListener{
+public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter> implements SwipeRefreshLayout.OnRefreshListener, GetCommentListContract.View, RecyclerArrayAdapter.OnLoadMoreListener {
 
     @Bind(R.id.titlebar)
     CustomTitlebar mTitlebar;
     @Bind(R.id.rv_comment_list)
     EasyRecyclerView mRvCommentList;
+    @Bind(R.id.ed_comment)
+    EditText mEdComment;
     private String url;
-    private int uid=0;
     private CommentListAdapter mCommentListAdapter;
 
     public static CommentListFragment newInstance(String url) {
@@ -89,10 +96,10 @@ public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter
                 mCommentListAdapter.resumeMore();
             }
         });
-        mTitlebar.setTitleBarOnClickListener(new CustomTitlebar.SimpleOnClickListener(){
+        mTitlebar.setTitleBarOnClickListener(new CustomTitlebar.SimpleOnClickListener() {
             @Override
             public void onClickTitleLeft() {
-                ((NewsDetailsActivity)getActivity()).vpContainer.setCurrentItem(0);
+                ((NewsDetailsActivity) getActivity()).vpContainer.setCurrentItem(0);
             }
         });
         mRvCommentList.setAdapter(mCommentListAdapter);
@@ -105,18 +112,20 @@ public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter
 
     private void getData() {
         if (!TextUtils.isEmpty(url)) {
-            mPresenter.getCommentListData(currentpage,url,uid);
+            mPresenter.getCommentListData(currentpage, url, AppUser.isLogin() ? AppUser.getUserInfoBean().getUid() : 0);
         }
     }
 
-    @OnClick({R.id.btn_comment, R.id.btn_send})
+    @OnClick({R.id.btn_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_comment:
-                ToastUtil.show("评论");
-                break;
             case R.id.btn_send:
-                ToastUtil.show("发送");
+                String content = mEdComment.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    ToastUtil.show("请输入评论内容");
+                    return;
+                }
+                mPresenter.postComment(url, content, AppUser.isLogin() ? AppUser.getUserInfoBean().getUid() : 0);
                 break;
             default:
                 break;
@@ -132,13 +141,12 @@ public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter
     public void setCommentListData(CommentListBean commentListData) {
         if (currentpage == 1) {
             mCommentListAdapter.clear();
-            mCommentListAdapter.addAll(commentListData.getList());
         }
-        if (commentListData!=null){
+        if (commentListData != null) {
             mCommentListAdapter.addAll(commentListData.getList());
-        }
-        if (commentListData.getTotal() <= pageSize) {
-            mCommentListAdapter.stopMore();
+            if (commentListData.getTotal() <= pageSize) {
+                mCommentListAdapter.stopMore();
+            }
         }
     }
 
@@ -166,5 +174,18 @@ public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter
     public void onLoadMore() {
         currentpage++;
         getData();
+    }
+
+    @Override
+    public void postCommentSuccess() {
+        mEdComment.setText("");
+        ToastUtil.show("评论成功");
+        SoftKeyBoardUtils.closeSoftInput(getContext());
+        getData();
+    }
+
+    @Override
+    public void postCommentFailed(String msg) {
+        ToastUtil.show(msg);
     }
 }

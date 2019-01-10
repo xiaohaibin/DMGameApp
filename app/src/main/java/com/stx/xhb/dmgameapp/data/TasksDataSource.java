@@ -6,6 +6,7 @@ import com.stx.xhb.dmgameapp.data.entity.GameListBean;
 import com.stx.xhb.dmgameapp.data.entity.GameRankBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsAboutBean;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
+import com.stx.xhb.dmgameapp.data.entity.PostCommentRepsonse;
 import com.stx.xhb.dmgameapp.data.entity.SaleGameBean;
 import com.stx.xhb.dmgameapp.data.entity.UserInfoBean;
 import com.stx.xhb.dmgameapp.http.BaseResponse;
@@ -35,22 +36,22 @@ public interface TasksDataSource {
     /**
      * 加载新闻
      */
-    Subscription getNews(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
+    Subscription getNews(int currentPage, LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getOriginalPage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
+    Subscription getOriginalPage(int currentPage, LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getVideoPage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
+    Subscription getVideoPage(int currentPage, LoadTaskCallback<NewsPageBean> callback);
 
     /**
      * 原创
      */
-    Subscription getAmusePage(int currentPage,  LoadTaskCallback<NewsPageBean> callback);
+    Subscription getAmusePage(int currentPage, LoadTaskCallback<NewsPageBean> callback);
 
 
     /**
@@ -61,58 +62,68 @@ public interface TasksDataSource {
     /**
      * 已售游戏
      */
-    Subscription getSaleGame(int currentPage,  LoadTaskCallback<SaleGameBean> callback);
+    Subscription getSaleGame(int currentPage, LoadTaskCallback<SaleGameBean> callback);
 
     /**
      * 未发售游戏
      */
-    Subscription getUnSaleGame(int currentPage,  LoadTaskCallback<SaleGameBean> callback);
+    Subscription getUnSaleGame(int currentPage, LoadTaskCallback<SaleGameBean> callback);
 
     /**
      * 汉化游戏
      */
-    Subscription getChinesizeGame(int currentPage,  int order,LoadTaskCallback<SaleGameBean> callback);
+    Subscription getChinesizeGame(int currentPage, int order, LoadTaskCallback<SaleGameBean> callback);
 
     /**
      * 汉化游戏
      */
-    Subscription getRankGame(int currentPage,  String uid,LoadTaskCallback<GameRankBean> callback);
+    Subscription getRankGame(int currentPage, String uid, LoadTaskCallback<GameRankBean> callback);
 
     /**
      * 相关新闻
      */
-    Subscription getNewsAbout(String url,LoadTaskCallback<NewsAboutBean> callback);
+    Subscription getNewsAbout(String url, LoadTaskCallback<NewsAboutBean> callback);
 
     /**
      * 获取热门评论
      */
-    Subscription getHotComment(int currentPage,String arcurl,int uid,LoadTaskCallback<CommentListBean> callback);
+    Subscription getHotComment(int currentPage, String arcurl, int uid, LoadTaskCallback<CommentListBean> callback);
 
 
     /**
      * 获取所有评论
      */
-    Subscription getComment(int currentPage,String arcurl,int uid,LoadTaskCallback<CommentListBean> callback);
+    Subscription getComment(int currentPage, String arcurl, int uid, LoadTaskCallback<CommentListBean> callback);
 
 
     /**
      * 登录
      */
-    Subscription login(String usrname,String pwd,LoadTaskCallback<UserInfoBean> callback);
+    Subscription login(String usrname, String pwd, LoadTaskCallback<UserInfoBean> callback);
 
     /**
      * 注册
      */
-    Subscription register(String mobile, String passwd, String validate,LoadTaskCallback<String> callback);
+    Subscription register(String mobile, String passwd, String validate, LoadTaskCallback<String> callback);
 
     /**
      * 发送验证码
      */
-    Subscription sendSms(String mobile, int act, int uid,LoadTaskCallback<String> callback);
+    Subscription sendSms(String mobile, int act, int uid, LoadTaskCallback<String> callback);
 
     /**
      * 找回密码
      */
-    Subscription findPwd(String mobile, String validate, String passwd,LoadTaskCallback<String> callback);
+    Subscription findPwd(String mobile, String validate, String passwd, LoadTaskCallback<String> callback);
+
+    /**
+     * 提交评论
+     */
+    Subscription postComment(String accurl,String content, int uid, LoadTaskCallback<PostCommentRepsonse> callback);
+
+    /**
+     * 回复评论
+     */
+    Subscription replyComment(String uid, int id, String arcurl, String content, LoadTaskCallback<PostCommentRepsonse> callback);
 
 }

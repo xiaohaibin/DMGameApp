@@ -36,7 +36,7 @@ public class BaseDialogFragment extends DialogFragment {
         Window window = dialog.getWindow();
         if (window!=null) {
             window.setGravity(getGravity());
-            window.setBackgroundDrawable(new ColorDrawable(Color.argb(0, 0, 0, 0)));
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         dialog.setContentView(contentView, getLayoutParams());
         return dialog;

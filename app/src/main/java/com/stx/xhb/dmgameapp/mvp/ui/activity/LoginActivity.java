@@ -1,5 +1,6 @@
 package com.stx.xhb.dmgameapp.mvp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +42,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Bind(R.id.btn_register)
     TextView mBtnRegister;
 
+    public static void start(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_login;
@@ -55,13 +61,13 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_forget://忘记密码
-                RegisterActivity.start(LoginActivity.this,true);
+                RegisterActivity.start(LoginActivity.this, true);
                 break;
             case R.id.btn_login://登录
                 mPresenter.login(mEdAccount.getText().toString(), mEdPwd.getText().toString());
                 break;
             case R.id.btn_register://注册
-                RegisterActivity.start(LoginActivity.this,false);
+                RegisterActivity.start(LoginActivity.this, false);
                 break;
             default:
                 break;
