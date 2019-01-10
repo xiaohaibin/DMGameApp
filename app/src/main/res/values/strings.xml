@@ -9,4 +9,7 @@
     <string name="string_cancle">取消</string>
     <string name="string_sure">确定</string>
     <string name="string_share">(分享至游戏资讯，下载链接：https://www.coolapk.com/apk/com.stx.xhb.dmgameapp)</string>
+    <string name="string_loading">加载中...</string>
+    <string name="load_end">加载完成</string>
+    <string name="load_failed">加载失败</string>
 </resources>

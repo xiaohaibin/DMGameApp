@@ -11,7 +11,6 @@ import com.stx.core.utils.ScreenUtil;
 import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.NewsPageBean;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
-import com.stx.xhb.dmgameapp.mvp.ui.activity.WebDetailsActivity;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
@@ -52,9 +51,9 @@ public class NewsAdViewHolder {
         });
         mBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
-            public void onItemClick(XBanner banner, int position) {
+            public void onItemClick(XBanner banner, Object model, View view, int position) {
                 NewsPageBean.SlidesBean slidesBean = bannerList.get(position);
-                NewsDetailsActivity.start(mContext,slidesBean.getWebviewurl(),slidesBean.getArcurl(),slidesBean.getTitle(),slidesBean.getLitpic());
+                NewsDetailsActivity.start(mContext, slidesBean.getWebviewurl(), slidesBean.getArcurl(), slidesBean.getTitle(), slidesBean.getLitpic());
             }
         });
     }
