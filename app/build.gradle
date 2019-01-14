@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply from: "$rootDir/config.gradle"
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 14
         versionName "3.3"
         multiDexEnabled true
@@ -29,32 +29,32 @@ android {
 
     }
 
-//    //签名信息配置
-//    signingConfigs {
-//        debug {
-//            storeFile file(appConfig.storeFile)
-//            storePassword appConfig.storePassWord
-//            keyAlias appConfig.keyAlias
-//            keyPassword appConfig.keyPassWord
-//        }
-//        release {
-//            storeFile file(appConfig.storeFile)
-//            storePassword appConfig.storePassWord
-//            keyAlias appConfig.keyAlias
-//            keyPassword appConfig.keyPassWord
-//        }
-//    }
+    //签名信息配置
+    signingConfigs {
+        debug {
+            storeFile file(appConfig.storeFile)
+            storePassword appConfig.storePassWord
+            keyAlias appConfig.keyAlias
+            keyPassword appConfig.keyPassWord
+        }
+        release {
+            storeFile file(appConfig.storeFile)
+            storePassword appConfig.storePassWord
+            keyAlias appConfig.keyAlias
+            keyPassword appConfig.keyPassWord
+        }
+    }
 
     buildTypes {
         release {
             minifyEnabled false //是否混淆+
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
             minifyEnabled false
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

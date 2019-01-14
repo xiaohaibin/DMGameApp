@@ -22,6 +22,7 @@ import com.stx.xhb.dmgameapp.R;
 import com.stx.xhb.dmgameapp.data.entity.CommentListBean;
 import com.stx.xhb.dmgameapp.mvp.contract.GetCommentListContract;
 import com.stx.xhb.dmgameapp.mvp.presenter.GetCommentListPresenter;
+import com.stx.xhb.dmgameapp.mvp.ui.activity.LoginActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.activity.NewsDetailsActivity;
 import com.stx.xhb.dmgameapp.mvp.ui.adapter.CommentListAdapter;
 import com.stx.xhb.dmgameapp.utils.AppUser;
@@ -120,6 +121,11 @@ public class CommentListFragment extends BaseMvpFragment<GetCommentListPresenter
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
+                if (!AppUser.isLogin()) {
+                    ToastUtil.show("请登录");
+                    LoginActivity.start(getContext());
+                    return;
+                }
                 String content = mEdComment.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
                     ToastUtil.show("请输入评论内容");
