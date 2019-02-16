@@ -22,7 +22,6 @@ import okhttp3.Request;
  * Github:https://github.com/xiaohaibin/
  * Drscribe:
  */
-
 public class GetForumDetailsListPresenter extends BasePresenter<GetForumDetailsListContract.getForumListDataView> implements GetForumDetailsListContract.getForumListModel{
     @Override
     public void getForumListData(String fid,int page) {

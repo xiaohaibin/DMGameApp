@@ -8,8 +8,8 @@ android {
         applicationId "com.stx.xhb.dmgameapp"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 14
-        versionName "3.3"
+        versionCode 15
+        versionName "3.4"
         multiDexEnabled true
         flavorDimensions "DimenA"
         ndk {
