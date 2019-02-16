@@ -87,7 +87,7 @@ public class HttpManager {
         @Override
         public void log(String message) {
             //打印retrofit日志
-            Logger.i(message);
+            Logger.i("==http"+message);
         }
     });
 

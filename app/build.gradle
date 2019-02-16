@@ -80,7 +80,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':core')
-    implementation 'com.github.xiaohaibin:XBanner:1.6.2'
+    implementation 'com.github.xiaohaibin:XBanner:1.6.4'
     implementation 'com.jude:easyrecyclerview:4.4.2'
     implementation files('libs/GDTUnionSDK.TBS.4.19.574.min.jar')
 }

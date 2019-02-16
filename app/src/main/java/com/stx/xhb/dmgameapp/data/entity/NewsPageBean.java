@@ -1,5 +1,7 @@
 package com.stx.xhb.dmgameapp.data.entity;
 
+import com.stx.xhb.xbanner.entity.SimpleBannerInfo;
+
 import java.util.List;
 
 /**
@@ -125,7 +127,7 @@ public class NewsPageBean {
         }
     }
 
-    public static class SlidesBean {
+    public static class SlidesBean extends SimpleBannerInfo {
         /**
          * aid : 3740840
          * arcurl : https://www.3dmgame.com/news/201808/3743832.html
@@ -179,6 +181,16 @@ public class NewsPageBean {
 
         public String getWebviewurl() {
             return webviewurl;
+        }
+
+        @Override
+        public String getXBannerUrl() {
+            return litpic;
+        }
+
+        @Override
+        public String getXBannerTitle() {
+            return title;
         }
     }
 }

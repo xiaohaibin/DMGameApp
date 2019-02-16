@@ -1,6 +1,7 @@
 package com.stx.xhb.dmgameapp.mvp.ui.adapter.viewholder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
@@ -38,12 +39,12 @@ public class NewsAdViewHolder {
     }
 
     public void setData(final List<NewsPageBean.SlidesBean> bannerList) {
-        List<String> tips = new ArrayList<String>();
+        List<String> tips = new ArrayList<>();
         for (int i = 0; i < bannerList.size(); i++) {
             tips.add(bannerList.get(i).getTitle());
         }
         mBanner.setData(bannerList, tips);
-        mBanner.setmAdapter(new XBanner.XBannerAdapter() {
+        mBanner.loadImage(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
                 Glide.with(mContext).load(bannerList.get(position).getLitpic()).placeholder(R.drawable.default_image).error(R.drawable.default_image).into((ImageView) view);
